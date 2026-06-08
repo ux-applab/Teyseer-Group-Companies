@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Information Technology — Teyseer Group</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Cabin:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--blue:#2A3C8E;--blue-dark:#1F2D6B;--sky-soft:#DCE5F2;--sky:#B6C9E6;--night:#2A2A2A;--white:#F4F3EF;--paper:#FFFFFF;--line:#DAD8D0;--line-soft:#E8E6DF;--muted:#5C5C66;--steel:#A6A8BA;--font:"Cabin","Gill Sans MT",system-ui,sans-serif;--mono:"JetBrains Mono",ui-monospace,monospace;}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+body{font-family:var(--font);background:var(--white);color:var(--night);-webkit-font-smoothing:antialiased;font-size:15.5px;line-height:1.6;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+nav{position:sticky;top:0;z-index:100;background:rgba(244,243,239,0.95);backdrop-filter:blur(14px);border-bottom:1px solid var(--line);height:64px;display:flex;align-items:center}
+.nav-in{max-width:1320px;margin:0 auto;padding:0 40px;display:flex;align-items:center;gap:16px;width:100%}
+.nav-mark{width:32px;height:32px;background:var(--blue);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.nav-mark svg{width:20px;height:20px}
+.nav-name{font-size:15px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:var(--night)}
+.nav-crumb{font-family:var(--mono);font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:0.12em;margin-left:4px}
+.nav-crumb .here{color:var(--blue)}
+.nav-links{display:flex;gap:4px;margin-left:auto}
+.nav-links a{font-size:13px;padding:6px 12px;border-radius:999px;color:var(--muted);transition:all 160ms}
+.nav-links a:hover{color:var(--blue);background:var(--sky-soft)}
+/* HERO */
+.hero-banner{background:var(--blue);padding:52px 0 48px;position:relative;overflow:hidden}
+.hero-banner::after{content:"";position:absolute;right:-60px;top:-60px;width:420px;height:420px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='420' height='420'%3E%3Crect x='155' y='155' width='110' height='110' transform='rotate(45 210 210)' fill='none' stroke='white' stroke-opacity='0.12' stroke-width='1.5'/%3E%3Crect x='115' y='115' width='190' height='190' transform='rotate(45 210 210)' fill='none' stroke='white' stroke-opacity='0.07' stroke-width='1'/%3E%3Crect x='75' y='75' width='270' height='270' transform='rotate(45 210 210)' fill='none' stroke='white' stroke-opacity='0.04' stroke-width='1'/%3E%3C/svg%3E") no-repeat center;pointer-events:none}
+.hero-in{max-width:1320px;margin:0 auto;padding:0 40px;position:relative;z-index:1}
+.hero-crumb{font-family:var(--mono);font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:rgba(255,255,255,0.55);margin-bottom:14px}
+.hero-crumb a{color:rgba(255,255,255,0.55)}.hero-crumb .sep{margin:0 8px;opacity:0.4}
+.hero-h1{font-size:clamp(36px,4.5vw,60px);font-weight:700;color:#fff;letter-spacing:-0.01em;line-height:1.05}
+.hero-sub{font-size:16px;color:rgba(255,255,255,0.7);margin-top:10px;max-width:52ch}
+/* COMMON */
+.wrap{max-width:1320px;margin:0 auto;padding:0 40px}
+.sec{padding:72px 0}
+.sec-eye{font-family:var(--mono);font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--blue);display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.sec-eye::before{content:"";width:10px;height:10px;background:var(--blue);transform:rotate(45deg);display:inline-block;flex-shrink:0}
+.sec-h2{font-size:clamp(22px,2.4vw,34px);font-weight:700;color:var(--blue-dark);margin-bottom:8px}
+.divider{width:100%;height:1px;background:var(--line);margin-bottom:36px}
+/* KEY ACCOMPLISHMENTS */
+#accomplishments{background:var(--paper)}
+.hl-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.hl{background:var(--white);border:1px solid var(--line);padding:20px;display:flex;flex-direction:column;gap:9px;text-decoration:none;color:inherit;transition:border-color 0.2s,box-shadow 0.2s,transform 0.25s}
+.hl:hover{border-color:var(--blue);box-shadow:0 6px 24px rgba(42,60,142,0.12);transform:scale(1.02)}
+.hl-cat{font-family:var(--mono);font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--blue)}
+.hl-title{font-size:14px;font-weight:600;color:var(--blue-dark);line-height:1.3}
+.hl-sub{font-size:12.5px;color:var(--muted);line-height:1.6}
+.hl-src{font-family:var(--mono);font-size:10px;color:var(--steel);margin-top:auto;padding-top:8px;border-top:1px solid var(--line-soft);display:flex;align-items:center;justify-content:space-between}
+.hl-arr{color:var(--blue)}
+/* AT A GLANCE */
+#glance{background:var(--blue)}
+.gl-wrap{max-width:1320px;margin:0 auto;padding:52px 40px;display:grid;grid-template-columns:repeat(4,1fr)}
+.gl-item{padding:28px 24px;border-right:1px solid rgba(255,255,255,0.15)}
+.gl-item:last-child{border-right:none}
+.gl-n{font-size:clamp(40px,5vw,68px);font-weight:700;color:#fff;line-height:1;margin-bottom:8px}
+.gl-l{font-family:var(--mono);font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.6)}
+/* IT SERVICES TAB PANEL */
+#services{background:var(--white)}
+.svc-layout{display:grid;grid-template-columns:260px 1fr;gap:0;border:1px solid var(--line)}
+.svc-tabs{background:var(--paper);display:flex;flex-direction:column;gap:1px}
+.stab{padding:15px 18px;font-size:13.5px;font-weight:500;color:var(--muted);cursor:pointer;border-left:3px solid transparent;transition:all 0.18s;background:var(--paper);user-select:none}
+.stab:hover{color:var(--blue);background:var(--sky-soft)}
+.stab.active{color:var(--blue);font-weight:600;border-left-color:var(--blue)}
+.stab-num{font-family:var(--mono);font-size:9px;color:var(--steel);margin-right:7px}
+.stab.active .stab-num{color:var(--blue)}
+.svc-detail{background:var(--paper);padding:36px 40px;border-left:1px solid var(--line);animation:fi 0.2s ease}
+@keyframes fi{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.sd-eye{font-family:var(--mono);font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:var(--blue);margin-bottom:8px}
+.sd-name{font-size:clamp(20px,2vw,28px);font-weight:700;color:var(--blue-dark);margin-bottom:12px}
+.sd-desc{font-size:15px;color:var(--muted);line-height:1.7;margin-bottom:20px;max-width:60ch}
+.sd-img{width:100%;aspect-ratio:16/7;background:repeating-linear-gradient(135deg,var(--sky-soft) 0,var(--sky-soft) 14px,var(--paper) 14px,var(--paper) 28px);display:flex;align-items:center;justify-content:center;margin-bottom:20px;border:1px solid var(--line)}
+.sd-img span{font-family:var(--mono);font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--steel)}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{padding:4px 10px;background:var(--sky-soft);color:var(--blue-dark);font-size:12px;font-weight:500;border-radius:2px;border:1px solid rgba(42,60,142,0.1)}
+.sd-link{display:inline-flex;align-items:center;gap:8px;margin-top:14px;font-size:12px;font-weight:600;color:var(--blue);border-bottom:1.5px solid var(--sky-soft);padding-bottom:2px;transition:border-color 0.2s}
+.sd-link:hover{border-color:var(--blue)}.sd-link svg{width:13px;height:13px}
+/* BRANDS & PROJECTS CAROUSEL */
+#brands-projects{background:var(--paper)}
+.proj-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px}
+.proj-ctrl{display:flex;gap:8px}
+.proj-btn{width:38px;height:38px;border:1.5px solid var(--line);background:none;color:var(--night);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.2s;border-radius:2px}
+.proj-btn:hover{border-color:var(--blue);color:var(--blue)}
+.proj-btn:disabled{opacity:0.25;cursor:default}
+.proj-btn svg{width:15px;height:15px}
+.proj-track{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.pcard{background:var(--white);border:1px solid var(--line);padding:22px 24px;display:flex;flex-direction:column;transition:border-color 0.2s,box-shadow 0.2s}
+.pcard:hover{border-color:var(--blue);box-shadow:0 4px 20px rgba(42,60,142,0.08)}
+.pc-num{font-family:var(--mono);font-size:11px;color:var(--steel);margin-bottom:10px}
+.pc-name{font-size:16px;font-weight:700;color:var(--blue-dark);margin-bottom:4px}
+.pc-sub{font-size:12px;color:var(--blue);font-style:italic;margin-bottom:12px}
+.pc-loc{font-size:12px;color:var(--muted);margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.pc-desc{font-size:13px;color:var(--muted);line-height:1.6;flex:1;margin-bottom:12px}
+.pc-pills{display:flex;flex-wrap:wrap;gap:5px}
+.ppill{padding:3px 8px;background:var(--sky-soft);color:var(--blue-dark);font-size:11px;border-radius:2px}
+/* OUR PARTNERS MARQUEE */
+#partners{background:var(--white);padding:48px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.marquee-wrap{overflow:hidden;position:relative}
+.marquee-wrap::before,.marquee-wrap::after{content:"";position:absolute;top:0;bottom:0;width:120px;z-index:2;pointer-events:none}
+.marquee-wrap::before{left:0;background:linear-gradient(to right,var(--white),transparent)}
+.marquee-wrap::after{right:0;background:linear-gradient(to left,var(--white),transparent)}
+.marquee-track{display:flex;animation:marquee 30s linear infinite;width:max-content}
+.marquee-track:hover{animation-play-state:paused}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.bitem{display:flex;align-items:center;padding:14px 36px;border-left:1px solid var(--line);min-width:160px}
+.bname{font-size:14px;font-weight:500;color:var(--steel);white-space:nowrap;transition:color 0.2s}
+.bitem:hover .bname{color:var(--blue)}
+/* OUR COMPANIES */
+#companies{background:var(--paper)}
+.co-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2px;background:var(--line);border:1px solid var(--line)}
+.co{background:var(--paper);padding:36px 32px 40px;display:flex;flex-direction:column}
+.co-est{font-family:var(--mono);font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--blue);margin-bottom:10px}
+.co-name{font-size:20px;font-weight:700;color:var(--blue-dark);margin-bottom:10px}
+.co-desc{font-size:14px;color:var(--muted);line-height:1.65;flex:1;margin-bottom:18px}
+.co-btns{display:flex;gap:10px;flex-wrap:wrap}
+.co-btn{display:inline-flex;align-items:center;gap:7px;font-size:12px;font-weight:600;color:#fff;background:var(--blue);padding:10px 18px;border-radius:3px;transition:background 0.2s}
+.co-btn:hover{background:var(--blue-dark)}.co-btn svg{width:12px;height:12px}
+.co-btn-ghost{display:inline-flex;align-items:center;gap:7px;font-size:12px;font-weight:600;color:var(--blue);background:var(--sky-soft);padding:10px 18px;border-radius:3px;transition:background 0.2s}
+.co-btn-ghost:hover{background:var(--sky)}.co-btn-ghost svg{width:12px;height:12px}
+/* CTA */
+#cta{background:var(--blue)}
+.cta-in{max-width:1320px;margin:0 auto;padding:72px 40px;display:flex;align-items:center;justify-content:space-between;gap:40px}
+.cta-h2{font-size:clamp(24px,2.4vw,36px);font-weight:700;color:#fff;max-width:28ch;line-height:1.2}
+.cta-p{color:rgba(255,255,255,0.7);font-size:15px;margin-top:10px}
+.cta-btns{display:flex;gap:12px;flex-shrink:0;flex-wrap:wrap}
+.btn-w{padding:13px 26px;background:#fff;color:var(--blue);font-size:13px;font-weight:700;border-radius:3px;transition:background 0.2s}.btn-w:hover{background:var(--sky-soft)}
+.btn-ghost-w{padding:13px 26px;border:1.5px solid rgba(255,255,255,0.4);color:#fff;font-size:13px;font-weight:600;border-radius:3px;transition:all 0.2s}.btn-ghost-w:hover{background:rgba(255,255,255,0.1)}
+footer{background:var(--blue-dark);padding:32px 40px;display:flex;align-items:center;justify-content:space-between}
+.ft-brand{display:flex;align-items:center;gap:12px}
+.ft-mark{width:28px;height:28px;background:rgba(255,255,255,0.15);display:flex;align-items:center;justify-content:center}
+.ft-mark svg{width:18px;height:18px}
+.ft-name{font-size:13px;font-weight:600;color:#fff;letter-spacing:0.06em;text-transform:uppercase}
+.ft-copy{font-family:var(--mono);font-size:11px;color:rgba(255,255,255,0.4)}
+.partners-hd{text-align:center;margin-bottom:28px}
+.partners-eye{font-family:var(--mono);font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--blue);margin-bottom:8px;display:flex;align-items:center;justify-content:center;gap:10px}
+.partners-eye::before{content:"";width:10px;height:10px;background:var(--blue);transform:rotate(45deg)}
+.partners-h2{font-size:clamp(22px,2vw,30px);font-weight:700;color:var(--blue-dark)}
+@media(max-width:900px){.hl-grid{grid-template-columns:repeat(2,1fr)}.gl-wrap{grid-template-columns:repeat(2,1fr)}.svc-layout{grid-template-columns:1fr}.svc-tabs{display:grid;grid-template-columns:repeat(3,1fr)}.stab{border-left:none;border-bottom:2px solid transparent;font-size:12px;padding:10px 10px;text-align:center}.stab.active{border-bottom-color:var(--blue);border-left:none}.svc-detail{border-left:none;padding:24px}.co-grid{grid-template-columns:1fr}.cta-in{flex-direction:column}.sec{padding:52px 0}.wrap{padding:0 24px}}
+</style>
+</head>
+<body>
+<nav>
+  <div class="nav-in">
+    <div class="nav-mark"><svg viewBox="0 0 20 20" fill="none"><rect x="5" y="5" width="10" height="10" transform="rotate(45 10 10)" fill="white"/></svg></div>
+    <span class="nav-name">Teyseer Group</span>
+    <span class="nav-crumb">/ Verticals / <span class="here">Information Technology</span></span>
+    <nav class="nav-links"><a href="#accomplishments">Highlights</a><a href="#services">IT Services</a><a href="#companies">Companies</a></nav>
+  </div>
+</nav>
+
+<div class="hero-banner">
+  <div class="hero-in">
+    <div class="hero-crumb"><a href="index.html">Teyseer Group</a><span class="sep">/</span><a href="Teyseer Group - Industry Verticals v2.html">Verticals</a><span class="sep">/</span>Information Technology</div>
+    <h1 class="hero-h1">Information Technology</h1>
+    <p class="hero-sub">Enterprise-grade IT solutions — infrastructure, cloud, cybersecurity, and managed services across Qatar since 1979.</p>
+  </div>
+</div>
+
+<!-- OUR COMPANIES -->
+<section class="sec" id="companies" style="background:var(--paper)">
+  <div class="wrap">
+    <div class="sec-eye">Our Businesses</div>
+    <h2 class="sec-h2">Our Companies</h2>
+    <div class="divider"></div>
+    <div class="co-grid" id="coGrid"></div>
+  </div>
+</section>
+
+<!-- KEY ACCOMPLISHMENTS -->
+<section class="sec" id="accomplishments" style="background:var(--paper)">
+  <div class="wrap">
+    <div class="sec-eye">News & Milestones</div>
+    <h2 class="sec-h2">Key Accomplishments</h2>
+    <div class="divider"></div>
+    <div class="hl-grid" id="hlGrid"></div>
+  </div>
+</section>
+
+<!-- AT A GLANCE -->
+<section id="glance">
+  <div class="gl-wrap">
+    <div class="gl-item"><div class="gl-n">45+</div><div class="gl-l">Years in Qatar</div></div>
+    <div class="gl-item"><div class="gl-n">2</div><div class="gl-l">IT Companies</div></div>
+    <div class="gl-item"><div class="gl-n">15+</div><div class="gl-l">Technology Partners</div></div>
+    <div class="gl-item"><div class="gl-n">6</div><div class="gl-l">Sectors Served</div></div>
+  </div>
+</section>
+
+<!-- IT SERVICES -->
+<section class="sec" id="services">
+  <div class="wrap">
+    <div class="sec-eye">What We Deliver</div>
+    <h2 class="sec-h2">IT Services</h2>
+    <div class="divider"></div>
+    <div class="svc-layout">
+      <div class="svc-tabs" id="svcTabs"></div>
+      <div class="svc-detail" id="svcDetail"></div>
+    </div>
+  </div>
+</section>
+
+<!-- BRANDS & PROJECTS -->
+<section class="sec" id="brands-projects" style="background:var(--paper)">
+  <div class="wrap">
+    <div class="proj-hd">
+      <div><div class="sec-eye">Our Work</div><h2 class="sec-h2">Brands &amp; Projects</h2></div>
+
+    </div>
+    <div class="proj-track" id="projTrack"></div>
+  </div>
+</section>
+
+<!-- OUR PARTNERS -->
+<section id="partners">
+  <div class="partners-hd"><div class="partners-eye">Technology Partners</div><h2 class="partners-h2">Our Partners</h2></div>
+  <div class="marquee-wrap"><div class="marquee-track" id="mtrack"></div></div>
+</section>
+
+<section id="cta">
+  <div class="cta-in">
+    <div><h2 class="cta-h2">Power your digital transformation.</h2><p class="cta-p">Partner with Teyseer's IT vertical for enterprise infrastructure, cybersecurity, cloud, and managed services.</p></div>
+    <div class="cta-btns">
+      <a class="btn-w" href="https://carabia.com/contact-us/" target="_blank">Get in Touch</a>
+      <a class="btn-ghost-w" href="Teyseer Group - Industry Verticals v2.html">All Verticals</a>
+    </div>
+  </div>
+</section>
+<footer>
+  <div class="ft-brand"><div class="ft-mark"><svg viewBox="0 0 20 20" fill="none"><rect x="5" y="5" width="10" height="10" transform="rotate(45 10 10)" fill="white"/></svg></div><span class="ft-name">Teyseer Group — IT</span></div>
+  <span class="ft-copy">EST. 1968 · DOHA, QATAR</span>
+</footer>
+
+<script>
+const neArr=`<svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 10L10 2M4 2h6v6"/></svg>`;
+const arrowSvg=`<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 13L13 3M5 3h8v8"/></svg>`;
+const extSvg=`<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M8 3l5 5-5 5"/></svg>`;
+
+const HIGHLIGHTS=[
+  {cat:"Strategic Partnership · February 2026",title:"Dukhan Bank MoU — Technology & Financing for SMEs",sub:"Signed at Web Summit Qatar, exploring bundled IT infrastructure and Sharia-compliant financing for SMEs through Computer Arabia.",src:"gulf-times.com",link:"https://www.gulf-times.com/article/719811/business/dukhan-bank-teyseer-group-sign-mou-to-explore-integrated-banking-technology-and-financing-solutions-for-smes-startups"},
+  {cat:"Strategic Partnership · December 2025",title:"Computer Arabia & Solix Technologies — Enterprise Data",sub:"Partnered with Solix Technologies to deliver AI-ready data management across Qatar's government, telecom, energy, banking, and education sectors.",src:"solix.com",link:"https://www.solix.com/company/news-events/press-releases/solix-technologies-and-computer-arabia-forge-strategic-partnership-to-accelerate-enterprise-data-modernization-in-qatar/"},
+  {cat:"Award · 2025",title:"Palo Alto Networks — Collaboration Champion of the Year",sub:"Computer Arabia named Collaboration Champion of the Year 2025 by Palo Alto Networks for cybersecurity excellence in Qatar.",src:"linkedin.com",link:"https://www.linkedin.com/posts/computer-arabia-wll_%D9%81%D8%AE%D9%88%D8%B1%D9%88%D9%86-%D8%A8%D8%AD%D8%B5%D9%88%D9%84%D9%86%D8%A7-%D8%B9%D9%84%D9%89-%D9%84%D9%82%D8%A8-%D8%A8%D8%B7%D9%84-%D8%A7%D9%84%D8%AA%D8%B9%D8%A7%D9%88%D9%86-%D9%84%D8%B9%D8%A7%D9%85-2025-activity-7417563648941993985-w3Tp"},
+  {cat:"Industry Event · 2025",title:"Dell Technologies at MWC25 — Doha",sub:"Computer Arabia showcased Dell Technologies' latest innovations at Mobile World Congress Qatar at the Doha Exhibition and Convention Center.",src:"linkedin.com",link:"https://ae.linkedin.com/posts/computer-arabia-wll_%D9%8A%D9%88%D9%85%D8%A7%D9%86-%D8%B1%D8%A7%D8%A6%D8%B9%D8%A7%D9%86-%D9%81%D9%8A-mwc25-%D8%A5%D9%84%D9%8A%D9%83%D9%85-%D9%86%D8%B8%D8%B1%D8%A9-%D8%B9%D9%84%D9%89-%D8%A3%D8%AC%D9%85%D9%84-activity-7399802355174551553-UEi9"}
+];
+
+const SERVICES=[
+  {num:"01",name:"IT Infrastructure Assessment",eye:"Computer Arabia",desc:"Comprehensive assessment of your IT environment — identifying gaps, risks and optimisation opportunities to form the foundation of a future-ready IT strategy.",tags:["Current State Analysis","Gap Identification","Risk Assessment","Recommendations Roadmap"],link:"https://carabia.com/service-lines/infrastructure-assessment/"},
+  {num:"02",name:"Design & Architecture",eye:"Computer Arabia",desc:"End-to-end IT solution design — data centre architecture, network topology, cloud blueprint, and security framework tailored to your organisation.",tags:["Data Centre Design","Network Architecture","Cloud Blueprint","Security Framework"],link:"https://carabia.com/service-lines/design-architecture/"},
+  {num:"03",name:"Hybrid & Private Cloud",eye:"Computer Arabia",desc:"Hybrid and private cloud environments — covering Hybrid Cloud, Private Cloud, and Hyper Convergence — delivering scalable, future-ready infrastructure.",tags:["Hybrid Cloud","Private Cloud","Hyper Convergence","VMware vSphere"],link:"https://carabia.com/client-solutions/hybrid-cloud/"},
+  {num:"04",name:"Networking",eye:"Computer Arabia & Teyseer Technology Services",desc:"End-to-end enterprise networking — campus LAN, data centre switching, SD-WAN, and wireless infrastructure ensuring high-availability connectivity.",tags:["Campus LAN","Data Centre Switching","VMware NSX","SD-WAN"],link:"https://carabia.com/client-solutions/networking/"},
+  {num:"05",name:"Cybersecurity",eye:"Computer Arabia & Teyseer Technology Services",desc:"Comprehensive cybersecurity solutions — Next Generation Firewalls, endpoint protection, SOC services, and managed security to protect against modern threats.",tags:["Palo Alto NGFW","Cortex XDR","SOC Services","Threat Intelligence"],link:"https://carabia.com/cyber-security/"},
+  {num:"06",name:"Data Storage",eye:"Computer Arabia",desc:"Enterprise-grade primary, secondary, and archival storage using Dell EMC's leading platforms — designed for performance, resilience, and scalability.",tags:["Dell EMC PowerStore","Dell EMC Isilon","VxBlock","High Availability"],link:"https://carabia.com/client-solutions/data-storage/"},
+  {num:"07",name:"Data Protection",eye:"Computer Arabia",desc:"Complete data protection — backup, recovery, replication, and archiving to ensure business continuity and protect critical data with Dell EMC platforms.",tags:["Dell EMC IDPA","RecoverPoint for VMs","Backup & Archiving","Disaster Recovery"],link:"https://carabia.com/client-solutions/data-protection/"},
+  {num:"08",name:"Managed IT Services",eye:"Teyseer Technology Services",desc:"Proactive managed IT — network monitoring, server management, helpdesk, and ongoing IT operations enabling organisations to focus on their core business.",tags:["24/7 NOC Monitoring","Incident Management","Helpdesk","Capacity Planning"],link:"https://www.teyseertech.com"},
+  {num:"09",name:"Hardware Maintenance",eye:"Computer Arabia",desc:"Ongoing hardware maintenance and support — proactive monitoring, break-fix, and preventive maintenance keeping infrastructure at peak performance.",tags:["Preventive Maintenance","Break-fix Support","Spare Parts","SLA Management"],link:"https://carabia.com/service-lines/hardware-maintenance/"}
+];
+
+const PROJECTS=[
+  {num:"01",name:"Computer Arabia W.L.L.",sub:"Qatar's IT Infrastructure Backbone",loc:"Teyseer Group HQ, Airport Road, Doha",desc:"Teyseer's flagship IT subsidiary since 1979. Delivers hardware, cloud infrastructure, software licensing, managed services, and IT consulting across 6+ sectors.",pills:["IT Infrastructure","Cloud Solutions","Dell Partner","Managed Services","Cybersecurity"]},
+  {num:"02",name:"Emerson PACSystems",sub:"Industrial Automation & SCADA",loc:"Qatar — oil & gas, power plants, industrial sites",desc:"Computer Arabia represents Emerson's PACSystems in Qatar — SCADA software, PLCs, Remote I/O, VFDs, HMIs, and machine safety with OT cybersecurity solutions.",pills:["SCADA","PLC","Industrial Automation","Oil & Gas","OT Cybersecurity"]},
+  {num:"03",name:"Teyseer Technology Services",sub:"Dell & Dell EMC Authorized Service Center",loc:"Teyseer Group HQ, Doha",desc:"The sole authorized service center for Dell and Dell EMC in Qatar — comprehensive warranty and post-warranty support by factory-trained technicians.",pills:["Dell EMC","Authorized Service","Enterprise IT","Warranty Support","Azure"]}
+];
+
+const BRANDS=["Dell Technologies","Microsoft","VMware","Google Cloud","Azure","Palo Alto Networks","Cisco","Fortinet","Veeam","Trend Micro","Barracuda","Epson","SonicWall","Sophos","RSA","Emerson"];
+const COMPANIES=[
+  {est:"Est. 1979 · Dell Technologies Titanium Partner",name:"Computer Arabia W.L.L.",desc:"One of Qatar's oldest IT providers — delivering enterprise infrastructure, cloud, cybersecurity, and data protection solutions as a Dell Technologies Titanium Partner.",page:"Computer Arabia.html",site:"https://carabia.com"},
+  {est:"Member of Teyseer Group · Dell EMC Authorized Service Center",name:"Teyseer Technology Services W.L.L.",desc:"Teyseer's managed IT services arm — providing network management, cybersecurity, cloud services, and IT support to enterprise and government clients across Qatar.",page:"Teyseer Technology Services.html",site:"https://www.teyseertech.com"}
+];
+
+// Highlights
+document.getElementById('hlGrid').innerHTML=HIGHLIGHTS.map(h=>`
+  <a class="hl" href="${h.link}" target="_blank" rel="noopener">
+    <div class="hl-cat">${h.cat}</div>
+    <div class="hl-title">${h.title}</div>
+    <div class="hl-sub">${h.sub}</div>
+    <div class="hl-src"><span>${h.src}</span><span class="hl-arr">${neArr}</span></div>
+  </a>`).join('');
+
+// Services
+let svcActive=0;
+function renderSvcTabs(){
+  document.getElementById('svcTabs').innerHTML=SERVICES.map((s,i)=>`
+    <div class="stab${i===svcActive?' active':''}" data-i="${i}"><span class="stab-num">${s.num}</span>${s.name}</div>`).join('');
+  document.querySelectorAll('.stab').forEach(t=>t.addEventListener('click',()=>{svcActive=+t.dataset.i;renderSvcTabs();renderSvcDetail();}));
+}
+function renderSvcDetail(){
+  const s=SERVICES[svcActive];
+  document.getElementById('svcDetail').innerHTML=`
+    <div class="sd-eye">${s.eye}</div>
+    <div class="sd-name">${s.name}</div>
+    <div class="sd-desc">${s.desc}</div>
+    <div class="sd-img"><span>[ ${s.name} ]</span></div>
+    <div class="chips">${s.tags.map(t=>`<span class="chip">${t}</span>`).join('')}</div>
+    <a class="sd-link" href="${s.link}" target="_blank" rel="noopener">Learn more ${extSvg}</a>`;
+}
+renderSvcTabs();renderSvcDetail();
+
+// Projects carousel
+document.getElementById('projTrack').innerHTML=PROJECTS.map(p=>`
+  <div class="pcard">
+    <div class="pc-num">${p.num}</div>
+    <div class="pc-name">${p.name}</div>
+    <div class="pc-sub">${p.sub}</div>
+    <div class="pc-loc">📍 ${p.loc}</div>
+    <div class="pc-desc">${p.desc}</div>
+    <div class="pc-pills">${p.pills.map(t=>`<span class="ppill">${t}</span>`).join('')}</div>
+  </div>`).join('');
+// 3 cards in grid, no scroll needed
+
+// Partners marquee
+const all=[...BRANDS,...BRANDS];
+document.getElementById('mtrack').innerHTML=all.map(b=>`<div class="bitem"><span class="bname">${b}</span></div>`).join('');
+
+// Companies
+document.getElementById('coGrid').innerHTML=COMPANIES.map(c=>`
+  <div class="co">
+    <div class="co-est">${c.est}</div>
+    <div class="co-name">${c.name}</div>
+    <div class="co-desc">${c.desc}</div>
+    <div class="co-btns">
+      <a class="co-btn" href="${c.site}" target="_blank" rel="noopener">${arrowSvg} Official Site</a>
+    </div>
+  </div>`).join('');
+</script>
+</body>
+</html>

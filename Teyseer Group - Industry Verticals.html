@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Industry Verticals — Teyseer Group</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Cabin:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --blue:#2A3C8E;--blue-dark:#1F2D6B;--blue-deep:#16204D;
+  --steel:#A6A8BA;--sky:#B6C9E6;--sky-soft:#DCE5F2;
+  --night:#2A2A2A;--white:#F4F3EF;--paper:#FFFFFF;
+  --cream-2:#ECEAE3;--line:#DAD8D0;--line-soft:#E8E6DF;
+  --muted:#5C5C66;--muted-dk:#B9BBC6;
+  --font:"Cabin","Gill Sans MT",system-ui,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,monospace;
+}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+body{font-family:var(--font);background:var(--white);color:var(--night);-webkit-font-smoothing:antialiased;font-size:15.5px;line-height:1.6;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:100;background:rgba(244,243,239,0.95);backdrop-filter:blur(14px);border-bottom:1px solid var(--line);height:64px;display:flex;align-items:center}
+.nav-in{max-width:1320px;margin:0 auto;padding:0 40px;display:flex;align-items:center;gap:20px;width:100%}
+.nav-mark{width:32px;height:32px;background:var(--blue);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.nav-mark svg{width:20px;height:20px}
+.nav-name{font-family:var(--font);font-size:16px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:var(--night)}
+.nav-crumb{font-family:var(--mono);font-size:11px;letter-spacing:0.14em;color:var(--muted);text-transform:uppercase;margin-left:4px}
+.nav-crumb .here{color:var(--blue)}
+.nav-links{display:flex;gap:4px;margin-left:auto}
+.nav-links a{font-size:13px;padding:6px 12px;border-radius:999px;color:var(--muted);transition:all 160ms}
+.nav-links a:hover{color:var(--blue);background:var(--sky-soft)}
+
+/* HERO BANNER */
+.hero-banner{background:var(--blue);padding:52px 0 48px;position:relative;overflow:hidden}
+.hero-banner::after{content:"";position:absolute;right:-60px;top:-60px;width:420px;height:420px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='420' height='420'%3E%3Crect x='155' y='155' width='110' height='110' transform='rotate(45 210 210)' fill='none' stroke='white' stroke-opacity='0.12' stroke-width='1.5'/%3E%3Crect x='115' y='115' width='190' height='190' transform='rotate(45 210 210)' fill='none' stroke='white' stroke-opacity='0.07' stroke-width='1'/%3E%3Crect x='75' y='75' width='270' height='270' transform='rotate(45 210 210)' fill='none' stroke='white' stroke-opacity='0.04' stroke-width='1'/%3E%3Crect x='185' y='185' width='50' height='50' transform='rotate(45 210 210)' fill='none' stroke='white' stroke-opacity='0.18' stroke-width='1.5'/%3E%3C/svg%3E") no-repeat center;pointer-events:none}
+.hero-in{max-width:1320px;margin:0 auto;padding:0 40px;position:relative;z-index:1}
+.hero-crumb{font-family:var(--mono);font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:rgba(255,255,255,0.55);margin-bottom:16px}
+.hero-crumb a{color:rgba(255,255,255,0.55);transition:color 0.2s}.hero-crumb a:hover{color:#fff}
+.hero-crumb .sep{margin:0 8px;opacity:0.4}
+.hero-h1{font-size:clamp(36px,4.5vw,60px);font-weight:700;color:#FFFFFF;letter-spacing:-0.01em;line-height:1.05}
+.hero-sub{font-size:16px;color:rgba(255,255,255,0.7);margin-top:10px;font-weight:400;max-width:52ch}
+
+/* STATS */
+.stats-strip{background:var(--paper);border-bottom:1px solid var(--line)}
+.stats-in{max-width:1320px;margin:0 auto;padding:0 40px;display:grid;grid-template-columns:repeat(4,1fr)}
+.stat{padding:28px 24px;border-right:1px solid var(--line)}
+.stat:last-child{border-right:none}
+.stat-n{font-size:clamp(32px,3vw,48px);font-weight:700;color:var(--blue);line-height:1;margin-bottom:6px}
+.stat-l{font-family:var(--mono);font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted)}
+
+/* WRAP */
+.wrap{max-width:1320px;margin:0 auto;padding:0 40px}
+.sec{padding:80px 0}
+.sec-eye{font-family:var(--mono);font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--blue);display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.sec-eye::before{content:"";width:10px;height:10px;background:var(--blue);transform:rotate(45deg);display:inline-block;flex-shrink:0}
+.sec-h2{font-size:clamp(26px,2.8vw,40px);font-weight:700;color:var(--blue-dark);margin-bottom:8px;letter-spacing:-0.005em}
+.sec-divider{width:100%;height:1px;background:var(--line);margin-bottom:40px}
+
+/* ACHIEVEMENTS */
+#achievements{background:var(--paper)}
+.ach-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.ach-card{background:var(--white);border:1px solid var(--line);padding:20px 22px 22px;display:flex;flex-direction:column;gap:10px;transition:border-color 0.2s,box-shadow 0.2s}
+.ach-card:hover{border-color:var(--sky);box-shadow:0 4px 20px rgba(42,60,142,0.08)}
+.ach-vtag{display:inline-block;padding:3px 10px;background:var(--sky-soft);color:var(--blue);font-family:var(--mono);font-size:10px;letter-spacing:0.12em;text-transform:uppercase;border-radius:2px;align-self:flex-start}
+.ach-year{font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:0.08em}
+.ach-title{font-size:15px;font-weight:600;color:var(--blue-dark);line-height:1.3}
+.ach-desc{font-size:13px;color:var(--muted);line-height:1.6}
+
+/* VERTICALS PANEL */
+#verticals{background:var(--white)}
+.vert-layout{display:grid;grid-template-columns:260px 1fr;gap:0;border:1px solid var(--line);background:var(--line)}
+.vert-tabs{background:var(--paper);display:flex;flex-direction:column;gap:1px}
+.vtab{padding:16px 20px;font-size:14px;font-weight:500;color:var(--muted);cursor:pointer;border-left:3px solid transparent;transition:all 0.2s;user-select:none;background:var(--paper)}
+.vtab:hover{color:var(--blue);background:var(--sky-soft)}
+.vtab.active{color:var(--blue);font-weight:600;border-left-color:var(--blue);background:var(--paper)}
+.vtab-num{font-family:var(--mono);font-size:10px;color:var(--steel);margin-right:8px}
+.vtab.active .vtab-num{color:var(--blue)}
+.vert-detail{background:var(--paper);padding:40px 44px;animation:fadeIn 0.25s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.vd-eye{font-family:var(--mono);font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--blue);margin-bottom:8px}
+.vd-name{font-size:clamp(22px,2.2vw,32px);font-weight:700;color:var(--blue-dark);margin-bottom:14px;letter-spacing:-0.005em}
+.vd-desc{font-size:15px;color:var(--muted);line-height:1.7;margin-bottom:28px;max-width:68ch}
+.vd-section{margin-bottom:24px}
+.vd-slabel{font-family:var(--mono);font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid var(--line-soft)}
+.chips{display:flex;flex-wrap:wrap;gap:7px}
+.chip{padding:5px 12px;background:var(--sky-soft);color:var(--blue-dark);font-size:12.5px;font-weight:500;border-radius:3px;border:1px solid rgba(42,60,142,0.12);white-space:nowrap;transition:all 0.18s}
+.chip.co{cursor:pointer}.chip.co:hover{background:var(--blue);color:#fff;border-color:var(--blue)}
+.chip.brand{background:var(--white);color:var(--muted);border:1px solid var(--line);font-size:12px}
+.vd-cta{margin-top:28px}
+.btn-explore{display:inline-flex;align-items:center;gap:10px;padding:12px 24px;background:var(--blue);color:#fff;font-size:13px;font-weight:600;letter-spacing:0.04em;border-radius:3px;transition:background 0.2s}
+.btn-explore:hover{background:var(--blue-dark)}
+.btn-explore svg{width:14px;height:14px}
+.btn-explore.disabled{background:var(--blue);color:#fff;cursor:default;opacity:0.55}
+
+/* CTA */
+#cta{background:var(--blue)}
+.cta-in{max-width:1320px;margin:0 auto;padding:72px 40px;display:flex;align-items:center;justify-content:space-between;gap:40px}
+.cta-h2{font-size:clamp(24px,2.4vw,36px);font-weight:700;color:#fff;max-width:28ch;line-height:1.2}
+.cta-p{color:rgba(255,255,255,0.7);font-size:15px;max-width:40ch;margin-top:10px}
+.cta-btns{display:flex;gap:12px;flex-shrink:0;flex-wrap:wrap}
+.btn-w{padding:13px 26px;background:#fff;color:var(--blue);font-size:13px;font-weight:700;border-radius:3px;transition:background 0.2s}
+.btn-w:hover{background:var(--sky-soft)}
+.btn-ghost-w{padding:13px 26px;border:1.5px solid rgba(255,255,255,0.4);color:#fff;font-size:13px;font-weight:600;border-radius:3px;transition:all 0.2s}
+.btn-ghost-w:hover{background:rgba(255,255,255,0.1)}
+
+footer{background:var(--blue-dark);padding:36px 40px;display:flex;align-items:center;justify-content:space-between}
+.ft-brand{display:flex;align-items:center;gap:12px}
+.ft-mark{width:28px;height:28px;background:rgba(255,255,255,0.15);display:flex;align-items:center;justify-content:center}
+.ft-mark svg{width:18px;height:18px}
+.ft-name{font-size:13px;font-weight:600;color:#fff;letter-spacing:0.06em;text-transform:uppercase}
+.ft-copy{font-family:var(--mono);font-size:11px;color:rgba(255,255,255,0.4);letter-spacing:0.08em}
+
+@media(max-width:900px){
+  .stats-in{grid-template-columns:repeat(2,1fr)}.stat:nth-child(2){border-right:none}
+  .vert-layout{grid-template-columns:1fr}.vert-tabs{display:grid;grid-template-columns:repeat(3,1fr);background:var(--line);gap:1px}
+  .vtab{border-left:none;border-bottom:3px solid transparent;font-size:12px;padding:12px 14px;text-align:center}
+  .vtab.active{border-left:none;border-bottom-color:var(--blue)}
+  .vert-detail{padding:28px 24px}
+  .ach-grid{grid-template-columns:1fr}
+  .cta-in{flex-direction:column;align-items:flex-start}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-in">
+    <div class="nav-mark"><svg viewBox="0 0 20 20" fill="none"><rect x="5" y="5" width="10" height="10" transform="rotate(45 10 10)" fill="white"/></svg></div>
+    <span class="nav-name">Teyseer Group</span>
+    <span class="nav-crumb">/ <span class="here">Industry Verticals</span></span>
+    <nav class="nav-links">
+      <a href="#achievements">Achievements</a>
+      <a href="#verticals">Verticals</a>
+      <a href="#cta">Contact</a>
+    </nav>
+  </div>
+</nav>
+
+<div class="hero-banner">
+  <div class="hero-in">
+    <div class="hero-crumb"><a href="index.html">Teyseer Group</a><span class="sep">/</span><span class="here">Industry Verticals</span></div>
+    <h1 class="hero-h1">Industry Verticals</h1>
+    <p class="hero-sub">Nine industry verticals. 18+ Group companies. Over 50 years of contributing to Qatar's growth.</p>
+  </div>
+</div>
+
+<div class="stats-strip">
+  <div class="stats-in">
+    <div class="stat"><div class="stat-n">9</div><div class="stat-l">Verticals</div></div>
+    <div class="stat"><div class="stat-n">18+</div><div class="stat-l">Group Companies</div></div>
+    <div class="stat"><div class="stat-n">10+</div><div class="stat-l">Key Projects</div></div>
+    <div class="stat"><div class="stat-n">8+</div><div class="stat-l">Key Awards</div></div>
+  </div>
+</div>
+
+<!-- KEY ACHIEVEMENTS -->
+<section class="sec" id="achievements">
+  <div class="wrap">
+    <div class="sec-eye">Key Achievements</div>
+    <h2 class="sec-h2">Key Achievements Across the Verticals</h2>
+    <div class="sec-divider"></div>
+    <div class="ach-grid" id="achGrid"></div>
+  </div>
+</section>
+
+<!-- VERTICALS -->
+<section class="sec" id="verticals" style="background:var(--white);padding-top:0">
+  <div class="wrap">
+    <div class="sec-eye">Our Verticals</div>
+    <h2 class="sec-h2">Industry Verticals</h2>
+    <div class="sec-divider"></div>
+    <div class="vert-layout">
+      <div class="vert-tabs" id="vertTabs"></div>
+      <div class="vert-detail" id="vertDetail"></div>
+    </div>
+  </div>
+</section>
+
+<section id="cta">
+  <div class="cta-in">
+    <div>
+      <h2 class="cta-h2">Partner with Teyseer Group.</h2>
+      <p class="cta-p">Explore opportunities across our nine industry verticals — from automotive to technology, construction, security and beyond.</p>
+    </div>
+    <div class="cta-btns">
+      <a class="btn-w" href="https://www.teyseergroup.com/contact-us/" target="_blank">Get in Touch</a>
+      <a class="btn-ghost-w" href="index.html">View All Pages</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="ft-brand"><div class="ft-mark"><svg viewBox="0 0 20 20" fill="none"><rect x="5" y="5" width="10" height="10" transform="rotate(45 10 10)" fill="white"/></svg></div><span class="ft-name">Teyseer Group</span></div>
+  <span class="ft-copy">EST. 1968 · DOHA, QATAR · © 2024 ALL RIGHTS RESERVED</span>
+</footer>
+
+<script>
+const ACHIEVEMENTS=[
+  {vertical:"Automotive",year:"May 2026",cat:"Strategic Milestone",title:"SAP S/4HANA Digital Transformation",desc:"Teyseer Motors selected SAP to deploy an AI-enabled dealership platform unifying pre-sales, sales, and aftersales across all brands — with embedded AI and regional expansion ambitions."},
+  {vertical:"Information Technology",year:"2025",cat:"Industry Award",title:"Palo Alto Collaboration Champion of the Year",desc:"Computer Arabia named Collaboration Champion of the Year 2025 by Palo Alto Networks for outstanding cybersecurity excellence in Qatar."},
+  {vertical:"Construction & Building Materials",year:"Delivered",cat:"Mega Project",title:"Msheireb Downtown Doha Phase 4 — US$630M LEED",desc:"Teyseer Contracting, in JV with CCC, delivered Phase 4 of Qatar's landmark sustainable urban regeneration project — LEED certified, valued at US$630 million."},
+  {vertical:"Manufacturing & Fabrication",year:"2022",cat:"Mega Event",title:"FIFA World Cup 2022 — Scaffolding & Structures",desc:"Qatar Plant Hire designed and installed event structures, crowd control barriers, and scaffolding across multiple FIFA World Cup 2022 venues in Qatar."},
+  {vertical:"Information Technology",year:"Dec 2025",cat:"Strategic Partnership",title:"Solix Technologies Enterprise Data Partnership",desc:"Computer Arabia partnered with Solix Technologies to deliver AI-ready enterprise data modernisation across Qatar's government, telecom, energy, and banking sectors."},
+  {vertical:"Automotive",year:"Jan 2025",cat:"Product Launch",title:"Haval H7 Launch at Qatar Custom Show",desc:"Teyseer Motors unveiled the Haval H7 at QAR 92,900 at Qatar's premier automotive showcase, expanding the GWM lineup alongside Tank 500, Tank 300, and Haval H9."}
+];
+
+const VERTICALS=[
+  {id:"automotive",name:"Automotive",
+   desc:"Teyseer's automotive vertical has driven Qatar's mobility since 1968 — spanning exclusive vehicle distribution, aftersales excellence, car care stations, and flexible rental and leasing solutions across Qatar.",
+   companies:[{n:"Teyseer Motors W.L.L.",u:"https://teymotor.com"},{n:"Teyseer Service Centre W.L.L.",u:"https://www.tsc-qatar.com"},{n:"Teyseer Rent a Car Co. W.L.L.",u:"https://teyseerrentacar.com"}],
+   brands:["Suzuki","Peugeot","GWM","Haval","Tank","Farizon","Mobil","ExxonMobil","Nexen Tire","Linglong","Akrapovič","Motorex","RS Taichi","Helden"],
+   page:"Teyseer Automotive v3.html"},
+  {id:"it",name:"Information Technology",
+   desc:"Enterprise IT infrastructure, cloud solutions, cybersecurity, and managed services — serving Qatar's banking, energy, government, healthcare, and aviation sectors since 1979.",
+   companies:[{n:"Computer Arabia W.L.L.",u:"https://carabia.com"},{n:"Teyseer Technology Services W.L.L.",u:"https://www.teyseertech.com"}],
+   brands:["Dell Technologies","Microsoft","VMware","Palo Alto Networks","Cisco","Fortinet","Google Cloud","Microsoft Azure","Veeam","Epson","Emerson PACSystems","SonicWall","Sophos","Barracuda","Trend Micro"],
+   page:"Teyseer IT Vertical.html"},
+  {id:"construction",name:"Construction & Building Materials",
+   desc:"One of Qatar's most established construction groups — from building materials supply and rebar fabrication to large-scale contracting, heavy logistics, and industrial lifting solutions.",
+   companies:[{n:"Teyseer Building Materials & Transport Co. W.L.L.",u:"https://www.teyseerbm.com"},{n:"Teyseer Contracting Company W.L.L.",u:"https://www.teyseergroup.com"},{n:"Dutest Qatar W.L.L.",u:"https://www.dutestqatar.com"}],
+   brands:["Qatar Steel","Qatar National Cement","Al Khalij Cement","Maple Leaf White Cement","BTMS Couplers","Leviat","Al Jazeera Steel","Dr. Fixit","Bitugulf","Aquatech","Corkjoint","Astra","Jollyboard","Supreme Industries","Scania"],
+   page:"Teyseer Construction Vertical.html"},
+  {id:"industrial",name:"Industry Products & Safety Equipment",
+   desc:"Supply and distribution of industrial products, safety equipment, and technical services for Qatar's oil & gas, construction, and industrial sectors.",
+   companies:[{n:"Teyseer Industrial Supplies & Services W.L.L.",u:"https://www.teyseergroup.com"},{n:"Gulf Incon W.L.L.",u:"https://www.teyseergroup.com"},{n:"CCM Services W.L.L.",u:"https://www.teyseergroup.com"}],
+   brands:["3M","Ansell","Honeywell Safety","MSA Safety","DuPont","Kimberly-Clark","Draeger","Lakeland Industries","Brady","Globus"],
+   page:null},
+  {id:"manufacturing",name:"Manufacturing & Fabrication",
+   desc:"Industrial fabrication, scaffolding and plant hire, glass fibre manufacturing, and polymer products for Qatar's construction, oil & gas, and industrial sectors.",
+   companies:[{n:"Qatar Plant Hire Co. W.L.L.",u:"https://www.teyseergroup.com"},{n:"Gulf Glass Fibre W.L.L.",u:"https://www.teyseergroup.com"},{n:"Teyseer Polychem",u:"https://www.teyseergroup.com"}],
+   brands:["Cuplok Scaffolding","Ring-lock Systems","Tube & Fittings","FRP / GRP Products","Industrial Polymers","Plant & Equipment Hire"],
+   page:null},
+  {id:"security",name:"Security Services",
+   desc:"Professional security services — guarding, loss prevention, and integrated security solutions for corporate, government, retail, and industrial clients across Qatar.",
+   companies:[{n:"Teyseer Security Services W.L.L.",u:"https://www.teyseergroup.com"}],
+   brands:["Access Control Systems","CCTV & Surveillance","Biometric Systems","Guard Management Software","Patrol & Response"],
+   page:null},
+  {id:"hvac",name:"Air Conditioning & HVAC",
+   desc:"Complete HVAC solutions — supply, installation, commissioning, and maintenance of air conditioning and refrigeration systems for residential, commercial, and industrial applications.",
+   companies:[{n:"Teyseer AC & Refrigeration W.L.L.",u:"https://www.teyseergroup.com"}],
+   brands:["Carrier","York","Daikin","Trane","LG HVAC","Samsung HVAC","Mitsubishi Electric","Midea"],
+   page:null},
+  {id:"retail",name:"Retail",
+   desc:"Quality consumer goods and everyday essentials for Qatar's communities through Teyseer Go — a modern retail experience built on the Group's trusted heritage.",
+   companies:[{n:"Teyseer Go",u:"https://www.teyseergroup.com"}],
+   brands:["FMCG Products","Consumer Electronics","Personal Care","Food & Beverage","Household Essentials"],
+   page:null},
+  {id:"catering",name:"Catering & Facility Management",
+   desc:"Comprehensive catering and integrated facility management services for corporate, industrial, and government clients — delivering quality, consistency, and operational excellence.",
+   companies:[{n:"Teyseer Services Company W.L.L.",u:"https://www.teyseergroup.com"}],
+   brands:["Contract Catering","Hospitality Services","Facility Management","Soft FM","Camp Management"],
+   page:null}
+];
+
+let active=0;
+
+function renderAchievements(){
+  document.getElementById('achGrid').innerHTML=ACHIEVEMENTS.map(a=>`
+    <div class="ach-card">
+      <span class="ach-vtag">${a.vertical}</span>
+      <div class="ach-year">${a.year} · ${a.cat}</div>
+      <div class="ach-title">${a.title}</div>
+      <div class="ach-desc">${a.desc}</div>
+    </div>`).join('');
+}
+
+function renderTabs(){
+  document.getElementById('vertTabs').innerHTML=VERTICALS.map((v,i)=>`
+    <div class="vtab${i===active?' active':''}" data-i="${i}">
+      <span class="vtab-num">0${i+1}</span>${v.name}
+    </div>`).join('');
+  document.querySelectorAll('.vtab').forEach(t=>t.addEventListener('click',()=>{active=+t.dataset.i;renderTabs();renderDetail();}));
+}
+
+function renderDetail(){
+  const v=VERTICALS[active];
+  document.getElementById('vertDetail').innerHTML=`
+    <div class="vd-eye">Vertical 0${active+1} of 09</div>
+    <div class="vd-name">${v.name}</div>
+    <div class="vd-desc">${v.desc}</div>
+    <div class="vd-section">
+      <div class="vd-slabel">Companies</div>
+      <div class="chips">${v.companies.map(c=>`<a class="chip co" href="${c.u}" target="_blank" rel="noopener">${c.n}</a>`).join('')}</div>
+    </div>
+    <div class="vd-section">
+      <div class="vd-slabel">Partner Brands</div>
+      <div class="chips">${v.brands.map(b=>`<span class="chip brand">${b}</span>`).join('')}</div>
+    </div>
+    <div class="vd-cta">
+      ${v.page
+        ? `<a class="btn-explore" href="${v.page}">Explore ${v.name} <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M8 3l5 5-5 5"/></svg></a>`
+        : `<span class="btn-explore disabled">More Coming Soon</span>`}
+    </div>`;
+}
+
+renderAchievements();renderTabs();renderDetail();
+</script>
+</body>
+</html>

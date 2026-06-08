@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Automotive — Teyseer Group</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Cabin:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--blue:#2A3C8E;--blue-dark:#1F2D6B;--sky-soft:#DCE5F2;--sky:#B6C9E6;--night:#2A2A2A;--white:#F4F3EF;--paper:#FFFFFF;--line:#DAD8D0;--line-soft:#E8E6DF;--muted:#5C5C66;--steel:#A6A8BA;--font:"Cabin","Gill Sans MT",system-ui,sans-serif;--mono:"JetBrains Mono",ui-monospace,monospace;}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+body{font-family:var(--font);background:var(--white);color:var(--night);-webkit-font-smoothing:antialiased;font-size:15.5px;line-height:1.6;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+nav{position:sticky;top:0;z-index:100;background:rgba(244,243,239,0.95);backdrop-filter:blur(14px);border-bottom:1px solid var(--line);height:64px;display:flex;align-items:center}
+.nav-in{max-width:1320px;margin:0 auto;padding:0 40px;display:flex;align-items:center;gap:16px;width:100%}
+.nav-mark{width:32px;height:32px;background:var(--blue);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.nav-mark svg{width:20px;height:20px}
+.nav-name{font-size:15px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:var(--night)}
+.nav-crumb{font-family:var(--mono);font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:0.12em;margin-left:4px}
+.nav-crumb .here{color:var(--blue)}
+.nav-links{display:flex;gap:4px;margin-left:auto}
+.nav-links a{font-size:13px;padding:6px 12px;border-radius:999px;color:var(--muted);transition:all 160ms}
+.nav-links a:hover{color:var(--blue);background:var(--sky-soft)}
+/* HERO */
+.hero-banner{background:var(--blue);padding:52px 0 48px;position:relative;overflow:hidden}
+.hero-banner::after{content:"";position:absolute;right:-60px;top:-60px;width:420px;height:420px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='420' height='420'%3E%3Crect x='155' y='155' width='110' height='110' transform='rotate(45 210 210)' fill='none' stroke='white' stroke-opacity='0.12' stroke-width='1.5'/%3E%3Crect x='115' y='115' width='190' height='190' transform='rotate(45 210 210)' fill='none' stroke='white' stroke-opacity='0.07' stroke-width='1'/%3E%3Crect x='75' y='75' width='270' height='270' transform='rotate(45 210 210)' fill='none' stroke='white' stroke-opacity='0.04' stroke-width='1'/%3E%3C/svg%3E") no-repeat center;pointer-events:none}
+.hero-in{max-width:1320px;margin:0 auto;padding:0 40px;position:relative;z-index:1}
+.hero-crumb{font-family:var(--mono);font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:rgba(255,255,255,0.55);margin-bottom:14px}
+.hero-crumb a{color:rgba(255,255,255,0.55)}.hero-crumb .sep{margin:0 8px;opacity:0.4}
+.hero-h1{font-size:clamp(36px,4.5vw,60px);font-weight:700;color:#fff;letter-spacing:-0.01em;line-height:1.05}
+.hero-sub{font-size:16px;color:rgba(255,255,255,0.7);margin-top:10px;max-width:52ch}
+/* LAYOUT */
+.wrap{max-width:1320px;margin:0 auto;padding:0 40px}
+.sec{padding:80px 0}
+.sec-eye{font-family:var(--mono);font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--blue);display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.sec-eye::before{content:"";width:10px;height:10px;background:var(--blue);transform:rotate(45deg);display:inline-block;flex-shrink:0}
+.sec-h2{font-size:clamp(24px,2.6vw,38px);font-weight:700;color:var(--blue-dark);margin-bottom:8px}
+.divider{width:100%;height:1px;background:var(--line);margin-bottom:40px}
+/* BRANDS MARQUEE */
+#brands{background:var(--paper);padding:40px 0;overflow:hidden}
+.marquee-wrap{overflow:hidden;position:relative}
+.marquee-wrap::before,.marquee-wrap::after{content:"";position:absolute;top:0;bottom:0;width:120px;z-index:2;pointer-events:none}
+.marquee-wrap::before{left:0;background:linear-gradient(to right,var(--paper),transparent)}
+.marquee-wrap::after{right:0;background:linear-gradient(to left,var(--paper),transparent)}
+.marquee-track{display:flex;animation:marquee 28s linear infinite;width:max-content}
+.marquee-track:hover{animation-play-state:paused}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.bitem{display:flex;align-items:center;justify-content:center;padding:14px 36px;border-left:1px solid var(--line);min-width:160px}
+.bname{font-size:14px;font-weight:500;color:var(--steel);white-space:nowrap;transition:color 0.2s}
+.bitem:hover .bname{color:var(--blue)}
+/* DIVISIONS */
+#divisions{background:var(--white)}
+.dv{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--line);margin-bottom:20px;background:var(--paper);overflow:hidden}
+.dv.rev .dv-media{order:2}
+.dv-media{background:repeating-linear-gradient(135deg,var(--sky-soft) 0,var(--sky-soft) 14px,var(--paper) 14px,var(--paper) 28px);min-height:220px;display:flex;flex-direction:column;justify-content:flex-end;border-right:1px solid var(--line);position:relative;overflow:hidden}
+.dv.rev .dv-media{border-right:none;border-left:1px solid var(--line)}
+.dv-ph{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:var(--mono);font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--steel);pointer-events:none}
+.award-wrap{position:relative;display:flex;flex-direction:column}
+.award-ctrl{display:flex;align-items:center;justify-content:space-between;padding:8px 12px;background:var(--sky-soft);border-top:1px solid var(--line)}
+.award-ctrl-label{font-family:var(--mono);font-size:10px;color:var(--blue);letter-spacing:0.1em;text-transform:uppercase}
+.award-ctrl-btns{display:flex;gap:6px}
+.award-btn{width:28px;height:28px;border:1px solid var(--line);background:var(--paper);color:var(--night);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.18s;border-radius:2px}
+.award-btn:hover{border-color:var(--blue);color:var(--blue)}
+.award-btn:disabled{opacity:0.25;cursor:default}
+.award-btn svg{width:12px;height:12px}
+.award-scroll{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;scrollbar-width:none;gap:0;background:var(--line)}
+.award-scroll::-webkit-scrollbar{display:none}
+.award-card{flex:1 0 0;min-width:150px;scroll-snap-align:start;background:var(--paper);padding:14px 16px 16px;display:flex;flex-direction:column;gap:5px;border-right:1px solid var(--line)}
+.award-card:last-child{border-right:none}
+.award-title{font-size:13px;font-weight:700;color:var(--blue-dark);line-height:1.3}
+.award-sub{font-family:var(--mono);font-size:10px;color:var(--blue);letter-spacing:0.08em}
+.dv-body{padding:36px 40px;display:flex;flex-direction:column;gap:14px}
+.dv-eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:var(--blue)}
+.dv-name{font-size:clamp(20px,1.8vw,28px);font-weight:700;color:var(--blue-dark);line-height:1.2}
+.dv-desc{font-size:14.5px;color:var(--muted);line-height:1.7;max-width:44ch}
+.dv-services{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}
+.dv-chip{padding:4px 10px;background:var(--sky-soft);color:var(--blue-dark);font-size:12px;border-radius:2px;font-weight:500}
+.dv-link{display:inline-flex;align-items:center;gap:8px;margin-top:8px;font-size:13px;font-weight:600;color:var(--blue);padding:10px 20px;background:var(--blue);color:#fff;border-radius:3px;align-self:flex-start;transition:background 0.2s}
+.dv-link:hover{background:var(--blue-dark)}.dv-link svg{width:13px;height:13px}
+/* HIGHLIGHTS = KEY PROJECTS AND ACCOMPLISHMENTS */
+#highlights{background:var(--paper)}
+.hl-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.hl{background:var(--paper);border:1px solid var(--line);padding:20px;display:flex;flex-direction:column;gap:10px;text-decoration:none;color:inherit;transition:border-color 0.2s,box-shadow 0.2s}
+.hl:hover{border-color:var(--blue);box-shadow:0 4px 20px rgba(42,60,142,0.1)}
+.hl-cat{font-family:var(--mono);font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--blue)}
+.hl-title{font-size:15px;font-weight:600;color:var(--blue-dark);line-height:1.3}
+.hl-text{font-size:13px;color:var(--muted);line-height:1.6}
+.hl-src{font-family:var(--mono);font-size:10px;color:var(--steel);margin-top:auto;padding-top:10px;border-top:1px solid var(--line-soft);display:flex;align-items:center;justify-content:space-between}
+.hl-ne{color:var(--blue)}
+/* CTA */
+#cta{background:var(--blue)}
+.cta-in{max-width:1320px;margin:0 auto;padding:72px 40px;display:flex;align-items:center;justify-content:space-between;gap:40px}
+.cta-h2{font-size:clamp(24px,2.4vw,36px);font-weight:700;color:#fff;max-width:28ch;line-height:1.2}
+.cta-p{color:rgba(255,255,255,0.7);font-size:15px;margin-top:10px}
+.cta-btns{display:flex;gap:12px;flex-shrink:0;flex-wrap:wrap}
+.btn-w{padding:13px 26px;background:#fff;color:var(--blue);font-size:13px;font-weight:700;border-radius:3px;transition:background 0.2s}.btn-w:hover{background:var(--sky-soft)}
+.btn-ghost-w{padding:13px 26px;border:1.5px solid rgba(255,255,255,0.4);color:#fff;font-size:13px;font-weight:600;border-radius:3px;transition:all 0.2s}.btn-ghost-w:hover{background:rgba(255,255,255,0.1)}
+footer{background:var(--blue-dark);padding:36px 40px;display:flex;align-items:center;justify-content:space-between}
+.ft-brand{display:flex;align-items:center;gap:12px}
+.ft-mark{width:28px;height:28px;background:rgba(255,255,255,0.15);display:flex;align-items:center;justify-content:center}
+.ft-mark svg{width:18px;height:18px}
+.ft-name{font-size:13px;font-weight:600;color:#fff;letter-spacing:0.06em;text-transform:uppercase}
+.ft-copy{font-family:var(--mono);font-size:11px;color:rgba(255,255,255,0.4)}
+@media(max-width:900px){.dv,.hl-grid{grid-template-columns:1fr}.cta-in{flex-direction:column}.sec{padding:56px 0}.wrap{padding:0 24px}}
+</style>
+</head>
+<body>
+<nav>
+  <div class="nav-in">
+    <div class="nav-mark"><svg viewBox="0 0 20 20" fill="none"><rect x="5" y="5" width="10" height="10" transform="rotate(45 10 10)" fill="white"/></svg></div>
+    <span class="nav-name">Teyseer Group</span>
+    <span class="nav-crumb">/ Verticals / <span class="here">Automotive</span></span>
+    <nav class="nav-links"><a href="#divisions">Divisions</a><a href="#highlights">Accomplishments</a><a href="#cta">Contact</a></nav>
+  </div>
+</nav>
+
+<div class="hero-banner">
+  <div class="hero-in">
+    <div class="hero-crumb"><a href="index.html">Teyseer Group</a><span class="sep">/</span><a href="Teyseer Group - Industry Verticals v2.html">Verticals</a><span class="sep">/</span>Automotive</div>
+    <h1 class="hero-h1">Automotive</h1>
+    <p class="hero-sub">Exclusive distribution, expert aftersales, and flexible mobility — driving Qatar forward since 1968.</p>
+  </div>
+</div>
+
+<section class="sec" id="about" style="background:var(--paper)">
+  <div class="wrap">
+    <div style="max-width:76ch">
+      <div class="sec-eye">The Vertical</div>
+      <h2 class="sec-h2">Qatar's automotive leader, since 1968.</h2>
+      <div class="divider"></div>
+      <p style="font-size:15px;color:var(--muted);line-height:1.75">Teyseer's Automotive vertical spans exclusive marque distribution, certified aftersales, premium fuel and auto-care stations, and flexible vehicle rental — delivering a complete ownership journey across Qatar. Three dedicated companies, one unified commitment to quality.</p>
+    </div>
+  </div>
+</section>
+
+<section id="brands"><div class="marquee-wrap"><div class="marquee-track" id="mtrack"></div></div></section>
+
+<section class="sec" id="divisions">
+  <div class="wrap">
+    <div class="sec-eye">Our Divisions</div>
+    <h2 class="sec-h2">Our Divisions</h2>
+    <div class="divider"></div>
+    <div id="dvWrap"></div>
+  </div>
+</section>
+
+<section class="sec" id="highlights" style="background:var(--paper)">
+  <div class="wrap">
+    <div class="sec-eye">News & Milestones</div>
+    <h2 class="sec-h2">Key Projects and Accomplishments</h2>
+    <div class="divider"></div>
+    <div class="hl-grid" id="hlGrid"></div>
+  </div>
+</section>
+
+<section id="cta">
+  <div class="cta-in">
+    <div><h2 class="cta-h2">Begin your journey with us.</h2><p class="cta-p">Visit a showroom, service your vehicle, or arrange a rental. Our team is ready to help.</p></div>
+    <div class="cta-btns">
+      <a class="btn-w" href="https://teymotor.com" target="_blank">Teyseer Motors</a>
+      <a class="btn-ghost-w" href="Teyseer Automotive v3.html">Full Vertical Page</a>
+    </div>
+  </div>
+</section>
+<footer>
+  <div class="ft-brand"><div class="ft-mark"><svg viewBox="0 0 20 20" fill="none"><rect x="5" y="5" width="10" height="10" transform="rotate(45 10 10)" fill="white"/></svg></div><span class="ft-name">Teyseer Group — Automotive</span></div>
+  <span class="ft-copy">EST. 1968 · DOHA, QATAR</span>
+</footer>
+
+<script>
+const BRANDS=["Suzuki","Peugeot","GWM","Haval","Tank","Farizon","Mobil","ExxonMobil","Nexen Tire","Linglong","Akrapovič","Motorex","RS Taichi","Helden"];
+const all=[...BRANDS,...BRANDS];
+document.getElementById('mtrack').innerHTML=all.map(b=>`<div class="bitem"><span class="bname">${b}</span></div>`).join('');
+
+const DIVISIONS=[
+  {eyebrow:"Division 01 · Est. 1968",name:"Teyseer Motors",rev:false,
+   desc:"The flagship of the vertical and exclusive distributor of Suzuki (since 1970) and GWM in Qatar, and authorised distributor of Peugeot (since 2020). Delivering new vehicles, motorcycles, genuine parts, aftersales, lubricants, tires, and batteries.",
+   services:["Suzuki & Peugeot Sales","GWM Distribution","Motorcycles","Aftersales & Parts","Lubricants (Mobil)","Tires & Batteries","Pre-Owned","Golf Carts"],
+   awards:[{t:"Good Standing Certificate",m:"Teyseer Motors"},{t:"ExxonMobil Elite Club",m:"Distributor Excellence 2013"},{t:"NGK Appreciation Award",m:"Outstanding Partnership"},{t:"Kumho Tires Appreciation",m:"Authorised Distributor"},{t:"Aspire 4 Sports — Gold Sponsor",m:"Qatar Sports Initiative"},{t:"ExxonMobil Awards",m:"2009"},{t:"WD-40 Award",m:"603,000 Cans Sold"},{t:"Suzuki Sales Expansion",m:"Year 2000"},{t:"Outstanding Sales Performance",m:"ExxonMobil 2005–2006"},{t:"Certificate of Appreciation",m:"Stenden University"},{t:"Best Tank 500 Sales MEA",m:"2025"},{t:"Alpha Excellence Award",m:"GWM Global 2025"},{t:"Best New Business Partner",m:"GWM 2024"}],
+   awardsUrl:"",url:"https://teymotor.com",label:"Visit teymotor.com"},
+  {eyebrow:"Division 02 · Est. 1976",name:"Teyseer Service Centre",rev:true,
+   desc:"The largest service station network in Qatar — fuelling, car washing, lube change, minor repair, and auto-care across five stations powered by the Teyseer Card NFC payment system.",
+   services:["Fuel Stations","Body Wash","Jack Wash","Steam Wash","Express Lube","Teyseer Card","Minor Repair","Undercoating"],
+   awards:[{t:"ISO 9001:2015",m:"Quality Management System"},{t:"ISO 14001:2015",m:"Environmental Management"},{t:"ISO 45001:2018",m:"Occupational Health & Safety"},{t:"Teyseer Card Innovation",m:"NFC Smart Payment System"},{t:"Certificates & Accolades",m:"Industry Recognition"}],
+   awardsUrl:"",url:"https://www.tsc-qatar.com",label:"Visit tsc-qatar.com"},
+  {eyebrow:"Division 03 · Est. 2021",name:"Teyseer Rent A Car",rev:false,
+   desc:"Registered as an independent company in 2021 — born from Teyseer Group's automotive heritage. Flexible rental and long-term corporate leasing on a modern Suzuki and Peugeot fleet, with free replacement and responsive fleet management.",
+   services:["Daily Rental","Weekly Rental","Long-Term Lease","Corporate Fleet","Free Replacement","Delivery & Collection"],
+   awards:[{t:"ISO 9001:2015",m:"Quality Management System"},{t:"ISO 14001:2015",m:"Environmental Management"},{t:"ISO 45001:2018",m:"Occupational Health & Safety"},{t:"Customer Satisfaction",m:"Service Reliability Policy"},{t:"Integrated Management System",m:"Continual Improvement"}],
+   awardsUrl:"",url:"https://teyseerrentacar.com",label:"Visit teyseerrentacar.com"}
+];
+
+const arrowSvg=`<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 13L13 3M5 3h8v8"/></svg>`;
+const trophySvg=`<svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M5 2h8v8a4 4 0 01-8 0V2z"/><path d="M2 2h3M13 2h3M2 5H5M13 5h3M9 10v4M6 14h6"/></svg>`;
+
+document.getElementById('dvWrap').innerHTML=DIVISIONS.map(function(d,idx){
+  const awardCards=d.awards.map(function(a){
+    return '<div class="award-card"><div class="award-title">'+a.t+'</div><div class="award-sub">'+a.m+'</div></div>';
+  }).join('');
+  const chipItems=d.services.map(function(s){return '<span class="dv-chip">'+s+'</span>';}).join('');
+  const scrollId='as'+idx; const prevId='ap'+idx; const nextId='an'+idx;
+  return '<div class="dv'+(d.rev?' rev':'')+'"><div class="dv-media"><span class="dv-ph">[ '+d.name+' ]</span><div class="award-wrap"><div class="award-scroll" id="'+scrollId+'">'+awardCards+'</div><div class="award-ctrl" style="justify-content:flex-end"><div class="award-ctrl-btns"><button class="award-btn" id="'+prevId+'" disabled><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 2L4 6l4 4"/></svg></button><button class="award-btn" id="'+nextId+'"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 2l4 4-4 4"/></svg></button></div></div></div></div><div class="dv-body"><div class="dv-eyebrow">'+d.eyebrow+'</div><div class="dv-name">'+d.name+'</div><div class="dv-desc">'+d.desc+'</div><div class="dv-services">'+chipItems+'</div><a class="dv-link" href="'+d.url+'" target="_blank" rel="noopener">'+d.label+' '+arrowSvg+'</a></div></div>';
+}).join('');
+
+// Wire award scroll arrows
+DIVISIONS.forEach(function(_,idx){
+  const sc=document.getElementById('as'+idx);
+  const pr=document.getElementById('ap'+idx);
+  const nx=document.getElementById('an'+idx);
+  if(!sc||!pr||!nx)return;
+  function cw(){const c=sc.querySelector('.award-card');return c?c.offsetWidth:150;}
+  function upd(){const max=sc.scrollWidth-sc.clientWidth;pr.disabled=sc.scrollLeft<=2;nx.disabled=sc.scrollLeft>=max-2;}
+  pr.addEventListener('click',function(){sc.scrollBy({left:-cw(),behavior:'smooth'});});
+  nx.addEventListener('click',function(){sc.scrollBy({left:cw(),behavior:'smooth'});});
+  sc.addEventListener('scroll',upd);upd();
+});
+
+const HIGHLIGHTS=[
+  {cat:"Strategic Milestone · May 2026",title:"SAP S/4HANA Digital Transformation",text:"Teyseer Motors selected SAP to deploy an AI-enabled dealership platform unifying pre-sales, sales, and aftersales across all brands.",src:"GEC Newswire · SAP MENA",link:"https://gecnewswire.com/teyseer-motors-adopts-sap-to-drive-ai-powered-growth-in-qatar/"},
+  {cat:"Partnership · January 2024",title:"GWM Exclusive Distributorship Signed",text:"Formalised a landmark distributorship agreement with Great Wall Motor on 24 January 2024, completing GWM's full GCC six-country market coverage.",src:"Gulf Times · Qatar Tribune",link:"https://www.gulf-times.com/article/676577/qatar/great-wall-motor-and-teyseer-motors-forge-transformative-partnership-redefining-qatars-automotive-experience"},
+  {cat:"Product Launch · January 2025",title:"Haval H7 Launch — Qatar Custom Show",text:"Teyseer Motors unveiled the all-new Haval H7 at QAR 92,900 at Qatar's premier automotive showcase, expanding the GWM lineup.",src:"Qatar Tribune",link:"https://www.qatar-tribune.com/article/159592/business/teyseer-motors-unveils-all-new-haval-h7-at-qatar-custom-show"},
+  {cat:"Exhibition · November 2024",title:"GWM Tank 300 at Milipol Qatar",text:"GWM and Teyseer Motors presented the Tank 300 at Milipol Qatar 2024, targeting the security, defence, and government vehicle segment.",src:"GWM Global",link:"https://www.gwm-global.com/news/3403395.html"}
+];
+
+document.getElementById('hlGrid').innerHTML=HIGHLIGHTS.map(h=>`
+  <a class="hl" href="${h.link}" target="_blank" rel="noopener">
+    <div class="hl-cat">${h.cat}</div>
+    <div class="hl-title">${h.title}</div>
+    <div class="hl-text">${h.text}</div>
+    <div class="hl-src"><span>${h.src}</span><span class="hl-ne"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 10L10 2M4 2h6v6"/></svg></span></div>
+  </a>`).join('');
+</script>
+</body>
+</html>
