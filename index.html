@@ -3,6 +3,13 @@
 <head>
 <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Revised Pages — Teyseer Group</title>
+  <script>
+  const password = "Teyseer@26#1";
+  const input = prompt("Enter password to access this page:");
+  if (input !== password) {
+    document.body.innerHTML = "<h2 style='font-family:sans-serif;text-align:center;margin-top:20vh'>Incorrect password. Access denied.</h2>";
+  }
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link href="https://fonts.googleapis.com/css2?family=Cabin:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 <style>
