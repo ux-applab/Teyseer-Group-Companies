@@ -3,13 +3,30 @@
 <head>
 <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Revised Pages — Teyseer Group</title>
-  <script>
-  const password = "Teyseer@26#1";
-  const input = prompt("Enter password to access this page:");
-  if (input !== password) {
-    document.body.innerHTML = "<h2 style='font-family:sans-serif;text-align:center;margin-top:20vh;color:#1a2e5a'>Incorrect password. Access denied.</h2>";
-    document.title = "Access Denied";
-  }
+<script>
+  (function() {
+    const correct = "Teyseer@26#1";
+    
+    // If already authenticated this session, skip prompt
+    if (sessionStorage.getItem("auth") === "true") return;
+
+    // Block page immediately
+    document.documentElement.style.visibility = "hidden";
+
+    const input = prompt("Enter password to access this page:");
+
+    // Handle cancel or wrong password
+    if (input === null || input !== correct) {
+      document.documentElement.style.visibility = "visible";
+      document.body.innerHTML = "<h2 style='font-family:sans-serif;text-align:center;margin-top:20vh;color:#1a2e5a'>Access denied.</h2>";
+      document.title = "Access Denied";
+      return;
+    }
+
+    // Correct password — store and reveal
+    sessionStorage.setItem("auth", "true");
+    document.documentElement.style.visibility = "visible";
+  })();
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link href="https://fonts.googleapis.com/css2?family=Cabin:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
