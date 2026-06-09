@@ -1,0 +1,1570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Our Partners — Teyseer Group</title>
+<meta name="description" content="The international principals, joint ventures and group companies that make up the Teyseer portfolio — supporting Qatar's industry, mobility, energy and services since 1968.">
+<link rel="stylesheet" href="teyseer.css">
+<style>
+/* ============================================================
+   PAGE-SPECIFIC — PARTNERS / PORTFOLIO
+   ============================================================ */
+.hero.partners-hero { padding: 96px 0 56px; }
+.hero .quick {
+  margin-top: 64px;
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 0;
+  border: 1px solid var(--line);
+  background: var(--paper);
+}
+@media (max-width: 900px) { .hero .quick { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 540px) { .hero .quick { grid-template-columns: 1fr; } }
+.hero .quick .q {
+  padding: 26px 24px;
+  border-right: 1px solid var(--line);
+  display: flex; flex-direction: column; gap: 6px;
+}
+.hero .quick .q:last-child { border-right: 0; }
+@media (max-width: 900px) { .hero .quick .q:nth-child(2) { border-right: 0; } }
+.hero .quick .num {
+  font-family: var(--serif); font-weight: 300;
+  font-size: 48px; line-height: 1; color: var(--blue);
+}
+.hero .quick .num .sfx { font-size: 24px; vertical-align: super; margin-left: 2px; color: var(--steel-dim); }
+.hero .quick .lbl {
+  font-family: var(--mono); font-size: 10.5px;
+  letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted);
+}
+.hero .quick .desc { font-size: 13.5px; color: var(--night); margin-top: 6px; }
+
+/* Sector filter strip — multi-row chips */
+.filter-strip {
+  display: flex; flex-wrap: wrap; gap: 8px;
+  margin-bottom: 24px;
+}
+.filter-strip .fbtn {
+  padding: 10px 16px;
+  font-family: var(--sans); font-size: 13.5px; font-weight: 500;
+  color: var(--night); background: var(--paper);
+  border: 1px solid #B8B6AC;  /* ~10% darker than --line for stronger inactive-state contrast */
+  cursor: pointer; transition: background 160ms, color 160ms, border-color 160ms;
+  display: inline-flex; align-items: center; gap: 10px;
+}
+.filter-strip .fbtn .fc {
+  font-family: var(--mono); font-size: 10.5px;
+  color: var(--muted); letter-spacing: 0.14em;
+}
+.filter-strip .fbtn:hover { background: var(--sky-soft); color: var(--blue); border-color: var(--sky); }
+.filter-strip .fbtn.active { background: var(--blue); color: var(--paper); border-color: var(--blue); }
+.filter-strip .fbtn.active .fc { color: rgba(255,255,255,0.7); }
+
+/* Active-vertical title bar */
+.sector-title {
+  display: flex; justify-content: space-between; align-items: end;
+  border-bottom: 1px solid var(--line);
+  padding: 18px 0 14px;
+  margin-bottom: 22px;
+}
+.sector-title h3 {
+  font-family: var(--serif);
+  font-size: clamp(22px, 2.2vw, 32px);
+  font-weight: 700;
+  letter-spacing: -0.005em;
+  color: var(--blue-deep);
+  margin: 0;
+}
+.sector-title .meta {
+  font-family: var(--mono); font-size: 11px;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* Partner card grid — auto-fit so empty grey space disappears when filtering */
+.partner-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+}
+@media (max-width: 1024px) { .partner-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (max-width: 720px) { .partner-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 460px) { .partner-grid { grid-template-columns: 1fr; } }
+.partner-grid.cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.partner-grid.cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.partner-grid.cols-1 { grid-template-columns: 1fr; }
+/* Industry mode: 12-col grid, normal cards span 3 (=> 4 per row), last 3 span 4 (=> 3 across full width) */
+.partner-grid.industry-mode { grid-template-columns: repeat(12, minmax(0, 1fr)); }
+.partner-grid.industry-mode .partner-card { grid-column: span 3; }
+.partner-grid.industry-mode .partner-card:not(.hidden):nth-last-of-type(-n+3) { grid-column: span 4; }
+@media (max-width: 1024px) {
+  .partner-grid.industry-mode { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+  .partner-grid.industry-mode .partner-card { grid-column: span 2; }
+  .partner-grid.industry-mode .partner-card:not(.hidden):nth-last-of-type(-n+3) { grid-column: span 2; }
+}
+
+/* Scroll window — keeps section 02 / 05 from creating a long-scroll page */
+.scroll-window {
+  position: relative;
+  border: 1px solid var(--line);
+  background: var(--paper);
+}
+.scroll-window .scroll-inner {
+  max-height: 720px;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+}
+.scroll-window .scroll-inner::-webkit-scrollbar { width: 10px; }
+.scroll-window .scroll-inner::-webkit-scrollbar-track { background: var(--white); }
+.scroll-window .scroll-inner::-webkit-scrollbar-thumb { background: var(--steel); }
+.scroll-window .scroll-inner::-webkit-scrollbar-thumb:hover { background: var(--blue); }
+.scroll-window .partner-grid { border: 0; }
+
+/* Scroll affordance: gradient fade + "↓ More" pill, both fade once user scrolls */
+.scroll-window .scroll-fade,
+.scroll-window .scroll-hint {
+  pointer-events: none;
+  transition: opacity 220ms ease;
+}
+.scroll-window .scroll-fade {
+  position: absolute;
+  left: 1px; right: 1px;
+  bottom: 1px;
+  height: 96px;
+  background: linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(255,255,255,0.96) 80%);
+  z-index: 2;
+}
+.scroll-window .scroll-hint {
+  position: absolute;
+  left: 50%;
+  bottom: 18px;
+  transform: translateX(-50%);
+  background: var(--blue);
+  color: var(--paper);
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  padding: 7px 16px;
+  display: inline-flex; align-items: center; gap: 7px;
+  z-index: 3;
+  box-shadow: 0 2px 12px rgba(31,45,107,0.18);
+}
+.scroll-window[data-scrolled="true"] .scroll-fade,
+.scroll-window[data-scrolled="true"] .scroll-hint { opacity: 0; }
+.scroll-window[data-at-bottom="true"] .scroll-fade,
+.scroll-window[data-at-bottom="true"] .scroll-hint { opacity: 0; }
+
+/* Skip-rail — sits ABOVE the scroll window now, so users can opt out before they start scrolling */
+.skip-rail-top {
+  border: 1px solid var(--line);
+  border-bottom: 0;
+  background: var(--paper);
+  padding: 12px 18px;
+  display: flex; justify-content: space-between; align-items: center;
+  gap: 12px; flex-wrap: wrap;
+  font-family: var(--mono); font-size: 11px;
+  letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted);
+}
+.skip-rail-top .skip-link {
+  display: inline-flex; align-items: center; gap: 6px;
+  color: var(--blue); font-weight: 500;
+  padding: 6px 12px;
+  border: 1px solid var(--blue);
+  transition: all 160ms;
+}
+.skip-rail-top .skip-link:hover { background: var(--blue); color: var(--paper); }
+
+.partner-card {
+  background: var(--paper);
+  padding: 26px 22px 22px;
+  display: flex; flex-direction: column;
+  gap: 8px;
+  transition: background 180ms;
+  position: relative;
+  min-height: 200px;
+}
+.partner-card:hover { background: var(--sky-soft); }
+.partner-card.hidden { display: none; }
+.partner-card .logo {
+  width: 100%;
+  min-height: 48px;
+  display: flex; align-items: center;
+  border-bottom: 1px solid var(--line-soft);
+  padding-bottom: 12px;
+  margin-bottom: 2px;
+}
+.partner-card .wm {
+  font-family: var(--serif);
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--blue-deep);
+  text-transform: uppercase;
+}
+.partner-card .wm.thin { font-weight: 300; letter-spacing: 0.08em; }
+.partner-card .wm.italic { font-style: italic; font-weight: 400; }
+.partner-card .wm.small { font-size: 15px; }
+.partner-card .since {
+  font-family: var(--mono); font-size: 10px;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--muted);
+}
+.partner-card .name {
+  font-family: var(--serif);
+  font-size: 14.5px;
+  font-weight: 600;
+  color: var(--night);
+}
+.partner-card .desc {
+  font-size: 12.5px;
+  color: var(--muted);
+  line-height: 1.5;
+}
+.partner-card .tag {
+  margin-top: auto;
+  display: inline-flex; align-items: center; gap: 6px;
+  font-family: var(--mono); font-size: 9.5px;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--blue);
+  padding-top: 10px;
+}
+.partner-card .tag .diamond { width: 5px; height: 5px; background: var(--blue); transform: rotate(45deg); }
+
+/* Anchor partnerships — horizontal carousel (Section 03) */
+.anchors-shell { position: relative; }
+
+.anchors-controls {
+  display: flex; justify-content: space-between; align-items: center;
+  gap: 16px; margin-bottom: 18px; flex-wrap: wrap;
+}
+.anchors-controls .dots {
+  display: inline-flex; gap: 8px;
+  align-items: center;
+  margin: 0 auto;
+}
+.anchors-controls .dots .dot {
+  width: 32px; height: 4px;
+  background: var(--line);
+  border: 0;
+  cursor: pointer;
+  padding: 0;
+  transition: background 200ms ease, width 200ms ease;
+}
+.anchors-controls .dots .dot:hover { background: var(--steel); }
+.anchors-controls .dots .dot.active {
+  background: var(--blue);
+  width: 56px;
+}
+.anchors-controls .arrows {
+  display: inline-flex; gap: 8px;
+}
+.anchors-controls .arr {
+  width: 44px; height: 44px;
+  background: var(--paper);
+  border: 1px solid #B8B6AC;
+  color: var(--blue);
+  display: grid; place-items: center;
+  cursor: pointer;
+  transition: all 160ms;
+  flex-shrink: 0;
+}
+.anchors-controls .arr:hover:not(:disabled) {
+  background: var(--blue); color: var(--paper); border-color: var(--blue);
+}
+.anchors-controls .arr:disabled {
+  opacity: 0.3; cursor: not-allowed;
+}
+.anchors-controls .arr svg { width: 18px; height: 18px; }
+.anchors-controls .acounter {
+  font-family: var(--mono); font-size: 11px;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--muted);
+  white-space: nowrap;
+}
+.anchors-controls .acounter strong { color: var(--blue); font-weight: 500; }
+.anchors-controls .acounter .ctot { color: var(--muted); }
+
+.anchors-rail {
+  position: relative;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  padding: 4px 0 18px;
+}
+.anchors-rail::-webkit-scrollbar { height: 8px; }
+.anchors-rail::-webkit-scrollbar-track { background: var(--line-soft); }
+.anchors-rail::-webkit-scrollbar-thumb { background: var(--steel); }
+.anchors-rail::-webkit-scrollbar-thumb:hover { background: var(--blue); }
+
+.anchors-track {
+  display: flex;
+  gap: 24px;
+  padding-right: 32px;  /* breathing room past last card */
+}
+
+.anchor-card {
+  flex: 0 0 calc(50% - 12px);
+  max-width: 640px;
+  scroll-snap-align: start;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  display: flex; flex-direction: column;
+  overflow: hidden;
+  transition: border-color 180ms, box-shadow 180ms;
+}
+@media (max-width: 1100px) { .anchor-card { flex-basis: calc(75% - 12px); } }
+@media (max-width: 720px)  { .anchor-card { flex-basis: calc(100% - 4px); } }
+.anchor-card:hover {
+  border-color: var(--blue);
+  box-shadow: 0 6px 22px rgba(31,45,107,0.12);
+}
+.anchor-card .visual {
+  aspect-ratio: 16 / 9;
+  background: var(--sky-soft);
+  position: relative; overflow: hidden;
+  border-bottom: 1px solid var(--line);
+}
+.anchor-card .visual svg { width: 100%; height: 100%; display: block; }
+.anchor-card .visual .caption {
+  position: absolute; bottom: 12px; left: 12px;
+  font-family: var(--mono); font-size: 10px;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--paper);
+  background: rgba(31,45,107,0.92);
+  padding: 5px 9px;
+}
+.anchor-card .visual .badge-num {
+  position: absolute; top: 12px; left: 12px;
+  font-family: var(--mono); font-size: 10px;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--blue);
+  background: var(--paper);
+  padding: 5px 10px;
+  border: 1px solid var(--blue);
+}
+.anchor-card .body {
+  padding: 24px 26px 26px;
+  display: flex; flex-direction: column;
+  gap: 12px; flex: 1;
+}
+.anchor-card .body .eyebrow { display: block; }
+.anchor-card .body h3 {
+  font-family: var(--serif);
+  font-size: clamp(20px, 1.8vw, 26px);
+  font-weight: 700;
+  letter-spacing: -0.005em;
+  line-height: 1.2;
+  color: var(--blue);
+  margin: 4px 0 0;
+}
+.anchor-card .body p {
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: var(--night);
+  margin: 0;
+}
+.anchor-card .body .meta {
+  margin-top: auto;
+  padding-top: 16px;
+  border-top: 1px solid var(--line-soft);
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 12px;
+}
+@media (max-width: 540px) { .anchor-card .body .meta { grid-template-columns: 1fr 1fr; } }
+.anchor-card .body .meta .m { display: flex; flex-direction: column; gap: 3px; }
+.anchor-card .body .meta .mv {
+  font-family: var(--serif); font-size: 22px;
+  font-weight: 300; color: var(--blue); line-height: 1;
+}
+.anchor-card .body .meta .ml {
+  font-family: var(--mono); font-size: 10px;
+  letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted);
+}
+
+/* JV row */
+.jv-row {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 0; background: var(--paper); border: 1px solid var(--line);
+}
+@media (max-width: 900px) { .jv-row { grid-template-columns: 1fr; } }
+.jv {
+  padding: 36px 32px;
+  border-right: 1px solid var(--line);
+  display: flex; flex-direction: column; gap: 10px;
+}
+.jv:last-child { border-right: 0; }
+@media (max-width: 900px) { .jv { border-right: 0; border-bottom: 1px solid var(--line); } .jv:last-child { border-bottom: 0; } }
+.jv .ix { font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--blue); }
+.jv h4 { font-family: var(--serif); font-size: 22px; font-weight: 700; color: var(--night); margin: 4px 0 2px; }
+.jv .with { font-family: var(--mono); font-size: 11px; letter-spacing: 0.12em; color: var(--muted); margin-bottom: 10px; }
+.jv p { font-size: 14px; color: var(--night); line-height: 1.6; margin: 0; }
+
+/* ============================================================
+   PORTFOLIO — Compact directory pattern
+   Sector pills at top → filterable grid of compact company tiles
+   ============================================================ */
+.portfolio-shell {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  display: grid;
+  grid-template-columns: 280px 1fr;
+}
+@media (max-width: 900px) { .portfolio-shell { grid-template-columns: 1fr; } }
+
+.portfolio-aside {
+  border-right: 1px solid var(--line);
+  padding: 22px 18px;
+  background: var(--cream-2);
+  align-self: start;
+  position: sticky; top: 80px;
+}
+@media (max-width: 900px) {
+  .portfolio-aside { border-right: 0; border-bottom: 1px solid var(--line); padding: 14px 18px; position: static; }
+}
+.portfolio-aside .lbl {
+  font-family: var(--mono); font-size: 10.5px;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 14px;
+  display: block;
+}
+.portfolio-aside .pfilters {
+  display: flex; flex-direction: column; gap: 2px;
+}
+@media (max-width: 900px) { .portfolio-aside .pfilters { flex-direction: row; flex-wrap: wrap; gap: 6px; } }
+.portfolio-aside .pf {
+  text-align: left;
+  background: transparent;
+  border: 0;
+  padding: 10px 12px;
+  font-family: var(--sans); font-size: 14px;
+  color: var(--night);
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 12px;
+  cursor: pointer; transition: all 160ms;
+  font-weight: 500;
+  border-left: 2px solid transparent;
+}
+.portfolio-aside .pf:hover { color: var(--blue); background: var(--paper); }
+.portfolio-aside .pf.active {
+  color: var(--blue); background: var(--paper);
+  border-left-color: var(--blue);
+}
+.portfolio-aside .pf .ct {
+  font-family: var(--mono); font-size: 11px;
+  color: var(--muted); letter-spacing: 0.1em;
+  background: var(--white);
+  padding: 2px 7px;
+  border: 1px solid var(--line);
+}
+.portfolio-aside .pf.active .ct { color: var(--blue); border-color: var(--blue); }
+
+@media (max-width: 900px) {
+  .portfolio-aside .pf { border-left: 0; border-bottom: 2px solid transparent; padding: 8px 12px; }
+  .portfolio-aside .pf.active { border-bottom-color: var(--blue); border-left: 0; }
+}
+
+.portfolio-main {
+  padding: 22px 26px 22px;
+  display: flex; flex-direction: column;
+  gap: 14px;
+  min-height: 0;
+}
+.portfolio-main .pmhead {
+  display: flex; justify-content: space-between; align-items: end;
+  padding-bottom: 12px; border-bottom: 1px solid var(--line);
+}
+.portfolio-main .pmhead h3 {
+  font-family: var(--serif); font-size: 24px; font-weight: 700;
+  letter-spacing: -0.005em; color: var(--blue-deep);
+  margin: 0;
+}
+.portfolio-main .pmhead .desc {
+  font-size: 13px; color: var(--muted);
+  text-align: right; max-width: 38ch;
+  line-height: 1.45;
+}
+.portfolio-main .companies-scroll-wrap {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+}
+.portfolio-main .companies-scroll {
+  max-height: 540px;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+  padding-right: 6px;
+}
+.portfolio-main .companies-scroll::-webkit-scrollbar { width: 8px; }
+.portfolio-main .companies-scroll::-webkit-scrollbar-track { background: transparent; }
+.portfolio-main .companies-scroll::-webkit-scrollbar-thumb { background: var(--steel); }
+.portfolio-main .companies-scroll::-webkit-scrollbar-thumb:hover { background: var(--blue); }
+.portfolio-main .scroll-fade-pf,
+.portfolio-main .scroll-hint-pf {
+  pointer-events: none;
+  transition: opacity 220ms ease;
+}
+.portfolio-main .scroll-fade-pf {
+  position: absolute;
+  left: 0; right: 8px; bottom: 0;
+  height: 72px;
+  background: linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(255,255,255,0.96) 80%);
+}
+.portfolio-main .scroll-hint-pf {
+  position: absolute;
+  left: 50%; bottom: 12px;
+  transform: translateX(-50%);
+  background: var(--blue);
+  color: var(--paper);
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  padding: 6px 14px;
+  display: inline-flex; align-items: center; gap: 6px;
+  box-shadow: 0 2px 12px rgba(31,45,107,0.18);
+}
+.portfolio-main .companies-scroll-wrap[data-scrolled="true"] .scroll-fade-pf,
+.portfolio-main .companies-scroll-wrap[data-scrolled="true"] .scroll-hint-pf { opacity: 0; }
+.portfolio-main .companies-scroll-wrap[data-at-bottom="true"] .scroll-fade-pf,
+.portfolio-main .companies-scroll-wrap[data-at-bottom="true"] .scroll-hint-pf { opacity: 0; }
+.portfolio-main .companies-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+@media (max-width: 1100px) { .portfolio-main .companies-grid { grid-template-columns: 1fr; } }
+
+.coa {
+  padding: 18px 20px 16px;
+  background: var(--white);
+  border: 1px solid var(--line);
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 14px;
+  align-items: start;
+  transition: all 180ms;
+  cursor: default;
+}
+.coa.hidden { display: none; }
+.coa:hover { border-color: var(--blue); background: var(--paper); }
+.coa .num-blk {
+  width: 38px; height: 38px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  display: grid; place-items: center;
+  font-family: var(--mono); font-size: 11px;
+  color: var(--blue);
+  letter-spacing: 0.04em;
+}
+.coa .num-blk .n {
+  font-family: var(--serif);
+  font-weight: 700;
+  font-size: 14px;
+}
+.coa .info h4 {
+  font-family: var(--serif); font-size: 16px; font-weight: 700;
+  letter-spacing: -0.005em; color: var(--night);
+  margin: 0 0 2px;
+  line-height: 1.25;
+}
+.coa .info .wll {
+  font-family: var(--mono); font-size: 10px;
+  letter-spacing: 0.14em; color: var(--muted);
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.coa .info .desc {
+  font-size: 12.5px; color: var(--night);
+  line-height: 1.55;
+}
+.coa .sec-pin {
+  width: 10px; height: 10px;
+  background: var(--blue);
+  transform: rotate(45deg);
+  margin-top: 6px;
+}
+.coa .sec-pin.industry  { background: #1F8A5B; }
+.coa .sec-pin.build     { background: #6B7280; }
+.coa .sec-pin.it        { background: #6E59C7; }
+.coa .sec-pin.hvac      { background: #1395BA; }
+.coa .sec-pin.services  { background: #B43D5E; }
+.coa .sec-pin.crane     { background: #C97D1E; }
+.coa .sec-pin.manufact  { background: #6F4E37; }
+
+/* Brands / Companies tab toggle inside sector-title */
+.sector-title {
+  display: flex; justify-content: space-between; align-items: center;
+  gap: 16px; flex-wrap: wrap;
+}
+.sector-title .vt-tabs {
+  display: inline-flex;
+  gap: 4px;
+  background: var(--paper);
+  border: 1px solid #B8B6AC;
+  padding: 4px;
+}
+.sector-title .vt-tab {
+  font-family: var(--sans); font-size: 13px; font-weight: 500;
+  color: var(--muted); background: transparent;
+  border: 0;
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: all 160ms;
+  display: inline-flex; align-items: center; gap: 8px;
+}
+.sector-title .vt-tab .ct {
+  font-family: var(--mono); font-size: 10px;
+  letter-spacing: 0.14em; color: var(--muted);
+}
+.sector-title .vt-tab:hover { color: var(--blue); }
+.sector-title .vt-tab.active {
+  background: var(--blue); color: var(--paper);
+}
+.sector-title .vt-tab.active .ct { color: rgba(255,255,255,0.7); }
+.partner-card.hidden { display: none; }
+
+/* ============================================================
+   PORTFOLIO — sector pills + horizontal slider per sector
+   ============================================================ */
+.pf-pills-row {
+  display: flex; flex-wrap: wrap; gap: 8px;
+  margin-bottom: 28px;
+}
+.pf-sector-pill {
+  padding: 10px 18px;
+  font-family: var(--sans); font-size: 13.5px; font-weight: 500;
+  color: var(--night); background: var(--paper);
+  border: 1px solid #B8B6AC;
+  cursor: pointer; transition: all 160ms;
+  display: inline-flex; align-items: center; gap: 10px;
+}
+.pf-sector-pill .ct {
+  font-family: var(--mono); font-size: 10.5px;
+  letter-spacing: 0.14em; color: var(--muted);
+  background: var(--white);
+  padding: 2px 7px;
+  border: 1px solid var(--line);
+}
+.pf-sector-pill:hover { background: var(--sky-soft); color: var(--blue); border-color: var(--sky); }
+.pf-sector-pill.active {
+  background: var(--blue); color: var(--paper); border-color: var(--blue);
+}
+.pf-sector-pill.active .ct { color: var(--blue); background: var(--paper); border-color: var(--paper); }
+
+.pf-shell { position: relative; }
+.pf-panel { display: none; }
+.pf-panel[data-active="true"] { display: block; }
+
+.pf-panel-head {
+  display: flex; justify-content: space-between; align-items: end;
+  padding: 0 0 14px;
+  margin-bottom: 18px;
+  border-bottom: 1px solid var(--line);
+  gap: 16px; flex-wrap: wrap;
+}
+.pf-sector-label {
+  font-family: var(--serif);
+  font-size: clamp(20px, 1.8vw, 26px);
+  font-weight: 700;
+  color: var(--blue-deep);
+  letter-spacing: -0.005em;
+}
+.pf-sector-blurb {
+  font-family: var(--mono); font-size: 11px;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--muted); margin-top: 4px;
+}
+.pf-counter {
+  font-family: var(--mono); font-size: 11px;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--muted);
+}
+.pf-counter .cur { color: var(--blue); font-weight: 500; }
+
+.pf-slider-wrap {
+  display: grid;
+  grid-template-columns: 44px 1fr 44px;
+  gap: 12px;
+  align-items: stretch;
+}
+.pf-arr {
+  background: var(--paper);
+  border: 1px solid #B8B6AC;
+  color: var(--blue);
+  display: grid; place-items: center;
+  cursor: pointer; transition: all 160ms;
+}
+.pf-arr svg { width: 18px; height: 18px; }
+.pf-arr:hover:not(:disabled) { background: var(--blue); color: var(--paper); border-color: var(--blue); }
+.pf-arr:disabled { opacity: 0.3; cursor: not-allowed; }
+
+.pf-slider {
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  padding: 4px 0 16px;
+}
+.pf-slider::-webkit-scrollbar { height: 6px; }
+.pf-slider::-webkit-scrollbar-track { background: var(--line-soft); }
+.pf-slider::-webkit-scrollbar-thumb { background: var(--steel); }
+.pf-slider::-webkit-scrollbar-thumb:hover { background: var(--blue); }
+
+.pf-track {
+  display: flex;
+  gap: 18px;
+  padding-right: 20px;
+}
+.pf-card {
+  flex: 0 0 calc(50% - 9px);
+  max-width: 560px;
+  scroll-snap-align: start;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  display: flex; flex-direction: column;
+  overflow: hidden;
+  transition: border-color 180ms, box-shadow 180ms;
+}
+@media (max-width: 1100px) { .pf-card { flex-basis: calc(75% - 9px); } }
+@media (max-width: 720px)  { .pf-card { flex-basis: calc(100% - 4px); } }
+.pf-card:hover { border-color: var(--blue); box-shadow: 0 6px 22px rgba(31,45,107,0.10); }
+.pf-visual {
+  aspect-ratio: 16 / 9;
+  background: var(--sky-soft);
+  position: relative; overflow: hidden;
+  border-bottom: 1px solid var(--line);
+}
+.pf-visual svg { width: 100%; height: 100%; display: block; }
+.pf-num {
+  position: absolute; top: 12px; left: 12px;
+  font-family: var(--mono); font-size: 10.5px;
+  letter-spacing: 0.18em;
+  color: var(--blue);
+  background: var(--paper);
+  padding: 5px 10px;
+  border: 1px solid var(--blue);
+  z-index: 2;
+}
+.pf-cap {
+  position: absolute; bottom: 12px; right: 12px;
+  font-family: var(--mono); font-size: 9.5px;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--paper);
+  background: rgba(31,45,107,0.85);
+  padding: 4px 9px;
+}
+.pf-body {
+  padding: 20px 22px 22px;
+  display: flex; flex-direction: column; gap: 10px; flex: 1;
+}
+.pf-body h4 {
+  font-family: var(--serif);
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: -0.005em;
+  line-height: 1.25;
+  color: var(--blue);
+  margin: 0;
+}
+.pf-body p {
+  font-size: 13px; line-height: 1.55;
+  color: var(--night); margin: 0;
+}
+.pf-loc {
+  font-family: var(--mono); font-size: 10px;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--muted);
+  padding-top: 8px;
+  border-top: 1px solid var(--line-soft);
+}
+.pf-pills { display: flex; gap: 6px; flex-wrap: wrap; margin-top: auto; }
+.pf-pill {
+  font-family: var(--mono); font-size: 9.5px;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--blue);
+  background: var(--sky-soft);
+  padding: 4px 9px;
+}
+
+.pf-dots {
+  display: flex; gap: 6px;
+  justify-content: center;
+  margin-top: 16px;
+}
+.pf-dot {
+  width: 28px; height: 4px;
+  background: var(--line);
+  border: 0; padding: 0;
+  cursor: pointer;
+  transition: background 200ms, width 200ms;
+}
+.pf-dot:hover { background: var(--steel); }
+.pf-dot.active { background: var(--blue); width: 48px; }
+
+/* ============================================================
+   PAGE SWITCHER (inter-page nav across the 3 About-Us pages)
+   ============================================================ */
+.pageswitcher {
+  display: inline-flex; gap: 0;
+  border: 1px solid var(--line);
+  background: var(--paper);
+  margin-left: 8px;
+  flex-shrink: 0;
+}
+.pageswitcher a {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding: 7px 12px;
+  border-right: 1px solid var(--line);
+  transition: all 160ms;
+  white-space: nowrap;
+}
+.pageswitcher a:last-child { border-right: 0; }
+.pageswitcher a:hover { background: var(--sky-soft); color: var(--blue); }
+.pageswitcher a.here {
+  background: var(--blue);
+  color: var(--paper);
+}
+
+</style>
+</head>
+<body data-screen-label="Our Partners and Portfolio">
+
+<a class="skip" href="#main">Skip to content</a>
+<div class="progress"><div class="fill" id="progressFill"></div></div>
+
+<header class="pagebar" role="banner">
+  <div class="wrap">
+    <div class="pb-row pb-bottom">
+      <a href="#identity" class="brand" aria-label="Teyseer Group">
+      <span class="mark" aria-hidden="true">
+        <svg viewBox="0 0 36 36" fill="none">
+          <rect x="6" y="6" width="24" height="24" fill="#2A3C8E"></rect>
+          <rect x="13.5" y="13.5" width="9" height="9" transform="rotate(45 18 18)" fill="#A6A8BA"></rect>
+          <rect x="16.5" y="16.5" width="3" height="3" transform="rotate(45 18 18)" fill="#F4F3EF"></rect>
+        </svg>
+      </span>
+      <span>
+        <div class="name">Teyseer</div>
+        <div class="tag">Since 1968</div>
+      </span>
+    </a>
+      <div class="anchornav-wrap">
+      <nav class="anchornav" id="anchornav" aria-label="On this page">
+        <a href="#identity" class="active">01 Overview</a>
+        <a href="#partners">02 Our Partners</a>
+        
+      </nav>
+    </div>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- ============================================================
+     01 — HERO / OVERVIEW
+     ============================================================ -->
+<section class="hero partners-hero pattern-bg" id="identity" data-screen-label="01 Overview">
+  <svg class="water" viewBox="0 0 200 200" aria-hidden="true">
+    <rect x="40" y="40" width="120" height="120" fill="none" stroke="#2A3C8E" stroke-width="0.6"></rect>
+    <rect x="70" y="70" width="60" height="60" transform="rotate(45 100 100)" fill="none" stroke="#2A3C8E" stroke-width="0.6"></rect>
+    <rect x="92" y="92" width="16" height="16" transform="rotate(45 100 100)" fill="#2A3C8E"></rect>
+  </svg>
+  <div class="wrap">
+    <div class="ix">
+      <span>01</span><span class="dash"></span><span>Our Partners</span>
+    </div>
+    <h1 class="h1 b reveal">The international principals<br>we represent in Qatar.</h1>
+    <p class="lead reveal">For more than half a century, Teyseer has acted as the authorised representative, service agent and joint-venture partner for international principals across mobility, energy, industry, construction and technology — combining global brands with a deep local network of eighteen specialist companies.</p>
+
+    <div class="quick reveal" aria-label="Portfolio at a glance">
+      <div class="q">
+        <div class="num"><span class="counter" data-to="18">18</span></div>
+        <div class="lbl">Group Companies</div>
+        <div class="desc">Independent W.L.L. entities under one Qatari ownership.</div>
+      </div>
+      <div class="q">
+        <div class="num"><span class="counter" data-to="40">40</span><span class="sfx">+</span></div>
+        <div class="lbl">International Principals</div>
+        <div class="desc">Authorised distributorships, agencies &amp; brand representations — across the Major Brands directory on teyseergroup.com.</div>
+      </div>
+      <div class="q">
+        <div class="num"><span class="counter" data-to="9">9</span></div>
+        <div class="lbl">Industry Verticals</div>
+        <div class="desc">Mobility, IT, construction, industry, HVAC, security, FM, manufacturing, crane.</div>
+      </div>
+      <div class="q">
+        <div class="num"><span class="counter" data-to="40">40</span><span class="sfx">+</span></div>
+        <div class="lbl">Locations across Qatar</div>
+        <div class="desc">Showrooms, workshops, depots, labs and service centres.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     02 — PRINCIPALS — by Teyseer's nine verticals
+     ============================================================ -->
+<section class="section" id="partners" data-screen-label="02 Our Partners" style="background: var(--cream-2);">
+  <div class="wrap">
+    <div class="s-head">
+      <div class="reveal">
+        <div class="s-num">02 — Our Partners</div>
+        <h2 class="h2 b">The international principals<br>we represent in Qatar.</h2>
+      </div>
+      <div class="right reveal">
+        <p class="lead muted">Over forty-six international principals across mobility, energy, industry, construction, HVAC, IT and services — each supported by one of Teyseer's nineteen specialist W.L.L. companies. Filter by vertical to explore.</p>
+      </div>
+    </div>
+
+    <div class="filter-strip reveal" role="tablist" aria-label="Filter principals by vertical">
+      <button class="fbtn active" data-filter="all" role="tab" aria-selected="true">All <span class="fc" data-brand="46" data-company="18">·&nbsp;46</span></button>
+      <button class="fbtn" data-filter="auto" role="tab" aria-selected="false">Automobile <span class="fc" data-brand="9" data-company="4">·&nbsp;9</span></button>
+      <button class="fbtn" data-filter="it" role="tab" aria-selected="false">Information Technology <span class="fc" data-brand="8" data-company="2">·&nbsp;8</span></button>
+      <button class="fbtn" data-filter="build" role="tab" aria-selected="false">Construction &amp; Building Materials <span class="fc" data-brand="5" data-company="3">·&nbsp;5</span></button>
+      <button class="fbtn" data-filter="industry" role="tab" aria-selected="false">Industry Products &amp; Safety <span class="fc" data-brand="11" data-company="3">·&nbsp;11</span></button>
+      <button class="fbtn" data-filter="crane" role="tab" aria-selected="false">Crane &amp; Lifting <span class="fc" data-brand="3" data-company="1">·&nbsp;3</span></button>
+      <button class="fbtn" data-filter="manufact" role="tab" aria-selected="false">Manufacturing &amp; Fabrication <span class="fc" data-brand="3" data-company="2">·&nbsp;3</span></button>
+      <button class="fbtn" data-filter="hvac" role="tab" aria-selected="false">Air Conditioning &amp; HVAC <span class="fc" data-brand="4" data-company="1">·&nbsp;4</span></button>
+      <button class="fbtn" data-filter="services" role="tab" aria-selected="false">Catering &amp; FM <span class="fc" data-brand="2" data-company="1">·&nbsp;2</span></button>
+      <button class="fbtn" data-filter="security" role="tab" aria-selected="false">Security Services <span class="fc" data-brand="1" data-company="1">·&nbsp;1</span></button>
+    </div>
+
+    <div class="sector-title" id="sectorTitle" aria-live="polite">
+      <h3 id="sectorTitleText">All verticals</h3>
+      <div class="meta"><span id="sectorTitleCount">46 partners</span></div>
+    </div>
+<div class="scroll-window reveal" id="principalsScrollWin">
+      <div class="scroll-inner" id="scrollInner">
+    <div class="partner-grid" id="partnerGrid">
+      <!-- Automobile (9) -->
+      <article class="partner-card" data-sector="auto" data-vtype="brand">
+        <div class="logo"><div class="wm">SUZUKI</div></div>
+        <div class="name">Suzuki Motor Corporation</div>
+        <div class="since">Exclusive distributor · since 1970</div>
+        <div class="desc">Passenger cars, four-wheel drives and motorcycles — sales, service and parts under Teyseer Motors.</div>
+        <div class="tag"><span class="diamond"></span>Teyseer Motors</div>
+      </article>
+      <article class="partner-card" data-sector="auto" data-vtype="brand">
+        <div class="logo"><div class="wm">PEUGEOT</div></div>
+        <div class="name">Stellantis · Peugeot</div>
+        <div class="since">Authorised dealer · since 2020</div>
+        <div class="desc">Passenger cars and light commercial vehicles — full 3S (sales, service, spares) network.</div>
+        <div class="tag"><span class="diamond"></span>Teyseer Motors</div>
+      </article>
+      <article class="partner-card" data-sector="auto" data-vtype="brand">
+        <div class="logo"><div class="wm small">GREAT WALL MOTOR</div></div>
+        <div class="name">GWM Group</div>
+        <div class="since">Strategic partner · since 2024</div>
+        <div class="desc">GWM Tank premium SUVs, Haval SUV range and Poer / Wingle pickups — launched January 2024.</div>
+        <div class="tag"><span class="diamond"></span>Teyseer Motors</div>
+      </article>
+      <article class="partner-card" data-sector="auto" data-vtype="brand">
+        <div class="logo"><div class="wm">HAVAL</div></div>
+        <div class="name">Haval — GWM</div>
+        <div class="since">SUV portfolio</div>
+        <div class="desc">Haval SUVs with intelligent technologies — 9M+ users globally, retailed under Teyseer Motors.</div>
+        <div class="tag"><span class="diamond"></span>Teyseer Motors</div>
+      </article>
+      <article class="partner-card" data-sector="auto" data-vtype="brand">
+        <div class="logo"><div class="wm">TANK</div></div>
+        <div class="name">Tank — GWM</div>
+        <div class="since">Premium off-road SUV</div>
+        <div class="desc">GWM Tank — premium off-road SUV brand featured at the Old Airport Road showroom.</div>
+        <div class="tag"><span class="diamond"></span>Teyseer Motors</div>
+      </article>
+      <article class="partner-card" data-sector="auto" data-vtype="brand">
+        <div class="logo"><div class="wm small">ExxonMobil</div></div>
+        <div class="name">ExxonMobil Lubricants</div>
+        <div class="since">Authorised distributor · since 1969</div>
+        <div class="desc">Mobil portfolio for automotive, marine and industrial use. The Group's longest international relationship.</div>
+        <div class="tag"><span class="diamond"></span>Teyseer Motors / Energy</div>
+      </article>
+      <article class="partner-card" data-sector="auto" data-vtype="brand">
+        <div class="logo"><div class="wm">SCANIA</div></div>
+        <div class="name">Scania AB · Sweden</div>
+        <div class="since">Commercial fleet partner</div>
+        <div class="desc">Heavy trucks, buses and tippers — modernised low-emission technology operated by TBMTC.</div>
+        <div class="tag"><span class="diamond"></span>TBMTC</div>
+      </article>
+      <article class="partner-card" data-sector="auto" data-vtype="brand">
+        <div class="logo"><div class="wm">TVS</div></div>
+        <div class="name">TVS Motor Company</div>
+        <div class="since">Two-wheel mobility</div>
+        <div class="desc">Distribution of motorcycles and three-wheelers across the Qatar market.</div>
+        <div class="tag"><span class="diamond"></span>Teyseer Motors</div>
+      </article>
+      <article class="partner-card" data-sector="auto" data-vtype="brand">
+        <div class="logo"><div class="wm small">AUTOWORKS</div></div>
+        <div class="name">Autoworks Car Care</div>
+        <div class="since">Car-care partnership</div>
+        <div class="desc">Premium window-tinting and car-care services partnership announced by Teyseer Motors.</div>
+        <div class="tag"><span class="diamond"></span>Teyseer Motors</div>
+      </article>
+
+      <!-- IT (8) -->
+      <article class="partner-card" data-sector="it" data-vtype="brand">
+        <div class="logo"><div class="wm">DELL</div></div>
+        <div class="name">Dell Technologies</div>
+        <div class="since">Enterprise IT · long-term</div>
+        <div class="desc">Servers, storage, workstations and end-user computing — listed in the Group's services on LinkedIn.</div>
+        <div class="tag"><span class="diamond"></span>Teyseer Technology / CA</div>
+      </article>
+      <article class="partner-card" data-sector="it" data-vtype="brand">
+        <div class="logo"><div class="wm thin">BARRACUDA</div></div>
+        <div class="name">Barracuda Networks</div>
+        <div class="since">Network security</div>
+        <div class="desc">Email, network and application security — featured on the Group's "Major Brands · IT" listing.</div>
+        <div class="tag"><span class="diamond"></span>Computer Arabia</div>
+      </article>
+      <article class="partner-card" data-sector="it" data-vtype="brand">
+        <div class="logo"><div class="wm thin">PALOALTO</div></div>
+        <div class="name">Palo Alto Networks</div>
+        <div class="since">Cybersecurity</div>
+        <div class="desc">Next-gen firewall and threat-prevention solutions, featured in the IT major-brands carousel.</div>
+        <div class="tag"><span class="diamond"></span>Computer Arabia</div>
+      </article>
+      <article class="partner-card" data-sector="it" data-vtype="brand">
+        <div class="logo"><div class="wm thin">MICROSOFT</div></div>
+        <div class="name">Microsoft</div>
+        <div class="since">Enterprise software</div>
+        <div class="desc">Microsoft software, cloud and digital-workplace integration delivered through the IT cluster.</div>
+        <div class="tag"><span class="diamond"></span>Computer Arabia</div>
+      </article>
+      <article class="partner-card" data-sector="it" data-vtype="brand">
+        <div class="logo"><div class="wm thin">CISCO</div></div>
+        <div class="name">Cisco Systems</div>
+        <div class="since">Networking</div>
+        <div class="desc">Networking, collaboration and security infrastructure for Qatari enterprise customers.</div>
+        <div class="tag"><span class="diamond"></span>Computer Arabia</div>
+      </article>
+      <article class="partner-card" data-sector="it" data-vtype="brand">
+        <div class="logo"><div class="wm thin">HP / HPE</div></div>
+        <div class="name">HP &amp; Hewlett Packard Enterprise</div>
+        <div class="since">Servers · printing</div>
+        <div class="desc">Enterprise compute, storage and printing — delivered to public and private sector clients.</div>
+        <div class="tag"><span class="diamond"></span>Computer Arabia</div>
+      </article>
+      <article class="partner-card" data-sector="it" data-vtype="brand">
+        <div class="logo"><div class="wm thin">VMWARE</div></div>
+        <div class="name">VMware</div>
+        <div class="since">Virtualisation</div>
+        <div class="desc">Virtualisation and cloud-management software for enterprise IT infrastructure.</div>
+        <div class="tag"><span class="diamond"></span>Computer Arabia</div>
+      </article>
+      <article class="partner-card" data-sector="it" data-vtype="brand">
+        <div class="logo"><div class="wm thin">FORTINET</div></div>
+        <div class="name">Fortinet</div>
+        <div class="since">Cybersecurity</div>
+        <div class="desc">Integrated cybersecurity platform for Qatari enterprise and public-sector clients.</div>
+        <div class="tag"><span class="diamond"></span>Computer Arabia</div>
+      </article>
+
+      <!-- Construction & Building Materials (5) -->
+      <article class="partner-card" data-sector="build" data-vtype="brand">
+        <div class="logo"><div class="wm">SCANIA</div></div>
+        <div class="name">Scania Transport — Construction</div>
+        <div class="since">Latest-tech fleet</div>
+        <div class="desc">TBMTC operates Scania vehicles equipped with latest technology to expand transport and logistics capacity.</div>
+        <div class="tag"><span class="diamond"></span>TBMTC</div>
+      </article>
+      <article class="partner-card" data-sector="build" data-vtype="brand">
+        <div class="logo"><div class="wm thin">SUPREME INDUSTRIES</div></div>
+        <div class="name">Supreme Industries</div>
+        <div class="since">Exclusive distributor</div>
+        <div class="desc">Exclusive distribution of Supreme Industries products through TBMTC's building-materials division.</div>
+        <div class="tag"><span class="diamond"></span>TBMTC</div>
+      </article>
+      <article class="partner-card" data-sector="build" data-vtype="brand">
+        <div class="logo"><div class="wm thin">ARSAN KAUCUK</div></div>
+        <div class="name">Arsan Kaucuk · Türkiye</div>
+        <div class="since">Exclusive distributor</div>
+        <div class="desc">Structural bearings and expansion joints for infrastructure — distributed by TBMTC across Qatari projects.</div>
+        <div class="tag"><span class="diamond"></span>TBMTC</div>
+      </article>
+      <article class="partner-card" data-sector="build" data-vtype="brand">
+        <div class="logo"><div class="wm thin">REBAR FABRICATION</div></div>
+        <div class="name">Reinforcement Steel</div>
+        <div class="since">Pioneer in Qatar</div>
+        <div class="desc">TBMTC — "pioneer in reinforcing steel bar fabrication in the State of Qatar" (per teyseerbm.com).</div>
+        <div class="tag"><span class="diamond"></span>TBMTC</div>
+      </article>
+      <article class="partner-card" data-sector="build" data-vtype="brand">
+        <div class="logo"><div class="wm thin">STRUCTURAL STEEL</div></div>
+        <div class="name">Structural Steel Range</div>
+        <div class="since">Building materials</div>
+        <div class="desc">Structural steel sections and fabrication for Qatari building and infrastructure projects.</div>
+        <div class="tag"><span class="diamond"></span>TBMTC</div>
+      </article>
+
+      <!-- Industry Products & Safety (11) -->
+      <article class="partner-card" data-sector="industry" data-vtype="brand">
+        <div class="logo"><div class="wm thin">STANLEY · BLACK&amp;DECKER</div></div>
+        <div class="name">Stanley Black &amp; Decker</div>
+        <div class="since">Tools &amp; power tools</div>
+        <div class="desc">Hand tools, power tools and storage systems for industry, oil &amp; gas, and construction.</div>
+        <div class="tag"><span class="diamond"></span>TISSCO</div>
+      </article>
+      <article class="partner-card" data-sector="industry" data-vtype="brand">
+        <div class="logo"><div class="wm">FACOM</div></div>
+        <div class="name">Facom · France</div>
+        <div class="since">Professional tooling</div>
+        <div class="desc">Industrial tooling for automotive, aerospace and heavy industry workshops.</div>
+        <div class="tag"><span class="diamond"></span>TISSCO</div>
+      </article>
+      <article class="partner-card" data-sector="industry" data-vtype="brand">
+        <div class="logo"><div class="wm">EGA MASTER</div></div>
+        <div class="name">EGA Master · Spain</div>
+        <div class="since">ATEX &amp; industrial tools</div>
+        <div class="desc">Non-sparking, insulated and titanium tools for oil &amp; gas and hazardous environments.</div>
+        <div class="tag"><span class="diamond"></span>TISSCO</div>
+      </article>
+      <article class="partner-card" data-sector="industry" data-vtype="brand">
+        <div class="logo"><div class="wm">HOLMATRO</div></div>
+        <div class="name">Holmatro · Netherlands</div>
+        <div class="since">Hydraulic systems</div>
+        <div class="desc">Industrial and rescue hydraulic tools — cylinders, pumps and torque solutions.</div>
+        <div class="tag"><span class="diamond"></span>TISSCO</div>
+      </article>
+      <article class="partner-card" data-sector="industry" data-vtype="brand">
+        <div class="logo"><div class="wm">MOBIAK</div></div>
+        <div class="name">Mobiak S.A. · Greece</div>
+        <div class="since">Fire safety</div>
+        <div class="desc">Fire extinguishers, suppression systems and refilling services across Qatar.</div>
+        <div class="tag"><span class="diamond"></span>TISSCO</div>
+      </article>
+      <article class="partner-card" data-sector="industry" data-vtype="brand">
+        <div class="logo"><div class="wm thin">SCHNEIDER ELECTRIC</div></div>
+        <div class="name">Schneider Electric</div>
+        <div class="since">Electrical &amp; automation</div>
+        <div class="desc">Low- and medium-voltage electrical distribution, control gear and automation products.</div>
+        <div class="tag"><span class="diamond"></span>TISSCO</div>
+      </article>
+      <article class="partner-card" data-sector="industry" data-vtype="brand">
+        <div class="logo"><div class="wm">KNIPEX</div></div>
+        <div class="name">Knipex · Germany</div>
+        <div class="since">Pliers &amp; cutters</div>
+        <div class="desc">Specialist pliers, cutters and electrical tools for industrial and electrical trades.</div>
+        <div class="tag"><span class="diamond"></span>TISSCO</div>
+      </article>
+      <article class="partner-card" data-sector="industry" data-vtype="brand">
+        <div class="logo"><div class="wm">EXTECH</div></div>
+        <div class="name">Extech Instruments · FLIR</div>
+        <div class="since">Test &amp; measurement</div>
+        <div class="desc">Portable instrumentation for electrical, environmental and industrial measurement.</div>
+        <div class="tag"><span class="diamond"></span>TISSCO</div>
+      </article>
+      <article class="partner-card" data-sector="industry" data-vtype="brand">
+        <div class="logo"><div class="wm">FLEETGUARD</div></div>
+        <div class="name">Cummins Filtration</div>
+        <div class="since">Filtration</div>
+        <div class="desc">Air, fuel, lube and hydraulic filtration for diesel engines and stationary power.</div>
+        <div class="tag"><span class="diamond"></span>TISSCO</div>
+      </article>
+      <article class="partner-card" data-sector="industry" data-vtype="brand">
+        <div class="logo"><div class="wm">PIUSI</div></div>
+        <div class="name">PIUSI S.p.A · Italy</div>
+        <div class="since">Fluid handling</div>
+        <div class="desc">Fuel transfer pumps, oil dispensing systems and AdBlue solutions.</div>
+        <div class="tag"><span class="diamond"></span>TISSCO</div>
+      </article>
+      <article class="partner-card" data-sector="industry" data-vtype="brand">
+        <div class="logo"><div class="wm">YOUNG MAN</div></div>
+        <div class="name">Young Man · China</div>
+        <div class="since">Access equipment</div>
+        <div class="desc">Aluminium ladders, scaffolds and work-at-height platforms.</div>
+        <div class="tag"><span class="diamond"></span>TISSCO</div>
+      </article>
+
+      <!-- Crane & Lifting (3) -->
+      <article class="partner-card" data-sector="crane" data-vtype="brand">
+        <div class="logo"><div class="wm thin">TOWER CRANES</div></div>
+        <div class="name">Tower-crane Fleet</div>
+        <div class="since">Project lifting</div>
+        <div class="desc">Tower cranes for high-rise and infrastructure projects — operated by Qatar Plant Hire.</div>
+        <div class="tag"><span class="diamond"></span>Qatar Plant Hire</div>
+      </article>
+      <article class="partner-card" data-sector="crane" data-vtype="brand">
+        <div class="logo"><div class="wm thin">MOBILE CRANES</div></div>
+        <div class="name">Mobile-crane Fleet</div>
+        <div class="since">Site mobility</div>
+        <div class="desc">Mobile cranes for industrial sites, ports and infrastructure works across Qatar.</div>
+        <div class="tag"><span class="diamond"></span>Qatar Plant Hire</div>
+      </article>
+      <article class="partner-card" data-sector="crane" data-vtype="brand">
+        <div class="logo"><div class="wm thin">PLANT &amp; EQUIPMENT</div></div>
+        <div class="name">Yellow-goods Fleet</div>
+        <div class="since">Earthmoving</div>
+        <div class="desc">Earthmoving and yellow-goods fleet for Qatar's infrastructure, energy and building sectors.</div>
+        <div class="tag"><span class="diamond"></span>Qatar Plant Hire</div>
+      </article>
+
+      <!-- Manufacturing & Fabrication (3) -->
+      <article class="partner-card" data-sector="manufact" data-vtype="brand">
+        <div class="logo"><div class="wm thin">FIBREGLASS</div></div>
+        <div class="name">Gulf Glass Fibre</div>
+        <div class="since">Made in Qatar</div>
+        <div class="desc">Local manufacture of GRP tanks, panels and engineered glass-fibre products.</div>
+        <div class="tag"><span class="diamond"></span>Gulf Glass Fibre</div>
+      </article>
+      <article class="partner-card" data-sector="manufact" data-vtype="brand">
+        <div class="logo"><div class="wm thin">POLYCHEM</div></div>
+        <div class="name">Teyseer Polychem</div>
+        <div class="since">Polymers · chemicals</div>
+        <div class="desc">Polymer and chemicals processing for the Qatari industrial and construction supply chain.</div>
+        <div class="tag"><span class="diamond"></span>Teyseer Polychem</div>
+      </article>
+      <article class="partner-card" data-sector="manufact" data-vtype="brand">
+        <div class="logo"><div class="wm thin">STEEL FAB</div></div>
+        <div class="name">Steel Fabrication</div>
+        <div class="since">In-house</div>
+        <div class="desc">In-house steel fabrication for projects under the TBMTC group umbrella.</div>
+        <div class="tag"><span class="diamond"></span>TBMTC</div>
+      </article>
+
+      <!-- HVAC (4) -->
+      <article class="partner-card" data-sector="hvac" data-vtype="brand">
+        <div class="logo"><div class="wm thin">MITSUBISHI HEAVY</div></div>
+        <div class="name">Mitsubishi Heavy Industries</div>
+        <div class="since">HVAC partner</div>
+        <div class="desc">Residential, commercial and VRF air-conditioning systems featured on the Group's HVAC major-brands listing.</div>
+        <div class="tag"><span class="diamond"></span>Teyseer AC &amp; Refrigeration</div>
+      </article>
+      <article class="partner-card" data-sector="hvac" data-vtype="brand">
+        <div class="logo"><div class="wm thin">VOLTAS</div></div>
+        <div class="name">Voltas Limited · Tata</div>
+        <div class="since">Air conditioning</div>
+        <div class="desc">Residential and light-commercial air-conditioning — Voltas brand featured on the AC carousel.</div>
+        <div class="tag"><span class="diamond"></span>Teyseer AC &amp; Refrigeration</div>
+      </article>
+      <article class="partner-card" data-sector="hvac" data-vtype="brand">
+        <div class="logo"><div class="wm thin">WESTINGHOUSE</div></div>
+        <div class="name">Westinghouse — HVAC</div>
+        <div class="since">Authorised partner · since 2022</div>
+        <div class="desc">VRF, ducted splits, rooftop units and applied HVAC solutions — partnership announced July 2022.</div>
+        <div class="tag"><span class="diamond"></span>Teyseer AC &amp; Refrigeration</div>
+      </article>
+      <article class="partner-card" data-sector="hvac" data-vtype="brand">
+        <div class="logo"><div class="wm thin">REFRIGERATION</div></div>
+        <div class="name">Commercial Refrigeration</div>
+        <div class="since">Cold-rooms · walk-ins</div>
+        <div class="desc">Cold rooms, walk-ins and commercial refrigeration for retail, F&amp;B and pharmaceutical clients.</div>
+        <div class="tag"><span class="diamond"></span>Teyseer AC &amp; Refrigeration</div>
+      </article>
+
+      <!-- Catering & FM (2) -->
+      <article class="partner-card" data-sector="services" data-vtype="brand">
+        <div class="logo"><div class="wm thin">CATERING</div></div>
+        <div class="name">Industrial Catering</div>
+        <div class="since">Teyseer Services · since 1987</div>
+        <div class="desc">Catering services for industrial sites, corporate clients and projects — listed on LinkedIn services.</div>
+        <div class="tag"><span class="diamond"></span>Teyseer Services Co.</div>
+      </article>
+      <article class="partner-card" data-sector="services" data-vtype="brand">
+        <div class="logo"><div class="wm thin">SCAFFOLDING</div></div>
+        <div class="name">Scaffolding &amp; Manpower</div>
+        <div class="since">FM services</div>
+        <div class="desc">Scaffolding, manpower and facilities-management services across Qatari sites.</div>
+        <div class="tag"><span class="diamond"></span>Teyseer Services Co.</div>
+      </article>
+
+      <!-- Security (1) -->
+      <article class="partner-card" data-sector="security" data-vtype="brand">
+        <div class="logo"><div class="wm thin">SECURITY SERVICES</div></div>
+        <div class="name">Manned &amp; Electronic Security</div>
+        <div class="since">Ministry of Interior licensed</div>
+        <div class="desc">Manned guarding and electronic security across Qatar — Ministry-of-Interior licensed.</div>
+        <div class="tag"><span class="diamond"></span>Teyseer Security Services</div>
+      </article>
+
+      
+      </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     03 — OUR PORTFOLIO (sector pills + horizontal slider per sector)
+     ============================================================ -->
+
+<!-- Closing CTA -->
+<section class="final-cta reveal" aria-label="Partner with us">
+  <div class="wrap">
+    <div class="ctxt">
+      <div class="eyebrow">Work With Us</div>
+      <h2>Partner With Us.</h2>
+      <p>From international principals seeking a foothold in Qatar to local clients across infrastructure, industry, mobility and services — the right introduction starts a long-tenure relationship.</p>
+      <div class="btns">
+        <a class="btn" href="portfolio.html">View Our Portfolio <span class="arrow">→</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<button class="totop" id="totop" type="button" aria-label="Back to top">
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 19V5M5 12l7-7 7 7"></path></svg>
+</button>
+
+<script src="teyseer.js"></script>
+<script>
+/* ============ PORTFOLIO — sector pills + slider ============ */
+(function () {
+  // Sector pill switching
+  document.querySelectorAll('.pf-sector-pill').forEach(function (pill) {
+    pill.addEventListener('click', function () {
+      var sec = pill.getAttribute('data-pf-sector');
+      document.querySelectorAll('.pf-sector-pill').forEach(function (p) {
+        p.classList.toggle('active', p === pill);
+        p.setAttribute('aria-selected', p === pill ? 'true' : 'false');
+      });
+      document.querySelectorAll('.pf-panel').forEach(function (panel) {
+        panel.setAttribute('data-active', panel.getAttribute('data-pf-panel') === sec ? 'true' : 'false');
+      });
+    });
+  });
+
+  // Slider controls per panel
+  document.querySelectorAll('.pf-panel').forEach(function (panel) {
+    var slider = panel.querySelector('.pf-slider');
+    var cards  = panel.querySelectorAll('.pf-card');
+    var prev   = panel.querySelector('.pf-prev');
+    var next   = panel.querySelector('.pf-next');
+    var dots   = panel.querySelectorAll('.pf-dot');
+    var cur    = panel.querySelector('.pf-counter .cur');
+    if (!slider || !cards.length) return;
+
+    function pad(n){return n<10?'0'+n:''+n;}
+    function getIdx() {
+      var srect = slider.getBoundingClientRect();
+      var best = 0, bestDist = Infinity;
+      cards.forEach(function (c, i) {
+        var d = Math.abs(c.getBoundingClientRect().left - srect.left);
+        if (d < bestDist) { bestDist = d; best = i; }
+      });
+      return best;
+    }
+    function update() {
+      var i = getIdx();
+      if (cur) cur.textContent = pad(i + 1);
+      if (prev) prev.disabled = (i === 0);
+      if (next) next.disabled = (i === cards.length - 1);
+      dots.forEach(function (d, j) { d.classList.toggle('active', j === i); });
+    }
+    function go(i) {
+      if (i < 0 || i >= cards.length) return;
+      slider.scrollTo({ left: cards[i].offsetLeft - slider.offsetLeft, behavior: 'smooth' });
+    }
+    if (prev) prev.addEventListener('click', function () { go(getIdx() - 1); });
+    if (next) next.addEventListener('click', function () { go(getIdx() + 1); });
+    dots.forEach(function (d, i) {
+      d.addEventListener('click', function () { go(i); });
+    });
+    slider.addEventListener('scroll', function () { requestAnimationFrame(update); }, { passive: true });
+    slider.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowRight') { e.preventDefault(); go(getIdx() + 1); }
+      if (e.key === 'ArrowLeft')  { e.preventDefault(); go(getIdx() - 1); }
+    });
+    update();
+  });
+})();
+
+/* ============ ANCHOR PARTNERSHIPS CAROUSEL ============ */
+(function () {
+  var rail = document.getElementById('anchorsRail');
+  if (!rail) return;
+  var cards = rail.querySelectorAll('.anchor-card');
+  var total = cards.length;
+  var prev = document.getElementById('anchorPrev');
+  var next = document.getElementById('anchorNext');
+  var current = document.getElementById('anchorCurrent');
+  var title = document.getElementById('anchorTitle');
+  var dotsContainer = document.getElementById('anchorDots');
+  var dots = dotsContainer ? dotsContainer.querySelectorAll('.dot') : [];
+
+  function pad(n) { return n < 10 ? '0' + n : '' + n; }
+
+  function getActiveIndex() {
+    // Pick the card whose left edge is closest to rail's left edge
+    var railRect = rail.getBoundingClientRect();
+    var bestIdx = 0;
+    var bestDist = Infinity;
+    cards.forEach(function (c, i) {
+      var d = Math.abs(c.getBoundingClientRect().left - railRect.left);
+      if (d < bestDist) { bestDist = d; bestIdx = i; }
+    });
+    return bestIdx;
+  }
+
+  function updateUI() {
+    var idx = getActiveIndex();
+    if (current) current.textContent = pad(idx + 1);
+    if (title)   title.textContent   = cards[idx].getAttribute('data-anchor-title') || '';
+    if (dots && dots.length) {
+      dots.forEach(function (d, i) { d.classList.toggle('active', i === idx); });
+    }
+    if (prev) prev.disabled = (idx === 0);
+    if (next) next.disabled = (idx === total - 1);
+  }
+
+  function scrollToIndex(i) {
+    if (i < 0 || i >= total) return;
+    var target = cards[i];
+    rail.scrollTo({ left: target.offsetLeft - rail.offsetLeft, behavior: 'smooth' });
+  }
+
+  if (prev) prev.addEventListener('click', function () { scrollToIndex(getActiveIndex() - 1); });
+  if (next) next.addEventListener('click', function () { scrollToIndex(getActiveIndex() + 1); });
+  if (dots && dots.length) {
+    dots.forEach(function (d, i) {
+      d.addEventListener('click', function () { scrollToIndex(i); });
+    });
+  }
+
+  rail.addEventListener('scroll', function () {
+    requestAnimationFrame(updateUI);
+  }, { passive: true });
+
+  // Keyboard nav when rail has focus
+  rail.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowRight') { e.preventDefault(); scrollToIndex(getActiveIndex() + 1); }
+    if (e.key === 'ArrowLeft')  { e.preventDefault(); scrollToIndex(getActiveIndex() - 1); }
+  });
+
+  updateUI();
+})();
+
+/* ============ PRINCIPALS — vertical + brand/company filter ============ */
+(function () {
+  var grid = document.getElementById('partnerGrid');
+  var cards = grid.querySelectorAll('.partner-card');
+  var titleText = document.getElementById('sectorTitleText');
+  var scrollInner = document.getElementById('scrollInner');
+  var scrollWin = document.getElementById('principalsScrollWin');
+  var vtTabs = document.querySelectorAll('.vt-tab');
+  var currentVtype = 'brand';
+  var currentFilter = 'all';
+
+  // Scroll affordance — hide gradient + "Scroll for more" once scrolled or at bottom
+  function updateScrollState() {
+    if (!scrollInner || !scrollWin) return;
+    var st = scrollInner.scrollTop;
+    var max = scrollInner.scrollHeight - scrollInner.clientHeight;
+    scrollWin.setAttribute('data-scrolled', st > 20 ? 'true' : 'false');
+    scrollWin.setAttribute('data-at-bottom', (max <= 8 || st >= max - 8) ? 'true' : 'false');
+  }
+  if (scrollInner) {
+    scrollInner.addEventListener('scroll', updateScrollState, { passive: true });
+    setTimeout(updateScrollState, 60);
+  }
+
+  // Count per sector
+  var bySector = {};
+  cards.forEach(function (c) {
+    var s = c.getAttribute('data-sector');
+    bySector[s] = (bySector[s] || 0) + 1;
+  });
+
+  var labels = {
+    all:      'All verticals',
+    auto:     'Automobile',
+    it:       'Information Technology',
+    build:    'Construction & Building Materials',
+    industry: 'Industry Products & Safety Equipment',
+    crane:    'Crane & Lifting',
+    manufact: 'Manufacturing & Fabrication',
+    hvac:     'Air Conditioning & HVAC',
+    services: 'Catering & Facility Management',
+    security: 'Security Services'
+  };
+
+  function setColumns(filter, shown) {
+    grid.classList.remove('cols-1', 'cols-2', 'cols-3', 'industry-mode');
+    // Per-sector grid layout
+    if (filter === 'industry') {
+      grid.classList.add('industry-mode');
+      return;
+    }
+    if (filter === 'auto' || filter === 'build' || filter === 'crane' || filter === 'manufact') {
+      grid.classList.add('cols-3');
+      return;
+    }
+    if (filter === 'services') { grid.classList.add('cols-2'); return; }
+    if (filter === 'security') { grid.classList.add('cols-1'); return; }
+    // 'all', 'it', 'hvac' → default 4-col; reduce if shown count is smaller
+    if (shown === 1) grid.classList.add('cols-1');
+    else if (shown === 2) grid.classList.add('cols-2');
+    else if (shown === 3) grid.classList.add('cols-3');
+  }
+
+  function applyFilter() {
+    var shown = 0;
+    cards.forEach(function (c) {
+      var sectorOk = (currentFilter === 'all') || (c.getAttribute('data-sector') === currentFilter);
+      var vtypeOk  = (c.getAttribute('data-vtype') === currentVtype);
+      var keep = sectorOk && vtypeOk;
+      c.classList.toggle('hidden', !keep);
+      if (keep) shown++;
+    });
+    titleText.textContent = labels[currentFilter] || labels.all;
+    setColumns(currentFilter, shown);
+    // Reset scroll
+    if (scrollInner) scrollInner.scrollTop = 0;
+    setTimeout(updateScrollState, 60);
+  }
+
+  function updateChipCounts() {
+    document.querySelectorAll('.filter-strip .fbtn .fc').forEach(function (fc) {
+      var n = fc.getAttribute('data-' + currentVtype);
+      if (n !== null) fc.innerHTML = '·&nbsp;' + n;
+    });
+  }
+
+  vtTabs.forEach(function (tab) {
+    tab.addEventListener('click', function () {
+      vtTabs.forEach(function (t) { t.classList.remove('active'); t.setAttribute('aria-selected', 'false'); });
+      tab.classList.add('active');
+      tab.setAttribute('aria-selected', 'true');
+      currentVtype = tab.getAttribute('data-vtype');
+      updateChipCounts();
+      applyFilter();
+    });
+  });
+
+  // Initial filter pass
+  setTimeout(function () { updateChipCounts(); applyFilter(); }, 0);
+
+    document.querySelectorAll('.filter-strip .fbtn').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var f = btn.getAttribute('data-filter');
+      document.querySelectorAll('.filter-strip .fbtn').forEach(function (b) {
+        b.classList.remove('active'); b.setAttribute('aria-selected', 'false');
+      });
+      btn.classList.add('active'); btn.setAttribute('aria-selected', 'true');
+
+      currentFilter = f;
+      applyFilter();
+
+      // Scroll back to top of the scroll window when filter changes
+      var scroller = document.getElementById('scrollInner');
+      if (scroller) scroller.scrollTop = 0;
+      setTimeout(updateScrollState, 60);
+    });
+  });
+})();
+
+
+</script>
+
+</body>
+</html>

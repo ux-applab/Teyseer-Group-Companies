@@ -1,0 +1,1557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Benchmarks — Teyseer Group Wireframe Pages</title>
+<meta name="description" content="A file-by-file, section-by-section reference of the external benchmarks consulted while building the Teyseer Group site.">
+<link rel="stylesheet" href="teyseer.css">
+<style>
+/* PDF-style document layout */
+body { background: var(--white); }
+
+.bm-doc-hero {
+  padding: 56px 0 56px;
+  border-bottom: 1px solid var(--line);
+}
+.bm-doc-hero .head-row {
+  display: flex; align-items: flex-start; justify-content: space-between;
+  gap: 24px; padding-bottom: 28px;
+  border-bottom: 2px solid var(--blue);
+}
+.bm-doc-hero .id-blk { display: inline-flex; align-items: flex-start; gap: 14px; }
+.bm-doc-hero .id-blk .mark {
+  width: 28px; height: 28px;
+  background: var(--blue);
+  display: grid; place-items: center;
+  margin-top: 4px;
+}
+.bm-doc-hero .id-blk .name {
+  font-family: var(--serif); font-weight: 600;
+  font-size: 17px; letter-spacing: 0.18em;
+  color: var(--night); text-transform: uppercase;
+  line-height: 1; margin-bottom: 6px;
+}
+.bm-doc-hero .id-blk .sub {
+  font-family: var(--mono); font-size: 10.5px;
+  letter-spacing: 0.18em; color: var(--muted);
+  text-transform: uppercase;
+}
+.bm-doc-hero .doc-meta {
+  text-align: right;
+  font-family: var(--mono); font-size: 10.5px;
+  letter-spacing: 0.18em; color: var(--muted);
+  text-transform: uppercase;
+  line-height: 1.6;
+}
+.bm-doc-hero .doc-meta .doc {
+  color: var(--blue); letter-spacing: 0.18em;
+  display: block;
+}
+.bm-doc-hero h1 {
+  font-family: var(--serif); font-weight: 400;
+  font-size: clamp(34px, 4.4vw, 56px);
+  letter-spacing: -0.01em;
+  color: var(--night); line-height: 1.08;
+  margin: 36px 0 18px; max-width: 22ch;
+}
+.bm-doc-hero h1 em {
+  font-style: italic; font-weight: 400;
+  color: var(--blue);
+}
+.bm-doc-hero p.lead-doc {
+  font-size: 15px; line-height: 1.65;
+  color: var(--muted); margin: 0 0 24px;
+  max-width: 62ch;
+}
+.bm-doc-hero .layout-note {
+  border-left: 3px solid var(--blue);
+  padding: 8px 16px;
+  font-size: 13px; color: var(--night);
+  max-width: 70ch;
+  background: var(--paper);
+}
+.bm-doc-hero .layout-note strong { color: var(--blue); font-weight: 600; }
+
+/* Per-file section block */
+.bm-file {
+  padding: 56px 0 24px;
+  border-top: 1px solid var(--line);
+}
+.bm-file:first-of-type { border-top: 0; }
+.bm-file.alt { background: var(--cream-2); }
+
+.bm-file-head {
+  display: flex; align-items: flex-start; justify-content: space-between;
+  gap: 24px; padding-bottom: 20px;
+  border-bottom: 2px solid var(--blue);
+  margin-bottom: 36px;
+}
+.bm-file-head .id-blk { display: inline-flex; align-items: flex-start; gap: 14px; }
+.bm-file-head .id-blk .mark {
+  width: 24px; height: 24px;
+  background: var(--blue);
+  display: grid; place-items: center;
+  margin-top: 3px;
+}
+.bm-file-head .id-blk .mark svg { width: 100%; height: 100%; }
+.bm-file-head .id-blk .name {
+  font-family: var(--serif); font-weight: 600;
+  font-size: 15px; letter-spacing: 0.18em;
+  color: var(--night); text-transform: uppercase;
+  line-height: 1; margin-bottom: 5px;
+}
+.bm-file-head .id-blk .sub {
+  font-family: var(--mono); font-size: 10px;
+  letter-spacing: 0.16em; color: var(--muted);
+  text-transform: uppercase;
+}
+.bm-file-head .file-meta {
+  text-align: right;
+  font-family: var(--mono); font-size: 10px;
+  letter-spacing: 0.16em; color: var(--muted);
+  text-transform: uppercase;
+  line-height: 1.7;
+}
+.bm-file-head .file-meta strong { color: var(--blue); font-weight: 600; }
+
+.bm-file h2 {
+  font-family: var(--serif); font-weight: 400;
+  font-size: clamp(36px, 4.2vw, 56px);
+  color: var(--steel-dim); letter-spacing: 0;
+  margin: 0 0 36px;
+  display: flex; justify-content: space-between; align-items: baseline;
+  line-height: 1.05;
+}
+.bm-file h2 .ttl { color: var(--steel-dim); }
+.bm-file h2 .meta {
+  font-family: var(--mono); font-size: 11px;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--line); font-weight: 500;
+  white-space: nowrap; align-self: end;
+}
+@media (max-width: 720px) { .bm-file h2 .meta { display: none; } }
+
+/* Each benchmark entry */
+.bm-entry { margin-bottom: 44px; }
+.bm-entry:last-child { margin-bottom: 0; }
+
+.bm-entry .entry-head {
+  display: flex; align-items: baseline; gap: 18px;
+  margin-bottom: 14px;
+}
+.bm-entry .num {
+  font-family: var(--mono); font-size: 11px;
+  letter-spacing: 0.16em; color: var(--muted);
+  font-weight: 500;
+  min-width: 56px;
+}
+.bm-entry .entry-head h3 {
+  font-family: var(--serif); font-weight: 700;
+  font-size: 19px; letter-spacing: -0.005em;
+  margin: 0; color: var(--night);
+}
+
+.bm-entry .card {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  margin-left: 74px;
+}
+@media (max-width: 720px) {
+  .bm-entry .card { grid-template-columns: 1fr; }
+  .bm-entry .card { margin-left: 0; }
+  .bm-entry .entry-head { margin-left: 0; }
+}
+
+.bm-entry .card .img-cell {
+  background: var(--cream-2);
+  display: grid; place-items: center;
+  padding: 24px;
+  overflow: hidden;
+  border-right: 1px solid var(--line);
+}
+@media (max-width: 720px) {
+  .bm-entry .card .img-cell { border-right: 0; border-bottom: 1px solid var(--line); padding: 16px; }
+}
+.bm-entry .card .img-cell img {
+  max-width: 100%; max-height: 280px;
+  object-fit: contain; display: block;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+.bm-entry .card .img-cell.tall img { max-height: 360px; }
+.bm-entry .card .img-cell.short img { max-height: 180px; }
+
+.bm-entry .card .text-cell {
+  padding: 28px 30px;
+  display: flex; flex-direction: column;
+  gap: 10px; min-height: 240px;
+}
+.bm-entry .card .ref-line {
+  font-family: var(--mono); font-size: 10.5px;
+  letter-spacing: 0.18em; color: var(--blue);
+  text-transform: uppercase; font-weight: 500;
+}
+.bm-entry .card .takeaway {
+  font-family: var(--serif); font-size: 19px;
+  font-weight: 700; letter-spacing: -0.005em;
+  margin: 0; color: var(--blue);
+  font-style: italic; line-height: 1.25;
+}
+.bm-entry .card .desc {
+  font-size: 13.5px; line-height: 1.6;
+  color: var(--night); margin: 0;
+}
+.bm-entry .card .src {
+  margin-top: auto;
+  padding-top: 14px;
+  border-top: 1px solid var(--line-soft);
+  font-family: var(--mono); font-size: 10.5px;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--muted);
+  word-break: break-word;
+}
+.bm-entry .card .src .sk { color: var(--blue); font-weight: 500; }
+.bm-entry .card .src a {
+  color: var(--blue); text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: var(--steel);
+}
+.bm-entry .card .src a:hover { text-decoration-color: var(--blue); }
+
+/* Footer per-file */
+.bm-file-foot {
+  margin-top: 36px;
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+  display: flex; justify-content: space-between; align-items: center;
+  font-family: var(--mono); font-size: 10.5px;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--muted);
+}
+.bm-file-foot .pg { color: var(--blue); font-weight: 500; }
+
+/* Doc end CTA */
+.bm-end-cta {
+  background: var(--cream-2);
+  padding: 64px 0 56px;
+  text-align: center;
+  border-top: 1px solid var(--line);
+}
+.bm-end-cta .eyebrow { display: inline-block; margin-bottom: 14px; }
+.bm-end-cta h2 {
+  font-family: var(--serif); font-weight: 700;
+  font-size: clamp(28px, 3.2vw, 40px);
+  line-height: 1.15; margin: 0 0 14px;
+  color: var(--blue);
+}
+.bm-end-cta p { max-width: 60ch; margin: 0 auto 24px; color: var(--night); }
+.bm-end-cta .btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+</style>
+
+<style>
+.bm-entry-compact{padding:20px;border:1px solid var(--line);background:var(--paper)}
+.bm-entry-compact .entry-head{display:flex;align-items:flex-start;gap:12px;margin-bottom:10px}
+.bm-entry-compact .num{font-family:var(--mono);font-size:10px;letter-spacing:0.14em;color:var(--blue);padding-top:2px;flex-shrink:0}
+.bm-entry-compact h3{font-size:14px;font-weight:600;color:var(--night);line-height:1.3}
+.bm-entry-compact .bm-src{font-family:var(--mono);font-size:10px;letter-spacing:0.1em;color:var(--blue);margin-bottom:6px}
+.bm-entry-compact .bm-desc{font-size:13px;color:var(--muted);line-height:1.65}
+</style>
+</head>
+<body data-screen-label="Design Benchmarks">
+
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="pagebar" role="banner">
+  <div class="wrap">
+    <div class="pb-row pb-bottom">
+      <a href="index.html" class="brand" aria-label="Teyseer Group">
+        <span class="mark" aria-hidden="true">
+          <svg viewBox="0 0 36 36" fill="none">
+            <rect x="6" y="6" width="24" height="24" fill="#2A3C8E"></rect>
+            <rect x="13.5" y="13.5" width="9" height="9" transform="rotate(45 18 18)" fill="#A6A8BA"></rect>
+            <rect x="16.5" y="16.5" width="3" height="3" transform="rotate(45 18 18)" fill="#F4F3EF"></rect>
+          </svg>
+        </span>
+        <span>
+          <div class="name">Teyseer</div>
+          <div class="tag">Design Benchmarks</div>
+        </span>
+      </a>
+      <div class="anchornav-wrap" style="display:flex;align-items:center;gap:6px">
+        <button id="navPrev" onclick="document.getElementById('anchornav').scrollBy({left:-160,behavior:'smooth'})" style="flex-shrink:0;width:28px;height:28px;border:1px solid var(--line);background:var(--paper);cursor:pointer;display:grid;place-items:center;border-radius:2px" aria-label="Scroll nav left"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 2L4 7l5 5"/></svg></button>
+        <nav class="anchornav" id="anchornav" aria-label="On this page" style="overflow-x:auto;scrollbar-width:none">
+          <a href="#file-01" class="active">01 About Us</a>
+          <a href="#file-02">02 History</a>
+          <a href="#file-03">03 Vision</a>
+          <a href="#file-06">04 Partners</a>
+          <a href="#file-07-portfolio">05 Portfolio</a>
+          <a href="#file-08">06 Awards</a>
+          <a href="#file-07">07 Chairman</a>
+          <a href="#file-04">08 QNV</a>
+          <a href="#file-05">09 ESG</a>
+          <a href="#file-addendum">CTAs</a>
+          <a href="#inner-iv">Industry Verticals</a>
+          <a href="#inner-auto">Automotive</a>
+          <a href="#inner-it">IT</a>
+        </nav>
+        <button id="navNext" onclick="document.getElementById('anchornav').scrollBy({left:160,behavior:'smooth'})" style="flex-shrink:0;width:28px;height:28px;border:1px solid var(--line);background:var(--paper);cursor:pointer;display:grid;place-items:center;border-radius:2px" aria-label="Scroll nav right"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 2l5 5-5 5"/></svg></button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- ============================================================
+     DOC HERO
+     ============================================================ -->
+<section class="bm-doc-hero" data-screen-label="Document Hero">
+  <div class="wrap">
+    <div class="head-row">
+      <div class="id-blk">
+        <span class="mark" aria-hidden="true">
+          <svg viewBox="0 0 36 36" fill="none">
+            <rect x="6" y="6" width="24" height="24" fill="#2A3C8E"></rect>
+            <rect x="13.5" y="13.5" width="9" height="9" transform="rotate(45 18 18)" fill="#A6A8BA"></rect>
+            <rect x="16.5" y="16.5" width="3" height="3" transform="rotate(45 18 18)" fill="#F4F3EF"></rect>
+          </svg>
+        </span>
+        <div>
+          <div class="name">Teyseer</div>
+          <div class="sub">About Us — Benchmarks</div>
+        </div>
+      </div>
+      <div class="doc-meta">
+        <span class="doc">Document</span>
+        Design Benchmarks<br>
+        Companion to the About-Us page set
+      </div>
+    </div>
+
+    <h1>Design benchmarks for the Teyseer Group <em>About Us</em> page set.</h1>
+    <p class="lead-doc">A file-by-file, section-by-section reference of the external benchmarks consulted during design. Each row shows the source image on the LEFT and a short note on what it was referenced for on the RIGHT.</p>
+
+    <div class="layout-note">
+      <strong>Layout</strong> — Image LEFT (the benchmark reference), text RIGHT (what we took from it).
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     FILE 01 — ABOUT US
+     ============================================================ -->
+<section class="bm-file" id="file-01" data-screen-label="01 About Us">
+  <div class="wrap">
+
+    <div class="bm-file-head">
+      <div class="id-blk">
+        <span class="mark" aria-hidden="true">
+          <svg viewBox="0 0 36 36" fill="none">
+            <rect x="6" y="6" width="24" height="24" fill="#2A3C8E"></rect>
+            <rect x="13.5" y="13.5" width="9" height="9" transform="rotate(45 18 18)" fill="#A6A8BA"></rect>
+            <rect x="16.5" y="16.5" width="3" height="3" transform="rotate(45 18 18)" fill="#F4F3EF"></rect>
+          </svg>
+        </span>
+        <div>
+          <div class="name">Teyseer</div>
+          <div class="sub">About Us — Benchmarks</div>
+        </div>
+      </div>
+      <div class="file-meta">
+        <strong>File 01</strong><br>
+        aboutus.html · 10 references
+      </div>
+    </div>
+
+    <h2><span class="ttl">01 — About Us</span><span class="meta">aboutus.html · 10 references</span></h2>
+
+    <!-- 01.1 -->
+    <article class="bm-entry">
+      <div class="entry-head"><div class="num">01.1</div><h3>Hero — Branding Guide</h3></div>
+      <div class="card">
+        <div class="img-cell short">
+          <img src="img/bm-teyseer-hero.jpg" alt="Teyseer brand book hero treatment — the headline 'At the Heart of Service, Since 1968.' on a pale diamond-pattern background.">
+        </div>
+        <div class="text-cell">
+          <div class="ref-line">Reference · Teyseer</div>
+          <p class="takeaway">Taken from the Branding Guide</p>
+          <p class="desc">Hero composition and tone — the brand book's own "At the Heart of Service, Since 1968" treatment, used as the foundational reference for the page hero.</p>
+          <div class="src"><span class="sk">Source:</span> Teyseer Brand Book V1.0 (July 2025)</div>
+        </div>
+      </div>
+    </article>
+
+    <!-- 01.2 -->
+    <article class="bm-entry">
+      <div class="entry-head"><div class="num">01.2</div><h3>Hero — GE</h3></div>
+      <div class="card">
+        <div class="img-cell">
+          <img src="img/bm-ge-going-forward.jpg" alt="GE 'Going Forward' section — lead paragraph on the left with a 'Since 1892' brand statement, large jet-engine workshop photo on the right.">
+        </div>
+        <div class="text-cell">
+          <div class="ref-line">Reference · GE</div>
+          <p class="takeaway">Going Forward — Since 1892</p>
+          <p class="desc">Editorial hero combining a forward-looking statement, a "since" line, and a single supporting image. Influenced our hero tone and quiet two-column composition.</p>
+          <div class="src"><span class="sk">Source:</span> <a href="https://www.ge.com/about-us" target="_blank" rel="noopener">ge.com/about-us</a></div>
+        </div>
+      </div>
+    </article>
+
+    <!-- 01.3 -->
+    <article class="bm-entry">
+      <div class="entry-head"><div class="num">01.3</div><h3>Hero — Aramco</h3></div>
+      <div class="card">
+        <div class="img-cell">
+          <img src="img/bm-aramco-about.jpg" alt="Aramco 'About Aramco' hero — dark refinery photo behind the headline and a three-column lead paragraph below.">
+        </div>
+        <div class="text-cell">
+          <div class="ref-line">Reference · Aramco</div>
+          <p class="takeaway">About Aramco — Energy security for a more-sustainable world</p>
+          <p class="desc">Large hero image with a single statement overlay and a quiet three-column intro body. Influenced our hero-into-narrative pattern.</p>
+          <div class="src"><span class="sk">Source:</span> <a href="https://www.aramco.com/en/about-us" target="_blank" rel="noopener">aramco.com/en/about-us</a></div>
+        </div>
+      </div>
+    </article>
+
+    <!-- 01.4 -->
+    <article class="bm-entry">
+      <div class="entry-head"><div class="num">01.4</div><h3>By the Numbers — Aramco</h3></div>
+      <div class="card">
+        <div class="img-cell short">
+          <img src="img/bm-aramco-at-a-glance.jpg" alt="Aramco 'at a glance' — three large stats: 92 years of experience, 76,000+ total workforce, 247.2 billion barrels of oil.">
+        </div>
+        <div class="text-cell">
+          <div class="ref-line">Reference · Aramco</div>
+          <p class="takeaway">"Aramco at a glance" stat strip</p>
+          <p class="desc">Inspired our four-up "By the Numbers" band — oversized serif numeric, monospace label, single-line description.</p>
+          <div class="src"><span class="sk">Source:</span> <a href="https://www.aramco.com/en/about-us" target="_blank" rel="noopener">aramco.com/en/about-us</a></div>
+        </div>
+      </div>
+    </article>
+
+    <!-- 01.5 -->
+    <article class="bm-entry">
+      <div class="entry-head"><div class="num">01.5</div><h3>By the Numbers — Siemens</h3></div>
+      <div class="card">
+        <div class="img-cell">
+          <img src="img/bm-siemens-positive-change.jpg" alt="Siemens 'Creating positive change together' — dark-blue background, bright teal stats (90%, 694 million metric tons CO2e, 47.9, 58,000, 438 million).">
+        </div>
+        <div class="text-cell">
+          <div class="ref-line">Reference · Siemens</div>
+          <p class="takeaway">"Creating positive change together" — Siemens stat band</p>
+          <p class="desc">Used to validate density and proportions on the stat row — confidence that a multi-stat band can carry the page on a deep brand colour.</p>
+          <div class="src"><span class="sk">Source:</span> <a href="https://www.siemens.com/global/en/company/about.html" target="_blank" rel="noopener">siemens.com/en-us/company/about</a></div>
+        </div>
+      </div>
+    </article>
+
+    <!-- 01.6 -->
+    <article class="bm-entry">
+      <div class="entry-head"><div class="num">01.6</div><h3>Industries Served — Bechtel</h3></div>
+      <div class="card">
+        <div class="img-cell">
+          <img src="img/bm-bechtel-history.jpg" alt="Bechtel 'Building History' tabbed 'Explore Projects by Market' grid — six project tiles each with photo and sector label.">
+        </div>
+        <div class="text-cell">
+          <div class="ref-line">Reference · Bechtel</div>
+          <p class="takeaway">"Explore Projects by Market" grid</p>
+          <p class="desc">Inspired the industries grid — image + sector title + short description, tuned to read at a scan rather than as a long list.</p>
+          <div class="src"><span class="sk">Source:</span> <a href="https://www.bechtel.com/" target="_blank" rel="noopener">bechtel.com</a></div>
+        </div>
+      </div>
+    </article>
+
+    <!-- 01.7 -->
+    <article class="bm-entry">
+      <div class="entry-head"><div class="num">01.7</div><h3>Industries Served — Shell</h3></div>
+      <div class="card">
+        <div class="img-cell">
+          <img src="img/bm-shell-what-we-do.jpg" alt="Shell 'What we do' — six image tiles: Oil and natural gas, Mobility and Convenience, Renewable power, Hydrogen, Carbon capture and storage, Nature-based solutions.">
+        </div>
+        <div class="text-cell">
+          <div class="ref-line">Reference · Shell</div>
+          <p class="takeaway">"What we do" sector tiles</p>
+          <p class="desc">Second sector-grid reference — confirmed the image-led tile pattern works at energy / industrial scale, which matches Teyseer's portfolio breadth.</p>
+          <div class="src"><span class="sk">Source:</span> <a href="https://www.shell.com/what-we-do.html" target="_blank" rel="noopener">shell.com/what-we-do</a></div>
+        </div>
+      </div>
+    </article>
+
+    <!-- 01.8 -->
+    <article class="bm-entry">
+      <div class="entry-head"><div class="num">01.8</div><h3>Our People and Workplace — Vitol</h3></div>
+      <div class="card">
+        <div class="img-cell">
+          <img src="img/benchmark-vitol-people.png" alt="Vitol 'Our People' page — long-form culture statement on the left, supporting paragraph on the right, and a three-number stats row of 1,800+ employees / 65+ nationalities / 40+ offices.">
+        </div>
+        <div class="text-cell">
+          <div class="ref-line">Reference · Vitol</div>
+          <p class="takeaway">"Our People" — culture statement with stats row</p>
+          <p class="desc">Long-form culture statement paired with a discrete three-number stats row. Adopted as the layout reference for the Our People &amp; Workplace block placed immediately after Industries Served.</p>
+          <div class="src"><span class="sk">Source:</span> <a href="https://www.vitol.com/our-people/" target="_blank" rel="noopener">vitol.com/our-people/</a></div>
+        </div>
+      </div>
+    </article>
+
+    <!-- 01.9 -->
+    <article class="bm-entry">
+      <div class="entry-head"><div class="num">01.9</div><h3>Our Values — Al-Futtaim</h3></div>
+      <div class="card">
+        <div class="img-cell">
+          <img src="img/benchmark-alfuttaim-values.png" alt="Al-Futtaim values composition — four large square photo cards (Respect, Excellence, Collaboration, Integrity), each captioned with a single-word value name and a short definition paragraph.">
+        </div>
+        <div class="text-cell">
+          <div class="ref-line">Reference · Al-Futtaim</div>
+          <p class="takeaway">Four-value photo grid — Respect · Excellence · Collaboration · Integrity</p>
+          <p class="desc">Four equally-weighted photo cards with a single-word value name and a short narrative paragraph. Reference for the Brand Book values composition on the About Us page — large culture imagery paired with quiet typography.</p>
+          <div class="src"><span class="sk">Source:</span> <a href="https://www.alfuttaim.com/about-us/" target="_blank" rel="noopener">alfuttaim.com/about-us/</a></div>
+        </div>
+      </div>
+    </article>
+
+    <!-- 01.10 -->
+    <article class="bm-entry">
+      <div class="entry-head"><div class="num">01.10</div><h3>Our People — Al-Futtaim</h3></div>
+      <div class="card">
+        <div class="img-cell">
+          <img src="img/benchmark-alfuttaim-people.png" alt="Al-Futtaim 'People' section — section label 'People' on the left, a paragraph about 40,000+ employees from 100+ nationalities on the right, with four expanding accordion rows underneath (Our People Our Greatest Asset, Our Diversity Makes Us Successful, A Value Based Team, Focus On Career Development).">
+        </div>
+        <div class="text-cell">
+          <div class="ref-line">Reference · Al-Futtaim</div>
+          <p class="takeaway">"People" — culture statement with expandable rows</p>
+          <p class="desc">Section label on the left and a paragraph on the right, followed by four expandable accordion rows for deeper detail. Reference for an alternative Our People &amp; Workplace layout that supports more sub-topics without overwhelming the page.</p>
+          <div class="src"><span class="sk">Source:</span> <a href="https://www.alfuttaim.com/about-us/" target="_blank" rel="noopener">alfuttaim.com/about-us/</a></div>
+        </div>
+      </div>
+    </article>
+
+    <div class="bm-file-foot">
+      <span>Teyseer Group · About Us Benchmarks</span>
+      <span class="pg">File 01 / 08</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     FILE 02 — HISTORY
+     ============================================================ -->
+<section class="bm-file alt" id="file-02" data-screen-label="02 History">
+  <div class="wrap">
+
+    <div class="bm-file-head">
+      <div class="id-blk">
+        <span class="mark" aria-hidden="true">
+          <svg viewBox="0 0 36 36" fill="none">
+            <rect x="6" y="6" width="24" height="24" fill="#2A3C8E"></rect>
+            <rect x="13.5" y="13.5" width="9" height="9" transform="rotate(45 18 18)" fill="#A6A8BA"></rect>
+            <rect x="16.5" y="16.5" width="3" height="3" transform="rotate(45 18 18)" fill="#F4F3EF"></rect>
+          </svg>
+        </span>
+        <div>
+          <div class="name">Teyseer</div>
+          <div class="sub">History — Benchmarks</div>
+        </div>
+      </div>
+      <div class="file-meta">
+        <strong>File 02</strong><br>
+        history.html · 5 references
+      </div>
+    </div>
+
+    <h2><span class="ttl">02 — History</span><span class="meta">history.html · 5 references</span></h2>
+
+    <!-- 02.1 -->
+    <article class="bm-entry">
+      <div class="entry-head"><div class="num">02.1</div><h3>The Name — Chairman's Message</h3></div>
+      <div class="card">
+        <div class="img-cell">
+          <img src="img/bm-teyseer-chairman.jpg" alt="Teyseer Chairman's Message page — Chairman portrait above three paragraphs of message text.">
+        </div>
+        <div class="text-cell">
+          <div class="ref-line">Reference · Teyseer</div>
+          <p class="takeaway">Derived from the Message from the Chairman</p>
+          <p class="desc">The "Teyseer = to facilitate" name-origin treatment is sourced from the chairman's published message and used as the structural anchor for the History page's name section.</p>
+          <div class="src"><span class="sk">Source:</span> <a href="https://www.teyseergroup.com/message-from-the-chairman/" target="_blank" rel="noopener">teyseergroup.com/message-from-the-chairman</a></div>
+        </div>
+      </div>
+    </article>
+
+    <!-- 02.2 -->
+    <article class="bm-entry">
+      <div class="entry-head"><div class="num">02.2</div><h3>Origin Story — Aramco</h3></div>
+      <div class="card">
+        <div class="img-cell">
+          <img src="img/bm-aramco-arabian-oil.jpg" alt="Aramco 'The birth of Arabian oil' — long-form heritage essay with a single dated anchor (1933) and short narrative paragraphs.">
+        </div>
+        <div class="text-cell">
+          <div class="ref-line">Reference · Aramco</div>
+          <p class="takeaway">"The birth of Arabian oil" — founding-story treatment</p>
+          <p class="desc">Long-form origin block with a single dated anchor (1933), short narrative paragraph and quiet section break — Aramco's heritage page as the pattern for Teyseer's 1968 origin block.</p>
+          <div class="src"><span class="sk">Source:</span> <a href="https://www.aramco.com/en/about-us/our-history" target="_blank" rel="noopener">aramco.com/en/about-us/our-history</a></div>
+        </div>
+      </div>
+    </article>
+
+    <!-- 02.3a -->
+    <article class="bm-entry">
+      <div class="entry-head"><div class="num">02.3a</div><h3>Our Evolving Identity — Caterpillar</h3></div>
+      <div class="card">
+        <div class="img-cell">
+          <img src="img/bm-caterpillar-decades.jpg" alt="Caterpillar 'View Our History By The Decades' — three-card horizontal carousel with dot pagination and decade labels.">
+        </div>
+        <div class="text-cell">
+          <div class="ref-line">Reference · Caterpillar</div>
+          <p class="takeaway">"View Our History By The Decades"</p>
+          <p class="desc">Three-card horizontal carousel with dot pagination and decade anchors — informed the Evolving Identity treatment with chapter cards.</p>
+          <div class="src"><span class="sk">Source:</span> <a href="https://www.caterpillar.com/en/company/about-caterpillar/history.html" target="_blank" rel="noopener">caterpillar.com/en/company/about-caterpillar/history.html</a></div>
+        </div>
+      </div>
+    </article>
+
+    <!-- 02.3b -->
+    <article class="bm-entry">
+      <div class="entry-head"><div class="num">02.3b</div><h3>Our Evolving Identity — Jotun</h3></div>
+      <div class="card">
+        <div class="img-cell">
+          <img src="img/bm-jotun-story-begins.jpg" alt="Jotun heritage page — vertical year column with serif chapter titles (1920 The Jotun story begins, 1940 Strong values and resilience) and archival photos on the right.">
+        </div>
+        <div class="text-cell">
+          <div class="ref-line">Reference · Jotun</div>
+          <p class="takeaway">"The Jotun story begins" — vertical decade timeline</p>
+          <p class="desc">Vertical timeline with year + chapter title + paragraph + supporting image — used alongside Caterpillar to triangulate the Evolving Identity layout.</p>
+          <div class="src"><span class="sk">Source:</span> <a href="https://www.jotun.com/ww-en/about-jotun/our-history" target="_blank" rel="noopener">jotun.com/ww-en/about-jotun/our-history</a></div>
+        </div>
+      </div>
+    </article>
+
+    <!-- 02.4 -->
+    <article class="bm-entry">
+      <div class="entry-head"><div class="num">02.4</div><h3>Our Evolving Identity — Al-Futtaim</h3></div>
+      <div class="card">
+        <div class="img-cell">
+          <img src="img/benchmark-alfuttaim-timeline.png" alt="Al-Futtaim 'Our History' page — a horizontal decade-tab strip (2025-2021, 2020-2011, 2010-2001, 2000-1986, 1985-1971, 1970-1930) with a large year stamp (2025), a milestone card 'Acquisition of Cenomi Retail' on the left, and a large cinematic image on the right.">
+        </div>
+        <div class="text-cell">
+          <div class="ref-line">Reference · Al-Futtaim</div>
+          <p class="takeaway">Decade-tabbed timeline with milestone card + cinematic image</p>
+          <p class="desc">Horizontal decade-tab strip with a single dominant year stamp, a milestone card and a full-bleed contextual image. Reference for an editorial decade-tab variant of the History timeline.</p>
+          <div class="src"><span class="sk">Source:</span> <a href="https://www.alfuttaim.com/about-us/" target="_blank" rel="noopener">alfuttaim.com/about-us/</a></div>
+        </div>
+      </div>
+    </article>
+
+    <div class="bm-file-foot">
+      <span>Teyseer Group · History Benchmarks</span>
+      <span class="pg">File 02 / 08</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     FILE 03 — VISION & MISSION
+     ============================================================ -->
+<section class="bm-file" id="file-03" data-screen-label="03 Vision and Mission">
+  <div class="wrap">
+
+    <div class="bm-file-head">
+      <div class="id-blk">
+        <span class="mark" aria-hidden="true">
+          <svg viewBox="0 0 36 36" fill="none">
+            <rect x="6" y="6" width="24" height="24" fill="#2A3C8E"></rect>
+            <rect x="13.5" y="13.5" width="9" height="9" transform="rotate(45 18 18)" fill="#A6A8BA"></rect>
+            <rect x="16.5" y="16.5" width="3" height="3" transform="rotate(45 18 18)" fill="#F4F3EF"></rect>
+          </svg>
+        </span>
+        <div>
+          <div class="name">Teyseer</div>
+          <div class="sub">Vision &amp; Mission — Benchmarks</div>
+        </div>
+      </div>
+      <div class="file-meta">
+        <strong>File 03</strong><br>
+        visionmission.html · 2 references
+      </div>
+    </div>
+
+    <h2><span class="ttl">03 — Vision &amp; Mission</span><span class="meta">visionmission.html · 2 references</span></h2>
+
+    <!-- 03.1 -->
+    <article class="bm-entry">
+      <div class="entry-head"><div class="num">03.1</div><h3>Vision &amp; Mission — Jotun</h3></div>
+      <div class="card">
+        <div class="img-cell">
+          <img src="img/bm-jotun-loyalty.jpg" alt="Jotun 'Loyalty' values composition — full-bleed king-penguins photograph on the left, with the value name 'Loyalty', a 3-bullet definition and a short example paragraph on the right.">
+        </div>
+        <div class="text-cell">
+          <div class="ref-line">Reference · Jotun</div>
+          <p class="takeaway">"Loyalty" — Jotun values composition</p>
+          <p class="desc">Image-left, values-right layout — values rendered as a quiet bulleted list with a supporting image. Adopted for the Teyseer Touch page composition.</p>
+          <div class="src"><span class="sk">Source:</span> <a href="https://www.jotun.com/ww-en/about-jotun/our-values" target="_blank" rel="noopener">jotun.com/ww-en/about-jotun/our-values</a></div>
+        </div>
+      </div>
+    </article>
+
+    <!-- 03.2 -->
+    <article class="bm-entry">
+      <div class="entry-head"><div class="num">03.2</div><h3>Our Values — Apple</h3></div>
+      <div class="card">
+        <div class="img-cell">
+          <img src="img/bm-apple-values.jpg" alt="Apple values page — 3-column grid of image cards: Accessibility, Education, Environment, with a tightly cropped photo and a 'Learn More ›' link on each.">
+        </div>
+        <div class="text-cell">
+          <div class="ref-line">Reference · Apple</div>
+          <p class="takeaway">Values grid — Apple investor</p>
+          <p class="desc">Six-value grid with image, single-word title and "Learn more" link per card. Informed the values grid layout on the Vision &amp; Mission page.</p>
+          <div class="src"><span class="sk">Source:</span> <a href="https://investor.apple.com/our_values/default.aspx" target="_blank" rel="noopener">investor.apple.com/our_values</a></div>
+        </div>
+      </div>
+    </article>
+
+    <div class="bm-file-foot">
+      <span>Teyseer Group · Vision &amp; Mission Benchmarks</span>
+      <span class="pg">File 03 / 08</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     FILE 04 — QNV 2030
+     ============================================================ -->
+<section class="bm-file alt" id="file-06" data-screen-label="06 Our Partners">
+  <div class="wrap">
+
+    <div class="bm-file-head">
+      <div class="id-blk">
+        <span class="mark" aria-hidden="true">
+          <svg viewBox="0 0 36 36" fill="none">
+            <rect x="6" y="6" width="24" height="24" fill="#2A3C8E"></rect>
+            <rect x="13.5" y="13.5" width="9" height="9" transform="rotate(45 18 18)" fill="#A6A8BA"></rect>
+            <rect x="16.5" y="16.5" width="3" height="3" transform="rotate(45 18 18)" fill="#F4F3EF"></rect>
+          </svg>
+        </span>
+        <div>
+          <div class="name">Teyseer</div>
+          <div class="sub">Our Partners — Benchmarks</div>
+        </div>
+      </div>
+      <div class="file-meta">
+        <strong>File 04</strong><br>
+        partners.html · 1 reference
+      </div>
+    </div>
+
+    <h2><span class="ttl">04 — Our Partners</span><span class="meta">partners.html · 1 reference</span></h2>
+
+    <!-- 06.1 -->
+    <article class="bm-entry">
+      <div class="entry-head"><div class="num">06.1</div><h3>Our Partners — Siemens</h3></div>
+      <div class="card">
+        <div class="img-cell">
+          <img src="img/benchmark-siemens-partner-finders.png" alt="Siemens 'Our partner finders' — dark-blue background with a 3×2 grid of partner-category cards (Siemens Xcelerator Marketplace Sellers, Industry automation partners, Industry software partners, Building technology partners, Low-voltage distribution SIVACON partners, grid+ for electrification and automation partners), each with a teal line-icon, title, blurb and 'Find a partner ›' link.">
+        </div>
+        <div class="text-cell">
+          <div class="ref-line">Reference · Siemens</div>
+          <p class="takeaway">"Our partner finders" — categorised principals directory</p>
+          <p class="desc">Dark-blue partner-finders grid with category icons, sector title, short blurb and a "Find a partner" link per card. Reference for the international-principals directory layout on partners.html.</p>
+          <div class="src"><span class="sk">Source:</span> <a href="https://www.siemens.com/en-us/partners/" target="_blank" rel="noopener">siemens.com/en-us/partners</a></div>
+        </div>
+      </div>
+    </article>
+
+    <div class="bm-file-foot">
+      <span>Teyseer Group · Our Partners Benchmarks</span>
+      <span class="pg">File 06 / 08</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     FILE 07 — CHAIRMAN'S MESSAGE
+     ============================================================ -->
+
+<!-- ============================================================
+     FILE 07 — OUR PORTFOLIO
+     ============================================================ -->
+<section class="bm-file" id="file-07-portfolio" data-screen-label="07 Our Portfolio">
+  <div class="wrap">
+
+    <div class="bm-file-head">
+      <div class="id-blk">
+        <span class="mark" aria-hidden="true">
+          <svg viewBox="0 0 36 36" fill="none">
+            <rect x="6" y="6" width="24" height="24" fill="#2A3C8E"></rect>
+            <rect x="13.5" y="13.5" width="9" height="9" transform="rotate(45 18 18)" fill="#A6A8BA"></rect>
+            <rect x="16.5" y="16.5" width="3" height="3" transform="rotate(45 18 18)" fill="#F4F3EF"></rect>
+          </svg>
+        </span>
+        <div>
+          <div class="name">Teyseer</div>
+          <div class="sub">Our Portfolio — Benchmarks</div>
+        </div>
+      </div>
+      <div class="file-meta">
+        <strong>File 07</strong><br>
+        portfolio.html · 2 references
+      </div>
+    </div>
+
+    <h2><span class="ttl">07 — Our Portfolio</span><span class="meta">portfolio.html · 2 references</span></h2>
+
+    <!-- 07.1 (was 06.2) -->
+    <article class="bm-entry">
+      <div class="entry-head"><div class="num">07.1</div><h3>Our Portfolio — Siemens</h3></div>
+      <div class="card">
+        <div class="img-cell">
+          <img src="img/benchmark-siemens-portfolio.png" alt="Siemens 'Partners for automation and software in industry' — left sidebar with five category links; on the right a headline, 'Explore industrial partner ecosystem' teal CTA button, and two large editorial photo cards (Automation and digitalization, Industry software).">
+        </div>
+        <div class="text-cell">
+          <div class="ref-line">Reference · Siemens</div>
+          <p class="takeaway">"Partners for automation and software in industry"</p>
+          <p class="desc">Left sidebar of category links + headline + primary CTA + two large editorial portfolio cards side by side. Reference for the Our Portfolio layout on portfolio.html.</p>
+          <div class="src"><span class="sk">Source:</span> <a href="https://www.siemens.com/en-us/partners/" target="_blank" rel="noopener">siemens.com/en-us/partners</a></div>
+        </div>
+      </div>
+    </article>
+
+    <!-- 07.2 (was 06.3) -->
+    <article class="bm-entry">
+      <div class="entry-head"><div class="num">07.2</div><h3>Our Portfolio — Caterpillar</h3></div>
+      <div class="card">
+        <div class="img-cell">
+          <img src="img/bm-caterpillar-decades.jpg" alt="Caterpillar 'View Our History By The Decades' — three-card horizontal carousel with carousel controls and decade anchors.">
+        </div>
+        <div class="text-cell">
+          <div class="ref-line">Reference · Caterpillar</div>
+          <p class="takeaway">Multi-partner / heritage carousel</p>
+          <p class="desc">Horizontal slider of dated chapter cards with carousel controls — informed the project portfolio slider on portfolio.html.</p>
+          <div class="src"><span class="sk">Source:</span> <a href="https://www.caterpillar.com/en/company/about-caterpillar/history.html" target="_blank" rel="noopener">Caterpillar — Portfolio carousel</a></div>
+        </div>
+      </div>
+    </article>
+
+    <div class="bm-file-foot">
+      <span>Teyseer Group · Our Portfolio Benchmarks</span>
+      <span class="pg">File 07 / 11</span>
+    </div>
+  </div>
+</section>
+
+
+
+<section class="bm-file alt" id="file-08" data-screen-label="08 Awards and Certifications">
+  <div class="wrap">
+
+    <div class="bm-file-head">
+      <div class="id-blk">
+        <span class="mark" aria-hidden="true">
+          <svg viewBox="0 0 36 36" fill="none">
+            <rect x="6" y="6" width="24" height="24" fill="#2A3C8E"></rect>
+            <rect x="13.5" y="13.5" width="9" height="9" transform="rotate(45 18 18)" fill="#A6A8BA"></rect>
+            <rect x="16.5" y="16.5" width="3" height="3" transform="rotate(45 18 18)" fill="#F4F3EF"></rect>
+          </svg>
+        </span>
+        <div>
+          <div class="name">Teyseer</div>
+          <div class="sub">Awards &amp; Certifications — Benchmarks</div>
+        </div>
+      </div>
+      <div class="file-meta">
+        <strong>File 08</strong><br>
+        awards.html · 3 references
+      </div>
+    </div>
+
+    <h2><span class="ttl">08 — Awards &amp; Certifications</span><span class="meta">awards.html · 3 references</span></h2>
+
+    <!-- 08.1 -->
+    <article class="bm-entry">
+      <div class="entry-head"><div class="num">08.1</div><h3>Recent Deals &amp; Agreements — Samsung</h3></div>
+      <div class="card">
+        <div class="img-cell">
+          <img src="img/bm-samsung-ranking.jpg" alt="Samsung 'Ranking' page — 2×2 grid of recognition cards (Interbrand Best Global Brands 2025, MSCI AA Grade, KnowTheChain, KCGS), each with the issuing body's logo and a short citation paragraph.">
+        </div>
+        <div class="text-cell">
+          <div class="ref-line">Reference · Samsung</div>
+          <p class="takeaway">"Ranking" — awards / recognition grid</p>
+          <p class="desc">Samsung's recognitions grid — short title, awarding body, paragraph description and the awarding org's mark. Informed the Recent Deals card pattern with dated entries and source citations.</p>
+          <div class="src"><span class="sk">Source:</span> <a href="https://www.samsung.com/global/sustainability/" target="_blank" rel="noopener">samsung.com/sustainability/awards-recognition</a></div>
+        </div>
+      </div>
+    </article>
+
+    <!-- 08.2 -->
+    <article class="bm-entry">
+      <div class="entry-head"><div class="num">08.2</div><h3>Standards &amp; Authorisation — Samsung Semiconductor</h3></div>
+      <div class="card">
+        <div class="img-cell">
+          <img src="img/bm-samsung-accomplishments.jpg" alt="Samsung 'A Few of Our Accomplishments' — four side-by-side circle-cropped photos, each labelled with a category (Environmental Health and Safety; Security; Energy; Quality) and the certifying standard.">
+        </div>
+        <div class="text-cell">
+          <div class="ref-line">Reference · Samsung</div>
+          <p class="takeaway">"A Few of Our Accomplishments" — certifications grid</p>
+          <p class="desc">Tabbed certifications / authorisations pattern with image-led category tiles — directly informed the Standards &amp; Authorisations section's tabbed split between Certifications and Licences.</p>
+          <div class="src"><span class="sk">Source:</span> <a href="https://semiconductor.samsung.com/" target="_blank" rel="noopener">semiconductor.samsung.com/awards-certificates</a></div>
+        </div>
+      </div>
+    </article>
+
+    <!-- 08.3 -->
+    <article class="bm-entry">
+      <div class="entry-head"><div class="num">08.3</div><h3>Testimonies — Aramco</h3></div>
+      <div class="card">
+        <div class="img-cell">
+          <img src="img/bm-aramco-testimonials.jpg" alt="Aramco 'Testimonials' band — three circular employee headshots above a short pull-quote and a 'Watch her/his story' link.">
+        </div>
+        <div class="text-cell">
+          <div class="ref-line">Reference · Aramco</div>
+          <p class="takeaway">"Testimonials" — three-column employee quotes</p>
+          <p class="desc">Aramco careers testimonials — circular portrait, italic quote, named attribution, role line and "Watch story" link. Adopted for the Awards page testimonies section.</p>
+          <div class="src"><span class="sk">Source:</span> <a href="https://www.aramco.com/en/careers" target="_blank" rel="noopener">aramco.com/en/careers</a></div>
+        </div>
+      </div>
+    </article>
+
+    <div class="bm-file-foot">
+      <span>Teyseer Group · Awards &amp; Certifications Benchmarks</span>
+      <span class="pg">File 08 / 08</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     ADDENDUM — END-OF-PAGE CTA REFERENCES
+     ============================================================ -->
+<section class="bm-file" id="file-07" data-screen-label="07 Chairman's Message">
+  <div class="wrap">
+
+    <div class="bm-file-head">
+      <div class="id-blk">
+        <span class="mark" aria-hidden="true">
+          <svg viewBox="0 0 36 36" fill="none">
+            <rect x="6" y="6" width="24" height="24" fill="#2A3C8E"></rect>
+            <rect x="13.5" y="13.5" width="9" height="9" transform="rotate(45 18 18)" fill="#A6A8BA"></rect>
+            <rect x="16.5" y="16.5" width="3" height="3" transform="rotate(45 18 18)" fill="#F4F3EF"></rect>
+          </svg>
+        </span>
+        <div>
+          <div class="name">Teyseer</div>
+          <div class="sub">Chairman's Message — Benchmarks</div>
+        </div>
+      </div>
+      <div class="file-meta">
+        <strong>File 07</strong><br>
+        chairman.html · 4 references
+      </div>
+    </div>
+
+    <h2><span class="ttl">07 — Chairman's Message</span><span class="meta">chairman.html · 4 references</span></h2>
+
+    <!-- 07.1 -->
+    <article class="bm-entry">
+      <div class="entry-head"><div class="num">07.1</div><h3>Chairman's Message — GE</h3></div>
+      <div class="card">
+        <div class="img-cell">
+          <img src="img/bm-ge-chairman-letter.jpg" alt="GE Chairman's letter — three closing paragraphs at the top, a handwritten signature 'H. Lawrence Culp, Jr.' with the title 'Chairman and CEO, GE CEO, GE Aerospace' and date 'February 2, 2024'; large factory portrait on the right.">
+        </div>
+        <div class="text-cell">
+          <div class="ref-line">Reference · GE</div>
+          <p class="takeaway">Letter-format chairman message with signature</p>
+          <p class="desc">H. Lawrence Culp Jr. CEO letter — flowing paragraphs, large signature stamp, supporting portrait. Anchored the Chairman's letter rebuild.</p>
+          <div class="src"><span class="sk">Source:</span> <a href="https://www.ge.com/" target="_blank" rel="noopener">GE — Annual letter from the chairman</a></div>
+        </div>
+      </div>
+    </article>
+
+    <!-- 07.2 -->
+    <article class="bm-entry">
+      <div class="entry-head"><div class="num">07.2</div><h3>Chairman's Message — Microsoft</h3></div>
+      <div class="card">
+        <div class="img-cell short">
+          <img src="img/bm-microsoft-shareholders-letter.jpg" alt="Microsoft Annual Report — large salutation 'Dear shareholders, colleagues, customers, and partners:' followed by a paragraph beginning 'Fiscal year 2024 was a pivotal year for Microsoft...'.">
+        </div>
+        <div class="text-cell">
+          <div class="ref-line">Reference · Microsoft</div>
+          <p class="takeaway">"Dear shareholders, colleagues, customers, and partners"</p>
+          <p class="desc">Microsoft annual CEO letter pattern — strong TO line, oversize editorial headline, then quiet paragraph body. Cross-checked against the GE reference.</p>
+          <div class="src"><span class="sk">Source:</span> <a href="https://www.microsoft.com/en-us/Investor/annual-reports.aspx" target="_blank" rel="noopener">Microsoft — Annual report CEO letter</a></div>
+        </div>
+      </div>
+    </article>
+
+    <!-- 07.3 -->
+    <article class="bm-entry">
+      <div class="entry-head"><div class="num">07.3</div><h3>Chairman's Message — Aramco</h3></div>
+      <div class="card">
+        <div class="img-cell">
+          <img src="img/benchmark-aramco-chairman.png" alt="Aramco Annual Report — Chairman portrait on the left, a large green pull-quote on the right beginning 'As the global energy landscape continues to evolve...' with attribution to H.E. Yasir O. Al-Rumayyan, Chairman of the Board of Directors.">
+        </div>
+        <div class="text-cell">
+          <div class="ref-line">Reference · Aramco</div>
+          <p class="takeaway">Portrait + coloured pull-quote message</p>
+          <p class="desc">Portrait + oversized green pull-quote + small attribution line. Adopted as a reference for the Chairman's pull-quote treatment on chairman.html.</p>
+          <div class="src"><span class="sk">Source:</span> <a href="https://www.aramco.com/en/investors/annual-report" target="_blank" rel="noopener">aramco.com/en/investors/annual-report</a></div>
+        </div>
+      </div>
+    </article>
+
+    <!-- 07.4 -->
+    <article class="bm-entry">
+      <div class="entry-head"><div class="num">07.4</div><h3>Tribute to Our Founder — Estée Lauder Companies</h3></div>
+      <div class="card">
+        <div class="img-cell">
+          <img src="img/benchmark-elc-founder.png" alt="Estée Lauder Companies 'An Enduring Legacy' — a black-and-white portrait of the founder on the left and a serif headline 'An Enduring Legacy' above two narrative paragraphs on the right.">
+        </div>
+        <div class="text-cell">
+          <div class="ref-line">Reference · Estée Lauder Companies</div>
+          <p class="takeaway">"An Enduring Legacy" — founder portrait + serif tribute</p>
+          <p class="desc">Black-and-white founder portrait paired with a serif tribute headline and two short narrative paragraphs. Reference for the Founder Tribute section on chairman.html — the editorial-obituary tone done with restraint and warmth.</p>
+          <div class="src"><span class="sk">Source:</span> <a href="https://www.elcompanies.com/en-gb/who-we-are/our-heritage/our-founder" target="_blank" rel="noopener">elcompanies.com/en-gb/who-we-are/our-heritage/our-founder</a></div>
+        </div>
+      </div>
+    </article>
+
+    <div class="bm-file-foot">
+      <span>Teyseer Group · Chairman's Message Benchmarks</span>
+      <span class="pg">File 07 / 08</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     FILE 08 — AWARDS & CERTIFICATIONS
+     ============================================================ -->
+<section class="bm-file alt" id="file-04" data-screen-label="04 QNV 2030">
+  <div class="wrap">
+
+    <div class="bm-file-head">
+      <div class="id-blk">
+        <span class="mark" aria-hidden="true">
+          <svg viewBox="0 0 36 36" fill="none">
+            <rect x="6" y="6" width="24" height="24" fill="#2A3C8E"></rect>
+            <rect x="13.5" y="13.5" width="9" height="9" transform="rotate(45 18 18)" fill="#A6A8BA"></rect>
+            <rect x="16.5" y="16.5" width="3" height="3" transform="rotate(45 18 18)" fill="#F4F3EF"></rect>
+          </svg>
+        </span>
+        <div>
+          <div class="name">Teyseer</div>
+          <div class="sub">QNV 2030 — Benchmarks</div>
+        </div>
+      </div>
+      <div class="file-meta">
+        <strong>File 04</strong><br>
+        qnv.html · 3 references
+      </div>
+    </div>
+
+    <h2><span class="ttl">04 — QNV 2030</span><span class="meta">qnv.html · 3 references</span></h2>
+
+    <!-- 04.1a -->
+    <article class="bm-entry">
+      <div class="entry-head"><div class="num">04.1a</div><h3>QNV 2030 — Vision 2030 Pillars</h3></div>
+      <div class="card">
+        <div class="img-cell short">
+          <img src="img/bm-saudi-vibrant-society.jpg" alt="Vision 2030 pillars — three side-by-side dark cards: A Vibrant Society, A Thriving Economy, An Ambitious Nation, each with line-icon, serif headline and short paragraph.">
+        </div>
+        <div class="text-cell">
+          <div class="ref-line">Reference · Vision 2030</div>
+          <p class="takeaway">"A Vibrant Society · A Thriving Economy · An Ambitious Nation"</p>
+          <p class="desc">Pillar-grid layout: short icon + bold title + paragraph per pillar — used for the QNV 2030 four-pillar pattern.</p>
+          <div class="src"><span class="sk">Source:</span> <a href="https://www.vision2030.gov.sa/en" target="_blank" rel="noopener">vision2030.gov.sa — Three Pillars</a></div>
+        </div>
+      </div>
+    </article>
+
+    <!-- 04.1b -->
+    <article class="bm-entry">
+      <div class="entry-head"><div class="num">04.1b</div><h3>QNV 2030 — Progress &amp; Achievements</h3></div>
+      <div class="card">
+        <div class="img-cell short">
+          <img src="img/bm-saudi-progress.jpg" alt="Vision 2030 'Progress &amp; Achievements' — dark band with four side-by-side outcome cards each carrying a photo background and a white headline.">
+        </div>
+        <div class="text-cell">
+          <div class="ref-line">Reference · Vision 2030</div>
+          <p class="takeaway">"Progress &amp; Achievements" — outcome cards</p>
+          <p class="desc">Four-card outcome strip on a dark background — adopted for showing concrete achievements against each QNV 2030 pillar.</p>
+          <div class="src"><span class="sk">Source:</span> <a href="https://www.vision2030.gov.sa/en" target="_blank" rel="noopener">vision2030.gov.sa — Progress &amp; Achievements</a></div>
+        </div>
+      </div>
+    </article>
+
+
+    <!-- 04.1c — NEW: At a Glance stats inspiration -->
+    <article class="bm-entry">
+      <div class="entry-head"><div class="num">04.1c</div><h3>QNV 2030 — "At a Glance" Statistics Row</h3></div>
+      <div class="card">
+        <div class="img-cell short">
+          <img src="img/bm-alfuttaim-at-a-glance.png" alt="Al-Futtaim 'At a Glance' statistics section — four bold stat columns: 18% chiller energy consumption reduced via AI, 23% NEV sales as of July 2024, 350+ executives and managers upskilled (8,500 hours), Leaf 3 Green Carrier certification by GFA." style="max-width:100%; display:block; border: 1px solid var(--line);">
+        </div>
+        <div class="text-cell">
+          <div class="ref-line">Reference · Al-Futtaim Impact</div>
+          <p class="takeaway">"At a Glance" — bold stat strip after hero, four-column layout with large number, label and short descriptor per stat.</p>
+          <p class="desc">The Al-Futtaim Impact page uses a four-column stat strip immediately after the hero section to anchor the page with credible, verified numbers. This was the direct inspiration for the "At a Glance" section added to the QNV and ESG/Sustainability pages — showing Group Companies, Employees, International Principals, and Years of Operation at Teyseer.</p>
+          <div class="src"><span class="sk">Source:</span> <a href="https://www.alfuttaim.com/impact/" target="_blank" rel="noopener">alfuttaim.com/impact/ — At a Glance</a></div>
+        </div>
+      </div>
+    </article>
+
+        <div class="bm-file-foot">
+      <span>Teyseer Group · QNV 2030 Benchmarks</span>
+      <span class="pg">File 04 / 08</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     FILE 05 — SUSTAINABILITY
+     ============================================================ -->
+<section class="bm-file" id="file-05" data-screen-label="05 Sustainability">
+  <div class="wrap">
+
+    <div class="bm-file-head">
+      <div class="id-blk">
+        <span class="mark" aria-hidden="true">
+          <svg viewBox="0 0 36 36" fill="none">
+            <rect x="6" y="6" width="24" height="24" fill="#2A3C8E"></rect>
+            <rect x="13.5" y="13.5" width="9" height="9" transform="rotate(45 18 18)" fill="#A6A8BA"></rect>
+            <rect x="16.5" y="16.5" width="3" height="3" transform="rotate(45 18 18)" fill="#F4F3EF"></rect>
+          </svg>
+        </span>
+        <div>
+          <div class="name">Teyseer</div>
+          <div class="sub">Sustainability — Benchmarks</div>
+        </div>
+      </div>
+      <div class="file-meta">
+        <strong>File 05</strong><br>
+        sustainability.html · 5 references
+      </div>
+    </div>
+
+    <h2><span class="ttl">05 — Sustainability</span><span class="meta">sustainability.html · 5 references</span></h2>
+
+    <!-- 05.1 -->
+    <article class="bm-entry">
+      <div class="entry-head"><div class="num">05.1</div><h3>ESG — Netflix</h3></div>
+      <div class="card">
+        <div class="img-cell">
+          <img src="img/bm-netflix-esg.jpg" alt="Netflix ESG page — three side-by-side cards titled Environment, Social, Governance, each with a colourful illustration above and a long paragraph below.">
+        </div>
+        <div class="text-cell">
+          <div class="ref-line">Reference · Netflix</div>
+          <p class="takeaway">"Environment · Social · Governance" triptych</p>
+          <p class="desc">ESG presented as three illustrated cards with a paragraph each — adopted for the editorial-led ESG hero composition.</p>
+          <div class="src"><span class="sk">Source:</span> <a href="https://ir.netflix.net/governance/ESG/default.aspx" target="_blank" rel="noopener">Netflix — ESG / Sustainability landing</a></div>
+        </div>
+      </div>
+    </article>
+
+    <!-- 05.2a -->
+    <article class="bm-entry">
+      <div class="entry-head"><div class="num">05.2a</div><h3>ESG In Practice — Samsung (E · S · G)</h3></div>
+      <div class="card">
+        <div class="img-cell">
+          <img src="img/bm-samsung-esg-letters.jpg" alt="Samsung sustainability — three side-by-side photo cards each carrying one huge white letter ('E', 'S', 'G'), with Environmental, Social, Governance beneath.">
+        </div>
+        <div class="text-cell">
+          <div class="ref-line">Reference · Samsung</div>
+          <p class="takeaway">"E · S · G" image-led card grid</p>
+          <p class="desc">Large letter overlays on contextual photography — supports the "in practice" treatment with a clean three-column ESG breakout.</p>
+          <div class="src"><span class="sk">Source:</span> <a href="https://www.samsungena.com/en/sustainability/overview" target="_blank" rel="noopener">Samsung — ESG framework</a></div>
+        </div>
+      </div>
+    </article>
+
+    <!-- 05.2b -->
+    <article class="bm-entry">
+      <div class="entry-head"><div class="num">05.2b</div><h3>Sustainability In Practice — Samsung (News &amp; Story)</h3></div>
+      <div class="card">
+        <div class="img-cell">
+          <img src="img/bm-samsung-news-story.jpg" alt="Samsung 'News &amp; Story' — soft sand-and-surf background, a centred headline 'News &amp; Story', and a foreground card '2025 Sustainability Report — A Journey Towards a Sustainable Future' with prev/next arrows.">
+        </div>
+        <div class="text-cell">
+          <div class="ref-line">Reference · Samsung</div>
+          <p class="takeaway">"News &amp; Story" — sustainability reporting carousel</p>
+          <p class="desc">Horizontal carousel of dated sustainability stories — referenced for the in-practice / news section under Sustainability.</p>
+          <div class="src"><span class="sk">Source:</span> <a href="https://www.samsung.com/global/sustainability/" target="_blank" rel="noopener">Samsung Sustainability — News &amp; Story</a></div>
+        </div>
+      </div>
+    </article>
+
+    <!-- 05.3 -->
+    <article class="bm-entry">
+      <div class="entry-head"><div class="num">05.3</div><h3>Sustainability In Practice — Al-Futtaim</h3></div>
+      <div class="card">
+        <div class="img-cell">
+          <img src="img/benchmark-alfuttaim-sustainability.png" alt="Al-Futtaim sustainability page — dark navy background, headline 'Leading With Purpose: People, Planet, Progress' on the left and a paragraph on the right; below, a 'Being an employer of choice' sub-card paired with a large workplace photograph (workshop / meeting setting).">
+        </div>
+        <div class="text-cell">
+          <div class="ref-line">Reference · Al-Futtaim</div>
+          <p class="takeaway">"Leading With Purpose: People, Planet, Progress"</p>
+          <p class="desc">Dark cinematic sustainability hero with a single positioning statement, then practice-by-practice cards each pairing a sub-headline + paragraph with a large workplace photograph. Reference for the Sustainability In Practice section on sustainability.html.</p>
+          <div class="src"><span class="sk">Source:</span> <a href="https://www.alfuttaim.com/impact/" target="_blank" rel="noopener">alfuttaim.com/impact/</a></div>
+        </div>
+      </div>
+    </article>
+
+
+    <!-- 05.4 — NEW: At a Glance stats inspiration -->
+    <article class="bm-entry">
+      <div class="entry-head"><div class="num">05.4</div><h3>ESG / Sustainability — "At a Glance" Statistics Row</h3></div>
+      <div class="card">
+        <div class="img-cell short">
+          <img src="img/bm-alfuttaim-at-a-glance.png" alt="Al-Futtaim 'At a Glance' statistics section — four bold stat columns: 18% chiller energy consumption reduced via AI, 23% NEV sales as of July 2024, 350+ executives and managers upskilled (8,500 hours), Leaf 3 Green Carrier certification by GFA." style="max-width:100%; display:block; border: 1px solid var(--line);">
+        </div>
+        <div class="text-cell">
+          <div class="ref-line">Reference · Al-Futtaim Impact</div>
+          <p class="takeaway">"At a Glance" — bold four-column stat row anchoring the page after the hero section.</p>
+          <p class="desc">The Al-Futtaim /impact/ page uses four large-number stat columns immediately below the hero to communicate scale and credibility at a glance. This pattern was adopted for both the QNV and Sustainability pages — showing Teyseer's key figures (18+ Group Companies, 5,000–10,000 Employees, 57 years ExxonMobil partnership, ISO 9001 quality certification) with verified primary-source links.</p>
+          <div class="src"><span class="sk">Source:</span> <a href="https://www.alfuttaim.com/impact/" target="_blank" rel="noopener">alfuttaim.com/impact/ — At a Glance stats</a></div>
+        </div>
+      </div>
+    </article>
+
+        <div class="bm-file-foot">
+      <span>Teyseer Group · Sustainability Benchmarks</span>
+      <span class="pg">File 05 / 08</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     FILE 06 — OUR PARTNERS
+     ============================================================ -->
+<section class="bm-file" id="file-addendum" data-screen-label="Addendum End of Page CTA">
+  <div class="wrap">
+
+    <div class="bm-file-head">
+      <div class="id-blk">
+        <span class="mark" aria-hidden="true">
+          <svg viewBox="0 0 36 36" fill="none">
+            <rect x="6" y="6" width="24" height="24" fill="#2A3C8E"></rect>
+            <rect x="13.5" y="13.5" width="9" height="9" transform="rotate(45 18 18)" fill="#A6A8BA"></rect>
+            <rect x="16.5" y="16.5" width="3" height="3" transform="rotate(45 18 18)" fill="#F4F3EF"></rect>
+          </svg>
+        </span>
+        <div>
+          <div class="name">Teyseer</div>
+          <div class="sub">End-of-Page CTA — Benchmarks</div>
+        </div>
+      </div>
+      <div class="file-meta">
+        <strong>Addendum</strong><br>
+        Closing CTA · 3 references
+      </div>
+    </div>
+
+    <h2><span class="ttl">End-of-page CTA</span><span class="meta">Closing CTA · 3 references</span></h2>
+
+    <!-- A.1 -->
+    <article class="bm-entry">
+      <div class="entry-head"><div class="num">A.1</div><h3>End-of-Page CTA — Microsoft</h3></div>
+      <div class="card">
+        <div class="img-cell">
+          <img src="img/benchmark-microsoft-cta.png" alt="Microsoft Partner — 'Become a partner' CTA centred on a soft texture: bold serif headline, two-line subhead, primary blue 'Join today' button and a secondary 'Sign in now ›' link.">
+        </div>
+        <div class="text-cell">
+          <div class="ref-line">Reference · Microsoft</div>
+          <p class="takeaway">"Become a partner" — centred end-of-page CTA</p>
+          <p class="desc">Centred CTA with a primary action (Join today) and a secondary action (Sign in now). Reference for the Partner With Us closing CTA pattern at the bottom of every page in the set.</p>
+          <div class="src"><span class="sk">Source:</span> <a href="https://partner.microsoft.com/en-us" target="_blank" rel="noopener">partner.microsoft.com/en-us</a></div>
+        </div>
+      </div>
+    </article>
+
+    <!-- A.2 -->
+    <article class="bm-entry">
+      <div class="entry-head"><div class="num">A.2</div><h3>End-of-Page CTA — Aramco</h3></div>
+      <div class="card">
+        <div class="img-cell short">
+          <img src="img/benchmark-aramco-highlights.png" alt="Aramco Annual Report — full-bleed dark cinematic still of a refinery at dusk with the word 'Highlights' centred and a small 'Explore this section' CTA underneath.">
+        </div>
+        <div class="text-cell">
+          <div class="ref-line">Reference · Aramco</div>
+          <p class="takeaway">"Highlights" — cinematic section CTA</p>
+          <p class="desc">Full-bleed dark cinematic still with a single centred headline and a quiet "Explore this section" CTA. Reference for an optional cinematic end-of-page CTA variant.</p>
+          <div class="src"><span class="sk">Source:</span> <a href="https://www.aramco.com/en/investors/annual-report" target="_blank" rel="noopener">aramco.com/en/investors/annual-report</a></div>
+        </div>
+      </div>
+    </article>
+
+    <!-- A.3 -->
+    <article class="bm-entry">
+      <div class="entry-head"><div class="num">A.3</div><h3>End-of-Page CTA — Al-Futtaim</h3></div>
+      <div class="card">
+        <div class="img-cell">
+          <img src="img/benchmark-alfuttaim-cta.png" alt="Al-Futtaim end-of-page CTA — dark-navy band with the question 'Looking to connect with us?' on the left, a one-line subhead on the right, and two equal-width outlined buttons ('Connect with us', 'Partner with us'); underneath, a full footer with division and social links.">
+        </div>
+        <div class="text-cell">
+          <div class="ref-line">Reference · Al-Futtaim</div>
+          <p class="takeaway">"Looking to connect with us?" — dual outlined CTAs over a brand-coloured band</p>
+          <p class="desc">Dark-navy CTA band with a question + one-line subhead and two equal outlined CTAs (Connect with us / Partner with us), sitting on top of a full corporate footer. Reference for the end-of-page CTA pattern paired with the site footer.</p>
+          <div class="src"><span class="sk">Source:</span> <a href="https://www.alfuttaim.com/about-us/" target="_blank" rel="noopener">alfuttaim.com/about-us/</a></div>
+        </div>
+      </div>
+    </article>
+
+    <div class="bm-file-foot">
+      <span>Teyseer Group · End-of-Page CTA Benchmarks</span>
+      <span class="pg">Addendum</span>
+    </div>
+  </div>
+</section>
+
+<!-- End CTA -->
+
+<!-- ============================================================
+     APPENDIX — INNER PAGES DESIGN BENCHMARKS
+     ============================================================ -->
+<section class="bm-file alt" id="file-inner" data-screen-label="Inner Pages Benchmarks">
+  <div class="wrap">
+    <div class="file-meta">
+      <span class="file-tag">Appendix</span>
+    </div>
+    <h2><span class="ttl">Inner Pages — Design Benchmarks</span><span class="meta">Industry Verticals · Automotive · IT Details</span></h2>
+
+    <!-- A.1 Stats Strip -->
+    <h2 id="inner-iv" style="font-size:13px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--blue);border-bottom:2px solid var(--blue);padding-bottom:8px;margin-bottom:24px" id="inner-iv">A &mdash; Industry Verticals</h2>
+    <article class="bm-entry">
+      <div class="entry-head"><div class="num">A.1</div><h3>Stats Strip — Aramco "At a Glance"</h3></div>
+      <div class="card">
+        <div class="img-cell short">
+          <img src="img/bm-aramco-stats-strip.png" alt="Aramco 'At a glance' — three large minimal numbers: 93 years of experience, 76,000+ total workforce, 247.2 billion barrels hydrocarbon reserves." />
+        </div>
+        <div class="text-cell">
+          <p class="source"><a href="https://www.aramco.com/en" target="_blank" rel="noopener">aramco.com →</a></p>
+          <p>The At a Glance stats band in the Industry Verticals and IT Details pages was benchmarked from Aramco's minimal large-number stats — bold numbers with short label and horizontal rule separator. Applied to Teyseer's 4-column strip across all vertical detail pages.</p>
+          <p><strong>Used in:</strong> Industry Verticals Listing v2, IT Details Page</p>
+        </div>
+      </div>
+    </article>
+
+    <!-- A.2 Key Achievements editorial grid -->
+    <article class="bm-entry">
+      <div class="entry-head"><div class="num">A.2</div><h3>Key Achievements — Al-Futtaim News &amp; Insights</h3></div>
+      <div class="card">
+        <div class="img-cell">
+          <img src="img/bm-alfuttaim-news-insights.png" alt="Al-Futtaim News & Insights — 3-column editorial card grid with full-bleed image, category tag, date, and bold headline." />
+        </div>
+        <div class="text-cell">
+          <p class="source"><a href="https://www.alfuttaim.com/news-insights/" target="_blank" rel="noopener">alfuttaim.com →</a></p>
+          <p>The Key Accomplishments section was benchmarked from Al-Futtaim's News &amp; Insights editorial card grid. Each card shows a category tag, date, bold headline, and source attribution — with a NE-arrow link to the original article. The hover-enlarge interaction and verifiable link pattern builds credibility for B2B audiences.</p>
+          <p><strong>Used in:</strong> Automotive Details v2, Automotive Details v3, IT Details Page</p>
+        </div>
+      </div>
+    </article>
+
+    <!-- B.1 Business Units — GE Aerospace -->
+    <h2 id="inner-auto" style="font-size:13px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--blue);border-bottom:2px solid var(--blue);padding-bottom:8px;margin-bottom:24px;margin-top:48px" id="inner-auto">B &mdash; Automotive</h2>
+    <article class="bm-entry">
+      <div class="entry-head"><div class="num">B.1</div><h3>Business Units — GE Aerospace Brand Portfolio</h3></div>
+      <div class="card">
+        <div class="img-cell">
+          <img src="img/bm-ge-portfolio.png" alt="GE Aerospace 'Our portfolio of brands' — left text column with heading and nav arrows, right scrollable tall image cards each bearing a company name and tagline." />
+        </div>
+        <div class="text-cell">
+          <p class="source"><a href="https://www.geaerospace.com/" target="_blank" rel="noopener">geaerospace.com →</a></p>
+          <p>The Business Units / Our Companies section was benchmarked from GE Aerospace's brand portfolio: a static left column with heading and navigation arrows paired with horizontally scrollable tall image cards. Each card bears a company name, tagline, and arrow CTA. Teyseer adapts this for its three automotive companies — Teyseer Motors, TSC, Rent A Car.</p>
+          <p><strong>Used in:</strong> Automotive Details v1, Automotive Details v3</p>
+        </div>
+      </div>
+    </article>
+
+    <!-- B.2 Hero — Stripe -->
+    <article class="bm-entry">
+      <div class="entry-head"><div class="num">B.2</div><h3>Hero — Stripe Typographic Hero + Brand Marquee</h3></div>
+      <div class="card">
+        <div class="img-cell">
+          <img src="img/bm-stripe-hero.png" alt="Stripe homepage — oversized typographic headline with live stat counter above it and a scrolling partner brand logo strip below the CTAs." />
+        </div>
+        <div class="text-cell">
+          <p class="source"><a href="https://stripe.com/" target="_blank" rel="noopener">stripe.com →</a></p>
+          <p>The Automotive v2 hero was benchmarked from Stripe's homepage: a bold oversized headline commanding the full viewport width, paired with a live-data stat line and a scrolling strip of trusted partner logos below CTAs. This pattern informed the large-headline approach, the stats strip, and the brand marquee in Teyseer Automotive v2.</p>
+          <p><strong>Used in:</strong> Automotive Details v2</p>
+        </div>
+      </div>
+    </article>
+
+    <!-- B.3 Highlights — Al-Futtaim Automotive -->
+    <article class="bm-entry">
+      <div class="entry-head"><div class="num">B.3</div><h3>Highlights in Automotive — Al-Futtaim</h3></div>
+      <div class="card">
+        <div class="img-cell">
+          <img src="img/bm-alfuttaim-automotive-highlights.png" alt="Al-Futtaim Automotive 'Highlights in Automotive' — 4-column image cards with bold headline overlay and a + expand icon." />
+        </div>
+        <div class="text-cell">
+          <p class="source"><a href="https://www.alfuttaim.com/divisions/automotive/" target="_blank" rel="noopener">alfuttaim.com →</a></p>
+          <p>The Key Brands &amp; Projects section in Automotive v3 and IT Details was benchmarked from Al-Futtaim's Automotive highlights layout — full-bleed image cards with bold overlaid headlines and a "+" expand icon. This pattern informed the image-led card treatment and hover-reveal interaction for Teyseer's brand and project cards.</p>
+          <p><strong>Used in:</strong> Automotive Details v3, IT Details Page</p>
+        </div>
+      </div>
+    </article>
+
+    <!-- B.4 Selected Brands — Al-Futtaim -->
+    <article class="bm-entry">
+      <div class="entry-head"><div class="num">B.4</div><h3>Selected Brands — Al-Futtaim 2×4 Logo Grid</h3></div>
+      <div class="card">
+        <div class="img-cell">
+          <img src="img/bm-alfuttaim-selected-brands.png" alt="Al-Futtaim 'Selected Brands' — two-column header (large title left, description + CTA right) above a clean 4-column logo grid on a light background." />
+        </div>
+        <div class="text-cell">
+          <p class="source"><a href="https://www.alfuttaim.com/divisions/automotive/" target="_blank" rel="noopener">alfuttaim.com →</a></p>
+          <p>The Our Partners / Brands sections were benchmarked from Al-Futtaim's Selected Brands: a two-column header layout above a clean 4-column logo grid. The two-col header pattern informed the section title + descriptor layout, while the logo grid informed the brand partner display in Teyseer's IT Details and Automotive pages.</p>
+          <p><strong>Used in:</strong> Automotive Details v3, IT Details Page</p>
+        </div>
+      </div>
+    </article>
+
+    <!-- B.5 Dealer Locator — Mercedes-Benz -->
+    <article class="bm-entry">
+      <div class="entry-head"><div class="num">B.5</div><h3>Showrooms &amp; Locations — Mercedes-Benz Dealer Locator</h3></div>
+      <div class="card">
+        <div class="img-cell">
+          <img src="img/bm-mercedes-dealer-locator.png" alt="Mercedes-Benz MENA Dealer Locator — left sidebar with dealer list and filter, right Google Maps with location pins." />
+        </div>
+        <div class="text-cell">
+          <p class="source"><a href="https://www.mercedes-benz-mena.com/dubai/en/locate-us/" target="_blank" rel="noopener">mercedes-benz-mena.com →</a></p>
+          <p>The Showrooms &amp; Stations section in Automotive v3 — a sidebar list with filter pills and an interactive map — was benchmarked from Mercedes-Benz MENA's Dealer Locator. The left-panel list + right map split layout creates a familiar mental model for users looking for a specific type of location.</p>
+          <p><strong>Used in:</strong> Automotive Details v3</p>
+        </div>
+      </div>
+    </article>
+
+    <!-- B.6 Company Selector — Al Ghurair -->
+    <article class="bm-entry">
+      <div class="entry-head"><div class="num">B.6</div><h3>Company Selector — Al Ghurair Contact Tabs</h3></div>
+      <div class="card">
+        <div class="img-cell">
+          <img src="img/bm-alghurair-company-selector.png" alt="Al Ghurair contact company selector — row of pill-shaped company tabs activating a detail card showing address, phone, email, website, and a Get Directions CTA." />
+        </div>
+        <div class="text-cell">
+          <p class="source"><a href="https://www.alghurair.com/contact-us/" target="_blank" rel="noopener">alghurair.com →</a></p>
+          <p>The Showrooms &amp; Stations horizontal scroll strip in Automotive v2 was benchmarked from Al Ghurair's contact company selector — pill-shaped company tabs activate a detail card showing address, phone, email, and a Get Directions CTA. Teyseer adapts this into a horizontal scrollable card strip per location, keeping the same information density in a more compact format for 8 locations.</p>
+          <p><strong>Used in:</strong> Automotive Details v2</p>
+        </div>
+      </div>
+    </article>
+
+    <!-- C.1 IT Accomplishments — Siemens -->
+    <h2 id="inner-it" style="font-size:13px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--blue);border-bottom:2px solid var(--blue);padding-bottom:8px;margin-bottom:24px;margin-top:48px" id="inner-it">C &mdash; Information Technology</h2>
+    <article class="bm-entry">
+      <div class="entry-head"><div class="num">C.1</div><h3>IT Accomplishments — Siemens Press Highlights</h3></div>
+      <div class="card">
+        <div class="img-cell">
+          <img src="img/bm-siemens-press-highlights.png" alt="Siemens 'Global news & press highlights' — 3-column card grid with full-bleed image, location label, bold headline, and short body paragraph." />
+        </div>
+        <div class="text-cell">
+          <p class="source"><a href="https://www.siemens.com/en-us/press/" target="_blank" rel="noopener">siemens.com →</a></p>
+          <p>The Key Accomplishments section in the IT Details Page was benchmarked from Siemens' press page — each card features a full-bleed image, a location/category tag, a bold headline, and a short body paragraph. Teyseer adapts this into 3-column cards with category tag, date, title, one-line description, source attribution, and a NE-arrow link to the original article.</p>
+          <p><strong>Used in:</strong> IT Details Page</p>
+        </div>
+      </div>
+    </article>
+
+    <!-- C.2 IT Services — Siemens Tab Panel -->
+    <article class="bm-entry">
+      <div class="entry-head"><div class="num">C.2</div><h3>IT Services — Siemens Left Tab Nav + Content Panel</h3></div>
+      <div class="card">
+        <div class="img-cell">
+          <img src="img/bm-siemens-it-services.png" alt="Siemens technology page — vertical left tab list of service categories activating a centre image and right content card simultaneously." />
+        </div>
+        <div class="text-cell">
+          <p class="source"><a href="https://www.siemens.com/en-us/" target="_blank" rel="noopener">siemens.com →</a></p>
+          <p>The IT Services section tab panel was benchmarked from Siemens' technology page — a vertical list of service topics on the left activates a centre image and a right content card. This 3-column panel structure enables exploration of many service categories (9 in Teyseer's IT vertical) without navigating away, essential for enterprise B2B audiences comparing solutions.</p>
+          <p><strong>Used in:</strong> IT Details Page, Automotive Details v3 (Services section)</p>
+        </div>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+
+</main>
+
+
+</body>
+</html>
+
+<script>
+(function () {
+  /* ── Gather nav links and their target elements ── */
+  var links = Array.from(document.querySelectorAll('#anchornav a'));
+  var targets = links.map(function (a) {
+    return document.getElementById(a.getAttribute('href').slice(1));
+  });
+
+  /* ── Height of the sticky pagebar (used as offset) ── */
+  function barHeight() {
+    var bar = document.querySelector('.pagebar');
+    return bar ? bar.offsetHeight + 8 : 72;
+  }
+
+  /* ── Find which section the viewport is currently in ── */
+  function currentIndex() {
+    var offset = barHeight();
+    var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    var idx = 0;
+    for (var i = 0; i < targets.length; i++) {
+      if (!targets[i]) continue;
+      var top = targets[i].getBoundingClientRect().top + scrollTop - offset;
+      if (scrollTop >= top - 4) idx = i;
+    }
+    return idx;
+  }
+
+  /* ── Apply active class and scroll pill into view ── */
+  var scrolling = false;
+  function setActive(idx) {
+    links.forEach(function (l, i) {
+      l.classList.toggle('active', i === idx);
+    });
+    var activeLink = links[idx];
+    if (!activeLink) return;
+    var wrap = document.querySelector('.anchornav-wrap');
+    if (!wrap) return;
+    var lr = activeLink.getBoundingClientRect();
+    var wr = wrap.getBoundingClientRect();
+    if (lr.left < wr.left + 20 || lr.right > wr.right - 20) {
+      wrap.scrollLeft += lr.left - wr.left - (wr.width / 2 - lr.width / 2);
+    }
+  }
+
+  /* ── Scroll listener ── */
+  window.addEventListener('scroll', function () {
+    if (!scrolling) setActive(currentIndex());
+  }, { passive: true });
+
+  /* ── Click listener — lock active until scroll settles ── */
+  links.forEach(function (link, i) {
+    link.addEventListener('click', function () {
+      setActive(i);
+      scrolling = true;
+      clearTimeout(link._t);
+      link._t = setTimeout(function () { scrolling = false; }, 800);
+    });
+  });
+
+  /* ── Init ── */
+  setActive(currentIndex());
+})();
+
+/* ── Reading progress bar ── */
+(function () {
+  var fill = document.getElementById('progressFill');
+  if (!fill) return;
+  window.addEventListener('scroll', function () {
+    var h = document.documentElement;
+    var pct = h.scrollHeight === h.clientHeight ? 0
+      : (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100;
+    fill.style.width = pct + '%';
+  }, { passive: true });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,1541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Awards &amp; Certificates — Teyseer Group</title>
+<meta name="description" content="Certifications, accreditations and partner recognitions held across the Teyseer Group of companies in Qatar.">
+<link rel="stylesheet" href="teyseer.css">
+<style>
+/* ============================================================
+   PAGE-SPECIFIC — AWARDS & CERTIFICATES
+   ============================================================ */
+.hero.awards { padding: 96px 0 64px; }
+
+.hero .summary {
+  margin-top: 64px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  background: var(--paper);
+  border: 1px solid var(--line);
+}
+@media (max-width: 900px) { .hero .summary { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 540px) { .hero .summary { grid-template-columns: 1fr; } }
+.hero .summary .s {
+  padding: 26px 24px;
+  border-right: 1px solid var(--line);
+  display: flex; flex-direction: column; gap: 6px;
+}
+.hero .summary .s:last-child { border-right: 0; }
+@media (max-width: 900px) { .hero .summary .s:nth-child(2) { border-right: 0; } }
+.hero .summary .v {
+  font-family: var(--serif); font-size: 44px; font-weight: 300;
+  color: var(--blue); line-height: 1;
+}
+.hero .summary .v .sfx { font-size: 22px; vertical-align: super; margin-left: 2px; color: var(--steel-dim); }
+.hero .summary .l {
+  font-family: var(--mono); font-size: 10.5px;
+  letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted);
+}
+.hero .summary .d { font-size: 13.5px; color: var(--night); margin-top: 6px; line-height: 1.5; }
+
+/* ============================================================
+   02 — STANDARDS & AUTHORISATIONS — tabbed (Certifications / Licences)
+   ============================================================ */
+.standards-tabs {
+  display: inline-flex;
+  gap: 8px;
+  margin-bottom: 24px;
+  align-items: end;
+}
+.standards-tab {
+  font-family: var(--serif);
+  cursor: pointer;
+  border: 1px solid var(--line);
+  background: var(--white);
+  color: var(--muted);
+  padding: 12px 22px;
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: -0.005em;
+  display: inline-flex; align-items: center; gap: 10px;
+  transition: all 180ms ease;
+}
+.standards-tab .ct {
+  font-family: var(--mono); font-size: 10.5px;
+  letter-spacing: 0.14em; color: var(--muted);
+}
+.standards-tab:hover { color: var(--blue); border-color: var(--blue); }
+.standards-tab[aria-selected="true"] {
+  background: var(--blue-deep);
+  color: var(--paper);
+  border-color: var(--blue-deep);
+  padding: 16px 28px;
+  font-size: 18px;
+  font-weight: 700;
+}
+.standards-tab[aria-selected="true"] .ct { color: rgba(255,255,255,0.65); }
+.standards-panel { display: none; }
+.standards-panel[data-active="true"] { display: block; }
+.standards-panel .cert-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+}
+@media (max-width: 1100px) { .standards-panel .cert-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 540px)  { .standards-panel .cert-grid { grid-template-columns: 1fr; } }
+.standards-panel .cert { background: var(--paper); padding: 28px 24px 24px; min-height: 280px; }
+.standards-panel .licence-row {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+  margin-top: 0;
+}
+@media (max-width: 900px) { .standards-panel .licence-row { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 540px) { .standards-panel .licence-row { grid-template-columns: 1fr; } }
+/* Legacy classes */
+.cert-grid { display: grid; gap: 1px; background: var(--line); }
+.cert {
+  background: var(--paper);
+  padding: 32px 28px 28px;
+  display: flex; flex-direction: column;
+  gap: 12px;
+  position: relative;
+  min-height: 320px;
+}
+.cert .badge {
+  width: 96px; height: 96px;
+  background: var(--white);
+  border: 1px solid var(--line);
+  display: grid; place-items: center;
+  position: relative;
+  margin-bottom: 8px;
+  overflow: hidden;
+}
+.cert .badge::before {
+  content: ""; position: absolute;
+  inset: 8px;
+  border: 1px dashed var(--steel);
+}
+.cert .badge .code {
+  font-family: var(--serif); font-weight: 700;
+  font-size: 22px; color: var(--blue-deep);
+  letter-spacing: -0.005em;
+  line-height: 1; text-align: center;
+  z-index: 1; position: relative;
+}
+.cert .badge .code .sm { display: block; font-size: 11px; font-weight: 500; color: var(--muted); margin-top: 4px; letter-spacing: 0.14em; font-family: var(--mono); }
+.cert h4 {
+  font-family: var(--serif); font-size: 18px;
+  font-weight: 700; color: var(--night);
+  margin: 0; letter-spacing: -0.005em;
+  line-height: 1.3;
+}
+.cert .holder {
+  font-family: var(--mono); font-size: 10.5px;
+  letter-spacing: 0.14em; text-transform: uppercase; color: var(--blue);
+}
+.cert p {
+  font-size: 13.5px; color: var(--night);
+  line-height: 1.6; margin: 0;
+}
+.cert .footer {
+  margin-top: auto;
+  padding-top: 14px;
+  display: flex; justify-content: space-between;
+  gap: 12px;
+  border-top: 1px solid var(--line-soft);
+  font-family: var(--mono); font-size: 10px;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--muted);
+}
+.cert .footer .ok {
+  color: var(--blue); font-weight: 500;
+  display: inline-flex; align-items: center; gap: 6px;
+}
+.cert .footer .ok::before {
+  content: ""; width: 6px; height: 6px; background: var(--blue);
+  transform: rotate(45deg); display: inline-block;
+}
+
+/* License row (regulatory) */
+.licence-row {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+  margin-top: 24px;
+}
+@media (max-width: 900px) { .licence-row { grid-template-columns: 1fr; } }
+.licence {
+  background: var(--paper);
+  padding: 22px 22px;
+  display: grid;
+  grid-template-columns: 56px 1fr;
+  gap: 18px;
+  align-items: start;
+}
+.licence .seal {
+  width: 56px; height: 56px;
+  background: var(--blue);
+  display: grid; place-items: center;
+  color: var(--paper);
+}
+.licence .seal svg { width: 26px; height: 26px; }
+.licence h5 { font-family: var(--serif); font-size: 16px; font-weight: 700; color: var(--night); margin: 0 0 4px; }
+.licence .iss { font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+.licence p { font-size: 13.5px; color: var(--night); line-height: 1.55; margin: 0; }
+
+/* ============================================================
+   RECOGNITIONS + PARTNER AWARDS — merged shell
+   ============================================================ */
+.recog-shell {
+  border: 1px solid var(--line);
+  background: var(--paper);
+}
+.recog-shell .col-bar {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  padding: 16px 22px;
+  background: var(--cream-2);
+  border-bottom: 1px solid var(--line);
+  align-items: baseline;
+  gap: 12px;
+}
+.recog-shell .col-bar .lbl {
+  font-family: var(--mono); font-size: 10.5px;
+  letter-spacing: 0.18em; text-transform: uppercase; color: var(--blue);
+  font-weight: 500;
+}
+.recog-shell .col-bar .ct {
+  font-family: var(--mono); font-size: 10.5px;
+  letter-spacing: 0.14em; color: var(--muted);
+}
+
+/* Partner-awards band sits at the top now — compact strip with the principals */
+.recog-shell .partner-band {
+  border: 0;
+  border-bottom: 1px solid var(--line);
+}
+.recog-shell .partner-band .pl {
+  padding: 18px 14px;
+}
+.recog-shell .partner-band .pl .mark { font-size: 15px; }
+.recog-shell .partner-band .pl .sub { font-size: 9px; }
+
+/* Flagship awards — single row of 4 cards */
+.recog-shell .awards-row {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1px;
+  background: var(--line);
+  border-top: 1px solid var(--line);
+}
+@media (max-width: 1100px) { .recog-shell .awards-row { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 540px)  { .recog-shell .awards-row { grid-template-columns: 1fr; } }
+.recog-shell .award-card {
+  background: var(--paper);
+  padding: 22px 22px 22px;
+  display: flex; flex-direction: column;
+  gap: 8px;
+}
+.recog-shell .award-card .yr-blk {
+  display: flex; align-items: baseline; gap: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--line-soft);
+  margin-bottom: 4px;
+}
+.recog-shell .award-card .yr-blk .y {
+  font-family: var(--serif); font-size: 30px;
+  font-weight: 300; color: var(--blue); line-height: 1;
+  letter-spacing: -0.005em;
+}
+.recog-shell .award-card .yr-blk .sm {
+  font-family: var(--mono); font-size: 9.5px;
+  letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted);
+}
+.recog-shell .award-card .by {
+  font-family: var(--mono); font-size: 10px;
+  letter-spacing: 0.14em; text-transform: uppercase; color: var(--blue);
+}
+.recog-shell .award-card h4 {
+  font-family: var(--serif); font-size: 16px; font-weight: 700;
+  letter-spacing: -0.005em; color: var(--night);
+  margin: 0;
+  line-height: 1.25;
+}
+.recog-shell .award-card p {
+  font-size: 12.5px; line-height: 1.55; color: var(--night);
+  margin: 0;
+}
+.recog-shell .award-card .tag-row {
+  margin-top: auto;
+  padding-top: 12px;
+  border-top: 1px solid var(--line-soft);
+  display: flex; gap: 8px; flex-wrap: wrap;
+}
+.recog-shell .award-card .tag-row .k {
+  font-family: var(--mono); font-size: 9.5px;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--blue);
+  padding: 3px 8px;
+  background: var(--sky-soft);
+}
+
+/* Recognitions stack below (legacy) */
+.recog-shell .award-stack {
+  border: 0;
+}
+.recog-shell .award {
+  padding: 22px 28px;
+}
+
+/* Awards / recognitions — alternating layout */
+.award-stack { display: grid; gap: 1px; background: var(--line); border: 1px solid var(--line); }
+.award {
+  background: var(--paper);
+  padding: 32px 32px;
+  display: grid;
+  grid-template-columns: 110px 1fr auto;
+  gap: 36px;
+  align-items: center;
+}
+@media (max-width: 720px) { .award { grid-template-columns: 80px 1fr; gap: 18px; padding: 24px; } .award .meta { grid-column: 2; } }
+.award .year-mark {
+  font-family: var(--serif); font-size: 38px; font-weight: 300;
+  color: var(--blue); line-height: 1; letter-spacing: -0.005em;
+}
+.award .year-mark .yr-sm { display: block; font-family: var(--mono); font-size: 10px; letter-spacing: 0.18em; color: var(--muted); margin-top: 6px; }
+.award h4 { font-family: var(--serif); font-size: 22px; font-weight: 700; color: var(--night); letter-spacing: -0.005em; margin: 0 0 4px; }
+.award .by { font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--blue); margin-bottom: 8px; }
+.award p { font-size: 14px; color: var(--night); line-height: 1.6; margin: 0; max-width: 70ch; }
+/* Award meta column — 2-column label/value grid (Category | Type) */
+.award .meta {
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: 4px 24px;
+  align-content: start;
+  font-family: var(--mono); font-size: 10.5px;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--muted);
+  text-align: left;
+  min-width: 180px;
+}
+.award .meta .lbl { color: var(--blue); font-weight: 500; white-space: nowrap; }
+.award .meta .val { color: var(--muted); white-space: nowrap; }
+@media (max-width: 720px) { .award .meta { min-width: 0; } }
+
+/* Partner-recognition logos band */
+.partner-band {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 0;
+  background: var(--paper);
+  border: 1px solid var(--line);
+}
+@media (max-width: 1024px) { .partner-band { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 540px) { .partner-band { grid-template-columns: repeat(2, 1fr); } }
+.pl {
+  padding: 28px 22px;
+  border-right: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  display: flex; flex-direction: column; gap: 6px;
+  align-items: center; text-align: center;
+}
+.pl:last-child { border-right: 0; }
+.pl .mark {
+  font-family: var(--serif);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--blue-deep);
+  letter-spacing: 0.02em;
+}
+.pl .mark.thin { font-weight: 300; letter-spacing: 0.08em; }
+.pl .mark.italic { font-style: italic; font-weight: 400; }
+.pl .sub {
+  font-family: var(--mono); font-size: 9.5px;
+  letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted);
+}
+
+/* Timeline (decade strip) */
+.timeline-section { padding: 96px 0; background: var(--blue); color: var(--paper); position: relative; overflow: hidden; }
+.timeline-section::before {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background-image:
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'><g fill='none' stroke='%23A6A8BA' stroke-opacity='0.14' stroke-width='1'><rect x='15' y='15' width='10' height='10' transform='rotate(45 20 20)'/><rect x='17.5' y='17.5' width='5' height='5' transform='rotate(45 20 20)'/></g></svg>");
+  background-size: 40px 40px;
+}
+.timeline-section .wrap { position: relative; z-index: 1; }
+.timeline-section .s-head h2 { color: var(--paper); }
+.timeline-section .s-head .lead { color: rgba(255,255,255,0.74); }
+.timeline-section .s-head .s-num { color: var(--sky); }
+.timeline {
+  display: grid; grid-template-columns: repeat(6, 1fr);
+  border-top: 1px solid rgba(255,255,255,0.22);
+  margin-top: 20px;
+}
+@media (max-width: 900px) { .timeline { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 540px) { .timeline { grid-template-columns: 1fr; } }
+.tl-item {
+  padding: 28px 22px 32px;
+  border-right: 1px solid rgba(255,255,255,0.18);
+  display: flex; flex-direction: column; gap: 8px;
+  min-height: 220px;
+  position: relative;
+}
+.tl-item::before {
+  content: ""; position: absolute; top: -1px; left: 22px;
+  width: 12px; height: 12px;
+  background: var(--sky);
+  transform: rotate(45deg) translateY(-6px);
+}
+.tl-item:last-child { border-right: 0; }
+.tl-item .yr {
+  font-family: var(--serif); font-size: 28px; font-weight: 300;
+  color: var(--paper); line-height: 1;
+}
+.tl-item .ev {
+  font-family: var(--mono); font-size: 10px;
+  letter-spacing: 0.14em; text-transform: uppercase; color: var(--sky);
+}
+.tl-item p {
+  font-size: 13.5px; color: rgba(255,255,255,0.85);
+  line-height: 1.55; margin: 4px 0 0;
+}
+
+/* Quality filters strip — hidden now that certs live inside the merged shell */
+.qfilter { display: none; }
+
+/* Cert grid inside merged standards shell */
+.standards-col .cert-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1px;
+  background: var(--line);
+  border: 0;
+}
+@media (max-width: 720px) { .standards-col .cert-grid { grid-template-columns: 1fr; } }
+.standards-col .cert {
+  padding: 22px 20px 20px;
+  min-height: 240px;
+}
+.standards-col .cert .badge { width: 72px; height: 72px; margin-bottom: 4px; }
+.standards-col .cert .badge .code { font-size: 18px; }
+.standards-col .cert .badge .code .sm { font-size: 9.5px; }
+.standards-col .cert h4 { font-size: 15px; }
+.standards-col .cert p { font-size: 12.5px; line-height: 1.55; }
+.standards-col .cert .footer { font-size: 9.5px; }
+
+/* Licence row inside merged standards shell — single column stack */
+.standards-col .licence-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1px;
+  background: var(--line);
+}
+.standards-col .licence {
+  padding: 14px 18px;
+  grid-template-columns: 40px 1fr;
+  gap: 14px;
+  align-items: start;
+}
+.standards-col .licence .seal { width: 40px; height: 40px; }
+.standards-col .licence .seal svg { width: 20px; height: 20px; }
+.standards-col .licence h5 { font-size: 14px; margin: 0 0 2px; }
+.standards-col .licence .iss { margin-bottom: 4px; }
+.standards-col .licence p { font-size: 12.5px; line-height: 1.5; }
+.cert.hidden { display: none; }
+
+/* ============================================================
+   TESTIMONIALS — partner / customer voices
+   ============================================================ */
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+}
+@media (max-width: 900px) { .testimonials-grid { grid-template-columns: 1fr; } }
+.testi {
+  background: var(--paper);
+  padding: 36px 36px 32px;
+  display: flex; flex-direction: column; gap: 14px;
+  position: relative;
+}
+.testi .qm {
+  font-family: var(--serif);
+  font-size: 90px;
+  line-height: 0.7;
+  font-weight: 300;
+  color: var(--blue);
+  opacity: 0.18;
+  margin-bottom: -10px;
+}
+.testi p.quote {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(16px, 1.3vw, 20px);
+  line-height: 1.5;
+  color: var(--night);
+  margin: 0;
+}
+.testi .attr {
+  margin-top: 8px;
+  padding-top: 18px;
+  border-top: 1px solid var(--line-soft);
+  display: flex; flex-direction: column; gap: 4px;
+}
+.testi .attr .who {
+  font-family: var(--serif);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--blue-deep);
+  letter-spacing: -0.005em;
+}
+.testi .attr .role {
+  font-family: var(--mono); font-size: 10.5px;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--muted);
+}
+.testi .source {
+  margin-top: auto;
+  padding-top: 14px;
+  font-family: var(--mono); font-size: 10px;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--blue);
+  display: inline-flex; align-items: center; gap: 6px;
+}
+.testi .source::before {
+  content: ""; width: 5px; height: 5px;
+  background: var(--blue); transform: rotate(45deg);
+}
+
+/* ============================================================
+   RECENT DEALS / NEWS — published-in-press style cards
+   ============================================================ */
+.deals-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+}
+@media (max-width: 900px) { .deals-grid { grid-template-columns: 1fr; } }
+.deal {
+  background: var(--paper);
+  padding: 28px 32px 30px;
+  display: grid;
+  grid-template-columns: 90px 1fr;
+  gap: 24px;
+  align-items: start;
+}
+.deal .date-blk {
+  display: flex; flex-direction: column; gap: 4px;
+  border-right: 1px solid var(--line-soft);
+  padding-right: 18px;
+}
+.deal .date-blk .yr {
+  font-family: var(--serif);
+  font-size: 32px;
+  font-weight: 300;
+  color: var(--blue);
+  line-height: 1;
+}
+.deal .date-blk .mo {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 4px;
+}
+.deal .body { display: flex; flex-direction: column; gap: 8px; }
+.deal .body .tag {
+  font-family: var(--mono); font-size: 10.5px;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--blue);
+}
+.deal .body h4 {
+  font-family: var(--serif);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--night);
+  letter-spacing: -0.005em;
+  margin: 0;
+  line-height: 1.2;
+}
+.deal .body p { font-size: 14px; line-height: 1.6; color: var(--night); margin: 0; }
+.deal .body .src {
+  margin-top: 8px;
+  padding-top: 14px;
+  border-top: 1px solid var(--line-soft);
+  font-family: var(--mono); font-size: 10px;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--muted);
+  display: flex; gap: 6px; flex-wrap: wrap;
+}
+.deal .body .src .sk { color: var(--blue); }
+
+/* ============================================================
+   FLAGSHIP AWARDS TIMELINE — left rail + per-year slider
+   ============================================================ */
+.ftl-shell {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 0;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.18);
+}
+@media (max-width: 900px) { .ftl-shell { grid-template-columns: 1fr; } }
+.ftl-years {
+  display: flex; flex-direction: column;
+  border-right: 1px solid rgba(255,255,255,0.18);
+  background: rgba(0,0,0,0.18);
+}
+@media (max-width: 900px) {
+  .ftl-years { flex-direction: row; overflow-x: auto; border-right: 0; border-bottom: 1px solid rgba(255,255,255,0.18); }
+}
+.ftl-year {
+  text-align: left;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid rgba(255,255,255,0.12);
+  padding: 16px 22px;
+  color: rgba(255,255,255,0.65);
+  cursor: pointer;
+  transition: all 180ms;
+  position: relative;
+}
+.ftl-year::before {
+  content: ""; position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 3px;
+  background: transparent;
+  transition: background 180ms;
+}
+.ftl-year:last-child { border-bottom: 0; }
+.ftl-year:hover { background: rgba(255,255,255,0.05); color: var(--paper); }
+.ftl-year.active {
+  background: rgba(255,255,255,0.08);
+  color: var(--paper);
+}
+.ftl-year.active::before { background: var(--sky); }
+.ftl-year .ftl-y {
+  font-family: var(--serif); font-size: 22px;
+  font-weight: 300; line-height: 1; color: var(--paper);
+  letter-spacing: -0.005em;
+  margin-bottom: 6px;
+}
+.ftl-year .ftl-blurb {
+  font-family: var(--mono); font-size: 10px;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  line-height: 1.5;
+}
+@media (max-width: 900px) {
+  .ftl-year {
+    border-bottom: 0; border-right: 1px solid rgba(255,255,255,0.12);
+    min-width: 200px;
+  }
+  .ftl-year::before { left: 0; right: 0; top: auto; bottom: 0; width: auto; height: 3px; }
+}
+
+.ftl-stage { padding: 28px 30px 28px; min-width: 0; }
+.ftl-panel { display: none; }
+.ftl-panel[data-active="true"] { display: block; }
+.ftl-counter {
+  font-family: var(--mono); font-size: 11px;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: rgba(255,255,255,0.7);
+  margin-bottom: 14px;
+}
+.ftl-counter .cur { color: var(--paper); font-weight: 500; }
+.ftl-slider-wrap {
+  position: relative;
+  display: block;
+  min-width: 0;
+}
+.ftl-arr {
+  background: var(--paper);
+  border: 1px solid var(--paper);
+  color: var(--blue-deep);
+  width: 44px; height: 44px;
+  display: grid; place-items: center;
+  cursor: pointer; transition: all 180ms;
+  position: absolute;
+  z-index: 4;
+  bottom: 22px;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.32);
+}
+.ftl-arr.ftl-prev { right: 76px; }
+.ftl-arr.ftl-next { right: 22px; }
+.ftl-arr:hover:not(:disabled) { background: var(--paper); color: var(--blue); border-color: var(--paper); }
+.ftl-arr:disabled { opacity: 0.3; cursor: not-allowed; }
+.ftl-arr svg { width: 16px; height: 16px; }
+.ftl-slider {
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 8px;
+  min-width: 0;
+}
+.ftl-slider::-webkit-scrollbar { height: 0; }
+.ftl-slider { scrollbar-width: none; }
+.ftl-track { display: flex; gap: 16px; padding-right: 20px; }
+.ftl-card {
+  flex: 0 0 100%;
+  max-width: 100%;
+  scroll-snap-align: start;
+  background: var(--paper);
+  color: var(--night);
+  display: grid;
+  grid-template-columns: 1.05fr 1fr;
+  overflow: hidden;
+  min-height: 380px;
+}
+@media (max-width: 720px) { .ftl-card { grid-template-columns: 1fr; min-height: 0; } }
+.ftl-vis {
+  position: relative; overflow: hidden;
+  background: var(--blue-deep);
+  min-height: 320px;
+}
+@media (max-width: 720px) { .ftl-vis { aspect-ratio: 16 / 9; min-height: 0; } }
+.ftl-vis svg { width: 100%; height: 100%; display: block; }
+.ftl-yr-stamp {
+  position: absolute; top: 12px; left: 12px;
+  font-family: var(--serif); font-size: 22px;
+  font-weight: 300; color: var(--paper);
+  line-height: 1;
+  background: rgba(0,0,0,0.45);
+  padding: 6px 12px;
+  letter-spacing: -0.005em;
+}
+.ftl-cap {
+  position: absolute; bottom: 10px; right: 10px;
+  font-family: var(--mono); font-size: 9.5px;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--paper); background: rgba(0,0,0,0.55);
+  padding: 4px 8px;
+}
+.ftl-body { padding: 36px 40px 80px; display: flex; flex-direction: column; gap: 14px; }
+@media (max-width: 720px) { .ftl-body { padding: 24px 24px 80px; } }
+.ftl-from {
+  font-family: var(--mono); font-size: 10px;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--blue);
+}
+.ftl-body h4 {
+  font-family: var(--serif); font-size: clamp(20px, 2vw, 28px); font-weight: 700;
+  letter-spacing: -0.005em; line-height: 1.2;
+  color: var(--blue-deep);
+  margin: 0;
+}
+.ftl-body p { font-size: 14.5px; line-height: 1.65; color: var(--night); margin: 0; }
+.ftl-pills { display: flex; gap: 6px; flex-wrap: wrap; margin-top: auto; }
+.ftl-pill {
+  font-family: var(--mono); font-size: 9.5px;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--blue);
+  background: var(--sky-soft);
+  padding: 4px 9px;
+}
+
+/* ============================================================
+   PAGE SWITCHER (inter-page nav across the 3 About-Us pages)
+   ============================================================ */
+.pageswitcher {
+  display: inline-flex; gap: 0;
+  border: 1px solid var(--line);
+  background: var(--paper);
+  margin-left: 8px;
+  flex-shrink: 0;
+}
+.pageswitcher a {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding: 7px 12px;
+  border-right: 1px solid var(--line);
+  transition: all 160ms;
+  white-space: nowrap;
+}
+.pageswitcher a:last-child { border-right: 0; }
+.pageswitcher a:hover { background: var(--sky-soft); color: var(--blue); }
+.pageswitcher a.here {
+  background: var(--blue);
+  color: var(--paper);
+}
+
+</style>
+</head>
+<body data-screen-label="Awards and Certificates">
+
+<a class="skip" href="#main">Skip to content</a>
+<div class="progress"><div class="fill" id="progressFill"></div></div>
+
+<header class="pagebar" role="banner">
+  <div class="wrap">
+    <div class="pb-row pb-bottom">
+      <a href="#identity" class="brand" aria-label="Teyseer Group">
+      <span class="mark" aria-hidden="true">
+        <svg viewBox="0 0 36 36" fill="none">
+          <rect x="6" y="6" width="24" height="24" fill="#2A3C8E"></rect>
+          <rect x="13.5" y="13.5" width="9" height="9" transform="rotate(45 18 18)" fill="#A6A8BA"></rect>
+          <rect x="16.5" y="16.5" width="3" height="3" transform="rotate(45 18 18)" fill="#F4F3EF"></rect>
+        </svg>
+      </span>
+      <span>
+        <div class="name">Teyseer</div>
+        <div class="tag">Since 1968</div>
+      </span>
+    </a>
+      <div class="anchornav-wrap">
+      <nav class="anchornav" id="anchornav" aria-label="On this page">
+        <a href="#identity" class="active">01 Overview</a>
+        <a href="#timeline">02 Flagship Awards Timeline</a>
+        <a href="#certifications">03 Standards &amp; Authorisations</a>
+        <a href="#partners-band">04 Awarded by Principals</a>
+        <a href="#deals">05 Recent Deals</a>
+        <a href="#testimonies">06 Testimonies</a>
+      </nav>
+    </div>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- ============================================================
+     01 — HERO
+     ============================================================ -->
+<section class="hero awards pattern-bg" id="identity" data-screen-label="01 Overview">
+  <svg class="water" viewBox="0 0 200 200" aria-hidden="true">
+    <rect x="40" y="40" width="120" height="120" fill="none" stroke="#2A3C8E" stroke-width="0.6"></rect>
+    <rect x="70" y="70" width="60" height="60" transform="rotate(45 100 100)" fill="none" stroke="#2A3C8E" stroke-width="0.6"></rect>
+    <rect x="92" y="92" width="16" height="16" transform="rotate(45 100 100)" fill="#2A3C8E"></rect>
+  </svg>
+  <div class="wrap">
+    <div class="ix">
+      <span>01</span><span class="dash"></span><span>Awards &amp; Certificates</span>
+    </div>
+
+    <h1 class="h1 b reveal">The standards we<br>work&nbsp;to.</h1>
+    <p class="lead reveal">A summary of the certifications, accreditations and partner recognitions held across the Teyseer Group of companies — earned over more than half a century of service to Qatar, and audited continuously by independent bodies.</p>
+
+    <div class="summary reveal" aria-label="Standards at a glance">
+      <div class="s">
+        <div class="v"><span class="counter" data-to="57">57</span><span class="sfx">&nbsp;yrs</span></div>
+        <div class="l">Of continuous service</div>
+        <div class="d">Continuously operating under Qatari ownership since 1968.</div>
+      </div>
+      <div class="s">
+        <div class="v"><span class="counter" data-to="4">4</span></div>
+        <div class="l">Active certifications</div>
+        <div class="d">ISO management-system, laboratory and construction-specification standards.</div>
+      </div>
+      <div class="s">
+        <div class="v"><span class="counter" data-to="12">12</span><span class="sfx">+</span></div>
+        <div class="l">Partner recognitions</div>
+        <div class="d">Distributor-of-the-year, performance &amp; safety awards from international principals.</div>
+      </div>
+      <div class="s">
+        <div class="v"><span class="counter" data-to="5">5</span></div>
+        <div class="l">Regulatory licences</div>
+        <div class="d">Trade, security and industry licences held under Qatar regulators.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     04 — FLAGSHIP AWARDS TIMELINE
+     ============================================================ -->
+<section class="section timeline-section" id="timeline" data-screen-label="02 Flagship Awards Timeline">
+  <div class="wrap">
+    <div class="s-head">
+      <div class="reveal">
+        <div class="s-num" style="color: var(--sky);">02 — Flagship Awards Timeline</div>
+        <h2 class="h2 b" style="color: var(--paper);">Walk through<br>each year of recognition.</h2>
+      </div>
+      <div class="right reveal">
+        <p class="lead" style="color: rgba(255,255,255,0.78);">Pick a year from the timeline on the left — then swipe through the awards earned in that year. Years descend from the most recent.</p>
+      </div>
+    </div>
+    <div class="ftl-shell reveal">
+      <aside class="ftl-years" role="tablist" aria-label="Years">
+        <button class="ftl-year active" data-year="2024" role="tab" aria-selected="true"><div class="ftl-y">2024</div><div class="ftl-blurb">GWM debut · Dell EMC · Mobil Gold</div></button>
+        <button class="ftl-year" data-year="2022" role="tab" aria-selected="false"><div class="ftl-y">2022</div><div class="ftl-blurb">FIFA World Cup · Mobil Elite Tier · Eurorepar</div></button>
+        <button class="ftl-year" data-year="2021" role="tab" aria-selected="false"><div class="ftl-y">2021</div><div class="ftl-blurb">QatarEnergy Seven Star — Platinum &amp; Gold</div></button>
+        <button class="ftl-year" data-year="2019" role="tab" aria-selected="false"><div class="ftl-y">2019</div><div class="ftl-blurb">Suzuki Service Quality · QP recognition</div></button>
+        <button class="ftl-year" data-year="2018" role="tab" aria-selected="false"><div class="ftl-y">2018</div><div class="ftl-blurb">Qatar Chamber 50-year acknowledgement</div></button>
+        <button class="ftl-year" data-year="2010-14" role="tab" aria-selected="false"><div class="ftl-y">2010 – 14</div><div class="ftl-blurb">Oryx GTL excellence · Qatalum project</div></button>
+        <button class="ftl-year" data-year="1998" role="tab" aria-selected="false"><div class="ftl-y">1998</div><div class="ftl-blurb">Chiyoda LNG safety achievement</div></button>
+      </aside>
+      <div class="ftl-stage">
+        <div class="ftl-panel" data-year-panel="2024" data-active="true" aria-label="Awards for 2024">
+          <div class="ftl-counter"><strong class="cur">01</strong> / 03 &nbsp;·&nbsp; <span>2024 awards</span></div>
+          <div class="ftl-slider-wrap">
+            <button class="ftl-arr ftl-prev" aria-label="Previous" disabled><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"></path></svg></button>
+            <div class="ftl-slider" tabindex="0" role="region" aria-label="2024 awards scroller">
+              <div class="ftl-track">
+                <article class="ftl-card">
+                  <div class="ftl-vis" aria-hidden="true">
+                    <svg viewBox="0 0 400 225" preserveAspectRatio="xMidYMid slice">
+                      <defs><linearGradient id="ftlg0-0" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#1F2D6B"></stop><stop offset="100%" stop-color="#16204D"></stop></linearGradient></defs>
+                      <rect width="400" height="225" fill="url(#ftlg0-0)"></rect>
+                      <g stroke="#DCE5F2" stroke-width="1" fill="none" opacity="0.6"><rect x="120" y="60" width="160" height="120" rx="6"></rect><circle cx="200" cy="120" r="32"></circle><path d="M200 88 L210 112 L235 112 L215 128 L222 152 L200 138 L178 152 L185 128 L165 112 L190 112 Z" fill="#DCE5F2" opacity="0.6"></path></g>
+                    </svg>
+                    <div class="ftl-cap">[Award image · placeholder]</div>
+                  </div>
+                  <div class="ftl-body">
+                    <div class="ftl-from">From · Great Wall Motors</div>
+                    <h4>Best New Business Partner — GWM 2024</h4>
+                    <p>Recognition for Teyseer Motors as a new strategic GWM partner in the year of Qatar launch.</p>
+                    <div class="ftl-pills"><span class="ftl-pill">GWM</span><span class="ftl-pill">Mobility</span><span class="ftl-pill">Partner Award</span></div>
+                  </div>
+                </article>
+                <article class="ftl-card">
+                  <div class="ftl-vis" aria-hidden="true">
+                    <svg viewBox="0 0 400 225" preserveAspectRatio="xMidYMid slice">
+                      <defs><linearGradient id="ftlg0-1" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#1F2D6B"></stop><stop offset="100%" stop-color="#16204D"></stop></linearGradient></defs>
+                      <rect width="400" height="225" fill="url(#ftlg0-1)"></rect>
+                      <g stroke="#DCE5F2" stroke-width="1" fill="none" opacity="0.6"><rect x="120" y="60" width="160" height="120" rx="6"></rect><circle cx="200" cy="120" r="32"></circle><path d="M200 88 L210 112 L235 112 L215 128 L222 152 L200 138 L178 152 L185 128 L165 112 L190 112 Z" fill="#DCE5F2" opacity="0.6"></path></g>
+                    </svg>
+                    <div class="ftl-cap">[Award image · placeholder]</div>
+                  </div>
+                  <div class="ftl-body">
+                    <div class="ftl-from">From · ExxonMobil Lubricants</div>
+                    <h4>Mobil Circle of Excellence Gold (2018–2023)</h4>
+                    <p>Cumulative Gold-tier recognition for the Mobil distributorship in Qatar — passenger, commercial, industrial and marine.</p>
+                    <div class="ftl-pills"><span class="ftl-pill">ExxonMobil</span><span class="ftl-pill">Gold Tier</span><span class="ftl-pill">Multi-Year</span></div>
+                  </div>
+                </article>
+                <article class="ftl-card">
+                  <div class="ftl-vis" aria-hidden="true">
+                    <svg viewBox="0 0 400 225" preserveAspectRatio="xMidYMid slice">
+                      <defs><linearGradient id="ftlg0-2" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#1F2D6B"></stop><stop offset="100%" stop-color="#16204D"></stop></linearGradient></defs>
+                      <rect width="400" height="225" fill="url(#ftlg0-2)"></rect>
+                      <g stroke="#DCE5F2" stroke-width="1" fill="none" opacity="0.6"><rect x="120" y="60" width="160" height="120" rx="6"></rect><circle cx="200" cy="120" r="32"></circle><path d="M200 88 L210 112 L235 112 L215 128 L222 152 L200 138 L178 152 L185 128 L165 112 L190 112 Z" fill="#DCE5F2" opacity="0.6"></path></g>
+                    </svg>
+                    <div class="ftl-cap">[Award image · placeholder]</div>
+                  </div>
+                  <div class="ftl-body">
+                    <div class="ftl-from">From · Dell Technologies</div>
+                    <h4>Dell EMC Authorised Service Centre — Qatar</h4>
+                    <p>Sole-authorised service-centre status confirmed for Teyseer Technology Services across the Qatar territory.</p>
+                    <div class="ftl-pills"><span class="ftl-pill">Dell EMC</span><span class="ftl-pill">IT</span><span class="ftl-pill">Authorised Service</span></div>
+                  </div>
+                </article>
+              </div>
+            </div>
+            <button class="ftl-arr ftl-next" aria-label="Next"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"></path></svg></button>
+          </div>
+        </div>
+        <div class="ftl-panel" data-year-panel="2022" data-active="false" aria-label="Awards for 2022">
+          <div class="ftl-counter"><strong class="cur">01</strong> / 02 &nbsp;·&nbsp; <span>2022 awards</span></div>
+          <div class="ftl-slider-wrap">
+            <button class="ftl-arr ftl-prev" aria-label="Previous" disabled><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"></path></svg></button>
+            <div class="ftl-slider" tabindex="0" role="region" aria-label="2022 awards scroller">
+              <div class="ftl-track">
+                <article class="ftl-card">
+                  <div class="ftl-vis" aria-hidden="true">
+                    <svg viewBox="0 0 400 225" preserveAspectRatio="xMidYMid slice">
+                      <defs><linearGradient id="ftlg1-0" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#1F2D6B"></stop><stop offset="100%" stop-color="#16204D"></stop></linearGradient></defs>
+                      <rect width="400" height="225" fill="url(#ftlg1-0)"></rect>
+                      <g stroke="#DCE5F2" stroke-width="1" fill="none" opacity="0.6"><rect x="120" y="60" width="160" height="120" rx="6"></rect><circle cx="200" cy="120" r="32"></circle><path d="M200 88 L210 112 L235 112 L215 128 L222 152 L200 138 L178 152 L185 128 L165 112 L190 112 Z" fill="#DCE5F2" opacity="0.6"></path></g>
+                    </svg>
+                    <div class="ftl-cap">[Award image · placeholder]</div>
+                  </div>
+                  <div class="ftl-body">
+                    <div class="ftl-from">From · FIFA / Qatar 2022</div>
+                    <h4>FIFA World Cup Qatar 2022 — Official Security Operations Partner</h4>
+                    <p>Teyseer Security as Official Operations Partner — security, crowd management, traffic control and surveillance across tournament venues.</p>
+                    <div class="ftl-pills"><span class="ftl-pill">FIFA</span><span class="ftl-pill">Event Security</span><span class="ftl-pill">Crowd Management</span></div>
+                  </div>
+                </article>
+                <article class="ftl-card">
+                  <div class="ftl-vis" aria-hidden="true">
+                    <svg viewBox="0 0 400 225" preserveAspectRatio="xMidYMid slice">
+                      <defs><linearGradient id="ftlg1-1" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#1F2D6B"></stop><stop offset="100%" stop-color="#16204D"></stop></linearGradient></defs>
+                      <rect width="400" height="225" fill="url(#ftlg1-1)"></rect>
+                      <g stroke="#DCE5F2" stroke-width="1" fill="none" opacity="0.6"><rect x="120" y="60" width="160" height="120" rx="6"></rect><circle cx="200" cy="120" r="32"></circle><path d="M200 88 L210 112 L235 112 L215 128 L222 152 L200 138 L178 152 L185 128 L165 112 L190 112 Z" fill="#DCE5F2" opacity="0.6"></path></g>
+                    </svg>
+                    <div class="ftl-cap">[Award image · placeholder]</div>
+                  </div>
+                  <div class="ftl-body">
+                    <div class="ftl-from">From · ExxonMobil Lubricants</div>
+                    <h4>Elite Club — Distributor Tier</h4>
+                    <p>Top global cohort under ExxonMobil Elite Club programme for distributor quality and performance.</p>
+                    <div class="ftl-pills"><span class="ftl-pill">ExxonMobil</span><span class="ftl-pill">Tier</span><span class="ftl-pill">Global Programme</span></div>
+                  </div>
+                </article>
+              </div>
+            </div>
+            <button class="ftl-arr ftl-next" aria-label="Next"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"></path></svg></button>
+          </div>
+        </div>
+        <div class="ftl-panel" data-year-panel="2021" data-active="false" aria-label="Awards for 2021">
+          <div class="ftl-counter"><strong class="cur">01</strong> / 02 &nbsp;·&nbsp; <span>2021 awards</span></div>
+          <div class="ftl-slider-wrap">
+            <button class="ftl-arr ftl-prev" aria-label="Previous" disabled><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"></path></svg></button>
+            <div class="ftl-slider" tabindex="0" role="region" aria-label="2021 awards scroller">
+              <div class="ftl-track">
+                <article class="ftl-card">
+                  <div class="ftl-vis" aria-hidden="true">
+                    <svg viewBox="0 0 400 225" preserveAspectRatio="xMidYMid slice">
+                      <defs><linearGradient id="ftlg2-0" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#1F2D6B"></stop><stop offset="100%" stop-color="#16204D"></stop></linearGradient></defs>
+                      <rect width="400" height="225" fill="url(#ftlg2-0)"></rect>
+                      <g stroke="#DCE5F2" stroke-width="1" fill="none" opacity="0.6"><rect x="120" y="60" width="160" height="120" rx="6"></rect><circle cx="200" cy="120" r="32"></circle><path d="M200 88 L210 112 L235 112 L215 128 L222 152 L200 138 L178 152 L185 128 L165 112 L190 112 Z" fill="#DCE5F2" opacity="0.6"></path></g>
+                    </svg>
+                    <div class="ftl-cap">[Award image · placeholder]</div>
+                  </div>
+                  <div class="ftl-body">
+                    <div class="ftl-from">From · QatarEnergy</div>
+                    <h4>Seven Star Programme — Platinum (Mesaieed)</h4>
+                    <p>Platinum Award (Low Risk Category) under the Contractor Seven Star Program at Mesaieed Industrial City — Dutest Qatar (crane/lifting) and Teyseer Security.</p>
+                    <div class="ftl-pills"><span class="ftl-pill">QatarEnergy</span><span class="ftl-pill">Platinum</span><span class="ftl-pill">Mesaieed</span></div>
+                  </div>
+                </article>
+                <article class="ftl-card">
+                  <div class="ftl-vis" aria-hidden="true">
+                    <svg viewBox="0 0 400 225" preserveAspectRatio="xMidYMid slice">
+                      <defs><linearGradient id="ftlg2-1" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#1F2D6B"></stop><stop offset="100%" stop-color="#16204D"></stop></linearGradient></defs>
+                      <rect width="400" height="225" fill="url(#ftlg2-1)"></rect>
+                      <g stroke="#DCE5F2" stroke-width="1" fill="none" opacity="0.6"><rect x="120" y="60" width="160" height="120" rx="6"></rect><circle cx="200" cy="120" r="32"></circle><path d="M200 88 L210 112 L235 112 L215 128 L222 152 L200 138 L178 152 L185 128 L165 112 L190 112 Z" fill="#DCE5F2" opacity="0.6"></path></g>
+                    </svg>
+                    <div class="ftl-cap">[Award image · placeholder]</div>
+                  </div>
+                  <div class="ftl-body">
+                    <div class="ftl-from">From · QatarEnergy</div>
+                    <h4>Seven Star Programme — Gold (Dukhan)</h4>
+                    <p>Gold Award under the Contractor Seven Star Program for crane and lifting services at the Dukhan Concession Area.</p>
+                    <div class="ftl-pills"><span class="ftl-pill">QatarEnergy</span><span class="ftl-pill">Gold</span><span class="ftl-pill">Dukhan</span></div>
+                  </div>
+                </article>
+              </div>
+            </div>
+            <button class="ftl-arr ftl-next" aria-label="Next"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"></path></svg></button>
+          </div>
+        </div>
+        <div class="ftl-panel" data-year-panel="2019" data-active="false" aria-label="Awards for 2019">
+          <div class="ftl-counter"><strong class="cur">01</strong> / 02 &nbsp;·&nbsp; <span>2019 awards</span></div>
+          <div class="ftl-slider-wrap">
+            <button class="ftl-arr ftl-prev" aria-label="Previous" disabled><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"></path></svg></button>
+            <div class="ftl-slider" tabindex="0" role="region" aria-label="2019 awards scroller">
+              <div class="ftl-track">
+                <article class="ftl-card">
+                  <div class="ftl-vis" aria-hidden="true">
+                    <svg viewBox="0 0 400 225" preserveAspectRatio="xMidYMid slice">
+                      <defs><linearGradient id="ftlg3-0" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#1F2D6B"></stop><stop offset="100%" stop-color="#16204D"></stop></linearGradient></defs>
+                      <rect width="400" height="225" fill="url(#ftlg3-0)"></rect>
+                      <g stroke="#DCE5F2" stroke-width="1" fill="none" opacity="0.6"><rect x="120" y="60" width="160" height="120" rx="6"></rect><circle cx="200" cy="120" r="32"></circle><path d="M200 88 L210 112 L235 112 L215 128 L222 152 L200 138 L178 152 L185 128 L165 112 L190 112 Z" fill="#DCE5F2" opacity="0.6"></path></g>
+                    </svg>
+                    <div class="ftl-cap">[Award image · placeholder]</div>
+                  </div>
+                  <div class="ftl-body">
+                    <div class="ftl-from">From · Suzuki Motor Corporation</div>
+                    <h4>Service-Quality Recognition</h4>
+                    <p>Sustained service-quality standards at Teyseer Service Centre — Qatar’s authorised Suzuki workshop network.</p>
+                    <div class="ftl-pills"><span class="ftl-pill">Suzuki</span><span class="ftl-pill">Service</span><span class="ftl-pill">OEM</span></div>
+                  </div>
+                </article>
+                <article class="ftl-card">
+                  <div class="ftl-vis" aria-hidden="true">
+                    <svg viewBox="0 0 400 225" preserveAspectRatio="xMidYMid slice">
+                      <defs><linearGradient id="ftlg3-1" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#1F2D6B"></stop><stop offset="100%" stop-color="#16204D"></stop></linearGradient></defs>
+                      <rect width="400" height="225" fill="url(#ftlg3-1)"></rect>
+                      <g stroke="#DCE5F2" stroke-width="1" fill="none" opacity="0.6"><rect x="120" y="60" width="160" height="120" rx="6"></rect><circle cx="200" cy="120" r="32"></circle><path d="M200 88 L210 112 L235 112 L215 128 L222 152 L200 138 L178 152 L185 128 L165 112 L190 112 Z" fill="#DCE5F2" opacity="0.6"></path></g>
+                    </svg>
+                    <div class="ftl-cap">[Award image · placeholder]</div>
+                  </div>
+                  <div class="ftl-body">
+                    <div class="ftl-from">From · Qatar Petroleum (now QatarEnergy)</div>
+                    <h4>Certificate of Appreciation</h4>
+                    <p>Recognition for security and crane/lifting service contributions across QP sites during the 2018–2019 programme.</p>
+                    <div class="ftl-pills"><span class="ftl-pill">Qatar Petroleum</span><span class="ftl-pill">Security</span><span class="ftl-pill">Lifting</span></div>
+                  </div>
+                </article>
+              </div>
+            </div>
+            <button class="ftl-arr ftl-next" aria-label="Next"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"></path></svg></button>
+          </div>
+        </div>
+        <div class="ftl-panel" data-year-panel="2018" data-active="false" aria-label="Awards for 2018">
+          <div class="ftl-counter"><strong class="cur">01</strong> / 01 &nbsp;·&nbsp; <span>2018 awards</span></div>
+          <div class="ftl-slider-wrap">
+            <button class="ftl-arr ftl-prev" aria-label="Previous" disabled><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"></path></svg></button>
+            <div class="ftl-slider" tabindex="0" role="region" aria-label="2018 awards scroller">
+              <div class="ftl-track">
+                <article class="ftl-card">
+                  <div class="ftl-vis" aria-hidden="true">
+                    <svg viewBox="0 0 400 225" preserveAspectRatio="xMidYMid slice">
+                      <defs><linearGradient id="ftlg4-0" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#1F2D6B"></stop><stop offset="100%" stop-color="#16204D"></stop></linearGradient></defs>
+                      <rect width="400" height="225" fill="url(#ftlg4-0)"></rect>
+                      <g stroke="#DCE5F2" stroke-width="1" fill="none" opacity="0.6"><rect x="120" y="60" width="160" height="120" rx="6"></rect><circle cx="200" cy="120" r="32"></circle><path d="M200 88 L210 112 L235 112 L215 128 L222 152 L200 138 L178 152 L185 128 L165 112 L190 112 Z" fill="#DCE5F2" opacity="0.6"></path></g>
+                    </svg>
+                    <div class="ftl-cap">[Award image · placeholder]</div>
+                  </div>
+                  <div class="ftl-body">
+                    <div class="ftl-from">From · Qatar Chamber</div>
+                    <h4>Half-Century of Service Acknowledgement</h4>
+                    <p>Acknowledgement of fifty years of continuous Qatari ownership and service to the State — issued on the Group’s 50th anniversary.</p>
+                    <div class="ftl-pills"><span class="ftl-pill">Heritage</span><span class="ftl-pill">50 Years</span><span class="ftl-pill">Qatar Chamber</span></div>
+                  </div>
+                </article>
+              </div>
+            </div>
+            <button class="ftl-arr ftl-next" aria-label="Next" disabled><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"></path></svg></button>
+          </div>
+        </div>
+        <div class="ftl-panel" data-year-panel="2010-14" data-active="false" aria-label="Awards for 2010-14">
+          <div class="ftl-counter"><strong class="cur">01</strong> / 02 &nbsp;·&nbsp; <span>2010-14 awards</span></div>
+          <div class="ftl-slider-wrap">
+            <button class="ftl-arr ftl-prev" aria-label="Previous" disabled><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"></path></svg></button>
+            <div class="ftl-slider" tabindex="0" role="region" aria-label="2010-14 awards scroller">
+              <div class="ftl-track">
+                <article class="ftl-card">
+                  <div class="ftl-vis" aria-hidden="true">
+                    <svg viewBox="0 0 400 225" preserveAspectRatio="xMidYMid slice">
+                      <defs><linearGradient id="ftlg5-0" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#1F2D6B"></stop><stop offset="100%" stop-color="#16204D"></stop></linearGradient></defs>
+                      <rect width="400" height="225" fill="url(#ftlg5-0)"></rect>
+                      <g stroke="#DCE5F2" stroke-width="1" fill="none" opacity="0.6"><rect x="120" y="60" width="160" height="120" rx="6"></rect><circle cx="200" cy="120" r="32"></circle><path d="M200 88 L210 112 L235 112 L215 128 L222 152 L200 138 L178 152 L185 128 L165 112 L190 112 Z" fill="#DCE5F2" opacity="0.6"></path></g>
+                    </svg>
+                    <div class="ftl-cap">[Award image · placeholder]</div>
+                  </div>
+                  <div class="ftl-body">
+                    <div class="ftl-from">From · Oryx GTL</div>
+                    <h4>Certificates of Excellence (2012, 2013, 2014)</h4>
+                    <p>Outstanding security and crane-maintenance service at the gas-to-liquids facility, Ras Laffan.</p>
+                    <div class="ftl-pills"><span class="ftl-pill">Oryx GTL</span><span class="ftl-pill">GTL</span><span class="ftl-pill">Multi-Year</span></div>
+                  </div>
+                </article>
+                <article class="ftl-card">
+                  <div class="ftl-vis" aria-hidden="true">
+                    <svg viewBox="0 0 400 225" preserveAspectRatio="xMidYMid slice">
+                      <defs><linearGradient id="ftlg5-1" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#1F2D6B"></stop><stop offset="100%" stop-color="#16204D"></stop></linearGradient></defs>
+                      <rect width="400" height="225" fill="url(#ftlg5-1)"></rect>
+                      <g stroke="#DCE5F2" stroke-width="1" fill="none" opacity="0.6"><rect x="120" y="60" width="160" height="120" rx="6"></rect><circle cx="200" cy="120" r="32"></circle><path d="M200 88 L210 112 L235 112 L215 128 L222 152 L200 138 L178 152 L185 128 L165 112 L190 112 Z" fill="#DCE5F2" opacity="0.6"></path></g>
+                    </svg>
+                    <div class="ftl-cap">[Award image · placeholder]</div>
+                  </div>
+                  <div class="ftl-body">
+                    <div class="ftl-from">From · Qatalum Project</div>
+                    <h4>Certificate of Achievement (March 2010)</h4>
+                    <p>Security service contribution at one of the world’s largest aluminium smelters.</p>
+                    <div class="ftl-pills"><span class="ftl-pill">Qatalum</span><span class="ftl-pill">Aluminium</span><span class="ftl-pill">Mesaieed</span></div>
+                  </div>
+                </article>
+              </div>
+            </div>
+            <button class="ftl-arr ftl-next" aria-label="Next"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"></path></svg></button>
+          </div>
+        </div>
+        <div class="ftl-panel" data-year-panel="1998" data-active="false" aria-label="Awards for 1998">
+          <div class="ftl-counter"><strong class="cur">01</strong> / 01 &nbsp;·&nbsp; <span>1998 awards</span></div>
+          <div class="ftl-slider-wrap">
+            <button class="ftl-arr ftl-prev" aria-label="Previous" disabled><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"></path></svg></button>
+            <div class="ftl-slider" tabindex="0" role="region" aria-label="1998 awards scroller">
+              <div class="ftl-track">
+                <article class="ftl-card">
+                  <div class="ftl-vis" aria-hidden="true">
+                    <svg viewBox="0 0 400 225" preserveAspectRatio="xMidYMid slice">
+                      <defs><linearGradient id="ftlg6-0" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#1F2D6B"></stop><stop offset="100%" stop-color="#16204D"></stop></linearGradient></defs>
+                      <rect width="400" height="225" fill="url(#ftlg6-0)"></rect>
+                      <g stroke="#DCE5F2" stroke-width="1" fill="none" opacity="0.6"><rect x="120" y="60" width="160" height="120" rx="6"></rect><circle cx="200" cy="120" r="32"></circle><path d="M200 88 L210 112 L235 112 L215 128 L222 152 L200 138 L178 152 L185 128 L165 112 L190 112 Z" fill="#DCE5F2" opacity="0.6"></path></g>
+                    </svg>
+                    <div class="ftl-cap">[Award image · placeholder]</div>
+                  </div>
+                  <div class="ftl-body">
+                    <div class="ftl-from">From · Chiyoda Corporation</div>
+                    <h4>Safety Achievement Award</h4>
+                    <p>Exceptional safety performance during the Qatargas LNG Plant Project — Ras Laffan. One of the earliest major LNG infrastructure deployments.</p>
+                    <div class="ftl-pills"><span class="ftl-pill">Chiyoda</span><span class="ftl-pill">LNG</span><span class="ftl-pill">Safety</span></div>
+                  </div>
+                </article>
+              </div>
+            </div>
+            <button class="ftl-arr ftl-next" aria-label="Next" disabled><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"></path></svg></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     02 — STANDARDS & AUTHORISATIONS (tabbed: Certifications / Licences)
+     ============================================================ -->
+<section class="section" id="certifications" data-screen-label="03 Standards and Authorisations" style="background: var(--cream-2);">
+  <div class="wrap">
+    <div class="s-head">
+      <div class="reveal">
+        <div class="s-num">03 — Standards &amp; Authorisations</div>
+        <h2 class="h2 b">Certified &amp; authorised<br>to operate in Qatar.</h2>
+      </div>
+      <div class="right reveal">
+        <p class="lead muted">International quality standards and Qatari regulatory licences — each held by the specific group company that operates under it. Use the tabs to switch.</p>
+      </div>
+    </div>
+
+    <div class="standards-tabs reveal" role="tablist" aria-label="Standards and authorisations">
+      <button class="standards-tab" role="tab" aria-selected="true" data-stab="certs">Certifications <span class="ct">4</span></button>
+      <button class="standards-tab" role="tab" aria-selected="false" data-stab="licences">Licences <span class="ct">6</span></button>
+    </div>
+
+    <div class="standards-panel reveal" data-panel="certs" data-active="true" aria-label="Certifications panel">
+      <div class="cert-grid" id="certGrid">
+        <article class="cert" data-family="quality">
+          <div class="badge"><div class="code">ISO<div class="sm">9001:2015</div></div></div>
+          <div class="holder">TISSCO · Quality</div>
+          <h4>Quality Management Systems</h4>
+          <p>The international standard for quality management systems — held by TISSCO per tissco.qa/profile.</p>
+          <div class="footer"><span>Issued · ISO 9001:2015</span><span class="ok">Active</span></div>
+        </article>
+        <article class="cert" data-family="lab">
+          <div class="badge"><div class="code">ISO<div class="sm">/IEC 17025</div></div></div>
+          <div class="holder">TISSCO · Calibration Lab</div>
+          <h4>Testing &amp; Calibration Laboratories</h4>
+          <p>The general requirements for the competence of testing and calibration laboratories — operated via Micro Precision JV.</p>
+          <div class="footer"><span>Issued · ISO/IEC 17025</span><span class="ok">Active</span></div>
+        </article>
+        <article class="cert" data-family="quality">
+          <div class="badge"><div class="code">QCS<div class="sm">2014</div></div></div>
+          <div class="holder">Construction · Building</div>
+          <h4>Qatar Construction Specifications</h4>
+          <p>Conformity to QCS 2014 across the Group's construction, building-materials and contracting activities.</p>
+          <div class="footer"><span>Reference · QCS 2014</span><span class="ok">Active</span></div>
+        </article>
+        <article class="cert" data-family="lab">
+          <div class="badge"><div class="code">ASTM<div class="sm">&amp; BS EN</div></div></div>
+          <div class="holder">Dutest Qatar · Materials</div>
+          <h4>Material &amp; Soil Testing</h4>
+          <p>Testing to ASTM and British &amp; European standards — supporting major Qatari infrastructure projects.</p>
+          <div class="footer"><span>Standards · ASTM · BS EN</span><span class="ok">Active</span></div>
+        </article>
+      </div>
+    </div>
+
+    <div class="standards-panel reveal" data-panel="licences" data-active="false" aria-label="Licences panel">
+      <div class="licence-row">
+        <article class="licence">
+          <span class="seal" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2l9 4v6c0 5-4 9-9 10-5-1-9-5-9-10V6l9-4z"></path><path d="M9 12l2 2 4-4"></path></svg>
+          </span>
+          <div>
+            <h5>MoI Security Services Licence</h5>
+            <div class="iss">Ministry of Interior · Qatar</div>
+            <p>Held by Teyseer Security Services W.L.L. — manned guarding, electronic security and protective services.</p>
+          </div>
+        </article>
+        <article class="licence">
+          <span class="seal" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"></path></svg>
+          </span>
+          <div>
+            <h5>Qatar Chamber Membership</h5>
+            <div class="iss">Qatar Chamber of Commerce &amp; Industry</div>
+            <p>Member in good standing across the Group's eighteen W.L.L. companies.</p>
+          </div>
+        </article>
+        <article class="licence">
+          <span class="seal" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 7h16v12H4z"></path><path d="M4 7l8 6 8-6"></path></svg>
+          </span>
+          <div>
+            <h5>Customs &amp; Trade Authorisations</h5>
+            <div class="iss">General Authority of Customs</div>
+            <p>Importer-of-record authorisations for vehicles, lubricants and industrial supplies.</p>
+          </div>
+        </article>
+        <article class="licence">
+          <span class="seal" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 12l9-9 9 9"></path><path d="M5 10v10h4v-6h6v6h4V10"></path></svg>
+          </span>
+          <div>
+            <h5>Ministry of Municipality · Class</h5>
+            <div class="iss">Ministry of Municipality · Qatar</div>
+            <p>Construction class for civil-works and material-supply activities (TBMTC &amp; Teyseer Contracting).</p>
+          </div>
+        </article>
+        <article class="licence">
+          <span class="seal" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2v20M2 12h20"></path><circle cx="12" cy="12" r="9"></circle></svg>
+          </span>
+          <div>
+            <h5>Authorised Service-Agent Status</h5>
+            <div class="iss">Multiple OEMs</div>
+            <p>Service-agent status from Suzuki, Peugeot, Mitsubishi Heavy and other principals — renewed annually.</p>
+          </div>
+        </article>
+        <article class="licence">
+          <span class="seal" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3l8 4v6c0 4-4 7-8 8-4-1-8-4-8-8V7l8-4z"></path><path d="M9 12h6M9 15h6"></path></svg>
+          </span>
+          <div>
+            <h5>Civil Defence Authorisation</h5>
+            <div class="iss">General Directorate of Civil Defence</div>
+            <p>Required for security-services and fire-safety (MOBIAK fire extinguishers via TISSCO).</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     03 — RECOGNITIONS & AWARDS
+     ============================================================ -->
+<section class="section" id="partners-band" data-screen-label="04 Awarded by Principals">
+  <div class="wrap">
+    <div class="s-head">
+      <div class="reveal">
+        <div class="s-num">04 — Awarded by our Principals</div>
+        <h2 class="h2 b">Recognised by<br>the brands we represent.</h2>
+      </div>
+      <div class="right reveal">
+        <p class="lead muted">Twelve international principals have publicly recognised Teyseer Group companies for distributor performance, service quality and long-term partnership.</p>
+      </div>
+    </div>
+
+    <div class="recog-shell reveal" aria-label="Awarded by our Principals">
+      <div class="partner-band" aria-label="Partner-recognition logos">
+        <div class="pl"><div class="mark">ExxonMobil</div><div class="sub">Elite Club tier</div></div>
+        <div class="pl"><div class="mark">SUZUKI</div><div class="sub">Service Quality</div></div>
+        <div class="pl"><div class="mark">PEUGEOT</div><div class="sub">Dealer Standard</div></div>
+        <div class="pl"><div class="mark">SCANIA</div><div class="sub">Fleet Operator</div></div>
+        <div class="pl"><div class="mark thin">MITSUBISHI HEAVY</div><div class="sub">HVAC Partner</div></div>
+        <div class="pl"><div class="mark thin">SCHNEIDER ELECTRIC</div><div class="sub">Authorised Partner</div></div>
+        <div class="pl"><div class="mark thin">STANLEY · BLACK&amp;DECKER</div><div class="sub">Channel Recognition</div></div>
+        <div class="pl"><div class="mark">DELL</div><div class="sub">Enterprise Partner</div></div>
+        <div class="pl"><div class="mark thin">MICRO PRECISION</div><div class="sub">Lab JV · USA</div></div>
+        <div class="pl"><div class="mark">FACOM</div><div class="sub">Authorised Distributor</div></div>
+        <div class="pl"><div class="mark">HOLMATRO</div><div class="sub">Authorised Distributor</div></div>
+        <div class="pl"><div class="mark italic">MOLYSLIP</div><div class="sub">Long-Term Agent</div></div>
+      </div>
+
+            </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     05 — RECENT DEALS (press-published partnerships)
+     ============================================================ -->
+<section class="section" id="deals" data-screen-label="05 Recent Deals" style="background: var(--cream-2); padding-bottom: 40px;">
+  <div class="wrap">
+    <div class="s-head">
+      <div class="reveal">
+        <div class="s-num">05 — Recent Deals &amp; Agreements</div>
+        <h2 class="h2 b">Four headline partnerships<br>of the last few years.</h2>
+      </div>
+      <div class="right reveal">
+        <p class="lead muted">The four biggest, most recent agreements Teyseer Group has entered or announced — each linked back to the publication in which it was reported.</p>
+      </div>
+    </div>
+
+    <div class="deals-grid reveal">
+      <article class="deal">
+        <div class="date-blk"><div class="yr">2024</div><div class="mo">May</div></div>
+        <div class="body">
+          <div class="tag">Banking · Teyseer Group</div>
+          <h4>MoU signed with Dukhan Bank — integrated banking, technology and SME financing.</h4>
+          <p>Teyseer Group signed a Memorandum of Understanding with Dukhan Bank to explore joint propositions for startups and SMEs, including bundled offerings combining Dukhan Bank's SME banking with Teyseer Group's technology, plus BNPL and POS financing for SME capital expenditure (subject to regulatory approvals).</p>
+          <span class="src"><span class="sk">From:</span> CB Insights · Dukhan Bank press release on Teyseer Group MoU</span>
+        </div>
+      </article>
+
+      <article class="deal">
+        <div class="date-blk"><div class="yr">2024</div><div class="mo">January</div></div>
+        <div class="body">
+          <div class="tag">Mobility · Teyseer Motors</div>
+          <h4>Strategic partnership signed with Great Wall Motor (GWM).</h4>
+          <p>Teyseer Motors signed a strategic partnership with GWM on 24 January 2024 — covering the GWM Tank premium SUV brand, the Haval SUV range, and the Poer / Wingle pickup line. A new showroom on Old Airport Road, Doha, was announced as part of the agreement.</p>
+          <span class="src"><span class="sk">From:</span> Qatar Tribune · “GWM, Teyseer Motors transform Qatar's automotive landscape in new partnership” · 29 January 2024</span>
+        </div>
+      </article>
+
+      <article class="deal">
+        <div class="date-blk"><div class="yr">2023</div><div class="mo">March</div></div>
+        <div class="body">
+          <div class="tag">Technology · Computer Arabia</div>
+          <h4>Computer Arabia — The 2022 Partner Award of the Year.</h4>
+          <p>Computer Arabia, the Group's IT-cluster integrator, was recognised as &ldquo;The 2022 Partner Award of the Year” — announced via Teyseer Group's news channel in March 2023.</p>
+          <span class="src"><span class="sk">From:</span> teyseergroup.com / News · 29 March 2023</span>
+        </div>
+      </article>
+
+      <article class="deal">
+        <div class="date-blk"><div class="yr">2022</div><div class="mo">July</div></div>
+        <div class="body">
+          <div class="tag">HVAC · Teyseer AC &amp; Refrigeration</div>
+          <h4>Westinghouse HVAC partnership announced for Qatar.</h4>
+          <p>Westinghouse Air Conditioning and Electronics Middle East confirmed it would supply VRF, ducted splits, rooftop units, applied solutions and the latest HVAC technologies through a partnership with Teyseer Group — announced via EINPresswire on 14 July 2022.</p>
+          <span class="src"><span class="sk">From:</span> EINPresswire · 14 July 2022 (per ZoomInfo company news)</span>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     06 — TESTIMONIES (partner / customer voices)
+     ============================================================ -->
+<section class="section" id="testimonies" data-screen-label="06 Testimonies">
+  <div class="wrap">
+    <div class="s-head">
+      <div class="reveal">
+        <div class="s-num">06 — Testimonies</div>
+        <h2 class="h2 b">In the words of<br>those we serve.</h2>
+      </div>
+      <div class="right reveal">
+        <p class="lead muted">A selection of testimonies and statements about Teyseer Group companies — each attributed to a named speaker and traceable to a published source. We don't reprint anonymous praise.</p>
+      </div>
+    </div>
+
+    <div class="testimonials-grid reveal">
+      <article class="testi">
+        <span class="qm" aria-hidden="true">“</span>
+        <p class="quote">Leveraging our robust infrastructure and extensive expertise in after-sales service, Teyseer Motors is dedicated to ensuring that this partnership with GWM proves to be a valuable and fitting investment for our valued customers.</p>
+        <div class="attr">
+          <span class="who">Khalifa Al Mannai</span>
+          <span class="role">Group Deputy Chairman · Teyseer (on the GWM agreement signing)</span>
+        </div>
+        <span class="source">Source &middot; Qatar Tribune &middot; 29 January 2024</span>
+      </article>
+
+      <article class="testi">
+        <span class="qm" aria-hidden="true">“</span>
+        <p class="quote">In the past 26 years of GWM in the GCC, we have never changed our customer-centric philosophy … We are confident that our combined strengths will not only meet but exceed the expectations of our esteemed customers.</p>
+        <div class="attr">
+          <span class="who">Parker Shi</span>
+          <span class="role">Vice President, GWM Group · Head of GWM International</span>
+        </div>
+        <span class="source">Source &middot; Qatar Tribune &middot; 29 January 2024</span>
+      </article>
+
+      <article class="testi">
+        <span class="qm" aria-hidden="true">“</span>
+        <p class="quote">Qatar Plant Hire received an appreciation letter from the Aspire Zone Foundation for its services on Foundation projects — recognising the company's reliability and on-site delivery standards.</p>
+        <div class="attr">
+          <span class="who">Aspire Zone Foundation</span>
+          <span class="role">Letter of Appreciation · to Qatar Plant Hire (QPH)</span>
+        </div>
+        <span class="source">Source &middot; teyseergroup.com / News &middot; 14 April 2023</span>
+      </article>
+
+      <article class="testi">
+        <span class="qm" aria-hidden="true">“</span>
+        <p class="quote">Teyseer is a family business, both in the true sense and in the way it strives to treat its multi-national staff and its management teams, many of whom have supported them for many years and demonstrated a loyalty over and above the call of duty.</p>
+        <div class="attr">
+          <span class="who">Teyseer Group of Companies</span>
+          <span class="role">Official corporate statement</span>
+        </div>
+        <span class="source">Source &middot; LinkedIn / Teyseer Group page</span>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     Closing CTA — Partner With Us + View Partners and Portfolio
+     ============================================================ -->
+<section class="final-cta reveal" aria-label="Next steps">
+  <div class="wrap">
+    <div class="ctxt">
+      <div class="eyebrow">Next Steps</div>
+      <h2>Partner With Us.</h2>
+      <p>For tender pre-qualification, partner due-diligence or principal validation, the Group will provide copies of active certifications, licences and partner authorisation letters on request.</p>
+      <div class="btns">
+        <a class="btn" href="#" data-noop="true">Partner With Us <span class="arrow">→</span></a>
+        <a class="btn outline" href="#" data-noop="true">View Partners &amp; Portfolio <span class="arrow">→</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<button class="totop" id="totop" type="button" aria-label="Back to top">
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 19V5M5 12l7-7 7 7"></path></svg>
+</button>
+
+<script src="teyseer.js"></script>
+<script>
+/* Standards tab switching (Certifications / Licences) */
+document.querySelectorAll('.standards-tab').forEach(function (btn) {
+  btn.addEventListener('click', function () {
+    var target = btn.getAttribute('data-stab');
+    document.querySelectorAll('.standards-tab').forEach(function (b) {
+      b.setAttribute('aria-selected', b === btn ? 'true' : 'false');
+    });
+    document.querySelectorAll('.standards-panel').forEach(function (p) {
+      p.setAttribute('data-active', p.getAttribute('data-panel') === target ? 'true' : 'false');
+    });
+  });
+});
+</script>
+
+
+
+<script>
+/* Flagship Awards Timeline */
+(function () {
+  document.querySelectorAll('.ftl-year').forEach(function (yBtn) {
+    yBtn.addEventListener('click', function () {
+      var yr = yBtn.getAttribute('data-year');
+      document.querySelectorAll('.ftl-year').forEach(function (b) {
+        b.classList.toggle('active', b === yBtn);
+        b.setAttribute('aria-selected', b === yBtn ? 'true' : 'false');
+      });
+      document.querySelectorAll('.ftl-panel').forEach(function (p) {
+        p.setAttribute('data-active', p.getAttribute('data-year-panel') === yr ? 'true' : 'false');
+      });
+    });
+  });
+  document.querySelectorAll('.ftl-panel').forEach(function (panel) {
+    var slider = panel.querySelector('.ftl-slider');
+    var cards  = panel.querySelectorAll('.ftl-card');
+    var prev   = panel.querySelector('.ftl-prev');
+    var next   = panel.querySelector('.ftl-next');
+    var cur    = panel.querySelector('.cur');
+    if (!slider || !cards.length) return;
+    function pad(n){return n<10?'0'+n:''+n;}
+    function getIdx(){
+      var s = slider.getBoundingClientRect();
+      var best=0,bd=Infinity;
+      cards.forEach(function(c,i){var d=Math.abs(c.getBoundingClientRect().left-s.left);if(d<bd){bd=d;best=i;}});
+      return best;
+    }
+    function update(){
+      var i = getIdx();
+      if (cur) cur.textContent = pad(i+1);
+      if (prev) prev.disabled = (i === 0);
+      if (next) next.disabled = (i === cards.length - 1);
+    }
+    function go(i){
+      if (i<0||i>=cards.length) return;
+      slider.scrollTo({ left: cards[i].offsetLeft - slider.offsetLeft, behavior:'smooth' });
+    }
+    if (prev) prev.addEventListener('click', function(){ go(getIdx()-1); });
+    if (next) next.addEventListener('click', function(){ go(getIdx()+1); });
+    slider.addEventListener('scroll', function(){ requestAnimationFrame(update); }, { passive:true });
+    slider.addEventListener('keydown', function(e){
+      if (e.key === 'ArrowRight') { e.preventDefault(); go(getIdx()+1); }
+      if (e.key === 'ArrowLeft')  { e.preventDefault(); go(getIdx()-1); }
+    });
+    update();
+  });
+})();
+</script>
+</body>
+</html>

@@ -1,156 +1,125 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Revised Pages — Teyseer Group</title>
-<script>
-  (function() {
-    const correct = "Teyseer@26#1";
-    if (sessionStorage.getItem("auth") === "true") return;
-
-    document.documentElement.style.visibility = "hidden";
-
-    document.addEventListener("DOMContentLoaded", function() {
-      const overlay = document.createElement("div");
-      overlay.style.cssText = `
-        position:fixed;top:0;left:0;width:100%;height:100%;
-        background:#f5f4f0;display:flex;align-items:center;
-        justify-content:center;z-index:999999;
-        font-family:sans-serif;
-      `;
-      overlay.innerHTML = `
-        <div style="text-align:center;padding:48px;background:white;
-          border-radius:8px;box-shadow:0 4px 24px rgba(0,0,0,0.08);
-          min-width:320px;">
-          <h2 style="color:#1a2e5a;margin:0 0 8px">Teyseer Group</h2>
-          <p style="color:#666;margin:0 0 24px;font-size:14px">
-            This is a private preview. Enter password to continue.
-          </p>
-          <input id="pwInput" type="password" placeholder="Password"
-            style="width:100%;padding:12px;border:1px solid #ddd;
-            border-radius:6px;font-size:14px;box-sizing:border-box;
-            margin-bottom:12px;outline:none;" />
-          <p id="pwError" style="color:#c0392b;font-size:13px;
-            margin:0 0 12px;display:none;">Incorrect password. Try again.</p>
-          <button id="pwBtn"
-            style="width:100%;padding:12px;background:#1a2e5a;
-            color:white;border:none;border-radius:6px;font-size:14px;
-            cursor:pointer;">
-            Enter
-          </button>
-        </div>
-      `;
-      document.body.appendChild(overlay);
-      document.documentElement.style.visibility = "visible";
-
-      function attempt() {
-        const val = document.getElementById("pwInput").value;
-        if (val === correct) {
-          sessionStorage.setItem("auth", "true");
-          overlay.remove();
-        } else {
-          document.getElementById("pwError").style.display = "block";
-          document.getElementById("pwInput").value = "";
-          document.getElementById("pwInput").focus();
-        }
-      }
-
-      document.getElementById("pwBtn").addEventListener("click", attempt);
-      document.getElementById("pwInput").addEventListener("keydown", function(e) {
-        if (e.key === "Enter") attempt();
-      });
-    });
-  })();
-</script>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Teyseer Wireframe for Inner Pages</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
-<link href="https://fonts.googleapis.com/css2?family=Cabin:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{--blue:#2A3C8E;--blue-dark:#1F2D6B;--sky-soft:#DCE5F2;--night:#2A2A2A;--white:#F4F3EF;--paper:#FFFFFF;--line:#DAD8D0;--muted:#5C5C66;--steel:#A6A8BA;--font:"Cabin","Gill Sans MT",system-ui,sans-serif;--mono:"JetBrains Mono",ui-monospace,monospace;}
-html{scroll-behavior:smooth}
-body{font-family:var(--font);background:var(--white);color:var(--night);-webkit-font-smoothing:antialiased;font-size:15px;line-height:1.6;min-height:100vh}
+:root{
+  --blue:#2A3C8E;--blue-dark:#1F2D6B;--sky-soft:#DCE5F2;
+  --night:#2A2A2A;--white:#F4F3EF;--paper:#FFFFFF;
+  --line:#DAD8D0;--muted:#5C5C66;--steel:#A6A8BA;
+  --font:'IBM Plex Sans',system-ui,sans-serif;
+  --mono:'IBM Plex Mono',monospace;
+}
+html{overflow-x:hidden}
+body{font-family:var(--font);background:var(--white);color:var(--night);-webkit-font-smoothing:antialiased;min-height:100vh}
 a{text-decoration:none;color:inherit}
-header{background:var(--blue);padding:48px 0 44px;position:relative;overflow:hidden}
-header::after{content:"";position:absolute;right:-60px;top:-60px;width:380px;height:380px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='380' height='380'%3E%3Crect x='140' y='140' width='100' height='100' transform='rotate(45 190 190)' fill='none' stroke='white' stroke-opacity='0.12' stroke-width='1.5'/%3E%3Crect x='100' y='100' width='180' height='180' transform='rotate(45 190 190)' fill='none' stroke='white' stroke-opacity='0.07' stroke-width='1'/%3E%3C/svg%3E") no-repeat center;pointer-events:none}
-.hd-in{max-width:1320px;margin:0 auto;padding:0 40px;position:relative;z-index:1}
-.hd-eye{font-family:var(--mono);font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.55);margin-bottom:12px;display:flex;align-items:center;gap:10px}
-.hd-eye::before{content:"";width:10px;height:10px;background:rgba(255,255,255,0.5);transform:rotate(45deg)}
-h1{font-size:clamp(32px,4vw,52px);font-weight:700;color:#fff;margin-bottom:8px}
-.hd-sub{font-size:15px;color:rgba(255,255,255,0.65)}
-.hd-meta{display:flex;gap:32px;margin-top:24px}
-.hm{font-family:var(--mono);font-size:12px;color:rgba(255,255,255,0.5)}
-.hm strong{color:#fff;font-size:20px;font-family:var(--font);font-weight:700;display:block;line-height:1}
-main{max-width:1320px;margin:0 auto;padding:52px 40px 80px}
-.group{margin-bottom:52px}
-.group-label{font-family:var(--mono);font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--blue);margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between}
-.count{color:var(--steel)}
-.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:2px;background:var(--line);border:1px solid var(--line)}
-.card{background:var(--paper);padding:22px 24px 26px;display:flex;flex-direction:column;gap:8px;position:relative;overflow:hidden;transition:background 0.18s}
-.card:hover{background:var(--sky-soft)}
-.card-badge{display:inline-block;padding:3px 8px;background:var(--sky-soft);color:var(--blue);font-family:var(--mono);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;border-radius:2px;align-self:flex-start}
-.card-name{font-size:16px;font-weight:700;color:var(--blue-dark);line-height:1.2}
-.card-desc{font-size:13px;color:var(--muted);line-height:1.6;flex:1}
-.card-cta{display:inline-flex;align-items:center;gap:7px;font-family:var(--mono);font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--blue);margin-top:8px}
-.card-cta svg{width:12px;height:12px}
-.card-bg{position:absolute;right:-4px;bottom:-8px;font-family:var(--font);font-size:64px;font-weight:700;color:rgba(42,60,142,0.04);line-height:1;pointer-events:none;user-select:none}
-footer{padding:32px 40px;border-top:1px solid var(--line);display:flex;align-items:center;justify-content:space-between}
-.ft-mark{width:28px;height:28px;background:var(--blue);display:flex;align-items:center;justify-content:center}
-.ft-mark svg{width:18px;height:18px}
-.ft-name{font-size:13px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:var(--night)}
-.ft-copy{font-family:var(--mono);font-size:11px;color:var(--steel)}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:100;height:64px;background:rgba(244,243,239,0.97);backdrop-filter:blur(14px);border-bottom:1px solid var(--line);display:flex;align-items:center;padding:0 40px}
+.nav-logo{display:flex;align-items:center;gap:8px;border:1px solid var(--line);padding:4px 12px 4px 4px;border-radius:2px}
+.logo-sq{width:30px;height:30px;background:var(--blue);display:grid;place-items:center;flex-shrink:0}
+.logo-sq svg{width:16px;height:16px}
+.logo-words{display:flex;flex-direction:column;gap:1px;line-height:1}
+.logo-name{font-size:13px;font-weight:700;letter-spacing:0.1em;color:var(--night)}
+.logo-since{font-family:var(--mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted)}
+.nav-slash{color:var(--line);font-size:18px;font-weight:200;margin:0 10px}
+.nav-title{font-family:var(--mono);font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted)}
+
+/* MAIN */
+main{max-width:1120px;margin:0 auto;padding:56px 40px 80px}
+h1{font-size:clamp(22px,2.4vw,32px);font-weight:700;color:var(--blue-dark);letter-spacing:-0.01em;margin-bottom:52px}
+
+/* GROUPS */
+.batch{margin-bottom:56px}
+.batch-title{font-family:var(--mono);font-size:10px;letter-spacing:0.22em;text-transform:uppercase;color:var(--steel);margin-bottom:24px;padding-bottom:10px;border-bottom:1px solid var(--line)}
+.pages-grid{display:grid;grid-template-columns:1fr 1fr;gap:0}
+.page-item{border-bottom:1px solid var(--line)}
+.page-item a{display:flex;align-items:center;justify-content:space-between;padding:14px 0;font-size:14px;font-weight:500;color:var(--night);letter-spacing:0.01em;transition:color .16s}
+.page-item a:hover{color:var(--blue)}
+.page-item a:hover .arr{opacity:1;transform:translateX(3px)}
+.arr{font-size:14px;color:var(--blue);opacity:0;transition:all .16s;flex-shrink:0}
+
+/* REFERENCES — different UI */
+.ref-batch{background:var(--blue-dark);padding:32px 40px;border-radius:3px;margin-top:8px}
+.ref-batch .batch-title{color:rgba(255,255,255,0.4);border-bottom-color:rgba(255,255,255,0.1)}
+.ref-batch .page-item{border-bottom-color:rgba(255,255,255,0.1)}
+.ref-batch .page-item a{color:rgba(255,255,255,0.75)}
+.ref-batch .page-item a:hover{color:#fff}
+.ref-batch .arr{color:rgba(255,255,255,0.6)}
+
+footer{border-top:1px solid var(--line);padding:24px 40px;display:flex;align-items:center;justify-content:space-between;background:var(--paper)}
+.ft-l{display:flex;align-items:center;gap:10px}
+.ft-sq{width:24px;height:24px;background:var(--blue);display:grid;place-items:center}
+.ft-sq svg{width:13px;height:13px}
+.ft-name{font-size:12px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--night)}
+.ft-copy{font-family:var(--mono);font-size:10px;color:var(--steel)}
+
+@media(max-width:700px){.pages-grid{grid-template-columns:1fr}.main{padding:40px 20px}}
 </style>
 </head>
 <body>
-<header>
-  <div class="hd-in">
-    <div class="hd-eye">Revised Pages</div>
-    <h1>Revised Teyseer Inner Pages</h1>
-    <p class="hd-sub">6 pages redesigned in Teyseer's official brand — new color system, updated IA, and revised content.</p>
-    <div class="hd-meta">
-      <div class="hm"><strong>8</strong>Total Pages</div>
-      <div class="hm"><strong>5</strong>Page Groups</div>
-      <div class="hm"><strong>2026</strong>Teyseer Brand</div>
+<nav>
+  <div class="nav-logo">
+    <div class="logo-sq"><svg viewBox="0 0 20 20" fill="none"><polygon points="10,2 18,10 10,18 2,10" stroke="rgba(255,255,255,0.55)" stroke-width="1" fill="none"/><polygon points="10,6 14,10 10,14 6,10" fill="white"/></svg></div>
+    <div class="logo-words"><span class="logo-name">TEYSEER</span><span class="logo-since">Since 1968</span></div>
+  </div>
+  <span class="nav-slash">/</span>
+  <span class="nav-title">Index</span>
+</nav>
+
+<main>
+  <h1>Teyseer Wireframe for Inner Pages</h1>
+
+  <!-- ABOUT US -->
+  <div class="batch">
+    <div class="batch-title">About Us</div>
+    <div class="pages-grid">
+      <div class="page-item"><a href="About Us.html" target="_blank">About Us <span class="arr">→</span></a></div>
+      <div class="page-item"><a href="History.html" target="_blank">History <span class="arr">→</span></a></div>
+      <div class="page-item"><a href="Vision Mission.html" target="_blank">Vision and Mission <span class="arr">→</span></a></div>
+      <div class="page-item"><a href="Partners.html" target="_blank">Our Partners <span class="arr">→</span></a></div>
+      <div class="page-item"><a href="Portfolio.html" target="_blank">Our Portfolio <span class="arr">→</span></a></div>
+      <div class="page-item"><a href="Chairman.html" target="_blank">Chairman's Message <span class="arr">→</span></a></div>
+      <div class="page-item"><a href="Awards.html" target="_blank">Awards and Certifications <span class="arr">→</span></a></div>
+      <div class="page-item"><a href="QNV.html" target="_blank">QNV 2030 <span class="arr">→</span></a></div>
+      <div class="page-item"><a href="Sustainability.html" target="_blank">Sustainability <span class="arr">→</span></a></div>
     </div>
   </div>
-</header>
-<main id="main"></main>
-<footer>
-  <div style="display:flex;align-items:center;gap:12px"><div class="ft-mark"><svg viewBox="0 0 20 20" fill="none"><rect x="5" y="5" width="10" height="10" transform="rotate(45 10 10)" fill="white"/></svg></div><span class="ft-name">Teyseer Group</span></div>
-  <span class="ft-copy">Revised Prototype · 2024</span>
-</footer>
-<script>
-const PAGES=[
-  {group:"Industry Verticals",cards:[
-    {badge:"v1 · Revised",name:"Industry Verticals",desc:"Tab-panel layout — 9 verticals with companies (clickable chips), partner brands, key achievements with vertical labels, and Explore CTAs.",file:"Teyseer Group - Industry Verticals.html",bg:"IV"},
-    {badge:"v2 · Revised",name:"Industry Verticals",desc:"Accordion layout — 9 verticals each expanding with description, company chips, and Explore CTAs. No brand chips.",file:"Teyseer Group - Industry Verticals v2.html",bg:"IV"}
-  ]},
-  {group:"Automotive Vertical",cards:[
-    {badge:"v1 · Revised",name:"Automotive",desc:"Marques We Represent (Suzuki, Peugeot, GWM, Farizon), Business Units with official website links, and Services grid.",file:"Teyseer Automotive.html",bg:"AV"},
-    {badge:"v2 · Revised",name:"Automotive",desc:"Divisions with integrated award badges, brands marquee, and Key Projects & Accomplishments (4 article-linked cards).",file:"Teyseer Automotive v2.html",bg:"AV"},
-    {badge:"v3 · Revised",name:"Automotive",desc:"Full IA restructure — Key Accomplishments, At a Glance, Automotive Services, Key Brands & Projects, Portfolio (4+5 grid), Companies, Locations map.",file:"Teyseer Automotive v3.html",bg:"AV"}
-  ]},
-  {group:"Information Technology",cards:[
-    {badge:"Revised",name:"IT Vertical",desc:"New IA — Key Accomplishments (4 linked cards), At a Glance, 9-service tab panel, Brands & Projects grid, Partners marquee, Our Companies section.",file:"Teyseer IT Vertical.html",bg:"IT"}
-  ]},
-  {group:"Design Research",cards:[
-    {badge:"Reference",name:"Benchmarks",desc:"Section-by-section design benchmarks across 6 pages — 30 benchmark cards sourced from Al Futtaim, Aramco, Siemens, Honeywell, GE Aerospace, Stripe, Mercedes-Benz and more.",file:"benchmarks.html",bg:"BM"},
-    {badge:"Reference",name:"Content References",desc:"Section-by-section content provenance for all 6 revised pages — source type, UX rationale, and links to every credible reference including the Teyseer official brochure.",file:"references.html",bg:"RF"}
-  ]}
-];
-const arr=`<svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 10L10 2M4 2h6v6"/></svg>`;
-document.getElementById('main').innerHTML=PAGES.map(g=>`
-  <div class="group">
-    <div class="group-label">${g.group}<span class="count">${String(g.cards.length).padStart(2,'0')}</span></div>
-    <div class="cards">${g.cards.map(c=>`
-      <a class="card" href="${c.file}" target="_blank" rel="noopener">
-        <span class="card-badge">${c.badge}</span>
-        <div class="card-name">${c.name}</div>
-        <div class="card-desc">${c.desc}</div>
-        <div class="card-cta">Open page ${arr}</div>
-        <div class="card-bg">${c.bg}</div>
-      </a>`).join('')}
+
+  <!-- GROUP COMPANIES -->
+  <div class="batch">
+    <div class="batch-title">Group Companies</div>
+    <div class="pages-grid">
+      <div class="page-item"><a href="Industry Verticals Listing v1.html" target="_blank">Industry Verticals Listing v1 <span class="arr">→</span></a></div>
+      <div class="page-item"><a href="../Industry Verticals Listing v2.html" target="_blank">Industry Verticals Listing v2 <span class="arr">→</span></a></div>
+      <div class="page-item"><a href="Automotive Details Page v1.html" target="_blank">Automotive Details V1 <span class="arr">→</span></a></div>
+      <div class="page-item"><a href="Automotive Details Page v2.html" target="_blank">Automotive Details V2 <span class="arr">→</span></a></div>
+      <div class="page-item"><a href="Automotive Details Page v3.html" target="_blank">Automotive Details V3 <span class="arr">→</span></a></div>
+      <div class="page-item"><a href="IT Details Page.html" target="_blank">IT Details <span class="arr">→</span></a></div>
     </div>
-  </div>`).join('');
-</script>
+  </div>
+
+  <!-- REFERENCES — different UI -->
+  <div class="ref-batch">
+    <div class="batch-title">References</div>
+    <div class="pages-grid">
+      <div class="page-item"><a href="Benchmarks.html" target="_blank">Benchmarks <span class="arr">→</span></a></div>
+      <div class="page-item"><a href="Content Provenance.html" target="_blank">Content Provenance <span class="arr">→</span></a></div>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="ft-l">
+    <div class="ft-sq"><svg viewBox="0 0 20 20" fill="none"><polygon points="10,2 18,10 10,18 2,10" stroke="rgba(255,255,255,0.55)" stroke-width="1" fill="none"/><polygon points="10,6 14,10 10,14 6,10" fill="white"/></svg></div>
+    <span class="ft-name">Teyseer Group</span>
+  </div>
+  <span class="ft-copy">Applab Qatar · 2026 · All pages open in new tab</span>
+</footer>
 </body>
 </html>

@@ -1,0 +1,2000 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Our Portfolio — Teyseer Group</title>
+<meta name="description" content="Projects delivered across Qatar's national economy — from electric vehicle launches to Msheireb Downtown Doha and Sidra Medical.">
+<link rel="stylesheet" href="teyseer.css">
+<style>
+/* ============================================================
+   PAGE-SPECIFIC — PARTNERS / PORTFOLIO
+   ============================================================ */
+.hero.partners-hero { padding: 96px 0 56px; }
+.hero .quick {
+  margin-top: 64px;
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 0;
+  border: 1px solid var(--line);
+  background: var(--paper);
+}
+@media (max-width: 900px) { .hero .quick { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 540px) { .hero .quick { grid-template-columns: 1fr; } }
+.hero .quick .q {
+  padding: 26px 24px;
+  border-right: 1px solid var(--line);
+  display: flex; flex-direction: column; gap: 6px;
+}
+.hero .quick .q:last-child { border-right: 0; }
+@media (max-width: 900px) { .hero .quick .q:nth-child(2) { border-right: 0; } }
+.hero .quick .num {
+  font-family: var(--serif); font-weight: 300;
+  font-size: 48px; line-height: 1; color: var(--blue);
+}
+.hero .quick .num .sfx { font-size: 24px; vertical-align: super; margin-left: 2px; color: var(--steel-dim); }
+.hero .quick .lbl {
+  font-family: var(--mono); font-size: 10.5px;
+  letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted);
+}
+.hero .quick .desc { font-size: 13.5px; color: var(--night); margin-top: 6px; }
+
+/* Sector filter strip — multi-row chips */
+.filter-strip {
+  display: flex; flex-wrap: wrap; gap: 8px;
+  margin-bottom: 24px;
+}
+.filter-strip .fbtn {
+  padding: 10px 16px;
+  font-family: var(--sans); font-size: 13.5px; font-weight: 500;
+  color: var(--night); background: var(--paper);
+  border: 1px solid #B8B6AC;  /* ~10% darker than --line for stronger inactive-state contrast */
+  cursor: pointer; transition: background 160ms, color 160ms, border-color 160ms;
+  display: inline-flex; align-items: center; gap: 10px;
+}
+.filter-strip .fbtn .fc {
+  font-family: var(--mono); font-size: 10.5px;
+  color: var(--muted); letter-spacing: 0.14em;
+}
+.filter-strip .fbtn:hover { background: var(--sky-soft); color: var(--blue); border-color: var(--sky); }
+.filter-strip .fbtn.active { background: var(--blue); color: var(--paper); border-color: var(--blue); }
+.filter-strip .fbtn.active .fc { color: rgba(255,255,255,0.7); }
+
+/* Active-vertical title bar */
+.sector-title {
+  display: flex; justify-content: space-between; align-items: end;
+  border-bottom: 1px solid var(--line);
+  padding: 18px 0 14px;
+  margin-bottom: 22px;
+}
+.sector-title h3 {
+  font-family: var(--serif);
+  font-size: clamp(22px, 2.2vw, 32px);
+  font-weight: 700;
+  letter-spacing: -0.005em;
+  color: var(--blue-deep);
+  margin: 0;
+}
+.sector-title .meta {
+  font-family: var(--mono); font-size: 11px;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* Partner card grid — auto-fit so empty grey space disappears when filtering */
+.partner-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+}
+@media (max-width: 1024px) { .partner-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (max-width: 720px) { .partner-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 460px) { .partner-grid { grid-template-columns: 1fr; } }
+.partner-grid.cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.partner-grid.cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.partner-grid.cols-1 { grid-template-columns: 1fr; }
+/* Industry mode: 12-col grid, normal cards span 3 (=> 4 per row), last 3 span 4 (=> 3 across full width) */
+.partner-grid.industry-mode { grid-template-columns: repeat(12, minmax(0, 1fr)); }
+.partner-grid.industry-mode .partner-card { grid-column: span 3; }
+.partner-grid.industry-mode .partner-card:not(.hidden):nth-last-of-type(-n+3) { grid-column: span 4; }
+@media (max-width: 1024px) {
+  .partner-grid.industry-mode { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+  .partner-grid.industry-mode .partner-card { grid-column: span 2; }
+  .partner-grid.industry-mode .partner-card:not(.hidden):nth-last-of-type(-n+3) { grid-column: span 2; }
+}
+
+/* Scroll window — keeps section 02 / 05 from creating a long-scroll page */
+.scroll-window {
+  position: relative;
+  border: 1px solid var(--line);
+  background: var(--paper);
+}
+.scroll-window .scroll-inner {
+  max-height: 720px;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+}
+.scroll-window .scroll-inner::-webkit-scrollbar { width: 10px; }
+.scroll-window .scroll-inner::-webkit-scrollbar-track { background: var(--white); }
+.scroll-window .scroll-inner::-webkit-scrollbar-thumb { background: var(--steel); }
+.scroll-window .scroll-inner::-webkit-scrollbar-thumb:hover { background: var(--blue); }
+.scroll-window .partner-grid { border: 0; }
+
+/* Scroll affordance: gradient fade + "↓ More" pill, both fade once user scrolls */
+.scroll-window .scroll-fade,
+.scroll-window .scroll-hint {
+  pointer-events: none;
+  transition: opacity 220ms ease;
+}
+.scroll-window .scroll-fade {
+  position: absolute;
+  left: 1px; right: 1px;
+  bottom: 1px;
+  height: 96px;
+  background: linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(255,255,255,0.96) 80%);
+  z-index: 2;
+}
+.scroll-window .scroll-hint {
+  position: absolute;
+  left: 50%;
+  bottom: 18px;
+  transform: translateX(-50%);
+  background: var(--blue);
+  color: var(--paper);
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  padding: 7px 16px;
+  display: inline-flex; align-items: center; gap: 7px;
+  z-index: 3;
+  box-shadow: 0 2px 12px rgba(31,45,107,0.18);
+}
+.scroll-window[data-scrolled="true"] .scroll-fade,
+.scroll-window[data-scrolled="true"] .scroll-hint { opacity: 0; }
+.scroll-window[data-at-bottom="true"] .scroll-fade,
+.scroll-window[data-at-bottom="true"] .scroll-hint { opacity: 0; }
+
+/* Skip-rail — sits ABOVE the scroll window now, so users can opt out before they start scrolling */
+.skip-rail-top {
+  border: 1px solid var(--line);
+  border-bottom: 0;
+  background: var(--paper);
+  padding: 12px 18px;
+  display: flex; justify-content: space-between; align-items: center;
+  gap: 12px; flex-wrap: wrap;
+  font-family: var(--mono); font-size: 11px;
+  letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted);
+}
+.skip-rail-top .skip-link {
+  display: inline-flex; align-items: center; gap: 6px;
+  color: var(--blue); font-weight: 500;
+  padding: 6px 12px;
+  border: 1px solid var(--blue);
+  transition: all 160ms;
+}
+.skip-rail-top .skip-link:hover { background: var(--blue); color: var(--paper); }
+
+.partner-card {
+  background: var(--paper);
+  padding: 26px 22px 22px;
+  display: flex; flex-direction: column;
+  gap: 8px;
+  transition: background 180ms;
+  position: relative;
+  min-height: 200px;
+}
+.partner-card:hover { background: var(--sky-soft); }
+.partner-card.hidden { display: none; }
+.partner-card .logo {
+  width: 100%;
+  min-height: 48px;
+  display: flex; align-items: center;
+  border-bottom: 1px solid var(--line-soft);
+  padding-bottom: 12px;
+  margin-bottom: 2px;
+}
+.partner-card .wm {
+  font-family: var(--serif);
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--blue-deep);
+  text-transform: uppercase;
+}
+.partner-card .wm.thin { font-weight: 300; letter-spacing: 0.08em; }
+.partner-card .wm.italic { font-style: italic; font-weight: 400; }
+.partner-card .wm.small { font-size: 15px; }
+.partner-card .since {
+  font-family: var(--mono); font-size: 10px;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--muted);
+}
+.partner-card .name {
+  font-family: var(--serif);
+  font-size: 14.5px;
+  font-weight: 600;
+  color: var(--night);
+}
+.partner-card .desc {
+  font-size: 12.5px;
+  color: var(--muted);
+  line-height: 1.5;
+}
+.partner-card .tag {
+  margin-top: auto;
+  display: inline-flex; align-items: center; gap: 6px;
+  font-family: var(--mono); font-size: 9.5px;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--blue);
+  padding-top: 10px;
+}
+.partner-card .tag .diamond { width: 5px; height: 5px; background: var(--blue); transform: rotate(45deg); }
+
+/* Anchor partnerships — horizontal carousel (Section 03) */
+.anchors-shell { position: relative; }
+
+.anchors-controls {
+  display: flex; justify-content: space-between; align-items: center;
+  gap: 16px; margin-bottom: 18px; flex-wrap: wrap;
+}
+.anchors-controls .dots {
+  display: inline-flex; gap: 8px;
+  align-items: center;
+  margin: 0 auto;
+}
+.anchors-controls .dots .dot {
+  width: 32px; height: 4px;
+  background: var(--line);
+  border: 0;
+  cursor: pointer;
+  padding: 0;
+  transition: background 200ms ease, width 200ms ease;
+}
+.anchors-controls .dots .dot:hover { background: var(--steel); }
+.anchors-controls .dots .dot.active {
+  background: var(--blue);
+  width: 56px;
+}
+.anchors-controls .arrows {
+  display: inline-flex; gap: 8px;
+}
+.anchors-controls .arr {
+  width: 44px; height: 44px;
+  background: var(--paper);
+  border: 1px solid #B8B6AC;
+  color: var(--blue);
+  display: grid; place-items: center;
+  cursor: pointer;
+  transition: all 160ms;
+  flex-shrink: 0;
+}
+.anchors-controls .arr:hover:not(:disabled) {
+  background: var(--blue); color: var(--paper); border-color: var(--blue);
+}
+.anchors-controls .arr:disabled {
+  opacity: 0.3; cursor: not-allowed;
+}
+.anchors-controls .arr svg { width: 18px; height: 18px; }
+.anchors-controls .acounter {
+  font-family: var(--mono); font-size: 11px;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--muted);
+  white-space: nowrap;
+}
+.anchors-controls .acounter strong { color: var(--blue); font-weight: 500; }
+.anchors-controls .acounter .ctot { color: var(--muted); }
+
+.anchors-rail {
+  position: relative;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  padding: 4px 0 18px;
+}
+.anchors-rail::-webkit-scrollbar { height: 8px; }
+.anchors-rail::-webkit-scrollbar-track { background: var(--line-soft); }
+.anchors-rail::-webkit-scrollbar-thumb { background: var(--steel); }
+.anchors-rail::-webkit-scrollbar-thumb:hover { background: var(--blue); }
+
+.anchors-track {
+  display: flex;
+  gap: 24px;
+  padding-right: 32px;  /* breathing room past last card */
+}
+
+.anchor-card {
+  flex: 0 0 calc(50% - 12px);
+  max-width: 640px;
+  scroll-snap-align: start;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  display: flex; flex-direction: column;
+  overflow: hidden;
+  transition: border-color 180ms, box-shadow 180ms;
+}
+@media (max-width: 1100px) { .anchor-card { flex-basis: calc(75% - 12px); } }
+@media (max-width: 720px)  { .anchor-card { flex-basis: calc(100% - 4px); } }
+.anchor-card:hover {
+  border-color: var(--blue);
+  box-shadow: 0 6px 22px rgba(31,45,107,0.12);
+}
+.anchor-card .visual {
+  aspect-ratio: 16 / 9;
+  background: var(--sky-soft);
+  position: relative; overflow: hidden;
+  border-bottom: 1px solid var(--line);
+}
+.anchor-card .visual svg { width: 100%; height: 100%; display: block; }
+.anchor-card .visual .caption {
+  position: absolute; bottom: 12px; left: 12px;
+  font-family: var(--mono); font-size: 10px;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--paper);
+  background: rgba(31,45,107,0.92);
+  padding: 5px 9px;
+}
+.anchor-card .visual .badge-num {
+  position: absolute; top: 12px; left: 12px;
+  font-family: var(--mono); font-size: 10px;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--blue);
+  background: var(--paper);
+  padding: 5px 10px;
+  border: 1px solid var(--blue);
+}
+.anchor-card .body {
+  padding: 24px 26px 26px;
+  display: flex; flex-direction: column;
+  gap: 12px; flex: 1;
+}
+.anchor-card .body .eyebrow { display: block; }
+.anchor-card .body h3 {
+  font-family: var(--serif);
+  font-size: clamp(20px, 1.8vw, 26px);
+  font-weight: 700;
+  letter-spacing: -0.005em;
+  line-height: 1.2;
+  color: var(--blue);
+  margin: 4px 0 0;
+}
+.anchor-card .body p {
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: var(--night);
+  margin: 0;
+}
+.anchor-card .body .meta {
+  margin-top: auto;
+  padding-top: 16px;
+  border-top: 1px solid var(--line-soft);
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 12px;
+}
+@media (max-width: 540px) { .anchor-card .body .meta { grid-template-columns: 1fr 1fr; } }
+.anchor-card .body .meta .m { display: flex; flex-direction: column; gap: 3px; }
+.anchor-card .body .meta .mv {
+  font-family: var(--serif); font-size: 22px;
+  font-weight: 300; color: var(--blue); line-height: 1;
+}
+.anchor-card .body .meta .ml {
+  font-family: var(--mono); font-size: 10px;
+  letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted);
+}
+
+/* JV row */
+.jv-row {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 0; background: var(--paper); border: 1px solid var(--line);
+}
+@media (max-width: 900px) { .jv-row { grid-template-columns: 1fr; } }
+.jv {
+  padding: 36px 32px;
+  border-right: 1px solid var(--line);
+  display: flex; flex-direction: column; gap: 10px;
+}
+.jv:last-child { border-right: 0; }
+@media (max-width: 900px) { .jv { border-right: 0; border-bottom: 1px solid var(--line); } .jv:last-child { border-bottom: 0; } }
+.jv .ix { font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--blue); }
+.jv h4 { font-family: var(--serif); font-size: 22px; font-weight: 700; color: var(--night); margin: 4px 0 2px; }
+.jv .with { font-family: var(--mono); font-size: 11px; letter-spacing: 0.12em; color: var(--muted); margin-bottom: 10px; }
+.jv p { font-size: 14px; color: var(--night); line-height: 1.6; margin: 0; }
+
+/* ============================================================
+   PORTFOLIO — Compact directory pattern
+   Sector pills at top → filterable grid of compact company tiles
+   ============================================================ */
+.portfolio-shell {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  display: grid;
+  grid-template-columns: 280px 1fr;
+}
+@media (max-width: 900px) { .portfolio-shell { grid-template-columns: 1fr; } }
+
+.portfolio-aside {
+  border-right: 1px solid var(--line);
+  padding: 22px 18px;
+  background: var(--cream-2);
+  align-self: start;
+  position: sticky; top: 80px;
+}
+@media (max-width: 900px) {
+  .portfolio-aside { border-right: 0; border-bottom: 1px solid var(--line); padding: 14px 18px; position: static; }
+}
+.portfolio-aside .lbl {
+  font-family: var(--mono); font-size: 10.5px;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 14px;
+  display: block;
+}
+.portfolio-aside .pfilters {
+  display: flex; flex-direction: column; gap: 2px;
+}
+@media (max-width: 900px) { .portfolio-aside .pfilters { flex-direction: row; flex-wrap: wrap; gap: 6px; } }
+.portfolio-aside .pf {
+  text-align: left;
+  background: transparent;
+  border: 0;
+  padding: 10px 12px;
+  font-family: var(--sans); font-size: 14px;
+  color: var(--night);
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 12px;
+  cursor: pointer; transition: all 160ms;
+  font-weight: 500;
+  border-left: 2px solid transparent;
+}
+.portfolio-aside .pf:hover { color: var(--blue); background: var(--paper); }
+.portfolio-aside .pf.active {
+  color: var(--blue); background: var(--paper);
+  border-left-color: var(--blue);
+}
+.portfolio-aside .pf .ct {
+  font-family: var(--mono); font-size: 11px;
+  color: var(--muted); letter-spacing: 0.1em;
+  background: var(--white);
+  padding: 2px 7px;
+  border: 1px solid var(--line);
+}
+.portfolio-aside .pf.active .ct { color: var(--blue); border-color: var(--blue); }
+
+@media (max-width: 900px) {
+  .portfolio-aside .pf { border-left: 0; border-bottom: 2px solid transparent; padding: 8px 12px; }
+  .portfolio-aside .pf.active { border-bottom-color: var(--blue); border-left: 0; }
+}
+
+.portfolio-main {
+  padding: 22px 26px 22px;
+  display: flex; flex-direction: column;
+  gap: 14px;
+  min-height: 0;
+}
+.portfolio-main .pmhead {
+  display: flex; justify-content: space-between; align-items: end;
+  padding-bottom: 12px; border-bottom: 1px solid var(--line);
+}
+.portfolio-main .pmhead h3 {
+  font-family: var(--serif); font-size: 24px; font-weight: 700;
+  letter-spacing: -0.005em; color: var(--blue-deep);
+  margin: 0;
+}
+.portfolio-main .pmhead .desc {
+  font-size: 13px; color: var(--muted);
+  text-align: right; max-width: 38ch;
+  line-height: 1.45;
+}
+.portfolio-main .companies-scroll-wrap {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+}
+.portfolio-main .companies-scroll {
+  max-height: 540px;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+  padding-right: 6px;
+}
+.portfolio-main .companies-scroll::-webkit-scrollbar { width: 8px; }
+.portfolio-main .companies-scroll::-webkit-scrollbar-track { background: transparent; }
+.portfolio-main .companies-scroll::-webkit-scrollbar-thumb { background: var(--steel); }
+.portfolio-main .companies-scroll::-webkit-scrollbar-thumb:hover { background: var(--blue); }
+.portfolio-main .scroll-fade-pf,
+.portfolio-main .scroll-hint-pf {
+  pointer-events: none;
+  transition: opacity 220ms ease;
+}
+.portfolio-main .scroll-fade-pf {
+  position: absolute;
+  left: 0; right: 8px; bottom: 0;
+  height: 72px;
+  background: linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(255,255,255,0.96) 80%);
+}
+.portfolio-main .scroll-hint-pf {
+  position: absolute;
+  left: 50%; bottom: 12px;
+  transform: translateX(-50%);
+  background: var(--blue);
+  color: var(--paper);
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  padding: 6px 14px;
+  display: inline-flex; align-items: center; gap: 6px;
+  box-shadow: 0 2px 12px rgba(31,45,107,0.18);
+}
+.portfolio-main .companies-scroll-wrap[data-scrolled="true"] .scroll-fade-pf,
+.portfolio-main .companies-scroll-wrap[data-scrolled="true"] .scroll-hint-pf { opacity: 0; }
+.portfolio-main .companies-scroll-wrap[data-at-bottom="true"] .scroll-fade-pf,
+.portfolio-main .companies-scroll-wrap[data-at-bottom="true"] .scroll-hint-pf { opacity: 0; }
+.portfolio-main .companies-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+@media (max-width: 1100px) { .portfolio-main .companies-grid { grid-template-columns: 1fr; } }
+
+.coa {
+  padding: 18px 20px 16px;
+  background: var(--white);
+  border: 1px solid var(--line);
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 14px;
+  align-items: start;
+  transition: all 180ms;
+  cursor: default;
+}
+.coa.hidden { display: none; }
+.coa:hover { border-color: var(--blue); background: var(--paper); }
+.coa .num-blk {
+  width: 38px; height: 38px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  display: grid; place-items: center;
+  font-family: var(--mono); font-size: 11px;
+  color: var(--blue);
+  letter-spacing: 0.04em;
+}
+.coa .num-blk .n {
+  font-family: var(--serif);
+  font-weight: 700;
+  font-size: 14px;
+}
+.coa .info h4 {
+  font-family: var(--serif); font-size: 16px; font-weight: 700;
+  letter-spacing: -0.005em; color: var(--night);
+  margin: 0 0 2px;
+  line-height: 1.25;
+}
+.coa .info .wll {
+  font-family: var(--mono); font-size: 10px;
+  letter-spacing: 0.14em; color: var(--muted);
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.coa .info .desc {
+  font-size: 12.5px; color: var(--night);
+  line-height: 1.55;
+}
+.coa .sec-pin {
+  width: 10px; height: 10px;
+  background: var(--blue);
+  transform: rotate(45deg);
+  margin-top: 6px;
+}
+.coa .sec-pin.industry  { background: #1F8A5B; }
+.coa .sec-pin.build     { background: #6B7280; }
+.coa .sec-pin.it        { background: #6E59C7; }
+.coa .sec-pin.hvac      { background: #1395BA; }
+.coa .sec-pin.services  { background: #B43D5E; }
+.coa .sec-pin.crane     { background: #C97D1E; }
+.coa .sec-pin.manufact  { background: #6F4E37; }
+
+/* Brands / Companies tab toggle inside sector-title */
+.sector-title {
+  display: flex; justify-content: space-between; align-items: center;
+  gap: 16px; flex-wrap: wrap;
+}
+.sector-title .vt-tabs {
+  display: inline-flex;
+  gap: 4px;
+  background: var(--paper);
+  border: 1px solid #B8B6AC;
+  padding: 4px;
+}
+.sector-title .vt-tab {
+  font-family: var(--sans); font-size: 13px; font-weight: 500;
+  color: var(--muted); background: transparent;
+  border: 0;
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: all 160ms;
+  display: inline-flex; align-items: center; gap: 8px;
+}
+.sector-title .vt-tab .ct {
+  font-family: var(--mono); font-size: 10px;
+  letter-spacing: 0.14em; color: var(--muted);
+}
+.sector-title .vt-tab:hover { color: var(--blue); }
+.sector-title .vt-tab.active {
+  background: var(--blue); color: var(--paper);
+}
+.sector-title .vt-tab.active .ct { color: rgba(255,255,255,0.7); }
+.partner-card.hidden { display: none; }
+
+/* ============================================================
+   PORTFOLIO — sector pills + horizontal slider per sector
+   ============================================================ */
+.pf-pills-row {
+  display: flex; flex-wrap: wrap; gap: 8px;
+  margin-bottom: 28px;
+}
+.pf-sector-pill {
+  padding: 10px 18px;
+  font-family: var(--sans); font-size: 13.5px; font-weight: 500;
+  color: var(--night); background: var(--paper);
+  border: 1px solid #B8B6AC;
+  cursor: pointer; transition: all 160ms;
+  display: inline-flex; align-items: center; gap: 10px;
+}
+.pf-sector-pill .ct {
+  font-family: var(--mono); font-size: 10.5px;
+  letter-spacing: 0.14em; color: var(--muted);
+  background: var(--white);
+  padding: 2px 7px;
+  border: 1px solid var(--line);
+}
+.pf-sector-pill:hover { background: var(--sky-soft); color: var(--blue); border-color: var(--sky); }
+.pf-sector-pill.active {
+  background: var(--blue); color: var(--paper); border-color: var(--blue);
+}
+.pf-sector-pill.active .ct { color: var(--blue); background: var(--paper); border-color: var(--paper); }
+
+.pf-shell { position: relative; }
+.pf-panel { display: none; }
+.pf-panel[data-active="true"] { display: block; }
+
+.pf-panel-head {
+  display: flex; justify-content: space-between; align-items: end;
+  padding: 0 0 14px;
+  margin-bottom: 18px;
+  border-bottom: 1px solid var(--line);
+  gap: 16px; flex-wrap: wrap;
+}
+.pf-sector-label {
+  font-family: var(--serif);
+  font-size: clamp(20px, 1.8vw, 26px);
+  font-weight: 700;
+  color: var(--blue-deep);
+  letter-spacing: -0.005em;
+}
+.pf-sector-blurb {
+  font-family: var(--mono); font-size: 11px;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--muted); margin-top: 4px;
+}
+.pf-counter {
+  font-family: var(--mono); font-size: 11px;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--muted);
+}
+.pf-counter .cur { color: var(--blue); font-weight: 500; }
+
+.pf-slider-wrap {
+  display: grid;
+  grid-template-columns: 44px 1fr 44px;
+  gap: 12px;
+  align-items: stretch;
+}
+.pf-arr {
+  background: var(--paper);
+  border: 1px solid #B8B6AC;
+  color: var(--blue);
+  display: grid; place-items: center;
+  cursor: pointer; transition: all 160ms;
+}
+.pf-arr svg { width: 18px; height: 18px; }
+.pf-arr:hover:not(:disabled) { background: var(--blue); color: var(--paper); border-color: var(--blue); }
+.pf-arr:disabled { opacity: 0.3; cursor: not-allowed; }
+
+.pf-slider {
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  padding: 4px 0 16px;
+}
+.pf-slider::-webkit-scrollbar { height: 6px; }
+.pf-slider::-webkit-scrollbar-track { background: var(--line-soft); }
+.pf-slider::-webkit-scrollbar-thumb { background: var(--steel); }
+.pf-slider::-webkit-scrollbar-thumb:hover { background: var(--blue); }
+
+.pf-track {
+  display: flex;
+  gap: 18px;
+  padding-right: 20px;
+}
+.pf-card {
+  flex: 0 0 calc(50% - 9px);
+  max-width: 560px;
+  scroll-snap-align: start;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  display: flex; flex-direction: column;
+  overflow: hidden;
+  transition: border-color 180ms, box-shadow 180ms;
+}
+@media (max-width: 1100px) { .pf-card { flex-basis: calc(75% - 9px); } }
+@media (max-width: 720px)  { .pf-card { flex-basis: calc(100% - 4px); } }
+.pf-card:hover { border-color: var(--blue); box-shadow: 0 6px 22px rgba(31,45,107,0.10); }
+.pf-visual {
+  aspect-ratio: 16 / 9;
+  background: var(--sky-soft);
+  position: relative; overflow: hidden;
+  border-bottom: 1px solid var(--line);
+}
+.pf-visual svg { width: 100%; height: 100%; display: block; }
+.pf-num {
+  position: absolute; top: 12px; left: 12px;
+  font-family: var(--mono); font-size: 10.5px;
+  letter-spacing: 0.18em;
+  color: var(--blue);
+  background: var(--paper);
+  padding: 5px 10px;
+  border: 1px solid var(--blue);
+  z-index: 2;
+}
+.pf-cap {
+  position: absolute; bottom: 12px; right: 12px;
+  font-family: var(--mono); font-size: 9.5px;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--paper);
+  background: rgba(31,45,107,0.85);
+  padding: 4px 9px;
+}
+.pf-body {
+  padding: 20px 22px 22px;
+  display: flex; flex-direction: column; gap: 10px; flex: 1;
+}
+.pf-body h4 {
+  font-family: var(--serif);
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: -0.005em;
+  line-height: 1.25;
+  color: var(--blue);
+  margin: 0;
+}
+.pf-body p {
+  font-size: 13px; line-height: 1.55;
+  color: var(--night); margin: 0;
+}
+.pf-loc {
+  font-family: var(--mono); font-size: 10px;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--muted);
+  padding-top: 8px;
+  border-top: 1px solid var(--line-soft);
+}
+.pf-pills { display: flex; gap: 6px; flex-wrap: wrap; margin-top: auto; }
+.pf-pill {
+  font-family: var(--mono); font-size: 9.5px;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--blue);
+  background: var(--sky-soft);
+  padding: 4px 9px;
+}
+
+.pf-dots {
+  display: flex; gap: 6px;
+  justify-content: center;
+  margin-top: 16px;
+}
+.pf-dot {
+  width: 28px; height: 4px;
+  background: var(--line);
+  border: 0; padding: 0;
+  cursor: pointer;
+  transition: background 200ms, width 200ms;
+}
+.pf-dot:hover { background: var(--steel); }
+.pf-dot.active { background: var(--blue); width: 48px; }
+
+/* ============================================================
+   PAGE SWITCHER (inter-page nav across the 3 About-Us pages)
+   ============================================================ */
+.pageswitcher {
+  display: inline-flex; gap: 0;
+  border: 1px solid var(--line);
+  background: var(--paper);
+  margin-left: 8px;
+  flex-shrink: 0;
+}
+.pageswitcher a {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding: 7px 12px;
+  border-right: 1px solid var(--line);
+  transition: all 160ms;
+  white-space: nowrap;
+}
+.pageswitcher a:last-child { border-right: 0; }
+.pageswitcher a:hover { background: var(--sky-soft); color: var(--blue); }
+.pageswitcher a.here {
+  background: var(--blue);
+  color: var(--paper);
+}
+
+</style>
+</head>
+<body data-screen-label="Our Portfolio">
+
+<a class="skip" href="#main">Skip to content</a>
+<div class="progress"><div class="fill" id="progressFill"></div></div>
+
+<header class="pagebar" role="banner">
+  <div class="wrap">
+    <div class="pb-row pb-bottom">
+      <a href="index.html" class="brand" aria-label="Teyseer Group">
+      <span class="mark" aria-hidden="true">
+        <svg viewBox="0 0 36 36" fill="none">
+          <rect x="6" y="6" width="24" height="24" fill="#2A3C8E"></rect>
+          <rect x="13.5" y="13.5" width="9" height="9" transform="rotate(45 18 18)" fill="#A6A8BA"></rect>
+          <rect x="16.5" y="16.5" width="3" height="3" transform="rotate(45 18 18)" fill="#F4F3EF"></rect>
+        </svg>
+      </span>
+      <span>
+        <div class="name">Teyseer</div>
+        <div class="tag">Since 1968</div>
+      </span>
+    </a>
+      <div class="anchornav-wrap">
+      <nav class="anchornav" id="anchornav" aria-label="On this page">
+        <a href="#portfolio" class="active">01 Portfolio Overview</a>
+        <a href="#portfolio">02 Projects by Sector</a>
+      </nav>
+    </div>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- PORTFOLIO HERO -->
+<section class="hero partners-hero pattern-bg" id="hero" data-screen-label="01 Portfolio Overview">
+  <svg class="water" viewBox="0 0 200 200" aria-hidden="true">
+    <rect x="40" y="40" width="120" height="120" fill="none" stroke="#2A3C8E" stroke-width="0.6"></rect>
+    <rect x="70" y="70" width="60" height="60" transform="rotate(45 100 100)" fill="none" stroke="#2A3C8E" stroke-width="0.6"></rect>
+    <rect x="92" y="92" width="16" height="16" transform="rotate(45 100 100)" fill="#2A3C8E"></rect>
+  </svg>
+  <div class="wrap">
+    <div class="ix">
+      <span>01</span><span class="dash"></span><span>Our Portfolio</span>
+    </div>
+    <h1 class="h1 b reveal">Delivered across<br>Qatar's economy.</h1>
+    <p class="lead reveal">From electric-vehicle launches and FIFA World Cup operations to Msheireb Downtown Doha and Sidra Medical — projects delivered by Teyseer Group companies across nine sectors and decades of national service.</p>
+
+    <div class="quick reveal" aria-label="Portfolio at a glance">
+      <div class="q">
+        <div class="num"><span class="counter" data-to="38">38</span></div>
+        <div class="lbl">Portfolio Projects</div>
+        <div class="desc">Verified project deliveries across all nine verticals.</div>
+      </div>
+      <div class="q">
+        <div class="num"><span class="counter" data-to="9">9</span></div>
+        <div class="lbl">Industry Sectors</div>
+        <div class="desc">Mobility, IT, construction, industry, HVAC, security, FM, manufacturing, crane.</div>
+      </div>
+      <div class="q">
+        <div class="num"><span class="counter" data-to="57">57</span><span class="sfx">+&nbsp;yrs</span></div>
+        <div class="lbl">In Qatar</div>
+        <div class="desc">Continuously operating since 1968.</div>
+      </div>
+      <div class="q">
+        <div class="num"><span class="counter" data-to="18">18</span></div>
+        <div class="lbl">Group Companies</div>
+        <div class="desc">Independent W.L.L. entities delivering across Qatar.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="portfolio-sectors" data-screen-label="03 Our Portfolio">
+  <div class="wrap">
+    <div class="s-head">
+      <div class="reveal">
+        <div class="s-num">03 — Our Portfolio</div>
+        <h2 class="h2 b">Projects across<br>Qatar's national economy.</h2>
+      </div>
+      <div class="right reveal">
+        <p class="lead muted">From electric-vehicle launches and FIFA World Cup operations to Msheireb Downtown Doha and Sidra Medical — selected projects delivered by Teyseer Group companies, organised by sector.</p>
+      </div>
+    </div>
+
+    <div class="pf-pills-row reveal" role="tablist" aria-label="Filter portfolio by sector">
+      <button class="pf-sector-pill active" data-pf-sector="auto" role="tab" aria-selected="true">Automobile <span class="ct">8</span></button>
+      <button class="pf-sector-pill" data-pf-sector="it" role="tab" aria-selected="false">Information Technology <span class="ct">3</span></button>
+      <button class="pf-sector-pill" data-pf-sector="build" role="tab" aria-selected="false">Construction and Building Materials <span class="ct">4</span></button>
+      <button class="pf-sector-pill" data-pf-sector="industry" role="tab" aria-selected="false">Industry Products and Safety Products <span class="ct">2</span></button>
+      <button class="pf-sector-pill" data-pf-sector="crane" role="tab" aria-selected="false">Crane and Lifting <span class="ct">5</span></button>
+      <button class="pf-sector-pill" data-pf-sector="manufact" role="tab" aria-selected="false">Manufacturing and Fabrication <span class="ct">1</span></button>
+      <button class="pf-sector-pill" data-pf-sector="services" role="tab" aria-selected="false">Catering and Facility Management <span class="ct">5</span></button>
+      <button class="pf-sector-pill" data-pf-sector="security" role="tab" aria-selected="false">Security Services <span class="ct">4</span></button>
+      <button class="pf-sector-pill" data-pf-sector="hvac" role="tab" aria-selected="false">Air Conditioning and HVAC <span class="ct">6</span></button>
+    </div>
+
+    <div class="pf-shell reveal">
+      <div class="pf-panel" data-pf-panel="auto" data-active="true" aria-label="Automobile projects">
+        <div class="pf-panel-head">
+          <div>
+            <div class="pf-sector-label">Automobile</div>
+            <div class="pf-sector-blurb">Teyseer Motors W.L.L. · Founded 1999 · 400+ automotive professionals</div>
+          </div>
+          <div class="pf-counter"><strong class="cur">01</strong> / 08</div>
+        </div>
+        <div class="pf-slider-wrap">
+          <button class="pf-arr pf-prev" aria-label="Previous project" disabled><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"></path></svg></button>
+          <div class="pf-slider" tabindex="0" role="region" aria-label="Automobile projects scroller">
+            <div class="pf-track">
+              <article class="pf-card" data-pf-idx="0">
+  <div class="pf-visual" aria-hidden="true">
+    <div class="pf-num">01</div>
+    <svg viewBox="0 0 400 225" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <linearGradient id="pfg0" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#DCE5F2"></stop><stop offset="100%" stop-color="#A6A8BA" stop-opacity="0.45"></stop></linearGradient>
+        <pattern id="pfp0" width="40" height="40" patternUnits="userSpaceOnUse"><g fill="none" stroke="#2A3C8E" stroke-opacity="0.10" stroke-width="1"><rect x="15" y="15" width="10" height="10" transform="rotate(45 20 20)"></rect></g></pattern>
+      </defs>
+      <rect width="400" height="225" fill="url(#pfg0)"></rect>
+      <rect width="400" height="225" fill="url(#pfp0)"></rect>
+    </svg>
+    <div class="pf-cap">[Project image · placeholder]</div>
+  </div>
+  <div class="pf-body">
+    <h4>Farizon SuperVan — Qatar Launch</h4>
+    <p>Qatar's first fully electric commercial van lineup from Geely Holding Group. Zero-emission logistics and passenger transport with ranges up to 376 km per charge, CATL batteries, rapid DC fast-charging.</p>
+    <div class="pf-loc">Showroom: Salwa Road, Doha</div>
+    <div class="pf-pills"><span class="pf-pill">Electric Vehicles</span><span class="pf-pill">Sustainable Mobility</span><span class="pf-pill">Fleet Solutions</span><span class="pf-pill">Zero Emission</span><span class="pf-pill">Geely</span></div>
+  </div>
+</article>
+              <article class="pf-card" data-pf-idx="1">
+  <div class="pf-visual" aria-hidden="true">
+    <div class="pf-num">02</div>
+    <svg viewBox="0 0 400 225" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <linearGradient id="pfg1" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#DCE5F2"></stop><stop offset="100%" stop-color="#A6A8BA" stop-opacity="0.45"></stop></linearGradient>
+        <pattern id="pfp1" width="40" height="40" patternUnits="userSpaceOnUse"><g fill="none" stroke="#2A3C8E" stroke-opacity="0.10" stroke-width="1"><rect x="15" y="15" width="10" height="10" transform="rotate(45 20 20)"></rect></g></pattern>
+      </defs>
+      <rect width="400" height="225" fill="url(#pfg1)"></rect>
+      <rect width="400" height="225" fill="url(#pfp1)"></rect>
+    </svg>
+    <div class="pf-cap">[Project image · placeholder]</div>
+  </div>
+  <div class="pf-body">
+    <h4>SOUO Motorcycle — Qatar Exclusive</h4>
+    <p>Qatar's only 8-cylinder touring motorcycle. Luxury launch under Teyseer Motors — multi-drive DCT transmission, Brembo brakes, ABS, traction control, blind-spot monitoring, SOS support.</p>
+    <div class="pf-loc">Doha, Qatar</div>
+    <div class="pf-pills"><span class="pf-pill">Luxury Motorcycles</span><span class="pf-pill">8-Cylinder</span><span class="pf-pill">Safety Tech</span><span class="pf-pill">Premium Mobility</span><span class="pf-pill">New Brand Launch</span></div>
+  </div>
+</article>
+              <article class="pf-card" data-pf-idx="2">
+  <div class="pf-visual" aria-hidden="true">
+    <div class="pf-num">03</div>
+    <svg viewBox="0 0 400 225" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <linearGradient id="pfg2" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#DCE5F2"></stop><stop offset="100%" stop-color="#A6A8BA" stop-opacity="0.45"></stop></linearGradient>
+        <pattern id="pfp2" width="40" height="40" patternUnits="userSpaceOnUse"><g fill="none" stroke="#2A3C8E" stroke-opacity="0.10" stroke-width="1"><rect x="15" y="15" width="10" height="10" transform="rotate(45 20 20)"></rect></g></pattern>
+      </defs>
+      <rect width="400" height="225" fill="url(#pfg2)"></rect>
+      <rect width="400" height="225" fill="url(#pfp2)"></rect>
+    </svg>
+    <div class="pf-cap">[Project image · placeholder]</div>
+  </div>
+  <div class="pf-body">
+    <h4>Suzuki Qatar — Exclusive Distribution Since 1971</h4>
+    <p>Exclusive distributor of Suzuki cars (Baleno, Swift, Jimny, Grand Vitara, Fronx, Dzire, Ertiga) and Suzuki Motorcycles through Teyseer Motors. Multiple dealer excellence and regional service awards.</p>
+    <div class="pf-loc">Doha, Qatar</div>
+    <div class="pf-pills"><span class="pf-pill">Vehicle Distribution</span><span class="pf-pill">Aftersales</span><span class="pf-pill">Fleet</span><span class="pf-pill">Suzuki</span><span class="pf-pill">Multi-Model Lineup</span></div>
+  </div>
+</article>
+              <article class="pf-card" data-pf-idx="3">
+  <div class="pf-visual" aria-hidden="true">
+    <div class="pf-num">04</div>
+    <svg viewBox="0 0 400 225" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <linearGradient id="pfg3" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#DCE5F2"></stop><stop offset="100%" stop-color="#A6A8BA" stop-opacity="0.45"></stop></linearGradient>
+        <pattern id="pfp3" width="40" height="40" patternUnits="userSpaceOnUse"><g fill="none" stroke="#2A3C8E" stroke-opacity="0.10" stroke-width="1"><rect x="15" y="15" width="10" height="10" transform="rotate(45 20 20)"></rect></g></pattern>
+      </defs>
+      <rect width="400" height="225" fill="url(#pfg3)"></rect>
+      <rect width="400" height="225" fill="url(#pfp3)"></rect>
+    </svg>
+    <div class="pf-cap">[Project image · placeholder]</div>
+  </div>
+  <div class="pf-body">
+    <h4>Peugeot Qatar — Official Dealership</h4>
+    <p>Authorised Peugeot dealer. Best Eurorepar Aftersales Performance (2021), PEUGEOT 408 Best FUV in Qatar Car of The Year Award 2023, Outstanding Contribution to Peugeot Qatar Certificate (2025).</p>
+    <div class="pf-loc">Doha, Qatar</div>
+    <div class="pf-pills"><span class="pf-pill">Peugeot</span><span class="pf-pill">Aftersales</span><span class="pf-pill">Award-Winning</span><span class="pf-pill">Vehicle Distribution</span><span class="pf-pill">Service Excellence</span></div>
+  </div>
+</article>
+              <article class="pf-card" data-pf-idx="4">
+  <div class="pf-visual" aria-hidden="true">
+    <div class="pf-num">05</div>
+    <svg viewBox="0 0 400 225" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <linearGradient id="pfg4" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#DCE5F2"></stop><stop offset="100%" stop-color="#A6A8BA" stop-opacity="0.45"></stop></linearGradient>
+        <pattern id="pfp4" width="40" height="40" patternUnits="userSpaceOnUse"><g fill="none" stroke="#2A3C8E" stroke-opacity="0.10" stroke-width="1"><rect x="15" y="15" width="10" height="10" transform="rotate(45 20 20)"></rect></g></pattern>
+      </defs>
+      <rect width="400" height="225" fill="url(#pfg4)"></rect>
+      <rect width="400" height="225" fill="url(#pfp4)"></rect>
+    </svg>
+    <div class="pf-cap">[Project image · placeholder]</div>
+  </div>
+  <div class="pf-body">
+    <h4>GWM Qatar — Authorized Dealership</h4>
+    <p>Authorised dealer for Great Wall Motors (GWM) including the Tank 500. Winner of Best New Business Partner (2024), Best Tank 500 Sales – Middle East &amp; Africa (2025), Alpha Excellence Award (2025).</p>
+    <div class="pf-loc">Doha, Qatar</div>
+    <div class="pf-pills"><span class="pf-pill">GWM</span><span class="pf-pill">Electric Vehicles</span><span class="pf-pill">SUV</span><span class="pf-pill">Tank 500</span><span class="pf-pill">Award-Winning</span></div>
+  </div>
+</article>
+              <article class="pf-card" data-pf-idx="5">
+  <div class="pf-visual" aria-hidden="true">
+    <div class="pf-num">06</div>
+    <svg viewBox="0 0 400 225" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <linearGradient id="pfg5" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#DCE5F2"></stop><stop offset="100%" stop-color="#A6A8BA" stop-opacity="0.45"></stop></linearGradient>
+        <pattern id="pfp5" width="40" height="40" patternUnits="userSpaceOnUse"><g fill="none" stroke="#2A3C8E" stroke-opacity="0.10" stroke-width="1"><rect x="15" y="15" width="10" height="10" transform="rotate(45 20 20)"></rect></g></pattern>
+      </defs>
+      <rect width="400" height="225" fill="url(#pfg5)"></rect>
+      <rect width="400" height="225" fill="url(#pfp5)"></rect>
+    </svg>
+    <div class="pf-cap">[Project image · placeholder]</div>
+  </div>
+  <div class="pf-body">
+    <h4>E-Car Electric Vehicles</h4>
+    <p>Electric golf carts, Greenman EVs, people movers and specialty utility carts (security, firefighting, ambulance, hospitality) for golf courses, resorts, industrial campuses and communities across Qatar.</p>
+    <div class="pf-loc">Salwa Road, Qatar</div>
+    <div class="pf-pills"><span class="pf-pill">Electric Vehicles</span><span class="pf-pill">Golf Carts</span><span class="pf-pill">Utility Vehicles</span><span class="pf-pill">Sustainable Transport</span><span class="pf-pill">Industrial EV</span></div>
+  </div>
+</article>
+              <article class="pf-card" data-pf-idx="6">
+  <div class="pf-visual" aria-hidden="true">
+    <div class="pf-num">07</div>
+    <svg viewBox="0 0 400 225" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <linearGradient id="pfg6" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#DCE5F2"></stop><stop offset="100%" stop-color="#A6A8BA" stop-opacity="0.45"></stop></linearGradient>
+        <pattern id="pfp6" width="40" height="40" patternUnits="userSpaceOnUse"><g fill="none" stroke="#2A3C8E" stroke-opacity="0.10" stroke-width="1"><rect x="15" y="15" width="10" height="10" transform="rotate(45 20 20)"></rect></g></pattern>
+      </defs>
+      <rect width="400" height="225" fill="url(#pfg6)"></rect>
+      <rect width="400" height="225" fill="url(#pfp6)"></rect>
+    </svg>
+    <div class="pf-cap">[Project image · placeholder]</div>
+  </div>
+  <div class="pf-body">
+    <h4>Teyseer Service Centre — Multi-Brand Automotive Service</h4>
+    <p>Full aftersales ecosystem with branches in Old Airport, Al Khor, Al Wakra, Industrial Area, Al Aziziyah and Salwa Road — repair, maintenance and warranty across Suzuki, Peugeot, GWM and other brands.</p>
+    <div class="pf-loc">Multiple locations across Qatar</div>
+    <div class="pf-pills"><span class="pf-pill">Aftersales</span><span class="pf-pill">Vehicle Maintenance</span><span class="pf-pill">Multi-Brand</span><span class="pf-pill">Service Network</span><span class="pf-pill">Quick Fit</span></div>
+  </div>
+</article>
+              <article class="pf-card" data-pf-idx="7">
+  <div class="pf-visual" aria-hidden="true">
+    <div class="pf-num">08</div>
+    <svg viewBox="0 0 400 225" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <linearGradient id="pfg7" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#DCE5F2"></stop><stop offset="100%" stop-color="#A6A8BA" stop-opacity="0.45"></stop></linearGradient>
+        <pattern id="pfp7" width="40" height="40" patternUnits="userSpaceOnUse"><g fill="none" stroke="#2A3C8E" stroke-opacity="0.10" stroke-width="1"><rect x="15" y="15" width="10" height="10" transform="rotate(45 20 20)"></rect></g></pattern>
+      </defs>
+      <rect width="400" height="225" fill="url(#pfg7)"></rect>
+      <rect width="400" height="225" fill="url(#pfp7)"></rect>
+    </svg>
+    <div class="pf-cap">[Project image · placeholder]</div>
+  </div>
+  <div class="pf-body">
+    <h4>Authorized Mobil (ExxonMobil) Lubricants Distributor</h4>
+    <p>Over five decades as the exclusive distributor of Mobil lubricants in Qatar — passenger, commercial fleet, industrial and marine sectors. Circle of Excellence Gold Awards (2018–2023), ExxonMobil Marine Channel Partner of the Year.</p>
+    <div class="pf-loc">Airport Road, Doha</div>
+    <div class="pf-pills"><span class="pf-pill">Lubricants</span><span class="pf-pill">ExxonMobil</span><span class="pf-pill">Industrial Supply</span><span class="pf-pill">Marine</span><span class="pf-pill">Fleet Services</span></div>
+  </div>
+</article>
+            </div>
+          </div>
+          <button class="pf-arr pf-next" aria-label="Next project"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"></path></svg></button>
+        </div>
+        <div class="pf-dots">
+          <button class="pf-dot active" data-pf-dot="0" aria-label="Project 1"></button>
+          <button class="pf-dot" data-pf-dot="1" aria-label="Project 2"></button>
+          <button class="pf-dot" data-pf-dot="2" aria-label="Project 3"></button>
+          <button class="pf-dot" data-pf-dot="3" aria-label="Project 4"></button>
+          <button class="pf-dot" data-pf-dot="4" aria-label="Project 5"></button>
+          <button class="pf-dot" data-pf-dot="5" aria-label="Project 6"></button>
+          <button class="pf-dot" data-pf-dot="6" aria-label="Project 7"></button>
+          <button class="pf-dot" data-pf-dot="7" aria-label="Project 8"></button>
+        </div>
+      </div>
+      <div class="pf-panel" data-pf-panel="it" data-active="false" aria-label="Information Technology projects">
+        <div class="pf-panel-head">
+          <div>
+            <div class="pf-sector-label">Information Technology</div>
+            <div class="pf-sector-blurb">Computer Arabia W.L.L. (Founded 1979, 72+ staff) · Teyseer Technology Services Co. (Founded 2019)</div>
+          </div>
+          <div class="pf-counter"><strong class="cur">01</strong> / 03</div>
+        </div>
+        <div class="pf-slider-wrap">
+          <button class="pf-arr pf-prev" aria-label="Previous project" disabled><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"></path></svg></button>
+          <div class="pf-slider" tabindex="0" role="region" aria-label="Information Technology projects scroller">
+            <div class="pf-track">
+              <article class="pf-card" data-pf-idx="0">
+  <div class="pf-visual" aria-hidden="true">
+    <div class="pf-num">01</div>
+    <svg viewBox="0 0 400 225" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <linearGradient id="pfg0" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#DCE5F2"></stop><stop offset="100%" stop-color="#A6A8BA" stop-opacity="0.45"></stop></linearGradient>
+        <pattern id="pfp0" width="40" height="40" patternUnits="userSpaceOnUse"><g fill="none" stroke="#2A3C8E" stroke-opacity="0.10" stroke-width="1"><rect x="15" y="15" width="10" height="10" transform="rotate(45 20 20)"></rect></g></pattern>
+      </defs>
+      <rect width="400" height="225" fill="url(#pfg0)"></rect>
+      <rect width="400" height="225" fill="url(#pfp0)"></rect>
+    </svg>
+    <div class="pf-cap">[Project image · placeholder]</div>
+  </div>
+  <div class="pf-body">
+    <h4>Computer Arabia — Qatar's IT Infrastructure Backbone</h4>
+    <p>Teyseer's flagship IT subsidiary since 1979. Hardware (Dell, HP, Cisco, Lenovo, Epson), cloud and network infrastructure, software licensing (Microsoft, VMware, Azure), managed services and IT consulting to banking, energy, government, healthcare, education, retail and industry.</p>
+    <div class="pf-loc">Airport Road, Zone 42, Doha</div>
+    <div class="pf-pills"><span class="pf-pill">IT Infrastructure</span><span class="pf-pill">Cloud Solutions</span><span class="pf-pill">Dell Partner</span><span class="pf-pill">Managed Services</span><span class="pf-pill">Cybersecurity</span></div>
+  </div>
+</article>
+              <article class="pf-card" data-pf-idx="1">
+  <div class="pf-visual" aria-hidden="true">
+    <div class="pf-num">02</div>
+    <svg viewBox="0 0 400 225" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <linearGradient id="pfg1" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#DCE5F2"></stop><stop offset="100%" stop-color="#A6A8BA" stop-opacity="0.45"></stop></linearGradient>
+        <pattern id="pfp1" width="40" height="40" patternUnits="userSpaceOnUse"><g fill="none" stroke="#2A3C8E" stroke-opacity="0.10" stroke-width="1"><rect x="15" y="15" width="10" height="10" transform="rotate(45 20 20)"></rect></g></pattern>
+      </defs>
+      <rect width="400" height="225" fill="url(#pfg1)"></rect>
+      <rect width="400" height="225" fill="url(#pfp1)"></rect>
+    </svg>
+    <div class="pf-cap">[Project image · placeholder]</div>
+  </div>
+  <div class="pf-body">
+    <h4>Emerson PACSystems — Industrial Automation &amp; SCADA</h4>
+    <p>Computer Arabia represents Emerson's PACSystems industrial automation in Qatar: SCADA software, PLCs (small/micro/compact/large), Remote I/O, VFDs, HMIs, machine safety. Serves oil &amp; gas, power and industry with OT cybersecurity.</p>
+    <div class="pf-loc">Oil &amp; gas, power plants, industrial sites — Qatar</div>
+    <div class="pf-pills"><span class="pf-pill">SCADA</span><span class="pf-pill">PLC</span><span class="pf-pill">Industrial Automation</span><span class="pf-pill">Oil &amp; Gas</span><span class="pf-pill">OT Cybersecurity</span><span class="pf-pill">Emerson</span></div>
+  </div>
+</article>
+              <article class="pf-card" data-pf-idx="2">
+  <div class="pf-visual" aria-hidden="true">
+    <div class="pf-num">03</div>
+    <svg viewBox="0 0 400 225" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <linearGradient id="pfg2" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#DCE5F2"></stop><stop offset="100%" stop-color="#A6A8BA" stop-opacity="0.45"></stop></linearGradient>
+        <pattern id="pfp2" width="40" height="40" patternUnits="userSpaceOnUse"><g fill="none" stroke="#2A3C8E" stroke-opacity="0.10" stroke-width="1"><rect x="15" y="15" width="10" height="10" transform="rotate(45 20 20)"></rect></g></pattern>
+      </defs>
+      <rect width="400" height="225" fill="url(#pfg2)"></rect>
+      <rect width="400" height="225" fill="url(#pfp2)"></rect>
+    </svg>
+    <div class="pf-cap">[Project image · placeholder]</div>
+  </div>
+  <div class="pf-body">
+    <h4>Teyseer Technology Services — Dell &amp; Dell EMC Authorized Service Center</h4>
+    <p>The sole authorised service centre for Dell and Dell EMC in Qatar. Warranty and post-warranty support, enterprise server / storage / networking solutions and factory-trained technicians across banking, energy, healthcare, government and retail.</p>
+    <div class="pf-loc">Teyseer Group Head Office, Doha</div>
+    <div class="pf-pills"><span class="pf-pill">Dell EMC</span><span class="pf-pill">Authorized Service</span><span class="pf-pill">Enterprise IT</span><span class="pf-pill">Warranty Support</span><span class="pf-pill">Microsoft Azure</span></div>
+  </div>
+</article>
+            </div>
+          </div>
+          <button class="pf-arr pf-next" aria-label="Next project"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"></path></svg></button>
+        </div>
+        <div class="pf-dots">
+          <button class="pf-dot active" data-pf-dot="0" aria-label="Project 1"></button>
+          <button class="pf-dot" data-pf-dot="1" aria-label="Project 2"></button>
+          <button class="pf-dot" data-pf-dot="2" aria-label="Project 3"></button>
+        </div>
+      </div>
+      <div class="pf-panel" data-pf-panel="build" data-active="false" aria-label="Construction and Building Materials projects">
+        <div class="pf-panel-head">
+          <div>
+            <div class="pf-sector-label">Construction and Building Materials</div>
+            <div class="pf-sector-blurb">TBMTC (Founded 1976) · Qatar Plant Hire (Founded 1979) · Teyseer Contracting (Founded 1999)</div>
+          </div>
+          <div class="pf-counter"><strong class="cur">01</strong> / 04</div>
+        </div>
+        <div class="pf-slider-wrap">
+          <button class="pf-arr pf-prev" aria-label="Previous project" disabled><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"></path></svg></button>
+          <div class="pf-slider" tabindex="0" role="region" aria-label="Construction and Building Materials projects scroller">
+            <div class="pf-track">
+              <article class="pf-card" data-pf-idx="0">
+  <div class="pf-visual" aria-hidden="true">
+    <div class="pf-num">01</div>
+    <svg viewBox="0 0 400 225" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <linearGradient id="pfg0" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#DCE5F2"></stop><stop offset="100%" stop-color="#A6A8BA" stop-opacity="0.45"></stop></linearGradient>
+        <pattern id="pfp0" width="40" height="40" patternUnits="userSpaceOnUse"><g fill="none" stroke="#2A3C8E" stroke-opacity="0.10" stroke-width="1"><rect x="15" y="15" width="10" height="10" transform="rotate(45 20 20)"></rect></g></pattern>
+      </defs>
+      <rect width="400" height="225" fill="url(#pfg0)"></rect>
+      <rect width="400" height="225" fill="url(#pfp0)"></rect>
+    </svg>
+    <div class="pf-cap">[Project image · placeholder]</div>
+  </div>
+  <div class="pf-body">
+    <h4>TBMTC — Building Materials &amp; Transportation</h4>
+    <p>One-stop source for construction materials and logistics since 1976. Structural steel, cement (Qatar Steel, Qatar National Cement, Al Khalij Cement, Maple Leaf), rebar fabrication, plywood, MDF, paints, wire mesh, hardwood and waterproofing (Dr. Fixit, Bitugulf, Aquatech). Fleet of 65+ heavy-duty trucks.</p>
+    <div class="pf-loc">P.O. Box 4333, Doha</div>
+    <div class="pf-pills"><span class="pf-pill">Steel</span><span class="pf-pill">Cement</span><span class="pf-pill">Rebar Fabrication</span><span class="pf-pill">Logistics</span><span class="pf-pill">Building Materials</span><span class="pf-pill">Waterproofing</span></div>
+  </div>
+</article>
+              <article class="pf-card" data-pf-idx="1">
+  <div class="pf-visual" aria-hidden="true">
+    <div class="pf-num">02</div>
+    <svg viewBox="0 0 400 225" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <linearGradient id="pfg1" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#DCE5F2"></stop><stop offset="100%" stop-color="#A6A8BA" stop-opacity="0.45"></stop></linearGradient>
+        <pattern id="pfp1" width="40" height="40" patternUnits="userSpaceOnUse"><g fill="none" stroke="#2A3C8E" stroke-opacity="0.10" stroke-width="1"><rect x="15" y="15" width="10" height="10" transform="rotate(45 20 20)"></rect></g></pattern>
+      </defs>
+      <rect width="400" height="225" fill="url(#pfg1)"></rect>
+      <rect width="400" height="225" fill="url(#pfp1)"></rect>
+    </svg>
+    <div class="pf-cap">[Project image · placeholder]</div>
+  </div>
+  <div class="pf-body">
+    <h4>Msheireb Downtown Doha — Phase 4 (US$630M, LEED Certified)</h4>
+    <p>Teyseer Contracting (JV with CCC) delivered Phase 4 of Msheireb Downtown Doha — Qatar's landmark sustainable urban regeneration project valued at US$630M. LEED certified. Pre-engineered and modular construction methods applied.</p>
+    <div class="pf-loc">Msheireb, Doha</div>
+    <div class="pf-pills"><span class="pf-pill">Mega Project</span><span class="pf-pill">LEED Certified</span><span class="pf-pill">Urban Regeneration</span><span class="pf-pill">JV with CCC</span><span class="pf-pill">US$630M</span></div>
+  </div>
+</article>
+              <article class="pf-card" data-pf-idx="2">
+  <div class="pf-visual" aria-hidden="true">
+    <div class="pf-num">03</div>
+    <svg viewBox="0 0 400 225" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <linearGradient id="pfg2" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#DCE5F2"></stop><stop offset="100%" stop-color="#A6A8BA" stop-opacity="0.45"></stop></linearGradient>
+        <pattern id="pfp2" width="40" height="40" patternUnits="userSpaceOnUse"><g fill="none" stroke="#2A3C8E" stroke-opacity="0.10" stroke-width="1"><rect x="15" y="15" width="10" height="10" transform="rotate(45 20 20)"></rect></g></pattern>
+      </defs>
+      <rect width="400" height="225" fill="url(#pfg2)"></rect>
+      <rect width="400" height="225" fill="url(#pfp2)"></rect>
+    </svg>
+    <div class="pf-cap">[Project image · placeholder]</div>
+  </div>
+  <div class="pf-body">
+    <h4>Sidra Medical &amp; Research Centre</h4>
+    <p>Teyseer Contracting (with CCC) delivered Sidra Medical &amp; Research Centre — one of Qatar's most advanced healthcare facilities. Large-scale complex building expertise in healthcare.</p>
+    <div class="pf-loc">Education City, Doha</div>
+    <div class="pf-pills"><span class="pf-pill">Healthcare</span><span class="pf-pill">Large-Scale Construction</span><span class="pf-pill">CCC Partnership</span><span class="pf-pill">Complex Buildings</span><span class="pf-pill">Research Facility</span></div>
+  </div>
+</article>
+              <article class="pf-card" data-pf-idx="3">
+  <div class="pf-visual" aria-hidden="true">
+    <div class="pf-num">04</div>
+    <svg viewBox="0 0 400 225" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <linearGradient id="pfg3" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#DCE5F2"></stop><stop offset="100%" stop-color="#A6A8BA" stop-opacity="0.45"></stop></linearGradient>
+        <pattern id="pfp3" width="40" height="40" patternUnits="userSpaceOnUse"><g fill="none" stroke="#2A3C8E" stroke-opacity="0.10" stroke-width="1"><rect x="15" y="15" width="10" height="10" transform="rotate(45 20 20)"></rect></g></pattern>
+      </defs>
+      <rect width="400" height="225" fill="url(#pfg3)"></rect>
+      <rect width="400" height="225" fill="url(#pfp3)"></rect>
+    </svg>
+    <div class="pf-cap">[Project image · placeholder]</div>
+  </div>
+  <div class="pf-body">
+    <h4>Khalifa Sports City (Aspire Dome) — Sports Hall</h4>
+    <p>Teyseer Contracting delivered the Sports Hall at Khalifa Sports City (Aspire Dome) — a landmark multi-purpose sports and events venue.</p>
+    <div class="pf-loc">Khalifa Sports City, Doha</div>
+    <div class="pf-pills"><span class="pf-pill">Sports Infrastructure</span><span class="pf-pill">Events Venue</span><span class="pf-pill">National Development</span><span class="pf-pill">Complex Structures</span><span class="pf-pill">CCC JV</span></div>
+  </div>
+</article>
+            </div>
+          </div>
+          <button class="pf-arr pf-next" aria-label="Next project"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"></path></svg></button>
+        </div>
+        <div class="pf-dots">
+          <button class="pf-dot active" data-pf-dot="0" aria-label="Project 1"></button>
+          <button class="pf-dot" data-pf-dot="1" aria-label="Project 2"></button>
+          <button class="pf-dot" data-pf-dot="2" aria-label="Project 3"></button>
+          <button class="pf-dot" data-pf-dot="3" aria-label="Project 4"></button>
+        </div>
+      </div>
+      <div class="pf-panel" data-pf-panel="industry" data-active="false" aria-label="Industry Products and Safety Products projects">
+        <div class="pf-panel-head">
+          <div>
+            <div class="pf-sector-label">Industry Products and Safety Products</div>
+            <div class="pf-sector-blurb">TISSCO (Founded 1999, 100+ staff) · Gulf Incon (Founded 1980, 58+ staff)</div>
+          </div>
+          <div class="pf-counter"><strong class="cur">01</strong> / 02</div>
+        </div>
+        <div class="pf-slider-wrap">
+          <button class="pf-arr pf-prev" aria-label="Previous project" disabled><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"></path></svg></button>
+          <div class="pf-slider" tabindex="0" role="region" aria-label="Industry Products and Safety Products projects scroller">
+            <div class="pf-track">
+              <article class="pf-card" data-pf-idx="0">
+  <div class="pf-visual" aria-hidden="true">
+    <div class="pf-num">01</div>
+    <svg viewBox="0 0 400 225" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <linearGradient id="pfg0" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#DCE5F2"></stop><stop offset="100%" stop-color="#A6A8BA" stop-opacity="0.45"></stop></linearGradient>
+        <pattern id="pfp0" width="40" height="40" patternUnits="userSpaceOnUse"><g fill="none" stroke="#2A3C8E" stroke-opacity="0.10" stroke-width="1"><rect x="15" y="15" width="10" height="10" transform="rotate(45 20 20)"></rect></g></pattern>
+      </defs>
+      <rect width="400" height="225" fill="url(#pfg0)"></rect>
+      <rect width="400" height="225" fill="url(#pfp0)"></rect>
+    </svg>
+    <div class="pf-cap">[Project image · placeholder]</div>
+  </div>
+  <div class="pf-body">
+    <h4>TISSCO — Industrial Supply to Qatar's Oil, Gas &amp; Construction</h4>
+    <p>Turnkey industrial supply and services to Qatar's core industrial and energy sectors. Tools &amp; machinery, safety (PPE, fire safety, fall arrest), hydraulics &amp; hose assembly, calibration (ISO 17025), pipes/fittings/valves, electrical &amp; instrumentation, on-site &amp; mobile services. Approved vendor for Ashghal, KAHRAMAA and QatarEnergy.</p>
+    <div class="pf-loc">Airport Road compound, Doha; client sites Qatar-wide</div>
+    <div class="pf-pills"><span class="pf-pill">PPE</span><span class="pf-pill">Safety</span><span class="pf-pill">Industrial Tools</span><span class="pf-pill">Hydraulics</span><span class="pf-pill">Calibration</span><span class="pf-pill">Oil &amp; Gas Supply</span><span class="pf-pill">Pipes &amp; Valves</span></div>
+  </div>
+</article>
+              <article class="pf-card" data-pf-idx="1">
+  <div class="pf-visual" aria-hidden="true">
+    <div class="pf-num">02</div>
+    <svg viewBox="0 0 400 225" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <linearGradient id="pfg1" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#DCE5F2"></stop><stop offset="100%" stop-color="#A6A8BA" stop-opacity="0.45"></stop></linearGradient>
+        <pattern id="pfp1" width="40" height="40" patternUnits="userSpaceOnUse"><g fill="none" stroke="#2A3C8E" stroke-opacity="0.10" stroke-width="1"><rect x="15" y="15" width="10" height="10" transform="rotate(45 20 20)"></rect></g></pattern>
+      </defs>
+      <rect width="400" height="225" fill="url(#pfg1)"></rect>
+      <rect width="400" height="225" fill="url(#pfp1)"></rect>
+    </svg>
+    <div class="pf-cap">[Project image · placeholder]</div>
+  </div>
+  <div class="pf-body">
+    <h4>Gulf Incon — Industrial Tools, Welding &amp; Process Equipment</h4>
+    <p>Since 1980, high-quality industrial tools and process equipment to oil &amp; gas, manufacturing, and engineering contractors. Represents ESAB (welding &amp; cutting), Metabo (power tools), BASF-CHEMETALL (surface treatment), James Walker / Rotabolt (sealing &amp; bolting). Technical workshop on Salwa Road.</p>
+    <div class="pf-loc">Salwa Road, Doha</div>
+    <div class="pf-pills"><span class="pf-pill">Welding Equipment</span><span class="pf-pill">ESAB</span><span class="pf-pill">Power Tools</span><span class="pf-pill">Oil &amp; Gas Supplies</span><span class="pf-pill">Industrial Machinery</span><span class="pf-pill">Surface Treatment</span></div>
+  </div>
+</article>
+            </div>
+          </div>
+          <button class="pf-arr pf-next" aria-label="Next project"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"></path></svg></button>
+        </div>
+        <div class="pf-dots">
+          <button class="pf-dot active" data-pf-dot="0" aria-label="Project 1"></button>
+          <button class="pf-dot" data-pf-dot="1" aria-label="Project 2"></button>
+        </div>
+      </div>
+      <div class="pf-panel" data-pf-panel="crane" data-active="false" aria-label="Crane and Lifting projects">
+        <div class="pf-panel-head">
+          <div>
+            <div class="pf-sector-label">Crane and Lifting</div>
+            <div class="pf-sector-blurb">Dutest Qatar W.L.L. (Founded 1997, ~300 staff, 25+ engineers)</div>
+          </div>
+          <div class="pf-counter"><strong class="cur">01</strong> / 05</div>
+        </div>
+        <div class="pf-slider-wrap">
+          <button class="pf-arr pf-prev" aria-label="Previous project" disabled><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"></path></svg></button>
+          <div class="pf-slider" tabindex="0" role="region" aria-label="Crane and Lifting projects scroller">
+            <div class="pf-track">
+              <article class="pf-card" data-pf-idx="0">
+  <div class="pf-visual" aria-hidden="true">
+    <div class="pf-num">01</div>
+    <svg viewBox="0 0 400 225" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <linearGradient id="pfg0" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#DCE5F2"></stop><stop offset="100%" stop-color="#A6A8BA" stop-opacity="0.45"></stop></linearGradient>
+        <pattern id="pfp0" width="40" height="40" patternUnits="userSpaceOnUse"><g fill="none" stroke="#2A3C8E" stroke-opacity="0.10" stroke-width="1"><rect x="15" y="15" width="10" height="10" transform="rotate(45 20 20)"></rect></g></pattern>
+      </defs>
+      <rect width="400" height="225" fill="url(#pfg0)"></rect>
+      <rect width="400" height="225" fill="url(#pfp0)"></rect>
+    </svg>
+    <div class="pf-cap">[Project image · placeholder]</div>
+  </div>
+  <div class="pf-body">
+    <h4>Dutest Qatar — QatarEnergy / Mesaieed Industrial City</h4>
+    <p>QatarEnergy Platinum Award (Low Risk Category) under the Contractor Seven Star Program at Mesaieed Industrial City (2021) — sustained excellence in crane and lifting operations.</p>
+    <div class="pf-loc">Mesaieed Industrial City</div>
+    <div class="pf-pills"><span class="pf-pill">Crane Operations</span><span class="pf-pill">QatarEnergy</span><span class="pf-pill">Mesaieed</span><span class="pf-pill">Seven Star Program</span><span class="pf-pill">Platinum Award</span></div>
+  </div>
+</article>
+              <article class="pf-card" data-pf-idx="1">
+  <div class="pf-visual" aria-hidden="true">
+    <div class="pf-num">02</div>
+    <svg viewBox="0 0 400 225" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <linearGradient id="pfg1" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#DCE5F2"></stop><stop offset="100%" stop-color="#A6A8BA" stop-opacity="0.45"></stop></linearGradient>
+        <pattern id="pfp1" width="40" height="40" patternUnits="userSpaceOnUse"><g fill="none" stroke="#2A3C8E" stroke-opacity="0.10" stroke-width="1"><rect x="15" y="15" width="10" height="10" transform="rotate(45 20 20)"></rect></g></pattern>
+      </defs>
+      <rect width="400" height="225" fill="url(#pfg1)"></rect>
+      <rect width="400" height="225" fill="url(#pfp1)"></rect>
+    </svg>
+    <div class="pf-cap">[Project image · placeholder]</div>
+  </div>
+  <div class="pf-body">
+    <h4>Dutest Qatar — Dukhan Concession Area</h4>
+    <p>QatarEnergy Gold Award under the Contractor Seven Star Program for crane and lifting services at the Dukhan Concession Area (2021).</p>
+    <div class="pf-loc">Dukhan, Qatar</div>
+    <div class="pf-pills"><span class="pf-pill">Crane Maintenance</span><span class="pf-pill">Oil Field</span><span class="pf-pill">Dukhan</span><span class="pf-pill">QatarEnergy</span><span class="pf-pill">Gold Award</span></div>
+  </div>
+</article>
+              <article class="pf-card" data-pf-idx="2">
+  <div class="pf-visual" aria-hidden="true">
+    <div class="pf-num">03</div>
+    <svg viewBox="0 0 400 225" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <linearGradient id="pfg2" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#DCE5F2"></stop><stop offset="100%" stop-color="#A6A8BA" stop-opacity="0.45"></stop></linearGradient>
+        <pattern id="pfp2" width="40" height="40" patternUnits="userSpaceOnUse"><g fill="none" stroke="#2A3C8E" stroke-opacity="0.10" stroke-width="1"><rect x="15" y="15" width="10" height="10" transform="rotate(45 20 20)"></rect></g></pattern>
+      </defs>
+      <rect width="400" height="225" fill="url(#pfg2)"></rect>
+      <rect width="400" height="225" fill="url(#pfp2)"></rect>
+    </svg>
+    <div class="pf-cap">[Project image · placeholder]</div>
+  </div>
+  <div class="pf-body">
+    <h4>Dutest Qatar — Qatargas LNG Plant</h4>
+    <p>Safety Achievement Award from Chiyoda Corporation for exceptional safety performance during the Qatargas LNG Plant Project (April 1998) — one of the earliest major LNG infrastructure projects in Qatar.</p>
+    <div class="pf-loc">Ras Laffan, Qatar</div>
+    <div class="pf-pills"><span class="pf-pill">LNG Plant</span><span class="pf-pill">Qatargas</span><span class="pf-pill">Crane Safety</span><span class="pf-pill">Lifting Operations</span><span class="pf-pill">Chiyoda</span></div>
+  </div>
+</article>
+              <article class="pf-card" data-pf-idx="3">
+  <div class="pf-visual" aria-hidden="true">
+    <div class="pf-num">04</div>
+    <svg viewBox="0 0 400 225" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <linearGradient id="pfg3" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#DCE5F2"></stop><stop offset="100%" stop-color="#A6A8BA" stop-opacity="0.45"></stop></linearGradient>
+        <pattern id="pfp3" width="40" height="40" patternUnits="userSpaceOnUse"><g fill="none" stroke="#2A3C8E" stroke-opacity="0.10" stroke-width="1"><rect x="15" y="15" width="10" height="10" transform="rotate(45 20 20)"></rect></g></pattern>
+      </defs>
+      <rect width="400" height="225" fill="url(#pfg3)"></rect>
+      <rect width="400" height="225" fill="url(#pfp3)"></rect>
+    </svg>
+    <div class="pf-cap">[Project image · placeholder]</div>
+  </div>
+  <div class="pf-body">
+    <h4>Dutest Qatar — Oryx GTL</h4>
+    <p>Certificates of Excellence from Oryx GTL (2012, 2013, 2014) — crane maintenance and lifting services at the gas-to-liquids facility.</p>
+    <div class="pf-loc">Ras Laffan, Qatar</div>
+    <div class="pf-pills"><span class="pf-pill">GTL Facility</span><span class="pf-pill">Crane Excellence</span><span class="pf-pill">Oryx GTL</span><span class="pf-pill">Multi-Year Contract</span><span class="pf-pill">Industrial Lifting</span></div>
+  </div>
+</article>
+              <article class="pf-card" data-pf-idx="4">
+  <div class="pf-visual" aria-hidden="true">
+    <div class="pf-num">05</div>
+    <svg viewBox="0 0 400 225" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <linearGradient id="pfg4" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#DCE5F2"></stop><stop offset="100%" stop-color="#A6A8BA" stop-opacity="0.45"></stop></linearGradient>
+        <pattern id="pfp4" width="40" height="40" patternUnits="userSpaceOnUse"><g fill="none" stroke="#2A3C8E" stroke-opacity="0.10" stroke-width="1"><rect x="15" y="15" width="10" height="10" transform="rotate(45 20 20)"></rect></g></pattern>
+      </defs>
+      <rect width="400" height="225" fill="url(#pfg4)"></rect>
+      <rect width="400" height="225" fill="url(#pfp4)"></rect>
+    </svg>
+    <div class="pf-cap">[Project image · placeholder]</div>
+  </div>
+  <div class="pf-body">
+    <h4>Dutest Qatar — Qatalum Aluminium</h4>
+    <p>Certificate of Achievement from the Qatalum Project (March 2010) — lifting operations at one of the world's largest aluminium smelters.</p>
+    <div class="pf-loc">Mesaieed, Qatar</div>
+    <div class="pf-pills"><span class="pf-pill">Aluminium Smelter</span><span class="pf-pill">Lifting Equipment</span><span class="pf-pill">Qatalum</span><span class="pf-pill">Industrial</span><span class="pf-pill">Qatar</span></div>
+  </div>
+</article>
+            </div>
+          </div>
+          <button class="pf-arr pf-next" aria-label="Next project"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"></path></svg></button>
+        </div>
+        <div class="pf-dots">
+          <button class="pf-dot active" data-pf-dot="0" aria-label="Project 1"></button>
+          <button class="pf-dot" data-pf-dot="1" aria-label="Project 2"></button>
+          <button class="pf-dot" data-pf-dot="2" aria-label="Project 3"></button>
+          <button class="pf-dot" data-pf-dot="3" aria-label="Project 4"></button>
+          <button class="pf-dot" data-pf-dot="4" aria-label="Project 5"></button>
+        </div>
+      </div>
+      <div class="pf-panel" data-pf-panel="manufact" data-active="false" aria-label="Manufacturing and Fabrication projects">
+        <div class="pf-panel-head">
+          <div>
+            <div class="pf-sector-label">Manufacturing and Fabrication</div>
+            <div class="pf-sector-blurb">Dutest Qatar — General Mechanical Works Division</div>
+          </div>
+          <div class="pf-counter"><strong class="cur">01</strong> / 01</div>
+        </div>
+        <div class="pf-slider-wrap">
+          <button class="pf-arr pf-prev" aria-label="Previous project" disabled><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"></path></svg></button>
+          <div class="pf-slider" tabindex="0" role="region" aria-label="Manufacturing and Fabrication projects scroller">
+            <div class="pf-track">
+              <article class="pf-card" data-pf-idx="0">
+  <div class="pf-visual" aria-hidden="true">
+    <div class="pf-num">01</div>
+    <svg viewBox="0 0 400 225" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <linearGradient id="pfg0" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#DCE5F2"></stop><stop offset="100%" stop-color="#A6A8BA" stop-opacity="0.45"></stop></linearGradient>
+        <pattern id="pfp0" width="40" height="40" patternUnits="userSpaceOnUse"><g fill="none" stroke="#2A3C8E" stroke-opacity="0.10" stroke-width="1"><rect x="15" y="15" width="10" height="10" transform="rotate(45 20 20)"></rect></g></pattern>
+      </defs>
+      <rect width="400" height="225" fill="url(#pfg0)"></rect>
+      <rect width="400" height="225" fill="url(#pfp0)"></rect>
+    </svg>
+    <div class="pf-cap">[Project image · placeholder]</div>
+  </div>
+  <div class="pf-body">
+    <h4>Dutest Qatar — General Mechanical Works &amp; Steel Fabrication</h4>
+    <p>Fully equipped workshop for the fabrication of non-pressure steel components — spreader beams, lifting frames, baskets, offshore containers. Industrial coatings: blasting and painting of tanks, vessels, piping and structures (onshore and offshore).</p>
+    <div class="pf-loc">Industrial Area HQ; Dukhan; Mesaieed; Jery Al Samour, Qatar</div>
+    <div class="pf-pills"><span class="pf-pill">Steel Fabrication</span><span class="pf-pill">Spreader Beams</span><span class="pf-pill">Industrial Coatings</span><span class="pf-pill">Offshore Containers</span><span class="pf-pill">Welding Workshops</span></div>
+  </div>
+</article>
+            </div>
+          </div>
+          <button class="pf-arr pf-next" aria-label="Next project" disabled><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"></path></svg></button>
+        </div>
+        <div class="pf-dots">
+          <button class="pf-dot active" data-pf-dot="0" aria-label="Project 1"></button>
+        </div>
+      </div>
+      <div class="pf-panel" data-pf-panel="services" data-active="false" aria-label="Catering and Facility Management projects">
+        <div class="pf-panel-head">
+          <div>
+            <div class="pf-sector-label">Catering and Facility Management</div>
+            <div class="pf-sector-blurb">Teyseer Services Co. W.L.L. (Founded 1987, 2,000–2,500 employees)</div>
+          </div>
+          <div class="pf-counter"><strong class="cur">01</strong> / 05</div>
+        </div>
+        <div class="pf-slider-wrap">
+          <button class="pf-arr pf-prev" aria-label="Previous project" disabled><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"></path></svg></button>
+          <div class="pf-slider" tabindex="0" role="region" aria-label="Catering and Facility Management projects scroller">
+            <div class="pf-track">
+              <article class="pf-card" data-pf-idx="0">
+  <div class="pf-visual" aria-hidden="true">
+    <div class="pf-num">01</div>
+    <svg viewBox="0 0 400 225" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <linearGradient id="pfg0" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#DCE5F2"></stop><stop offset="100%" stop-color="#A6A8BA" stop-opacity="0.45"></stop></linearGradient>
+        <pattern id="pfp0" width="40" height="40" patternUnits="userSpaceOnUse"><g fill="none" stroke="#2A3C8E" stroke-opacity="0.10" stroke-width="1"><rect x="15" y="15" width="10" height="10" transform="rotate(45 20 20)"></rect></g></pattern>
+      </defs>
+      <rect width="400" height="225" fill="url(#pfg0)"></rect>
+      <rect width="400" height="225" fill="url(#pfp0)"></rect>
+    </svg>
+    <div class="pf-cap">[Project image · placeholder]</div>
+  </div>
+  <div class="pf-body">
+    <h4>QatarEnergy — Industrial &amp; Corporate Catering</h4>
+    <p>Teyseer Services Co. (formerly in strategic partnership with Sodexo) provides high-volume industrial catering, facility management (soft &amp; hard FM), camp operations and security integration to QatarEnergy and affiliated energy sector entities.</p>
+    <div class="pf-loc">QatarEnergy sites, Qatar</div>
+    <div class="pf-pills"><span class="pf-pill">Industrial Catering</span><span class="pf-pill">Facility Management</span><span class="pf-pill">Camp Operations</span><span class="pf-pill">Oil &amp; Gas</span><span class="pf-pill">QatarEnergy</span></div>
+  </div>
+</article>
+              <article class="pf-card" data-pf-idx="1">
+  <div class="pf-visual" aria-hidden="true">
+    <div class="pf-num">02</div>
+    <svg viewBox="0 0 400 225" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <linearGradient id="pfg1" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#DCE5F2"></stop><stop offset="100%" stop-color="#A6A8BA" stop-opacity="0.45"></stop></linearGradient>
+        <pattern id="pfp1" width="40" height="40" patternUnits="userSpaceOnUse"><g fill="none" stroke="#2A3C8E" stroke-opacity="0.10" stroke-width="1"><rect x="15" y="15" width="10" height="10" transform="rotate(45 20 20)"></rect></g></pattern>
+      </defs>
+      <rect width="400" height="225" fill="url(#pfg1)"></rect>
+      <rect width="400" height="225" fill="url(#pfp1)"></rect>
+    </svg>
+    <div class="pf-cap">[Project image · placeholder]</div>
+  </div>
+  <div class="pf-body">
+    <h4>Hamad Medical Corporation — Institutional Catering &amp; FM</h4>
+    <p>Nutritious institutional catering and integrated facility management to HMC — Qatar's primary public healthcare network. Includes housekeeping, waste management and transport logistics.</p>
+    <div class="pf-loc">HMC facilities, Qatar</div>
+    <div class="pf-pills"><span class="pf-pill">Healthcare Catering</span><span class="pf-pill">Soft FM</span><span class="pf-pill">Institutional</span><span class="pf-pill">Hamad Medical</span><span class="pf-pill">Qatar</span></div>
+  </div>
+</article>
+              <article class="pf-card" data-pf-idx="2">
+  <div class="pf-visual" aria-hidden="true">
+    <div class="pf-num">03</div>
+    <svg viewBox="0 0 400 225" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <linearGradient id="pfg2" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#DCE5F2"></stop><stop offset="100%" stop-color="#A6A8BA" stop-opacity="0.45"></stop></linearGradient>
+        <pattern id="pfp2" width="40" height="40" patternUnits="userSpaceOnUse"><g fill="none" stroke="#2A3C8E" stroke-opacity="0.10" stroke-width="1"><rect x="15" y="15" width="10" height="10" transform="rotate(45 20 20)"></rect></g></pattern>
+      </defs>
+      <rect width="400" height="225" fill="url(#pfg2)"></rect>
+      <rect width="400" height="225" fill="url(#pfp2)"></rect>
+    </svg>
+    <div class="pf-cap">[Project image · placeholder]</div>
+  </div>
+  <div class="pf-body">
+    <h4>Sidra Medicine — Institutional Catering</h4>
+    <p>Catering and facility management to Sidra Medicine — one of Qatar's premier women's and children's hospitals. Clinical-standard kitchen management and nutrition compliance.</p>
+    <div class="pf-loc">Education City, Doha</div>
+    <div class="pf-pills"><span class="pf-pill">Hospital Catering</span><span class="pf-pill">Nutrition Standards</span><span class="pf-pill">Sidra Medicine</span><span class="pf-pill">Healthcare FM</span><span class="pf-pill">Qatar</span></div>
+  </div>
+</article>
+              <article class="pf-card" data-pf-idx="3">
+  <div class="pf-visual" aria-hidden="true">
+    <div class="pf-num">04</div>
+    <svg viewBox="0 0 400 225" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <linearGradient id="pfg3" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#DCE5F2"></stop><stop offset="100%" stop-color="#A6A8BA" stop-opacity="0.45"></stop></linearGradient>
+        <pattern id="pfp3" width="40" height="40" patternUnits="userSpaceOnUse"><g fill="none" stroke="#2A3C8E" stroke-opacity="0.10" stroke-width="1"><rect x="15" y="15" width="10" height="10" transform="rotate(45 20 20)"></rect></g></pattern>
+      </defs>
+      <rect width="400" height="225" fill="url(#pfg3)"></rect>
+      <rect width="400" height="225" fill="url(#pfp3)"></rect>
+    </svg>
+    <div class="pf-cap">[Project image · placeholder]</div>
+  </div>
+  <div class="pf-body">
+    <h4>ExxonMobil — Remote Camp Catering &amp; Facility Support</h4>
+    <p>Full camp setup and operations for ExxonMobil remote and industrial field teams: water treatment, laundry, housekeeping, catering, health &amp; safety. Capability in harsh-environment operations.</p>
+    <div class="pf-loc">Qatar (ExxonMobil field camps)</div>
+    <div class="pf-pills"><span class="pf-pill">Remote Camp Ops</span><span class="pf-pill">ExxonMobil</span><span class="pf-pill">Hard FM</span><span class="pf-pill">Camp Management</span><span class="pf-pill">Industrial Services</span></div>
+  </div>
+</article>
+              <article class="pf-card" data-pf-idx="4">
+  <div class="pf-visual" aria-hidden="true">
+    <div class="pf-num">05</div>
+    <svg viewBox="0 0 400 225" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <linearGradient id="pfg4" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#DCE5F2"></stop><stop offset="100%" stop-color="#A6A8BA" stop-opacity="0.45"></stop></linearGradient>
+        <pattern id="pfp4" width="40" height="40" patternUnits="userSpaceOnUse"><g fill="none" stroke="#2A3C8E" stroke-opacity="0.10" stroke-width="1"><rect x="15" y="15" width="10" height="10" transform="rotate(45 20 20)"></rect></g></pattern>
+      </defs>
+      <rect width="400" height="225" fill="url(#pfg4)"></rect>
+      <rect width="400" height="225" fill="url(#pfp4)"></rect>
+    </svg>
+    <div class="pf-cap">[Project image · placeholder]</div>
+  </div>
+  <div class="pf-body">
+    <h4>Kempinski Hotel — Event &amp; VIP Catering</h4>
+    <p>Premium Event &amp; VIP catering for high-profile corporate events, private functions and hospitality operations — including luxury hotel catering partnerships.</p>
+    <div class="pf-loc">Doha, Qatar</div>
+    <div class="pf-pills"><span class="pf-pill">VIP Catering</span><span class="pf-pill">Hospitality</span><span class="pf-pill">Kempinski</span><span class="pf-pill">Event Services</span><span class="pf-pill">Luxury</span></div>
+  </div>
+</article>
+            </div>
+          </div>
+          <button class="pf-arr pf-next" aria-label="Next project"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"></path></svg></button>
+        </div>
+        <div class="pf-dots">
+          <button class="pf-dot active" data-pf-dot="0" aria-label="Project 1"></button>
+          <button class="pf-dot" data-pf-dot="1" aria-label="Project 2"></button>
+          <button class="pf-dot" data-pf-dot="2" aria-label="Project 3"></button>
+          <button class="pf-dot" data-pf-dot="3" aria-label="Project 4"></button>
+          <button class="pf-dot" data-pf-dot="4" aria-label="Project 5"></button>
+        </div>
+      </div>
+      <div class="pf-panel" data-pf-panel="security" data-active="false" aria-label="Security Services projects">
+        <div class="pf-panel-head">
+          <div>
+            <div class="pf-sector-label">Security Services</div>
+            <div class="pf-sector-blurb">Teyseer Security Services (Founded 1994/2011, 4,000+ employees)</div>
+          </div>
+          <div class="pf-counter"><strong class="cur">01</strong> / 04</div>
+        </div>
+        <div class="pf-slider-wrap">
+          <button class="pf-arr pf-prev" aria-label="Previous project" disabled><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"></path></svg></button>
+          <div class="pf-slider" tabindex="0" role="region" aria-label="Security Services projects scroller">
+            <div class="pf-track">
+              <article class="pf-card" data-pf-idx="0">
+  <div class="pf-visual" aria-hidden="true">
+    <div class="pf-num">01</div>
+    <svg viewBox="0 0 400 225" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <linearGradient id="pfg0" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#DCE5F2"></stop><stop offset="100%" stop-color="#A6A8BA" stop-opacity="0.45"></stop></linearGradient>
+        <pattern id="pfp0" width="40" height="40" patternUnits="userSpaceOnUse"><g fill="none" stroke="#2A3C8E" stroke-opacity="0.10" stroke-width="1"><rect x="15" y="15" width="10" height="10" transform="rotate(45 20 20)"></rect></g></pattern>
+      </defs>
+      <rect width="400" height="225" fill="url(#pfg0)"></rect>
+      <rect width="400" height="225" fill="url(#pfp0)"></rect>
+    </svg>
+    <div class="pf-cap">[Project image · placeholder]</div>
+  </div>
+  <div class="pf-body">
+    <h4>FIFA World Cup Qatar 2022 — Official Security Operations Partner</h4>
+    <p>Official Operations Partner for FIFA World Cup 2022 — security, crowd management, traffic control and surveillance across multiple tournament venues throughout Qatar.</p>
+    <div class="pf-loc">Multiple FIFA 2022 stadiums and venues</div>
+    <div class="pf-pills"><span class="pf-pill">FIFA World Cup 2022</span><span class="pf-pill">Crowd Management</span><span class="pf-pill">Event Security</span><span class="pf-pill">CCTV</span><span class="pf-pill">Traffic Control</span></div>
+  </div>
+</article>
+              <article class="pf-card" data-pf-idx="1">
+  <div class="pf-visual" aria-hidden="true">
+    <div class="pf-num">02</div>
+    <svg viewBox="0 0 400 225" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <linearGradient id="pfg1" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#DCE5F2"></stop><stop offset="100%" stop-color="#A6A8BA" stop-opacity="0.45"></stop></linearGradient>
+        <pattern id="pfp1" width="40" height="40" patternUnits="userSpaceOnUse"><g fill="none" stroke="#2A3C8E" stroke-opacity="0.10" stroke-width="1"><rect x="15" y="15" width="10" height="10" transform="rotate(45 20 20)"></rect></g></pattern>
+      </defs>
+      <rect width="400" height="225" fill="url(#pfg1)"></rect>
+      <rect width="400" height="225" fill="url(#pfp1)"></rect>
+    </svg>
+    <div class="pf-cap">[Project image · placeholder]</div>
+  </div>
+  <div class="pf-body">
+    <h4>QatarEnergy — Mesaieed Industrial City (Platinum Award, 2021)</h4>
+    <p>QatarEnergy's Platinum Award (Low Risk Category) under the Contractor Seven Star Program at Mesaieed Industrial City (2021), plus 7-Star Safety Awards (2018–2019) for manned guarding and command &amp; control services.</p>
+    <div class="pf-loc">Mesaieed Industrial City</div>
+    <div class="pf-pills"><span class="pf-pill">QatarEnergy</span><span class="pf-pill">Industrial Security</span><span class="pf-pill">Manned Guarding</span><span class="pf-pill">Platinum Award</span><span class="pf-pill">Mesaieed</span></div>
+  </div>
+</article>
+              <article class="pf-card" data-pf-idx="2">
+  <div class="pf-visual" aria-hidden="true">
+    <div class="pf-num">03</div>
+    <svg viewBox="0 0 400 225" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <linearGradient id="pfg2" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#DCE5F2"></stop><stop offset="100%" stop-color="#A6A8BA" stop-opacity="0.45"></stop></linearGradient>
+        <pattern id="pfp2" width="40" height="40" patternUnits="userSpaceOnUse"><g fill="none" stroke="#2A3C8E" stroke-opacity="0.10" stroke-width="1"><rect x="15" y="15" width="10" height="10" transform="rotate(45 20 20)"></rect></g></pattern>
+      </defs>
+      <rect width="400" height="225" fill="url(#pfg2)"></rect>
+      <rect width="400" height="225" fill="url(#pfp2)"></rect>
+    </svg>
+    <div class="pf-cap">[Project image · placeholder]</div>
+  </div>
+  <div class="pf-body">
+    <h4>Hamad Medical Corporation — Healthcare Security</h4>
+    <p>Manned guarding and surveillance services for HMC — Qatar's largest healthcare network — ensuring safe environments across hospital campuses.</p>
+    <div class="pf-loc">HMC sites, Doha</div>
+    <div class="pf-pills"><span class="pf-pill">Healthcare Security</span><span class="pf-pill">Manned Guarding</span><span class="pf-pill">HMC</span><span class="pf-pill">CCTV</span><span class="pf-pill">Command &amp; Control</span></div>
+  </div>
+</article>
+              <article class="pf-card" data-pf-idx="3">
+  <div class="pf-visual" aria-hidden="true">
+    <div class="pf-num">04</div>
+    <svg viewBox="0 0 400 225" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <linearGradient id="pfg3" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#DCE5F2"></stop><stop offset="100%" stop-color="#A6A8BA" stop-opacity="0.45"></stop></linearGradient>
+        <pattern id="pfp3" width="40" height="40" patternUnits="userSpaceOnUse"><g fill="none" stroke="#2A3C8E" stroke-opacity="0.10" stroke-width="1"><rect x="15" y="15" width="10" height="10" transform="rotate(45 20 20)"></rect></g></pattern>
+      </defs>
+      <rect width="400" height="225" fill="url(#pfg3)"></rect>
+      <rect width="400" height="225" fill="url(#pfp3)"></rect>
+    </svg>
+    <div class="pf-cap">[Project image · placeholder]</div>
+  </div>
+  <div class="pf-body">
+    <h4>Doha Festival City — Retail &amp; Commercial Security</h4>
+    <p>Security, event traffic and crowd flow operations at Doha Festival City — one of Qatar's largest retail and entertainment destinations.</p>
+    <div class="pf-loc">Doha Festival City</div>
+    <div class="pf-pills"><span class="pf-pill">Retail Security</span><span class="pf-pill">Crowd Management</span><span class="pf-pill">Commercial</span><span class="pf-pill">Event Traffic</span><span class="pf-pill">Doha</span></div>
+  </div>
+</article>
+            </div>
+          </div>
+          <button class="pf-arr pf-next" aria-label="Next project"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"></path></svg></button>
+        </div>
+        <div class="pf-dots">
+          <button class="pf-dot active" data-pf-dot="0" aria-label="Project 1"></button>
+          <button class="pf-dot" data-pf-dot="1" aria-label="Project 2"></button>
+          <button class="pf-dot" data-pf-dot="2" aria-label="Project 3"></button>
+          <button class="pf-dot" data-pf-dot="3" aria-label="Project 4"></button>
+        </div>
+      </div>
+      <div class="pf-panel" data-pf-panel="hvac" data-active="false" aria-label="Air Conditioning and HVAC projects">
+        <div class="pf-panel-head">
+          <div>
+            <div class="pf-sector-label">Air Conditioning and HVAC</div>
+            <div class="pf-sector-blurb">TARC — Teyseer AC &amp; Refrigeration (Founded 1978) · CCM Service (Founded 1972)</div>
+          </div>
+          <div class="pf-counter"><strong class="cur">01</strong> / 06</div>
+        </div>
+        <div class="pf-slider-wrap">
+          <button class="pf-arr pf-prev" aria-label="Previous project" disabled><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"></path></svg></button>
+          <div class="pf-slider" tabindex="0" role="region" aria-label="Air Conditioning and HVAC projects scroller">
+            <div class="pf-track">
+              <article class="pf-card" data-pf-idx="0">
+  <div class="pf-visual" aria-hidden="true">
+    <div class="pf-num">01</div>
+    <svg viewBox="0 0 400 225" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <linearGradient id="pfg0" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#DCE5F2"></stop><stop offset="100%" stop-color="#A6A8BA" stop-opacity="0.45"></stop></linearGradient>
+        <pattern id="pfp0" width="40" height="40" patternUnits="userSpaceOnUse"><g fill="none" stroke="#2A3C8E" stroke-opacity="0.10" stroke-width="1"><rect x="15" y="15" width="10" height="10" transform="rotate(45 20 20)"></rect></g></pattern>
+      </defs>
+      <rect width="400" height="225" fill="url(#pfg0)"></rect>
+      <rect width="400" height="225" fill="url(#pfp0)"></rect>
+    </svg>
+    <div class="pf-cap">[Project image · placeholder]</div>
+  </div>
+  <div class="pf-body">
+    <h4>TARC — Sole Mitsubishi Heavy Industries Distributor, Qatar</h4>
+    <p>Sole authorised distributor and turnkey installer of Mitsubishi Heavy Industries air-conditioning in Qatar since 1978. Design, supply, installation, commissioning and maintenance of split units, central ACs, chillers, heat pumps and VRF — full ductwork and electrical integration.</p>
+    <div class="pf-loc">Salwa Road, Doha</div>
+    <div class="pf-pills"><span class="pf-pill">Mitsubishi</span><span class="pf-pill">HVAC</span><span class="pf-pill">Exclusive Distributor</span><span class="pf-pill">VRF Systems</span><span class="pf-pill">Chillers</span><span class="pf-pill">Turnkey HVAC</span></div>
+  </div>
+</article>
+              <article class="pf-card" data-pf-idx="1">
+  <div class="pf-visual" aria-hidden="true">
+    <div class="pf-num">02</div>
+    <svg viewBox="0 0 400 225" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <linearGradient id="pfg1" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#DCE5F2"></stop><stop offset="100%" stop-color="#A6A8BA" stop-opacity="0.45"></stop></linearGradient>
+        <pattern id="pfp1" width="40" height="40" patternUnits="userSpaceOnUse"><g fill="none" stroke="#2A3C8E" stroke-opacity="0.10" stroke-width="1"><rect x="15" y="15" width="10" height="10" transform="rotate(45 20 20)"></rect></g></pattern>
+      </defs>
+      <rect width="400" height="225" fill="url(#pfg1)"></rect>
+      <rect width="400" height="225" fill="url(#pfp1)"></rect>
+    </svg>
+    <div class="pf-cap">[Project image · placeholder]</div>
+  </div>
+  <div class="pf-body">
+    <h4>TARC — QAMCO (Qatar Aluminium Manufacturing Co.)</h4>
+    <p>HVAC solutions and maintenance to QAMCO — Qatar's prominent aluminium manufacturing entity — demonstrating industrial-grade HVAC capability.</p>
+    <div class="pf-loc">Mesaieed, Qatar</div>
+    <div class="pf-pills"><span class="pf-pill">Industrial HVAC</span><span class="pf-pill">QAMCO</span><span class="pf-pill">Aluminium</span><span class="pf-pill">Mesaieed</span><span class="pf-pill">PPM Services</span></div>
+  </div>
+</article>
+              <article class="pf-card" data-pf-idx="2">
+  <div class="pf-visual" aria-hidden="true">
+    <div class="pf-num">03</div>
+    <svg viewBox="0 0 400 225" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <linearGradient id="pfg2" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#DCE5F2"></stop><stop offset="100%" stop-color="#A6A8BA" stop-opacity="0.45"></stop></linearGradient>
+        <pattern id="pfp2" width="40" height="40" patternUnits="userSpaceOnUse"><g fill="none" stroke="#2A3C8E" stroke-opacity="0.10" stroke-width="1"><rect x="15" y="15" width="10" height="10" transform="rotate(45 20 20)"></rect></g></pattern>
+      </defs>
+      <rect width="400" height="225" fill="url(#pfg2)"></rect>
+      <rect width="400" height="225" fill="url(#pfp2)"></rect>
+    </svg>
+    <div class="pf-cap">[Project image · placeholder]</div>
+  </div>
+  <div class="pf-body">
+    <h4>TARC — QatarEnergy HVAC Services</h4>
+    <p>AC supply, installation and maintenance contracts for QatarEnergy facilities — QCS installation standards, OEM-backed quality.</p>
+    <div class="pf-loc">QatarEnergy sites, Qatar</div>
+    <div class="pf-pills"><span class="pf-pill">QatarEnergy</span><span class="pf-pill">HVAC Maintenance</span><span class="pf-pill">Industrial AC</span><span class="pf-pill">QCS Standards</span><span class="pf-pill">Oil &amp; Gas</span></div>
+  </div>
+</article>
+              <article class="pf-card" data-pf-idx="3">
+  <div class="pf-visual" aria-hidden="true">
+    <div class="pf-num">04</div>
+    <svg viewBox="0 0 400 225" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <linearGradient id="pfg3" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#DCE5F2"></stop><stop offset="100%" stop-color="#A6A8BA" stop-opacity="0.45"></stop></linearGradient>
+        <pattern id="pfp3" width="40" height="40" patternUnits="userSpaceOnUse"><g fill="none" stroke="#2A3C8E" stroke-opacity="0.10" stroke-width="1"><rect x="15" y="15" width="10" height="10" transform="rotate(45 20 20)"></rect></g></pattern>
+      </defs>
+      <rect width="400" height="225" fill="url(#pfg3)"></rect>
+      <rect width="400" height="225" fill="url(#pfp3)"></rect>
+    </svg>
+    <div class="pf-cap">[Project image · placeholder]</div>
+  </div>
+  <div class="pf-body">
+    <h4>TARC — Katara Cultural Village</h4>
+    <p>HVAC installation and maintenance at Katara Cultural Village — one of Qatar's landmark cultural and entertainment destinations.</p>
+    <div class="pf-loc">Katara Cultural Village, Doha</div>
+    <div class="pf-pills"><span class="pf-pill">Cultural Venue</span><span class="pf-pill">Central AC</span><span class="pf-pill">Large-Scale HVAC</span><span class="pf-pill">Public Facilities</span><span class="pf-pill">Doha</span></div>
+  </div>
+</article>
+              <article class="pf-card" data-pf-idx="4">
+  <div class="pf-visual" aria-hidden="true">
+    <div class="pf-num">05</div>
+    <svg viewBox="0 0 400 225" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <linearGradient id="pfg4" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#DCE5F2"></stop><stop offset="100%" stop-color="#A6A8BA" stop-opacity="0.45"></stop></linearGradient>
+        <pattern id="pfp4" width="40" height="40" patternUnits="userSpaceOnUse"><g fill="none" stroke="#2A3C8E" stroke-opacity="0.10" stroke-width="1"><rect x="15" y="15" width="10" height="10" transform="rotate(45 20 20)"></rect></g></pattern>
+      </defs>
+      <rect width="400" height="225" fill="url(#pfg4)"></rect>
+      <rect width="400" height="225" fill="url(#pfp4)"></rect>
+    </svg>
+    <div class="pf-cap">[Project image · placeholder]</div>
+  </div>
+  <div class="pf-body">
+    <h4>CCM Service — Pipeline, Pumping Stations, Control Systems</h4>
+    <p>Full-spectrum Electro-Mechanical Engineering — design, installation, testing and commissioning of MEP, HVAC and instrumentation. Energy &amp; Utilities: pipeline infrastructure, pumping stations, process control systems.</p>
+    <div class="pf-loc">Salwa Road, Doha</div>
+    <div class="pf-pills"><span class="pf-pill">Electro-Mechanical</span><span class="pf-pill">MEP</span><span class="pf-pill">HVAC Commissioning</span><span class="pf-pill">Pipeline</span><span class="pf-pill">Control Systems</span><span class="pf-pill">Instrumentation</span></div>
+  </div>
+</article>
+              <article class="pf-card" data-pf-idx="5">
+  <div class="pf-visual" aria-hidden="true">
+    <div class="pf-num">06</div>
+    <svg viewBox="0 0 400 225" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <linearGradient id="pfg5" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#DCE5F2"></stop><stop offset="100%" stop-color="#A6A8BA" stop-opacity="0.45"></stop></linearGradient>
+        <pattern id="pfp5" width="40" height="40" patternUnits="userSpaceOnUse"><g fill="none" stroke="#2A3C8E" stroke-opacity="0.10" stroke-width="1"><rect x="15" y="15" width="10" height="10" transform="rotate(45 20 20)"></rect></g></pattern>
+      </defs>
+      <rect width="400" height="225" fill="url(#pfg5)"></rect>
+      <rect width="400" height="225" fill="url(#pfp5)"></rect>
+    </svg>
+    <div class="pf-cap">[Project image · placeholder]</div>
+  </div>
+  <div class="pf-body">
+    <h4>CCM Service — Water &amp; Wastewater Treatment Infrastructure</h4>
+    <p>Major assignments in water and wastewater treatment plant infrastructure — mechanical and instrumentation support for Qatar's utilities sector.</p>
+    <div class="pf-loc">Qatar (utilities sites)</div>
+    <div class="pf-pills"><span class="pf-pill">Water Treatment</span><span class="pf-pill">Wastewater</span><span class="pf-pill">Infrastructure</span><span class="pf-pill">Mechanical Works</span><span class="pf-pill">Utilities</span></div>
+  </div>
+</article>
+            </div>
+          </div>
+          <button class="pf-arr pf-next" aria-label="Next project"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"></path></svg></button>
+        </div>
+        <div class="pf-dots">
+          <button class="pf-dot active" data-pf-dot="0" aria-label="Project 1"></button>
+          <button class="pf-dot" data-pf-dot="1" aria-label="Project 2"></button>
+          <button class="pf-dot" data-pf-dot="2" aria-label="Project 3"></button>
+          <button class="pf-dot" data-pf-dot="3" aria-label="Project 4"></button>
+          <button class="pf-dot" data-pf-dot="4" aria-label="Project 5"></button>
+          <button class="pf-dot" data-pf-dot="5" aria-label="Project 6"></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     Closing CTA — "Partner With Us"
+     ============================================================ -->
+
+<section class="final-cta reveal" aria-label="Partner with us">
+  <div class="wrap">
+    <div class="ctxt">
+      <div class="eyebrow">Work With Us</div>
+      <h2>Partner With Us.</h2>
+      <p>From international principals seeking a foothold in Qatar to local clients across infrastructure, industry, mobility and services — the right introduction starts a long-tenure relationship.</p>
+      <div class="btns">
+        <a class="btn" href="partners.html">View Our Partners <span class="arrow">→</span></a>
+        <a class="btn outline" href="index.html">Back to Overview <span class="arrow">→</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<button class="totop" id="totop" type="button" aria-label="Back to top">
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 19V5M5 12l7-7 7 7"></path></svg>
+</button>
+
+<script src="teyseer.js"></script>
+<script>
+/* ============ PORTFOLIO — sector pills + slider ============ */
+/* ============ PORTFOLIO — sector pills + slider ============ */
+(function () {
+  // Sector pill switching
+  document.querySelectorAll('.pf-sector-pill').forEach(function (pill) {
+    pill.addEventListener('click', function () {
+      var sec = pill.getAttribute('data-pf-sector');
+      document.querySelectorAll('.pf-sector-pill').forEach(function (p) {
+        p.classList.toggle('active', p === pill);
+        p.setAttribute('aria-selected', p === pill ? 'true' : 'false');
+      });
+      document.querySelectorAll('.pf-panel').forEach(function (panel) {
+        panel.setAttribute('data-active', panel.getAttribute('data-pf-panel') === sec ? 'true' : 'false');
+      });
+    });
+  });
+
+  // Slider controls per panel
+  document.querySelectorAll('.pf-panel').forEach(function (panel) {
+    var slider = panel.querySelector('.pf-slider');
+    var cards  = panel.querySelectorAll('.pf-card');
+    var prev   = panel.querySelector('.pf-prev');
+    var next   = panel.querySelector('.pf-next');
+    var dots   = panel.querySelectorAll('.pf-dot');
+    var cur    = panel.querySelector('.pf-counter .cur');
+    if (!slider || !cards.length) return;
+
+    function pad(n){return n<10?'0'+n:''+n;}
+    function getIdx() {
+      var srect = slider.getBoundingClientRect();
+      var best = 0, bestDist = Infinity;
+      cards.forEach(function (c, i) {
+        var d = Math.abs(c.getBoundingClientRect().left - srect.left);
+        if (d < bestDist) { bestDist = d; best = i; }
+      });
+      return best;
+    }
+    function update() {
+      var i = getIdx();
+      if (cur) cur.textContent = pad(i + 1);
+      if (prev) prev.disabled = (i === 0);
+      if (next) next.disabled = (i === cards.length - 1);
+      dots.forEach(function (d, j) { d.classList.toggle('active', j === i); });
+    }
+    function go(i) {
+      if (i < 0 || i >= cards.length) return;
+      slider.scrollTo({ left: cards[i].offsetLeft - slider.offsetLeft, behavior: 'smooth' });
+    }
+    if (prev) prev.addEventListener('click', function () { go(getIdx() - 1); });
+    if (next) next.addEventListener('click', function () { go(getIdx() + 1); });
+    dots.forEach(function (d, i) {
+      d.addEventListener('click', function () { go(i); });
+    });
+    slider.addEventListener('scroll', function () { requestAnimationFrame(update); }, { passive: true });
+    slider.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowRight') { e.preventDefault(); go(getIdx() + 1); }
+      if (e.key === 'ArrowLeft')  { e.preventDefault(); go(getIdx() - 1); }
+    });
+    update();
+  });
+})();
+</script>
+
+</body>
+</html>

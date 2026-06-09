@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chairman's Message — Teyseer Group</title>
+<meta name="description" content="A message from Khalifa A.R. Almannai, Chairman, Teyseer Group W.L.L. — on heritage, partnership and Qatar's path forward.">
+<link rel="stylesheet" href="teyseer.css">
+<style>
+/* ============================================================
+   PAGE-SPECIFIC — CHAIRMAN'S MESSAGE
+   ============================================================ */
+
+/* HERO — merged portrait + quote, name shown once */
+.hero.chair { padding: 56px 0 48px; }
+.hero.chair .merge-card {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 0;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  margin-top: 36px;
+  max-width: 1100px;
+}
+@media (max-width: 900px) { .hero.chair .merge-card { grid-template-columns: 1fr; } }
+
+.hero.chair .merge-portrait {
+  position: relative;
+  background: var(--sky-soft);
+  border-right: 1px solid var(--line);
+  overflow: hidden;
+  min-height: 420px;
+}
+@media (max-width: 900px) {
+  .hero.chair .merge-portrait { border-right: 0; border-bottom: 1px solid var(--line); min-height: 320px; }
+}
+.hero.chair .merge-portrait svg { width: 100%; height: 100%; display: block; }
+.hero.chair .merge-portrait .caption {
+  position: absolute; top: 12px; right: 12px;
+  font-family: var(--mono); font-size: 9.5px;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  background: rgba(31,45,107,0.85);
+  color: var(--paper);
+  padding: 5px 9px;
+}
+
+.hero.chair .merge-body {
+  padding: 40px 44px;
+  display: flex; flex-direction: column;
+  justify-content: center;
+  gap: 18px;
+}
+@media (max-width: 720px) { .hero.chair .merge-body { padding: 28px 24px; } }
+.hero.chair .merge-body .role-line {
+  font-family: var(--mono); font-size: 11px;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--blue);
+}
+.hero.chair .merge-body h1 {
+  font-family: var(--serif);
+  font-weight: 300;
+  font-size: clamp(28px, 3vw, 40px);
+  line-height: 1.1;
+  letter-spacing: -0.005em;
+  color: var(--night);
+  margin: 0;
+}
+.hero.chair .merge-body h1 em {
+  font-style: italic;
+  color: var(--blue);
+  font-weight: 400;
+}
+.hero.chair .merge-body .quote-block {
+  position: relative;
+  padding-left: 28px;
+  border-left: 3px solid var(--blue);
+  margin-top: 4px;
+}
+.hero.chair .merge-body .quote-block .qm {
+  position: absolute; left: -8px; top: -16px;
+  font-family: var(--serif); font-size: 64px;
+  font-weight: 300; line-height: 1;
+  color: var(--blue); opacity: 0.18;
+}
+.hero.chair .merge-body .quote-block p {
+  font-family: var(--serif);
+  font-style: italic; font-weight: 400;
+  font-size: clamp(17px, 1.5vw, 21px);
+  line-height: 1.45;
+  color: var(--night);
+  margin: 0;
+}
+.hero.chair .merge-body .name-stamp {
+  margin-top: 16px;
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
+  display: flex; justify-content: space-between; align-items: end;
+  flex-wrap: wrap; gap: 12px;
+}
+.hero.chair .merge-body .name-stamp .nm {
+  font-family: 'Cabin', serif;
+  font-style: italic;
+  font-weight: 500;
+  font-size: 30px;
+  line-height: 1;
+  letter-spacing: -0.005em;
+  color: var(--blue-deep);
+}
+.hero.chair .merge-body .name-stamp .meta {
+  font-family: var(--mono); font-size: 10.5px;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--muted); text-align: right;
+}
+
+/* ============================================================
+   THE LETTER — physical-letter layout
+   ============================================================ */
+.letter-section {
+  padding: 64px 0;
+  background: var(--cream-2);
+  position: relative;
+  overflow: clip;          /* clip not hidden — preserves sticky positioning for descendants */
+}
+/* Subtle brand graphics behind the letter */
+.letter-section::before {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background-image:
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'><g fill='none' stroke='%232A3C8E' stroke-opacity='0.045' stroke-width='1'><rect x='22' y='22' width='16' height='16' transform='rotate(45 30 30)'/><rect x='26' y='26' width='8' height='8' transform='rotate(45 30 30)'/></g></svg>");
+  background-size: 60px 60px;
+}
+.letter-section .wrap { position: relative; z-index: 1; max-width: 1180px; }
+
+/* Background watermark monogram */
+.letter-watermark {
+  position: absolute;
+  top: 0; right: 0;
+  width: 380px; height: 380px;
+  opacity: 0.06;
+  pointer-events: none;
+  z-index: 0;
+}
+@media (max-width: 900px) { .letter-watermark { width: 220px; height: 220px; } }
+
+/* "Letter paper" container */
+.letter-paper {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  position: relative;
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 0;
+}
+@media (max-width: 900px) { .letter-paper { grid-template-columns: 1fr; } }
+
+/* Subtle "letterhead" stripe at top */
+.letter-paper::before {
+  content: ""; position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  background: var(--blue);
+}
+
+/* TOC sidebar — sticky so it stays visible as the letter scrolls */
+.letter-toc {
+  padding: 56px 28px 32px;
+  border-right: 1px solid var(--line);
+  background: var(--white);
+  position: sticky;
+  top: 80px;
+  align-self: start;
+  max-height: calc(100vh - 96px);
+  overflow-y: auto;
+  z-index: 5;
+}
+.letter-toc::-webkit-scrollbar { width: 6px; }
+.letter-toc::-webkit-scrollbar-track { background: transparent; }
+.letter-toc::-webkit-scrollbar-thumb { background: var(--steel); }
+@media (max-width: 900px) {
+  .letter-toc {
+    border-right: 0; border-bottom: 1px solid var(--line);
+    padding: 24px 24px;
+    position: static;
+  }
+}
+.letter-toc .toc-lab {
+  font-family: var(--mono); font-size: 10.5px;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 16px;
+}
+.letter-toc .toc-list {
+  list-style: none; padding: 0; margin: 0;
+  display: flex; flex-direction: column; gap: 0;
+}
+.letter-toc .toc-list li {
+  border-top: 1px solid var(--line-soft);
+}
+.letter-toc .toc-list li:last-child { border-bottom: 1px solid var(--line-soft); }
+.letter-toc .toc-list a {
+  display: grid;
+  grid-template-columns: 28px 1fr;
+  gap: 10px;
+  padding: 10px 0;
+  font-size: 13.5px;
+  color: var(--muted);
+  align-items: baseline;
+  transition: color 160ms;
+}
+.letter-toc .toc-list a .n {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  color: var(--blue);
+  font-weight: 500;
+}
+.letter-toc .toc-list a:hover,
+.letter-toc .toc-list a.here {
+  color: var(--blue);
+}
+.letter-toc .toc-list a.here .n {
+  background: var(--blue);
+  color: var(--paper);
+  padding: 2px 6px;
+}
+
+/* Main letter content */
+.letter-content {
+  padding: 56px 64px 56px;
+}
+@media (max-width: 720px) { .letter-content { padding: 32px 28px; } }
+
+/* TO header (top-left) — calligraphy */
+.letter-to {
+  margin-bottom: 36px;
+  padding-bottom: 22px;
+  border-bottom: 1px solid var(--line);
+}
+.letter-to .lab {
+  font-family: var(--mono); font-size: 10.5px;
+  letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+.letter-to .who {
+  font-family: 'Cabin', serif;
+  font-style: italic;
+  font-weight: 500;
+  font-size: clamp(28px, 3vw, 40px);
+  line-height: 1.15;
+  letter-spacing: -0.005em;
+  color: var(--blue-deep);
+  max-width: 22ch;
+}
+.letter-to .date {
+  margin-top: 12px;
+  font-family: var(--mono); font-size: 11px;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--blue);
+}
+
+/* Opener — attributed via "By:" */
+.letter-content .opener {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-style: italic;
+  font-size: clamp(20px, 1.7vw, 24px);
+  line-height: 1.5;
+  color: var(--night);
+  margin: 0 0 14px;
+  padding-left: 18px;
+  border-left: 3px solid var(--blue);
+  max-width: 64ch;
+}
+.letter-content .opener-attr {
+  font-family: var(--mono); font-size: 11px;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--muted);
+  margin: 0 0 36px 21px;
+}
+.letter-content .opener-attr strong { color: var(--blue); font-weight: 500; }
+
+/* Letter body */
+.letter-content .body { max-width: 64ch; }
+.letter-content .body h3 {
+  font-family: var(--serif);
+  font-size: clamp(22px, 2.2vw, 30px);
+  font-weight: 700;
+  color: var(--blue);
+  letter-spacing: -0.005em;
+  margin: 44px 0 14px;
+  scroll-margin-top: 96px;
+}
+.letter-content .body h3 .sx {
+  display: inline-block; vertical-align: middle;
+  font-family: var(--mono); font-size: 10.5px;
+  letter-spacing: 0.18em; color: var(--muted);
+  margin-right: 12px; font-weight: 500;
+}
+.letter-content .body p {
+  font-size: 16px; line-height: 1.7;
+  color: var(--night); margin: 0 0 14px;
+}
+.letter-content .body p em {
+  font-style: italic; color: var(--blue);
+}
+.letter-content .body blockquote {
+  margin: 28px 0;
+  padding: 0 0 0 28px;
+  border-left: 4px solid var(--blue);
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: clamp(20px, 1.8vw, 24px);
+  line-height: 1.35;
+  font-weight: 400;
+  color: var(--blue-deep);
+}
+.letter-content .body blockquote .at {
+  display: block;
+  margin-top: 10px;
+  font-family: var(--mono); font-size: 11px;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--muted); font-style: normal; font-weight: 500;
+}
+
+/* Inline figures */
+.inline-figures {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+  margin: 24px 0;
+}
+@media (max-width: 720px) { .inline-figures { grid-template-columns: 1fr; } }
+.inline-figures .ifig { background: var(--white); padding: 16px 18px; display: flex; flex-direction: column; gap: 4px; }
+.inline-figures .ifig .v {
+  font-family: var(--serif); font-size: 26px; font-weight: 300;
+  color: var(--blue); line-height: 1;
+}
+.inline-figures .ifig .l {
+  font-family: var(--mono); font-size: 10px;
+  letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted);
+}
+.inline-figures .ifig .d { font-size: 13px; color: var(--night); }
+
+/* FROM header (bottom-right) — calligraphy */
+.letter-from {
+  margin-top: 56px;
+  padding-top: 28px;
+  border-top: 1px solid var(--line);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  text-align: right;
+}
+.letter-from .lab {
+  font-family: var(--mono); font-size: 10.5px;
+  letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 8px;
+}
+.letter-from .who {
+  font-family: 'Cabin', serif;
+  font-style: italic;
+  font-weight: 500;
+  font-size: clamp(28px, 3vw, 40px);
+  line-height: 1.05;
+  letter-spacing: -0.005em;
+  color: var(--blue-deep);
+}
+.letter-from .role {
+  margin-top: 6px;
+  font-family: var(--mono); font-size: 11px;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--blue);
+}
+.letter-from .seal {
+  margin-top: 16px;
+  width: 56px; height: 56px;
+  position: relative;
+}
+.letter-from .seal::before {
+  content: ""; position: absolute; inset: 0;
+  background: var(--blue);
+  clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
+}
+.letter-from .seal::after {
+  content: ""; position: absolute; inset: 18px;
+  background: var(--sky);
+  clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
+}
+
+/* ============================================================
+   FOUNDER TRIBUTE BAND
+   ============================================================ */
+.founder {
+  background: var(--blue);
+  color: var(--paper);
+  padding: 64px 0;
+  position: relative;
+  overflow: hidden;
+}
+.founder::before {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background-image:
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'><g fill='none' stroke='%23A6A8BA' stroke-opacity='0.16' stroke-width='1'><rect x='15' y='15' width='10' height='10' transform='rotate(45 20 20)'/><rect x='17.5' y='17.5' width='5' height='5' transform='rotate(45 20 20)'/></g></svg>");
+  background-size: 40px 40px;
+}
+.founder .grid {
+  display: grid; grid-template-columns: 1fr 1.4fr;
+  gap: 64px; align-items: center;
+  position: relative; z-index: 1;
+}
+@media (max-width: 1024px) { .founder .grid { grid-template-columns: 1fr; gap: 28px; } }
+.founder .frame {
+  aspect-ratio: 4 / 5;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.18);
+  position: relative; overflow: hidden;
+}
+.founder .frame svg { width: 100%; height: 100%; }
+.founder .frame .lbl {
+  position: absolute; left: 16px; bottom: 16px;
+  font-family: var(--mono); font-size: 10px;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: rgba(255,255,255,0.7);
+}
+.founder .eyebrow { color: var(--sky); margin-bottom: 12px; display: block; }
+.founder h2 {
+  font-family: var(--serif); font-weight: 300;
+  font-size: clamp(28px, 3.4vw, 44px);
+  line-height: 1.1; color: var(--paper);
+  letter-spacing: -0.005em;
+  margin: 0 0 20px;
+}
+.founder h2 em { font-style: italic; font-weight: 400; }
+.founder p { color: rgba(255,255,255,0.84); font-size: 16px; line-height: 1.65; margin: 0 0 12px; max-width: 60ch; }
+.founder .meta {
+  display: flex; gap: 28px; flex-wrap: wrap;
+  margin-top: 22px;
+  padding-top: 18px;
+  border-top: 1px solid rgba(255,255,255,0.18);
+}
+.founder .meta .mi { display: flex; flex-direction: column; gap: 4px; }
+.founder .meta .mv {
+  font-family: var(--serif); font-size: 26px; font-weight: 300;
+  color: var(--paper); line-height: 1;
+}
+.founder .meta .ml {
+  font-family: var(--mono); font-size: 10px;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: rgba(255,255,255,0.6);
+}
+
+/* ============================================================
+   MESSAGE CARD — concise single-column message
+   ============================================================ */
+.message-card {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  padding: 56px 64px 48px;
+  max-width: 880px;
+  margin: 0 auto;
+  position: relative;
+}
+@media (max-width: 720px) { .message-card { padding: 36px 28px 32px; } }
+.letterhead-stripe {
+  position: absolute; top: 0; left: 0; right: 0;
+  height: 4px;
+  background: var(--blue);
+}
+.msg-to, .msg-from {
+  display: flex; flex-direction: column; gap: 4px;
+}
+.msg-to { margin-bottom: 32px; padding-bottom: 22px; border-bottom: 1px solid var(--line); }
+.msg-from {
+  margin-top: 32px; padding-top: 22px; border-top: 1px solid var(--line);
+  align-items: flex-end; text-align: right;
+}
+.msg-to .lab, .msg-from .lab {
+  font-family: var(--mono); font-size: 10.5px;
+  letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted);
+}
+.msg-to .who, .msg-from .who {
+  font-family: 'Cabin', serif; font-style: italic; font-weight: 500;
+  font-size: clamp(22px, 2.4vw, 32px);
+  line-height: 1.15; letter-spacing: -0.005em;
+  color: var(--blue-deep);
+}
+.msg-from .role {
+  font-family: var(--mono); font-size: 11px;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--blue);
+  margin-top: 6px;
+}
+.msg-from .seal {
+  margin-top: 14px; width: 48px; height: 48px; position: relative;
+}
+.msg-from .seal::before {
+  content: ""; position: absolute; inset: 0;
+  background: var(--blue);
+  clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
+}
+.msg-from .seal::after {
+  content: ""; position: absolute; inset: 14px;
+  background: var(--sky);
+  clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
+}
+
+.msg-body { display: flex; flex-direction: column; gap: 22px; }
+.msg-body p {
+  font-family: var(--serif);
+  font-size: clamp(16px, 1.4vw, 19px);
+  line-height: 1.7;
+  color: var(--night);
+  margin: 0;
+}
+.msg-body p em { font-style: italic; color: var(--blue); font-weight: 400; }
+.msg-body p:first-of-type::first-letter {
+  font-family: var(--serif);
+  font-weight: 300;
+  float: left;
+  font-size: clamp(54px, 5vw, 72px);
+  line-height: 0.85;
+  color: var(--blue);
+  margin: 6px 14px 0 0;
+}
+
+.letter-toc, .letter-paper { display: none !important; }
+
+/* ============================================================
+   PAGE SWITCHER (inter-page nav across the 3 About-Us pages)
+   ============================================================ */
+.pageswitcher {
+  display: inline-flex; gap: 0;
+  border: 1px solid var(--line);
+  background: var(--paper);
+  margin-left: 8px;
+  flex-shrink: 0;
+}
+.pageswitcher a {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding: 7px 12px;
+  border-right: 1px solid var(--line);
+  transition: all 160ms;
+  white-space: nowrap;
+}
+.pageswitcher a:last-child { border-right: 0; }
+.pageswitcher a:hover { background: var(--sky-soft); color: var(--blue); }
+.pageswitcher a.here {
+  background: var(--blue);
+  color: var(--paper);
+}
+
+</style>
+</head>
+<body data-screen-label="Chairman's Message">
+
+<a class="skip" href="#main">Skip to content</a>
+<div class="progress"><div class="fill" id="progressFill"></div></div>
+
+<header class="pagebar" role="banner">
+  <div class="wrap">
+    <div class="pb-row pb-bottom">
+      <a href="#identity" class="brand" aria-label="Teyseer Group">
+      <span class="mark" aria-hidden="true">
+        <svg viewBox="0 0 36 36" fill="none">
+          <rect x="6" y="6" width="24" height="24" fill="#2A3C8E"></rect>
+          <rect x="13.5" y="13.5" width="9" height="9" transform="rotate(45 18 18)" fill="#A6A8BA"></rect>
+          <rect x="16.5" y="16.5" width="3" height="3" transform="rotate(45 18 18)" fill="#F4F3EF"></rect>
+        </svg>
+      </span>
+      <span>
+        <div class="name">Teyseer</div>
+        <div class="tag">Since 1968</div>
+      </span>
+    </a>
+      <div class="anchornav-wrap">
+      <nav class="anchornav" id="anchornav" aria-label="On this page">
+        <a href="#identity" class="active">01 Office</a>
+        <a href="#letter">02 The Letter</a>
+        <a href="#founder">03 Founder Tribute</a>
+      </nav>
+    </div>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- ============================================================
+     01 — HERO: merged portrait + quote, name shown once
+     ============================================================ -->
+<section class="hero chair pattern-bg" id="identity" data-screen-label="01 Office of the Chairman">
+  <svg class="water" viewBox="0 0 200 200" aria-hidden="true">
+    <rect x="40" y="40" width="120" height="120" fill="none" stroke="#2A3C8E" stroke-width="0.6"></rect>
+    <rect x="70" y="70" width="60" height="60" transform="rotate(45 100 100)" fill="none" stroke="#2A3C8E" stroke-width="0.6"></rect>
+    <rect x="92" y="92" width="16" height="16" transform="rotate(45 100 100)" fill="#2A3C8E"></rect>
+  </svg>
+  <div class="wrap">
+    <div class="ix">
+      <span>01</span><span class="dash"></span><span>Office of the Chairman</span>
+    </div>
+
+    <h1 class="h1 reveal" style="max-width: 18ch;">A message from the <em>Chairman.</em></h1>
+
+    <article class="merge-card reveal" aria-label="Chairman portrait and opening words">
+      <div class="merge-portrait" aria-label="Chairman portrait">
+        <svg viewBox="0 0 320 420" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+          <defs>
+            <linearGradient id="cpg" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#DCE5F2"></stop>
+              <stop offset="100%" stop-color="#A6A8BA" stop-opacity="0.45"></stop>
+            </linearGradient>
+            <pattern id="cpp" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+              <rect x="2" y="2" width="2" height="2" fill="#2A3C8E" fill-opacity="0.16"></rect>
+            </pattern>
+          </defs>
+          <rect width="320" height="420" fill="url(#cpg)"></rect>
+          <rect width="320" height="420" fill="url(#cpp)"></rect>
+          <circle cx="160" cy="170" r="58" fill="#B6C9E6"></circle>
+          <path d="M50 420c0-66 50-118 110-118s110 52 110 118" fill="#B6C9E6"></path>
+          <rect x="0" y="0" width="320" height="6" fill="#2A3C8E"></rect>
+        </svg>
+        <span class="caption">Photograph · placeholder</span>
+      </div>
+
+      <div class="merge-body">
+        <div class="role-line">Office of the Chairman · Teyseer Group W.L.L.</div>
+
+        <div class="quote-block">
+          <div class="qm" aria-hidden="true">“</div>
+          <p>Half a century of service is not a number — it is a series of relationships that were honoured, season after season. The Teyseer Group continues to be built on those relationships, and on the values inherited from our founder.</p>
+        </div>
+
+        <div class="name-stamp">
+          <div class="nm">Khalifa A.R. Almannai</div>
+          <div class="meta">Chairman<br>Doha · 2025</div>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ============================================================
+     02 — THE MESSAGE — concise, no side nav
+     ============================================================ -->
+<section class="letter-section" id="letter" data-screen-label="02 The Message">
+  <svg class="letter-watermark" viewBox="0 0 200 200" aria-hidden="true">
+    <rect x="40" y="40" width="120" height="120" fill="none" stroke="#2A3C8E" stroke-width="1"></rect>
+    <rect x="70" y="70" width="60" height="60" transform="rotate(45 100 100)" fill="none" stroke="#2A3C8E" stroke-width="1"></rect>
+    <rect x="92" y="92" width="16" height="16" transform="rotate(45 100 100)" fill="#2A3C8E"></rect>
+  </svg>
+
+  <div class="wrap">
+    <div class="s-head" style="margin-bottom: 28px;">
+      <div class="reveal">
+        <div class="s-num">02 — The Message</div>
+        <h2 class="h2 b">A message from<br>the Chairman.</h2>
+      </div>
+      <div class="right reveal">
+        <p class="lead muted">A short reflection on where we started, where we are today, and where Teyseer Group is going next.</p>
+      </div>
+    </div>
+
+    <article class="message-card reveal" aria-label="Chairman's message">
+      <div class="letterhead-stripe" aria-hidden="true"></div>
+
+      <header class="msg-to">
+        <div class="lab">To</div>
+        <div class="who">Our partners, our people, &amp; the people of Qatar</div>
+      </header>
+
+      <div class="msg-body">
+        <p>When my father, the late Mr. Abdulrahman Essa Al Mannai, founded Teyseer Group in 1968, he envisioned a company built on service — believing national progress begins by enabling others to thrive. The name <em>Teyseer</em>, meaning "to facilitate," has guided us ever since, and it remains the intent we extend to every partner, customer and colleague who works with the Group today.</p>
+
+        <p>From those humble beginnings, Teyseer Group has grown into a multi-sector enterprise of 18 subsidiaries with between 5,000 and 10,000 employees — alongside the international partners and principals who have grown with us. Our work now spans mobility, infrastructure, technology, energy, security and services, supporting both Qatar's daily rhythm and its long-term ambitions, and the relationships at the heart of that growth are still our most important measure of success.</p>
+
+        <p>As we align with the goals of Qatar National Vision 2030, we are modernising operations, investing in our people and extending the trust we have built with our partners into future-ready sectors — always anchored in our founding values. The next chapter of Qatar's economy is being written now, and Teyseer's task is to meet it the way we have met every other: with patience, discipline and a deep respect for the people we serve.</p>
+      </div>
+
+      <footer class="msg-from">
+        <div class="lab">From</div>
+        <div class="who">Khalifa A.R. Al Mannai</div>
+        <div class="role">Chairman · Teyseer Group</div>
+        <div class="seal" aria-hidden="true"></div>
+      </footer>
+    </article>
+  </div>
+</section>
+
+<!-- ============================================================
+     03 — FOUNDER TRIBUTE
+     ============================================================ -->
+<section class="founder" id="founder" data-screen-label="03 Founder Tribute">
+  <div class="wrap">
+    <div class="s-head" style="margin-bottom: 28px;">
+      <div class="reveal">
+        <div class="s-num" style="color: var(--sky);">03 — Founder Tribute</div>
+        <h2 class="h2 b" style="color: var(--paper);">A tribute.</h2>
+      </div>
+      <div class="right reveal">
+        <p class="lead" style="color: rgba(255,255,255,0.78);">A salute to our Founder Chairman, on whose standards the Group continues to build.</p>
+      </div>
+    </div>
+    <div class="grid">
+      <div class="frame reveal" aria-hidden="true">
+        <svg viewBox="0 0 200 250" preserveAspectRatio="xMidYMid slice">
+          <rect width="200" height="250" fill="#16204D"></rect>
+          <circle cx="100" cy="98" r="38" fill="#A6A8BA" opacity="0.65"></circle>
+          <path d="M30 250c0-44 30-78 70-78s70 34 70 78" fill="#A6A8BA" opacity="0.55"></path>
+          <g fill="none" stroke="#DCE5F2" stroke-width="0.6" opacity="0.4">
+            <rect x="20" y="20" width="160" height="210"></rect>
+          </g>
+        </svg>
+        <div class="lbl">[Founder portrait · placeholder]</div>
+      </div>
+      <div class="reveal">
+        <span class="eyebrow">A Tribute · Founder Chairman</span>
+        <h2>Mr. Abdul Rahman Essa Al Mannai &mdash; <em>founder of the Group, 1968.</em></h2>
+        <p>Our Founder Chairman, Mr. Abdul Rahman Essa Al Mannai, opened the first Teyseer office in Doha in 1968 — at a moment when Qatar was beginning a generational transformation. He believed that a Qatari business could earn the trust of international principals on the strength of its standards, and that a workplace built around long careers was the surest path to building those standards.</p>
+        <p>His belief in ethics, partnership and the long view is the foundation on which the Group still stands. Every company under the Teyseer name is a continuation of the standards he set — carried forward with pride.</p>
+        <div class="meta">
+          <div class="mi">
+            <span class="mv">1968</span>
+            <span class="ml">Group founded</span>
+          </div>
+          <div class="mi">
+            <span class="mv">100% Qatari</span>
+            <span class="ml">Ownership · since founding</span>
+          </div>
+          <div class="mi">
+            <span class="mv">Doha</span>
+            <span class="ml">First office, 1968</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     Closing CTA — View Partners and Portfolio
+     ============================================================ -->
+<section class="final-cta reveal" aria-label="Next">
+  <div class="wrap">
+    <div class="ctxt">
+      <div class="eyebrow">Continue</div>
+      <h2>View our Partners &amp; Portfolio.</h2>
+      <p>The international principals we represent, the joint ventures we operate, and the eighteen specialist companies that make up the Group.</p>
+      <div class="btns">
+        <a class="btn" href="#" data-noop="true">View Partners &amp; Portfolio <span class="arrow">→</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<button class="totop" id="totop" type="button" aria-label="Back to top">
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 19V5M5 12l7-7 7 7"></path></svg>
+</button>
+
+<script src="teyseer.js"></script>
+
+</body>
+</html>
