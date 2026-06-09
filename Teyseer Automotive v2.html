@@ -77,6 +77,16 @@ nav{position:sticky;top:0;z-index:100;background:rgba(244,243,239,0.95);backdrop
 .dv-chip{padding:4px 10px;background:var(--sky-soft);color:var(--blue-dark);font-size:12px;border-radius:2px;font-weight:500}
 .dv-link{display:inline-flex;align-items:center;gap:8px;margin-top:8px;font-size:13px;font-weight:600;color:var(--blue);padding:10px 20px;background:var(--blue);color:#fff;border-radius:3px;align-self:flex-start;transition:background 0.2s}
 .dv-link:hover{background:var(--blue-dark)}.dv-link svg{width:13px;height:13px}
+/* LOCATIONS STRIP */
+.loc-track{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;scrollbar-width:none;padding-bottom:4px}
+.loc-track::-webkit-scrollbar{display:none}
+.loc-card{flex:0 0 240px;scroll-snap-align:start;background:var(--paper);border:1px solid var(--line);padding:20px 22px;display:flex;flex-direction:column;gap:8px;transition:border-color 0.18s}
+.loc-card:hover{border-color:var(--blue)}
+.loc-tag{font-family:var(--mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--blue);background:var(--sky-soft);padding:2px 8px;border-radius:2px;align-self:flex-start}
+.loc-co{font-family:var(--mono);font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:0.1em}
+.loc-name{font-size:14px;font-weight:600;color:var(--blue-dark);line-height:1.25}
+.loc-addr{font-size:12px;color:var(--muted);display:flex;align-items:flex-start;gap:5px;margin-top:2px}
+.loc-addr svg{width:11px;height:11px;flex-shrink:0;margin-top:2px;color:var(--steel)}
 /* HIGHLIGHTS = KEY PROJECTS AND ACCOMPLISHMENTS */
 #highlights{background:var(--paper)}
 .hl-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
@@ -110,7 +120,7 @@ footer{background:var(--blue-dark);padding:36px 40px;display:flex;align-items:ce
     <div class="nav-mark"><svg viewBox="0 0 20 20" fill="none"><rect x="5" y="5" width="10" height="10" transform="rotate(45 10 10)" fill="white"/></svg></div>
     <span class="nav-name">Teyseer Group</span>
     <span class="nav-crumb">/ Verticals / <span class="here">Automotive</span></span>
-    <nav class="nav-links"><a href="#divisions">Divisions</a><a href="#highlights">Accomplishments</a><a href="#cta">Contact</a></nav>
+    <nav class="nav-links"><a href="#divisions">Divisions</a><a href="#highlights">Accomplishments</a><a href="#loc-strip">Locations</a><a href="#cta">Contact</a></nav>
   </div>
 </nav>
 
@@ -150,6 +160,20 @@ footer{background:var(--blue-dark);padding:36px 40px;display:flex;align-items:ce
     <h2 class="sec-h2">Key Projects and Accomplishments</h2>
     <div class="divider"></div>
     <div class="hl-grid" id="hlGrid"></div>
+  </div>
+</section>
+
+<!-- SHOWROOMS & STATIONS -->
+<section id="loc-strip" style="background:var(--white);border-top:1px solid var(--line)">
+  <div class="wrap">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:32px">
+      <div><div class="sec-eye">Where to Find Us</div><h2 class="sec-h2">Showrooms &amp; Stations</h2></div>
+      <div style="display:flex;gap:8px">
+        <button class="proj-btn" id="locPrev" disabled><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 3L5 8l5 5"/></svg></button>
+        <button class="proj-btn" id="locNext"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 3l5 5-5 5"/></svg></button>
+      </div>
+    </div>
+    <div class="loc-track" id="locTrack"></div>
   </div>
 </section>
 
@@ -229,6 +253,38 @@ document.getElementById('hlGrid').innerHTML=HIGHLIGHTS.map(h=>`
     <div class="hl-text">${h.text}</div>
     <div class="hl-src"><span>${h.src}</span><span class="hl-ne"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 10L10 2M4 2h6v6"/></svg></span></div>
   </a>`).join('');
+
+// Showrooms & Stations
+const LOCS=[
+  {tag:'Showroom',co:'Teyseer Motors',name:'Suzuki & Peugeot Showroom',addr:'Al Muntazah Area, Doha'},
+  {tag:'Showroom',co:'Teyseer Motors',name:'GWM Flagship Showroom',addr:'Airport Road, Doha'},
+  {tag:'Showroom',co:'Teyseer Motors',name:'Motorcycles Showroom',addr:'Industrial Area, Doha'},
+  {tag:'Service Centre',co:'Teyseer Motors',name:'Suzuki & GWM Service Centre',addr:'Salwa Road, Doha'},
+  {tag:'Rental Office',co:'Teyseer Rent A Car',name:'Teyseer Rent A Car HQ',addr:'Old Airport Road, Doha'},
+  {tag:'Fuel & Service',co:'Teyseer Service Centre',name:'Salwa Road Station',addr:'Salwa Road, Doha'},
+  {tag:'Service',co:'Teyseer Service Centre',name:'Airport Road Station',addr:'Airport Road, Doha'},
+  {tag:'Fuel & Service',co:'Teyseer Service Centre',name:'Hilal Station',addr:'Hilal Area, Doha'}
+];
+const pinSvg='<svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 1C4.3 1 3 2.3 3 4c0 2.5 3 7 3 7s3-4.5 3-7c0-1.7-1.3-3-3-3zm0 4a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/></svg>';
+document.getElementById('locTrack').innerHTML=LOCS.map(function(l){
+  return '<div class="loc-card">'
+    +'<span class="loc-tag">'+l.tag+'</span>'
+    +'<div class="loc-co">'+l.co+'</div>'
+    +'<div class="loc-name">'+l.name+'</div>'
+    +'<div class="loc-addr">'+pinSvg+l.addr+'</div>'
+    +'</div>';
+}).join('');
+(function(){
+  var lt=document.getElementById('locTrack');
+  var lp=document.getElementById('locPrev');
+  var ln=document.getElementById('locNext');
+  if(!lt||!lp||!ln)return;
+  function cw(){var c=lt.querySelector('.loc-card');return c?c.offsetWidth+14:254;}
+  function upd(){var max=lt.scrollWidth-lt.clientWidth;lp.disabled=lt.scrollLeft<=2;ln.disabled=lt.scrollLeft>=max-2;}
+  lp.addEventListener('click',function(){lt.scrollBy({left:-cw(),behavior:'smooth'});});
+  ln.addEventListener('click',function(){lt.scrollBy({left:cw(),behavior:'smooth'});});
+  lt.addEventListener('scroll',upd);upd();
+})();
 </script>
 </body>
 </html>

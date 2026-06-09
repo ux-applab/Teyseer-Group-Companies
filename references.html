@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>References — Teyseer Group Website Prototype</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --blue:#2A3C8E;--blue-dark:#1F2D6B;--blue-deep:#16204D;
+  --steel:#A6A8BA;--sky:#B6C9E6;--sky-soft:#DCE5F2;
+  --night:#2A2A2A;--white:#F4F3EF;--paper:#FFFFFF;
+  --cream-2:#ECEAE3;--line:#DAD8D0;--line-soft:#E8E6DF;
+  --muted:#5C5C66;--green:#1A6B3C;--green-soft:#E6F4ED;
+  --amber:#8A5C00;--amber-soft:#FDF3DC;
+  --font:'IBM Plex Sans',system-ui,sans-serif;
+  --mono:'IBM Plex Mono',monospace;
+}
+html{scroll-behavior:smooth;scroll-padding-top:64px;overflow-x:hidden}
+body{font-family:var(--font);background:var(--white);color:var(--night);-webkit-font-smoothing:antialiased;font-size:15px;line-height:1.65;text-wrap:pretty}
+a{color:var(--blue);text-decoration:none}
+a:hover{text-decoration:underline}
+
+nav{position:sticky;top:0;z-index:100;background:rgba(244,243,239,0.96);backdrop-filter:blur(14px);border-bottom:1px solid var(--line);height:64px;display:flex;align-items:center}
+.nav-in{max-width:1320px;margin:0 auto;padding:0 40px;display:flex;align-items:center;gap:16px;width:100%}
+.nav-mark{width:32px;height:32px;background:var(--blue);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.nav-mark svg{width:18px;height:18px}
+.nav-name{font-size:14px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:var(--night)}
+.nav-sep{color:var(--line);font-size:18px;font-weight:300}
+.nav-page{font-family:var(--mono);font-size:11px;letter-spacing:0.14em;color:var(--blue);text-transform:uppercase}
+.nav-back{margin-left:auto;display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);padding:6px 14px;border:1px solid var(--line);border-radius:3px;transition:all 0.18s}
+.nav-back:hover{color:var(--blue);border-color:var(--blue);background:var(--sky-soft)}
+.nav-back svg{width:13px;height:13px}
+
+.hero{background:var(--blue);padding:52px 0 48px;position:relative;overflow:hidden}
+.hero::after{content:"";position:absolute;right:-60px;top:-60px;width:420px;height:420px;background:radial-gradient(circle,rgba(255,255,255,0.06) 0%,transparent 70%);pointer-events:none}
+.hero-in{max-width:1320px;margin:0 auto;padding:0 40px;position:relative;z-index:1}
+.hero-eye{font-family:var(--mono);font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:rgba(255,255,255,0.55);margin-bottom:12px}
+.hero-h1{font-size:clamp(26px,3.2vw,44px);font-weight:700;color:#fff;letter-spacing:-0.015em;margin-bottom:12px;line-height:1.1}
+.hero-sub{font-size:15px;font-weight:300;color:rgba(255,255,255,0.72);max-width:680px;line-height:1.65;margin-bottom:32px}
+.hero-meta{display:flex;gap:40px;flex-wrap:wrap}
+.hm-n{font-size:24px;font-weight:700;color:#fff}
+.hm-l{font-family:var(--mono);font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-top:2px}
+
+/* JUMP NAV */
+.jump{background:var(--paper);border-bottom:1px solid var(--line);position:sticky;top:64px;z-index:90}
+.jump-in{max-width:1320px;margin:0 auto;padding:0 40px;display:flex;gap:0;overflow-x:auto;scrollbar-width:none}
+.jump-in::-webkit-scrollbar{display:none}
+.jump-a{display:flex;align-items:center;gap:7px;padding:14px 18px;font-family:var(--mono);font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);border-right:1px solid var(--line);border-bottom:2px solid transparent;transition:all 0.18s;white-space:nowrap;text-decoration:none}
+.jump-a:hover{color:var(--blue);background:var(--sky-soft)}
+.jump-a.active{color:var(--blue);border-bottom-color:var(--blue)}
+.jump-dot{width:7px;height:7px;background:var(--blue);transform:rotate(45deg);flex-shrink:0;opacity:0.35}
+.jump-a.active .jump-dot{opacity:1}
+
+/* LAYOUT */
+.wrap{max-width:1320px;margin:0 auto;padding:0 40px}
+.page-sec{padding:64px 0 0}
+.page-sec:last-child{padding-bottom:80px}
+
+.page-hd{display:flex;align-items:center;gap:14px;margin-bottom:8px}
+.page-diamond{width:10px;height:10px;background:var(--blue);transform:rotate(45deg);flex-shrink:0}
+.page-title{font-size:21px;font-weight:700;color:var(--blue-dark);letter-spacing:-0.01em}
+.open-link{margin-left:auto;display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);padding:4px 12px;border:1px solid var(--line);border-radius:3px;transition:all 0.18s;text-decoration:none}
+.open-link:hover{color:var(--blue);border-color:var(--blue);background:var(--sky-soft);text-decoration:none}
+.open-link svg{width:10px;height:10px}
+.page-intro{font-size:14px;color:var(--muted);margin-bottom:28px;max-width:800px}
+.divider{width:100%;height:1px;background:var(--line);margin-bottom:32px}
+
+/* SECTION ROWS */
+.ref-section{border:1px solid var(--line);background:var(--paper);margin-bottom:12px;overflow:hidden}
+.ref-head{display:grid;grid-template-columns:200px 1fr;gap:0;border-bottom:1px solid var(--line)}
+.ref-sec-label{padding:16px 20px;background:var(--blue);display:flex;align-items:flex-start;flex-direction:column;gap:5px}
+.ref-sec-tag{font-family:var(--mono);font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.6)}
+.ref-sec-name{font-size:13px;font-weight:600;color:#fff;line-height:1.3}
+.ref-head-body{padding:16px 24px;display:flex;flex-direction:column;gap:6px;background:var(--sky-soft)}
+.ref-ux{font-size:13px;color:var(--blue-dark);font-style:italic;line-height:1.55}
+.ref-body{padding:20px 24px 20px 20px;display:flex;flex-direction:column;gap:14px}
+.ref-row{display:grid;grid-template-columns:180px 1fr auto;gap:16px;align-items:start;padding-bottom:14px;border-bottom:1px solid var(--line-soft)}
+.ref-row:last-child{border-bottom:none;padding-bottom:0}
+.ref-type{font-family:var(--mono);font-size:10px;letter-spacing:0.12em;text-transform:uppercase;padding:3px 9px;border-radius:2px;align-self:flex-start;white-space:nowrap}
+.rt-official{background:var(--green-soft);color:var(--green)}
+.rt-news{background:var(--sky-soft);color:var(--blue-dark)}
+.rt-brochure{background:var(--amber-soft);color:var(--amber)}
+.rt-website{background:var(--cream-2);color:var(--muted)}
+.rt-social{background:#F0EEF8;color:#4A2D8A}
+.ref-desc{font-size:13px;color:var(--night);line-height:1.6}
+.ref-desc strong{font-weight:600;color:var(--blue-dark)}
+.ref-link{font-family:var(--mono);font-size:10px;color:var(--blue);padding:5px 12px;border:1px solid var(--sky);border-radius:3px;white-space:nowrap;transition:all 0.18s;display:inline-flex;align-items:center;gap:5px;text-decoration:none;align-self:flex-start}
+.ref-link:hover{background:var(--blue);color:#fff;border-color:var(--blue);text-decoration:none}
+.ref-link svg{width:10px;height:10px}
+
+/* LEGEND */
+.legend{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:28px}
+.leg{display:flex;align-items:center;gap:7px;font-family:var(--mono);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted)}
+.leg-dot{width:10px;height:10px;border-radius:1px;flex-shrink:0}
+
+/* SEP */
+.sec-sep{display:flex;align-items:center;gap:16px;margin:56px 0 0}
+.sec-sep .ln{flex:1;height:1px;background:var(--line)}
+.sec-sep .lbl{font-family:var(--mono);font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--steel);white-space:nowrap}
+
+footer{margin-top:80px;padding:32px 40px;border-top:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;background:var(--paper)}
+.ft-l{display:flex;align-items:center;gap:12px}
+.ft-mark{width:28px;height:28px;background:var(--blue);display:flex;align-items:center;justify-content:center}
+.ft-mark svg{width:15px;height:15px}
+.ft-name{font-size:12px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--night)}
+.ft-copy{font-family:var(--mono);font-size:11px;color:var(--steel)}
+
+.reveal{opacity:0;transform:translateY(14px);transition:opacity 0.5s ease,transform 0.5s ease}
+.reveal.in{opacity:1;transform:none}
+
+@media(max-width:900px){
+  .ref-head{grid-template-columns:1fr}
+  .ref-row{grid-template-columns:1fr;gap:8px}
+  .wrap{padding:0 20px}
+  .jump-a{padding:12px 14px}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-in">
+    <div class="nav-mark"><svg viewBox="0 0 20 20" fill="none"><rect x="3" y="3" width="6" height="6" fill="white"/><rect x="11" y="3" width="6" height="6" fill="rgba(255,255,255,0.5)"/><rect x="3" y="11" width="6" height="6" fill="rgba(255,255,255,0.5)"/><rect x="11" y="11" width="6" height="6" fill="white"/></svg></div>
+    <span class="nav-name">Teyseer Group</span>
+    <span class="nav-sep">/</span>
+    <span class="nav-page">References</span>
+    <a class="nav-back" href="index.html"><svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 2L4 7l5 5"/></svg> All Pages</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-in">
+    <div class="hero-eye">Content Provenance — Teyseer Group Website Prototype</div>
+    <h1 class="hero-h1">Content References</h1>
+    <p class="hero-sub">A section-by-section record of every content source used across the Teyseer Group website prototype — with UX rationale for each decision and links to the original credible sources.</p>
+    <div class="hero-meta">
+      <div><div class="hm-n">6</div><div class="hm-l">Pages Documented</div></div>
+      <div><div class="hm-n">14+</div><div class="hm-l">Primary Sources</div></div>
+      <div><div class="hm-n">4</div><div class="hm-l">Source Types</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="jump">
+  <div class="jump-in">
+    <a class="jump-a active" href="#iv1"><div class="jump-dot"></div>Industry Verticals v1</a>
+    <a class="jump-a" href="#iv2"><div class="jump-dot"></div>Industry Verticals v2</a>
+    <a class="jump-a" href="#av1"><div class="jump-dot"></div>Automotive v1</a>
+    <a class="jump-a" href="#av2"><div class="jump-dot"></div>Automotive v2</a>
+    <a class="jump-a" href="#av3"><div class="jump-dot"></div>Automotive v3</a>
+    <a class="jump-a" href="#itv"><div class="jump-dot"></div>IT Vertical</a>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <!-- LEGEND -->
+  <div style="padding-top:32px;margin-bottom:4px">
+    <div class="legend">
+      <div class="leg"><div class="leg-dot" style="background:var(--green-soft);border:1px solid var(--green)"></div>Official Website</div>
+      <div class="leg"><div class="leg-dot" style="background:var(--sky-soft);border:1px solid var(--sky)"></div>News Article</div>
+      <div class="leg"><div class="leg-dot" style="background:var(--amber-soft);border:1px solid #D4A017"></div>Official Brochure</div>
+      <div class="leg"><div class="leg-dot" style="background:var(--cream-2);border:1px solid var(--line)"></div>Company Website</div>
+      <div class="leg"><div class="leg-dot" style="background:#F0EEF8;border:1px solid #C5BCE8"></div>LinkedIn / Social</div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════ INDUSTRY VERTICALS V1 ═══════════════════ -->
+  <div class="page-sec" id="iv1">
+    <div class="page-hd reveal">
+      <div class="page-diamond"></div>
+      <span class="page-title">Industry Verticals — Version 1</span>
+      <a class="open-link" href="Teyseer Group - Industry Verticals.html" target="_blank">Open Page <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 10L10 2M4 2h6v6"/></svg></a>
+    </div>
+    <p class="page-intro reveal">The Industry Verticals v1 page presents a high-level overview of all 9 of Teyseer Group's business verticals, with stats, a sector navigator, key achievements, and a partner brands strip.</p>
+    <div class="divider"></div>
+
+    <div class="ref-section reveal">
+      <div class="ref-head">
+        <div class="ref-sec-label"><div class="ref-sec-tag">Section</div><div class="ref-sec-name">Hero &amp; Group Overview</div></div>
+        <div class="ref-head-body"><div class="ref-ux">Users arriving at the group verticals page need immediate orientation — who is Teyseer, how large are they, and what sectors do they cover? The hero anchors the page with a clear identity statement and a stats strip that communicates scale in seconds, reducing cognitive load before users scroll into detail.</div></div>
+      </div>
+      <div class="ref-body">
+        <div class="ref-row">
+          <span class="ref-type rt-official">Official Website</span>
+          <div class="ref-desc"><strong>Teyseer Group corporate website</strong> — Group overview, founding year (1968), headquarters (Doha, Qatar), and business scope across 9 verticals. Primary source for the hero headline, subtext, and the "Est. 1968" positioning.</div>
+          <a class="ref-link" href="https://www.teyseergroup.com/" target="_blank" rel="noopener">teyseergroup.com <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 10L10 2M4 2h6v6"/></svg></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="ref-section reveal">
+      <div class="ref-head">
+        <div class="ref-sec-label"><div class="ref-sec-tag">Section</div><div class="ref-sec-name">Stats Strip (10+ Projects, 18+ Companies, 8+ Awards, 9 Verticals)</div></div>
+        <div class="ref-head-body"><div class="ref-ux">Quantitative stats are the fastest way to communicate organisational scale without requiring users to read. The 4-stat strip is placed immediately below the hero fold so that users see credibility signals before engaging with individual verticals — anchoring trust early in the scroll journey.</div></div>
+      </div>
+      <div class="ref-body">
+        <div class="ref-row">
+          <span class="ref-type rt-official">Official Website</span>
+          <div class="ref-desc"><strong>Teyseer Group — Group Companies</strong> — Source for the count of 18+ group companies and the 9 verticals. Each company page was reviewed to validate the company count.</div>
+          <a class="ref-link" href="https://www.teyseergroup.com/group-companies/" target="_blank" rel="noopener">teyseergroup.com <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 10L10 2M4 2h6v6"/></svg></a>
+        </div>
+        <div class="ref-row">
+          <span class="ref-type rt-brochure">Official Brochure</span>
+          <div class="ref-desc"><strong>Teyseer Group Official Corporate Brochure</strong> — Source for key project counts and award tally across the group. The brochure consolidates achievements that are not individually listed on the public website.</div>
+          <a class="ref-link" href="https://heyzine.com/flip-book/e8b4cf3740.html" target="_blank" rel="noopener">View Brochure <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 10L10 2M4 2h6v6"/></svg></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="ref-section reveal">
+      <div class="ref-head">
+        <div class="ref-sec-label"><div class="ref-sec-tag">Section</div><div class="ref-sec-name">Industry Verticals Panel (9 Sectors + Companies + Partner Brands)</div></div>
+        <div class="ref-head-body"><div class="ref-ux">The verticals panel is the primary navigation hub of the page. Each vertical expands to show its companies and partner brands — giving users a scannable map of the group's full scope without requiring separate page loads. Company chips link to official websites so users can validate any claim directly.</div></div>
+      </div>
+      <div class="ref-body">
+        <div class="ref-row">
+          <span class="ref-type rt-official">Official Website</span>
+          <div class="ref-desc"><strong>Teyseer Group — All Group Companies</strong> — The complete list of companies under each vertical. Each company's name, sector classification, and official website URL was sourced here and cross-referenced with the brochure.</div>
+          <a class="ref-link" href="https://www.teyseergroup.com/group-companies/" target="_blank" rel="noopener">teyseergroup.com <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 10L10 2M4 2h6v6"/></svg></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="ref-section reveal">
+      <div class="ref-head">
+        <div class="ref-sec-label"><div class="ref-sec-tag">Section</div><div class="ref-sec-name">Key Achievements Across the Verticals</div></div>
+        <div class="ref-head-body"><div class="ref-ux">Recent achievements build credibility and demonstrate the group's active momentum. Showing achievements labelled by vertical helps users connect abstract sector names to real outcomes — making the group tangible. Sourcing from verifiable news articles rather than marketing copy increases trust.</div></div>
+      </div>
+      <div class="ref-body">
+        <div class="ref-row">
+          <span class="ref-type rt-brochure">Official Brochure</span>
+          <div class="ref-desc"><strong>Teyseer Group Official Corporate Brochure</strong> — Primary source for group-level achievements, award highlights, and key project milestones referenced in the achievements section across both v1 and v2.</div>
+          <a class="ref-link" href="https://heyzine.com/flip-book/e8b4cf3740.html" target="_blank" rel="noopener">View Brochure <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 10L10 2M4 2h6v6"/></svg></a>
+        </div>
+        <div class="ref-row">
+          <span class="ref-type rt-news">News Article</span>
+          <div class="ref-desc"><strong>Gulf Times — Dukhan Bank &amp; Teyseer Group MoU</strong> — Technology and SME financing partnership signed at Web Summit Qatar, February 2026. Used for the IT vertical achievement card.</div>
+          <a class="ref-link" href="https://www.gulf-times.com/article/719811/business/dukhan-bank-teyseer-group-sign-mou-to-explore-integrated-banking-technology-and-financing-solutions-for-smes-startups" target="_blank" rel="noopener">gulf-times.com <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 10L10 2M4 2h6v6"/></svg></a>
+        </div>
+        <div class="ref-row">
+          <span class="ref-type rt-news">News Article</span>
+          <div class="ref-desc"><strong>GEC Newswire — Teyseer Motors SAP Digital Transformation</strong> — SAP S/4HANA partnership for AI-driven dealership management, May 2026. Used for the Automotive vertical achievement card.</div>
+          <a class="ref-link" href="https://gecnewswire.com/teyseer-motors-adopts-sap-to-drive-ai-powered-growth-in-qatar/" target="_blank" rel="noopener">gecnewswire.com <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 10L10 2M4 2h6v6"/></svg></a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec-sep reveal"><div class="ln"></div><div class="lbl">Next Page</div><div class="ln"></div></div>
+
+  <!-- ═══════════════════ INDUSTRY VERTICALS V2 ═══════════════════ -->
+  <div class="page-sec" id="iv2">
+    <div class="page-hd reveal">
+      <div class="page-diamond"></div>
+      <span class="page-title">Industry Verticals — Version 2</span>
+      <a class="open-link" href="Teyseer Group - Industry Verticals v2.html" target="_blank">Open Page <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 10L10 2M4 2h6v6"/></svg></a>
+    </div>
+    <p class="page-intro reveal">Version 2 uses an accordion-style verticals list — the same content as v1 presented with a different interaction model. Content sources are shared with v1 except where noted.</p>
+    <div class="divider"></div>
+
+    <div class="ref-section reveal">
+      <div class="ref-head">
+        <div class="ref-sec-label"><div class="ref-sec-tag">Section</div><div class="ref-sec-name">Hero, Stats &amp; Group Overview</div></div>
+        <div class="ref-head-body"><div class="ref-ux">Same rationale as v1. The hero is more compact in v2 to allow the accordion verticals list to appear closer to the top fold, reducing the scroll distance before users reach the core navigation content.</div></div>
+      </div>
+      <div class="ref-body">
+        <div class="ref-row">
+          <span class="ref-type rt-official">Official Website</span>
+          <div class="ref-desc"><strong>Teyseer Group corporate website + Official Brochure</strong> — Same sources as v1 for the hero, stats strip, and group identity content.</div>
+          <a class="ref-link" href="https://www.teyseergroup.com/" target="_blank" rel="noopener">teyseergroup.com <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 10L10 2M4 2h6v6"/></svg></a>
+        </div>
+        <div class="ref-row">
+          <span class="ref-type rt-brochure">Official Brochure</span>
+          <div class="ref-desc"><strong>Teyseer Group Official Corporate Brochure</strong> — Validates stats and confirms achievement counts presented in the stats strip.</div>
+          <a class="ref-link" href="https://heyzine.com/flip-book/e8b4cf3740.html" target="_blank" rel="noopener">View Brochure <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 10L10 2M4 2h6v6"/></svg></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="ref-section reveal">
+      <div class="ref-head">
+        <div class="ref-sec-label"><div class="ref-sec-tag">Section</div><div class="ref-sec-name">Industry Verticals — Accordion (Companies per Vertical)</div></div>
+        <div class="ref-head-body"><div class="ref-ux">The accordion model reduces visual density on first load — users see only vertical names, then choose which to explore. Company chips within each accordion row are clickable to official sites, which signals transparency and lets informed users skip the prototype entirely if they wish.</div></div>
+      </div>
+      <div class="ref-body">
+        <div class="ref-row">
+          <span class="ref-type rt-official">Official Website</span>
+          <div class="ref-desc"><strong>Teyseer Group — Group Companies</strong> — Complete company-to-vertical mapping. Each chip in the accordion links to the respective company's official website.</div>
+          <a class="ref-link" href="https://www.teyseergroup.com/group-companies/" target="_blank" rel="noopener">teyseergroup.com <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 10L10 2M4 2h6v6"/></svg></a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec-sep reveal"><div class="ln"></div><div class="lbl">Next Page</div><div class="ln"></div></div>
+
+  <!-- ═══════════════════ AUTOMOTIVE V1 ═══════════════════ -->
+  <div class="page-sec" id="av1">
+    <div class="page-hd reveal">
+      <div class="page-diamond"></div>
+      <span class="page-title">Teyseer Automotive — Version 1</span>
+      <a class="open-link" href="Teyseer Automotive.html" target="_blank">Open Page <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 10L10 2M4 2h6v6"/></svg></a>
+    </div>
+    <p class="page-intro reveal">The Automotive v1 page provides a vertical-level overview — covering the three sub-companies, services, and the marques Teyseer distributes in Qatar.</p>
+    <div class="divider"></div>
+
+    <div class="ref-section reveal">
+      <div class="ref-head">
+        <div class="ref-sec-label"><div class="ref-sec-tag">Section</div><div class="ref-sec-name">Hero &amp; About Automotive</div></div>
+        <div class="ref-head-body"><div class="ref-ux">The hero must immediately answer "what is Teyseer Automotive?" for a user who has navigated from the group verticals page. Founded-year and brief scope (3 companies, 4 marques) are surfaced in the hero so users can orient quickly before scrolling into detail.</div></div>
+      </div>
+      <div class="ref-body">
+        <div class="ref-row">
+          <span class="ref-type rt-official">Official Website</span>
+          <div class="ref-desc"><strong>Teyseer Motors — About page</strong> — Founded 1968, exclusive Suzuki distributor since 1970, Peugeot since 2020, GWM exclusive distributor. Vision and mission statements.</div>
+          <a class="ref-link" href="https://teymotor.com/en/pages/95" target="_blank" rel="noopener">teymotor.com <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 10L10 2M4 2h6v6"/></svg></a>
+        </div>
+        <div class="ref-row">
+          <span class="ref-type rt-official">Official Website</span>
+          <div class="ref-desc"><strong>Teyseer Group — Automotive vertical page</strong> — Group-level description of the automotive division and its three companies.</div>
+          <a class="ref-link" href="https://www.teyseergroup.com/" target="_blank" rel="noopener">teyseergroup.com <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 10L10 2M4 2h6v6"/></svg></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="ref-section reveal">
+      <div class="ref-head">
+        <div class="ref-sec-label"><div class="ref-sec-tag">Section</div><div class="ref-sec-name">Business Units (Teyseer Motors, Service Centre, Rent A Car)</div></div>
+        <div class="ref-head-body"><div class="ref-ux">The three companies are the primary entities users will want to navigate to from this vertical page. Presenting them as equal-weight cards with a brief description and direct link reduces the steps to reach a specific company — a critical path for high-intent users.</div></div>
+      </div>
+      <div class="ref-body">
+        <div class="ref-row">
+          <span class="ref-type rt-website">Company Website</span>
+          <div class="ref-desc"><strong>Teyseer Motors</strong> — Vehicle brands, services, founding year, and company description for the Motors card.</div>
+          <a class="ref-link" href="https://teymotor.com/" target="_blank" rel="noopener">teymotor.com <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 10L10 2M4 2h6v6"/></svg></a>
+        </div>
+        <div class="ref-row">
+          <span class="ref-type rt-website">Company Website</span>
+          <div class="ref-desc"><strong>Teyseer Service Centre</strong> — Founded 1976, service stations, ISO certifications, and car-care services for the Service Centre card.</div>
+          <a class="ref-link" href="https://www.tsc-qatar.com/" target="_blank" rel="noopener">tsc-qatar.com <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 10L10 2M4 2h6v6"/></svg></a>
+        </div>
+        <div class="ref-row">
+          <span class="ref-type rt-website">Company Website</span>
+          <div class="ref-desc"><strong>Teyseer Rent A Car</strong> — Established as a separate entity in 2021, fleet composition, and rental/leasing services for the Rent A Car card.</div>
+          <a class="ref-link" href="https://teyseerrentacar.com/en/pages/387" target="_blank" rel="noopener">teyseerrentacar.com <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 10L10 2M4 2h6v6"/></svg></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="ref-section reveal">
+      <div class="ref-head">
+        <div class="ref-sec-label"><div class="ref-sec-tag">Section</div><div class="ref-sec-name">Marques We Represent</div></div>
+        <div class="ref-head-body"><div class="ref-ux">Brand recognition drives automotive purchase intent. Displaying the marques visually — with names and distribution type — gives brand-loyal users an immediate signal that their preferred brand is available through Teyseer, reducing search friction.</div></div>
+      </div>
+      <div class="ref-body">
+        <div class="ref-row">
+          <span class="ref-type rt-website">Company Website</span>
+          <div class="ref-desc"><strong>Teyseer Motors — Brands</strong> — Suzuki (since 1970), Peugeot (since 2020), GWM/Haval/Tank (exclusive), Farizon (EV commercial). Brand names and distribution status sourced from teymotor.com.</div>
+          <a class="ref-link" href="https://teymotor.com/" target="_blank" rel="noopener">teymotor.com <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 10L10 2M4 2h6v6"/></svg></a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec-sep reveal"><div class="ln"></div><div class="lbl">Next Page</div><div class="ln"></div></div>
+
+  <!-- ═══════════════════ AUTOMOTIVE V2 ═══════════════════ -->
+  <div class="page-sec" id="av2">
+    <div class="page-hd reveal">
+      <div class="page-diamond"></div>
+      <span class="page-title">Teyseer Automotive — Version 2</span>
+      <a class="open-link" href="Teyseer Automotive v2.html" target="_blank">Open Page <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 10L10 2M4 2h6v6"/></svg></a>
+    </div>
+    <p class="page-intro reveal">Automotive v2 leads with the three divisions in a detailed side-by-side layout, followed by key accomplishments and a locations strip.</p>
+    <div class="divider"></div>
+
+    <div class="ref-section reveal">
+      <div class="ref-head">
+        <div class="ref-sec-label"><div class="ref-sec-tag">Section</div><div class="ref-sec-name">Our Divisions (Awards Scroll per Company)</div></div>
+        <div class="ref-head-body"><div class="ref-ux">Award credentials displayed within each division's card validate quality and build trust at the point where users are evaluating which company to contact. Scrollable award cards keep the layout compact while surfacing a comprehensive accolade record.</div></div>
+      </div>
+      <div class="ref-body">
+        <div class="ref-row">
+          <span class="ref-type rt-website">Company Website</span>
+          <div class="ref-desc"><strong>Teyseer Motors — Awards &amp; Accolades</strong> — Good Standing Certificate, ExxonMobil Elite Club 2013, NGK Appreciation, Kumho Tires, Aspire 4 Sports Gold Sponsor, WD-40 Award, Best Tank 500 Sales MEA 2025, Alpha Excellence Award GWM, Best New Business Partner GWM 2024.</div>
+          <a class="ref-link" href="https://teymotor.com/en/pages/87" target="_blank" rel="noopener">teymotor.com <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 10L10 2M4 2h6v6"/></svg></a>
+        </div>
+        <div class="ref-row">
+          <span class="ref-type rt-website">Company Website</span>
+          <div class="ref-desc"><strong>Teyseer Service Centre — Certificates &amp; Accolades</strong> — ISO 9001:2015, ISO 14001:2015, ISO 45001:2018, Teyseer Card NFC Innovation.</div>
+          <a class="ref-link" href="https://www.tsc-qatar.com/certificates-accolades/" target="_blank" rel="noopener">tsc-qatar.com <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 10L10 2M4 2h6v6"/></svg></a>
+        </div>
+        <div class="ref-row">
+          <span class="ref-type rt-website">Company Website</span>
+          <div class="ref-desc"><strong>Teyseer Rent A Car — Awards page</strong> — ISO certifications, Customer Satisfaction Policy, Integrated Management System.</div>
+          <a class="ref-link" href="https://teyseerrentacar.com/en/pages/405" target="_blank" rel="noopener">teyseerrentacar.com <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 10L10 2M4 2h6v6"/></svg></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="ref-section reveal">
+      <div class="ref-head">
+        <div class="ref-sec-label"><div class="ref-sec-tag">Section</div><div class="ref-sec-name">Key Projects and Accomplishments</div></div>
+        <div class="ref-head-body"><div class="ref-ux">Linking accomplishments to verifiable news articles separates editorial content from marketing copy. Each card links to the original source so users can validate claims independently — a critical trust-building pattern for B2B and corporate audiences evaluating a potential partner.</div></div>
+      </div>
+      <div class="ref-body">
+        <div class="ref-row">
+          <span class="ref-type rt-brochure">Official Brochure</span>
+          <div class="ref-desc"><strong>Teyseer Group Official Corporate Brochure</strong> — Primary source for group-level milestone data and project highlights referenced across Automotive v2, v3, and the IT Vertical achievements sections.</div>
+          <a class="ref-link" href="https://heyzine.com/flip-book/e8b4cf3740.html" target="_blank" rel="noopener">View Brochure <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 10L10 2M4 2h6v6"/></svg></a>
+        </div>
+        <div class="ref-row">
+          <span class="ref-type rt-news">News Article</span>
+          <div class="ref-desc"><strong>GEC Newswire — SAP S/4HANA Digital Transformation</strong> — Teyseer Motors adopts SAP for AI-powered growth in Qatar, May 2026.</div>
+          <a class="ref-link" href="https://gecnewswire.com/teyseer-motors-adopts-sap-to-drive-ai-powered-growth-in-qatar/" target="_blank" rel="noopener">gecnewswire.com <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 10L10 2M4 2h6v6"/></svg></a>
+        </div>
+        <div class="ref-row">
+          <span class="ref-type rt-news">News Article</span>
+          <div class="ref-desc"><strong>Qatar Tribune — Haval H7 Launch at Qatar Custom Show</strong> — Teyseer Motors unveils all-new Haval H7, priced at QAR 92,900, January 2025.</div>
+          <a class="ref-link" href="https://www.qatar-tribune.com/article/159592/business/teyseer-motors-unveils-all-new-haval-h7-at-qatar-custom-show" target="_blank" rel="noopener">qatar-tribune.com <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 10L10 2M4 2h6v6"/></svg></a>
+        </div>
+        <div class="ref-row">
+          <span class="ref-type rt-news">News Article</span>
+          <div class="ref-desc"><strong>Gulf Times — GWM &amp; Teyseer Motors Distributorship Partnership</strong> — Landmark GWM exclusive distributorship agreement, January 2024.</div>
+          <a class="ref-link" href="https://www.gulf-times.com/article/676577/qatar/great-wall-motor-and-teyseer-motors-forge-transformative-partnership-redefining-qatars-automotive-experience" target="_blank" rel="noopener">gulf-times.com <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 10L10 2M4 2h6v6"/></svg></a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec-sep reveal"><div class="ln"></div><div class="lbl">Next Page</div><div class="ln"></div></div>
+
+  <!-- ═══════════════════ AUTOMOTIVE V3 ═══════════════════ -->
+  <div class="page-sec" id="av3">
+    <div class="page-hd reveal">
+      <div class="page-diamond"></div>
+      <span class="page-title">Teyseer Automotive — Version 3</span>
+      <a class="open-link" href="Teyseer Automotive v3.html" target="_blank">Open Page <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 10L10 2M4 2h6v6"/></svg></a>
+    </div>
+    <p class="page-intro reveal">Automotive v3 leads with stats, restructures the IA around services, and introduces a map-based showroom locator.</p>
+    <div class="divider"></div>
+
+    <div class="ref-section reveal">
+      <div class="ref-head">
+        <div class="ref-sec-label"><div class="ref-sec-tag">Section</div><div class="ref-sec-name">Key Accomplishments</div></div>
+        <div class="ref-head-body"><div class="ref-ux">Same rationale as Automotive v2. The brochure was used as the primary source to ensure achievements referenced in the prototype reflect Teyseer's own self-reported milestones rather than third-party interpretations.</div></div>
+      </div>
+      <div class="ref-body">
+        <div class="ref-row">
+          <span class="ref-type rt-brochure">Official Brochure</span>
+          <div class="ref-desc"><strong>Teyseer Group Official Corporate Brochure</strong> — Primary source for key accomplishment highlights in the automotive vertical.</div>
+          <a class="ref-link" href="https://heyzine.com/flip-book/e8b4cf3740.html" target="_blank" rel="noopener">View Brochure <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 10L10 2M4 2h6v6"/></svg></a>
+        </div>
+        <div class="ref-row">
+          <span class="ref-type rt-news">News Article</span>
+          <div class="ref-desc"><strong>GWM Global — GWM Flagship Showroom Opening, Airport Road, Doha</strong> — Over 200 vehicles pre-booked on launch day. July 2024.</div>
+          <a class="ref-link" href="https://www.gwm-global.com/news/3403395.html" target="_blank" rel="noopener">gwm-global.com <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 10L10 2M4 2h6v6"/></svg></a>
+        </div>
+        <div class="ref-row">
+          <span class="ref-type rt-news">News Article</span>
+          <div class="ref-desc"><strong>The Peninsula Qatar — Suzuki Showroom Renovation &amp; Grand Vitara Launch</strong> — Fully renovated Suzuki showroom with Japanese Embassy attendance, March 2023.</div>
+          <a class="ref-link" href="https://thepeninsulaqatar.com" target="_blank" rel="noopener">thepeninsulaqatar.com <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 10L10 2M4 2h6v6"/></svg></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="ref-section reveal">
+      <div class="ref-head">
+        <div class="ref-sec-label"><div class="ref-sec-tag">Section</div><div class="ref-sec-name">Automotive Services</div></div>
+        <div class="ref-head-body"><div class="ref-ux">Service descriptions must be specific enough to answer user intent questions (e.g. "do they service my brand?") without being a wall of text. Sourcing service details from each company's official website ensures accuracy. The tab structure lets users navigate directly to the service category relevant to them.</div></div>
+      </div>
+      <div class="ref-body">
+        <div class="ref-row">
+          <span class="ref-type rt-website">Company Website</span>
+          <div class="ref-desc"><strong>Teyseer Motors — Services</strong> — New car sales, motorcycles, aftersales, lubricants (ExxonMobil since 1969), tires &amp; batteries service categories.</div>
+          <a class="ref-link" href="https://teymotor.com/" target="_blank" rel="noopener">teymotor.com <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 10L10 2M4 2h6v6"/></svg></a>
+        </div>
+        <div class="ref-row">
+          <span class="ref-type rt-website">Company Website</span>
+          <div class="ref-desc"><strong>Teyseer Service Centre — Car Washing</strong> — Body wash, jack wash, and steam wash services. Source for the Car Washing service category.</div>
+          <a class="ref-link" href="https://www.tsc-qatar.com/teyseer-service-centre-8/" target="_blank" rel="noopener">tsc-qatar.com <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 10L10 2M4 2h6v6"/></svg></a>
+        </div>
+        <div class="ref-row">
+          <span class="ref-type rt-website">Company Website</span>
+          <div class="ref-desc"><strong>Teyseer Rent A Car — Services</strong> — Daily rental, long-term corporate leasing, free replacement vehicle, fleet management.</div>
+          <a class="ref-link" href="https://teyseerrentacar.com/" target="_blank" rel="noopener">teyseerrentacar.com <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 10L10 2M4 2h6v6"/></svg></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="ref-section reveal">
+      <div class="ref-head">
+        <div class="ref-sec-label"><div class="ref-sec-tag">Section</div><div class="ref-sec-name">Showrooms &amp; Stations (Map)</div></div>
+        <div class="ref-head-body"><div class="ref-ux">Location-finding is a high-intent action — users who want to visit a showroom or station need address, type, and brand context at a glance. An interactive map with a filterable list mirrors the mental model users bring from Google Maps, reducing cognitive load for location discovery.</div></div>
+      </div>
+      <div class="ref-body">
+        <div class="ref-row">
+          <span class="ref-type rt-website">Company Website</span>
+          <div class="ref-desc"><strong>Teyseer Motors — Locations</strong> — Suzuki &amp; Peugeot Showroom (Al Muntazah), GWM Flagship Showroom (Airport Road), Motorcycles Showroom (Industrial Area), Suzuki &amp; GWM Service Centre (Salwa Road).</div>
+          <a class="ref-link" href="https://teymotor.com/en/locations" target="_blank" rel="noopener">teymotor.com <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 10L10 2M4 2h6v6"/></svg></a>
+        </div>
+        <div class="ref-row">
+          <span class="ref-type rt-website">Company Website</span>
+          <div class="ref-desc"><strong>Teyseer Service Centre — Stations</strong> — Salwa Road Fuel &amp; Service Station, Airport Road Service Station, Hilal Fuel &amp; Service Station.</div>
+          <a class="ref-link" href="https://www.tsc-qatar.com/salwa-road-fuel-service-station/" target="_blank" rel="noopener">tsc-qatar.com <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 10L10 2M4 2h6v6"/></svg></a>
+        </div>
+        <div class="ref-row">
+          <span class="ref-type rt-website">Company Website</span>
+          <div class="ref-desc"><strong>Teyseer Rent A Car — Location</strong> — HQ at Old Airport Road, Doha.</div>
+          <a class="ref-link" href="https://teyseerrentacar.com/en/form/0/132/0" target="_blank" rel="noopener">teyseerrentacar.com <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 10L10 2M4 2h6v6"/></svg></a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec-sep reveal"><div class="ln"></div><div class="lbl">Next Page</div><div class="ln"></div></div>
+
+  <!-- ═══════════════════ IT VERTICAL ═══════════════════ -->
+  <div class="page-sec" id="itv">
+    <div class="page-hd reveal">
+      <div class="page-diamond"></div>
+      <span class="page-title">Teyseer IT Vertical</span>
+      <a class="open-link" href="Teyseer IT Vertical.html" target="_blank">Open Page <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 10L10 2M4 2h6v6"/></svg></a>
+    </div>
+    <p class="page-intro reveal">The IT Vertical page covers Teyseer's technology businesses — Computer Arabia and Teyseer Technology Services — including services, technology partners, and key accomplishments.</p>
+    <div class="divider"></div>
+
+    <div class="ref-section reveal">
+      <div class="ref-head">
+        <div class="ref-sec-label"><div class="ref-sec-tag">Section</div><div class="ref-sec-name">Hero &amp; IT Overview</div></div>
+        <div class="ref-head-body"><div class="ref-ux">The IT vertical hero must communicate specialisation — not just "technology" but specific domains (infrastructure, cybersecurity, cloud) — so users with relevant needs can self-qualify immediately. Specificity reduces bounce from irrelevant users and increases engagement from qualified ones.</div></div>
+      </div>
+      <div class="ref-body">
+        <div class="ref-row">
+          <span class="ref-type rt-website">Company Website</span>
+          <div class="ref-desc"><strong>Computer Arabia — About &amp; Services</strong> — IT infrastructure, hardware (Dell, HP, Cisco, Lenovo), cloud, networking, software licensing, managed services. Operating since 1979.</div>
+          <a class="ref-link" href="https://carabia.com/" target="_blank" rel="noopener">carabia.com <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 10L10 2M4 2h6v6"/></svg></a>
+        </div>
+        <div class="ref-row">
+          <span class="ref-type rt-website">Company Website</span>
+          <div class="ref-desc"><strong>Teyseer Technology Services — About</strong> — Sole authorised Dell and Dell EMC service centre in Qatar. Enterprise server, storage, networking support.</div>
+          <a class="ref-link" href="https://www.teyseertech.com/" target="_blank" rel="noopener">teyseertech.com <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 10L10 2M4 2h6v6"/></svg></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="ref-section reveal">
+      <div class="ref-head">
+        <div class="ref-sec-label"><div class="ref-sec-tag">Section</div><div class="ref-sec-name">Key Accomplishments</div></div>
+        <div class="ref-head-body"><div class="ref-ux">For an IT company, industry recognition (vendor awards, strategic partnerships) is a primary trust signal for enterprise buyers. Linking each card to the original press release or LinkedIn post allows procurement teams to verify claims without leaving the page — a pattern borrowed from mature B2B SaaS sites.</div></div>
+      </div>
+      <div class="ref-body">
+        <div class="ref-row">
+          <span class="ref-type rt-brochure">Official Brochure</span>
+          <div class="ref-desc"><strong>Teyseer Group Official Corporate Brochure</strong> — Primary source for IT vertical milestones and project highlights.</div>
+          <a class="ref-link" href="https://heyzine.com/flip-book/e8b4cf3740.html" target="_blank" rel="noopener">View Brochure <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 10L10 2M4 2h6v6"/></svg></a>
+        </div>
+        <div class="ref-row">
+          <span class="ref-type rt-news">News Article</span>
+          <div class="ref-desc"><strong>Gulf Times — Dukhan Bank &amp; Teyseer Group MoU</strong> — Bundled IT infrastructure and Sharia-compliant SME financing solutions partnership, signed at Web Summit Qatar, February 2026.</div>
+          <a class="ref-link" href="https://www.gulf-times.com/article/719811/business/dukhan-bank-teyseer-group-sign-mou-to-explore-integrated-banking-technology-and-financing-solutions-for-smes-startups" target="_blank" rel="noopener">gulf-times.com <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 10L10 2M4 2h6v6"/></svg></a>
+        </div>
+        <div class="ref-row">
+          <span class="ref-type rt-news">News Article</span>
+          <div class="ref-desc"><strong>Solix Technologies — Computer Arabia Enterprise Data Partnership</strong> — Strategic partnership to deliver AI-ready data management across Qatar's government, telecom, energy, banking, and education sectors, December 2025.</div>
+          <a class="ref-link" href="https://www.solix.com/company/news-events/press-releases/solix-technologies-and-computer-arabia-forge-strategic-partnership-to-accelerate-enterprise-data-modernization-in-qatar/" target="_blank" rel="noopener">solix.com <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 10L10 2M4 2h6v6"/></svg></a>
+        </div>
+        <div class="ref-row">
+          <span class="ref-type rt-social">LinkedIn</span>
+          <div class="ref-desc"><strong>Computer Arabia LinkedIn — Palo Alto Networks Collaboration Champion of the Year 2025</strong> — Award recognising cybersecurity excellence in Qatar.</div>
+          <a class="ref-link" href="https://www.linkedin.com/posts/computer-arabia-wll_%D9%81%D8%AE%D9%88%D8%B1%D9%88%D9%86-%D8%A8%D8%AD%D8%B5%D9%88%D9%84%D9%86%D8%A7-%D8%B9%D9%84%D9%89-%D9%84%D9%82%D8%A8-%D8%A8%D8%B7%D9%84-%D8%A7%D9%84%D8%AA%D8%B9%D8%A7%D9%88%D9%86-%D9%84%D8%B9%D8%A7%D9%85-2025-activity-7417563648941993985-w3Tp" target="_blank" rel="noopener">linkedin.com <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 10L10 2M4 2h6v6"/></svg></a>
+        </div>
+        <div class="ref-row">
+          <span class="ref-type rt-social">LinkedIn</span>
+          <div class="ref-desc"><strong>Computer Arabia LinkedIn — Dell Technologies at MWC25 Doha</strong> — Dell Technologies showcase at Mobile World Congress Qatar, DECC, 2025.</div>
+          <a class="ref-link" href="https://ae.linkedin.com/posts/computer-arabia-wll_%D9%8A%D9%88%D9%85%D8%A7%D9%86-%D8%B1%D8%A7%D8%A6%D8%B9%D8%A7%D9%86-%D9%81%D9%8A-mwc25-%D8%A5%D9%84%D9%8A%D9%83%D9%85-%D9%86%D8%B8%D8%B1%D8%A9-%D8%B9%D9%84%D9%89-%D8%A3%D8%AC%D9%85%D9%84-activity-7399802355174551553-UEi9" target="_blank" rel="noopener">linkedin.com <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 10L10 2M4 2h6v6"/></svg></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="ref-section reveal">
+      <div class="ref-head">
+        <div class="ref-sec-label"><div class="ref-sec-tag">Section</div><div class="ref-sec-name">IT Services</div></div>
+        <div class="ref-head-body"><div class="ref-ux">Detailed service descriptions help enterprise buyers identify whether Teyseer's IT companies offer what they need — reducing the need to call or email for basic qualification. Services were sourced directly from Computer Arabia's official site to ensure accuracy.</div></div>
+      </div>
+      <div class="ref-body">
+        <div class="ref-row">
+          <span class="ref-type rt-website">Company Website</span>
+          <div class="ref-desc"><strong>Computer Arabia — Services</strong> — Hybrid Cloud, Private Cloud, Hyper Convergence, Data Storage, Networking, Cybersecurity, Data Protection, Managed Services, Hardware supply, Software &amp; Licensing.</div>
+          <a class="ref-link" href="https://carabia.com/" target="_blank" rel="noopener">carabia.com <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 10L10 2M4 2h6v6"/></svg></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="ref-section reveal">
+      <div class="ref-head">
+        <div class="ref-sec-label"><div class="ref-sec-tag">Section</div><div class="ref-sec-name">Brands &amp; Projects</div></div>
+        <div class="ref-head-body"><div class="ref-ux">Named technology brands and projects are the most credible signals for enterprise IT buyers — they indicate vendor relationships, authorisation level, and implementation track record. Each project card includes verifiable details to support due diligence.</div></div>
+      </div>
+      <div class="ref-body">
+        <div class="ref-row">
+          <span class="ref-type rt-website">Company Website</span>
+          <div class="ref-desc"><strong>Computer Arabia — Emerson PACSystems</strong> — Industrial automation and SCADA representation: PLCs, Remote I/O, VFDs, HMIs, OT cybersecurity for Qatar's oil &amp; gas and power sectors.</div>
+          <a class="ref-link" href="https://carabia.com/" target="_blank" rel="noopener">carabia.com <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 10L10 2M4 2h6v6"/></svg></a>
+        </div>
+        <div class="ref-row">
+          <span class="ref-type rt-website">Company Website</span>
+          <div class="ref-desc"><strong>Teyseer Technology Services — Dell EMC Authorised Service Centre</strong> — Sole authorised Dell and Dell EMC warranty and post-warranty service centre in Qatar.</div>
+          <a class="ref-link" href="https://www.teyseertech.com/" target="_blank" rel="noopener">teyseertech.com <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 10L10 2M4 2h6v6"/></svg></a>
+        </div>
+        <div class="ref-row">
+          <span class="ref-type rt-official">Official Website</span>
+          <div class="ref-desc"><strong>Teyseer Group — IT Division</strong> — Computer Arabia described as Teyseer's flagship IT subsidiary since 1979, delivering hardware, cloud infrastructure, and managed services.</div>
+          <a class="ref-link" href="https://www.teyseergroup.com/" target="_blank" rel="noopener">teyseergroup.com <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 10L10 2M4 2h6v6"/></svg></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="ref-section reveal">
+      <div class="ref-head">
+        <div class="ref-sec-label"><div class="ref-sec-tag">Section</div><div class="ref-sec-name">Our Partners (Technology Brands)</div></div>
+        <div class="ref-head-body"><div class="ref-ux">Partner brand logos are one of the fastest trust signals in B2B — recognisable names like Microsoft, Cisco, and Dell tell a prospect that Teyseer's IT companies operate at enterprise grade. The scrolling marquee format keeps the section compact while conveying breadth of partnership.</div></div>
+      </div>
+      <div class="ref-body">
+        <div class="ref-row">
+          <span class="ref-type rt-website">Company Website</span>
+          <div class="ref-desc"><strong>Computer Arabia — Partner Brands</strong> — Microsoft, Cisco, Dell, Lenovo, HP, Epson, VMware, Azure, Palo Alto Networks, Emerson sourced from carabia.com partner listings.</div>
+          <a class="ref-link" href="https://carabia.com/" target="_blank" rel="noopener">carabia.com <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 10L10 2M4 2h6v6"/></svg></a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <div class="ft-l">
+    <div class="ft-mark"><svg viewBox="0 0 20 20" fill="none"><rect x="3" y="3" width="6" height="6" fill="white"/><rect x="11" y="3" width="6" height="6" fill="rgba(255,255,255,0.5)"/><rect x="3" y="11" width="6" height="6" fill="rgba(255,255,255,0.5)"/><rect x="11" y="11" width="6" height="6" fill="white"/></svg></div>
+    <span class="ft-name">Teyseer Group</span>
+  </div>
+  <span class="ft-copy">Content References — Design Prototype · June 2026</span>
+</footer>
+
+<template id="__bundler_thumbnail">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 56">
+  <rect width="80" height="56" fill="#2A3C8E"/>
+  <rect x="8" y="12" width="64" height="5" rx="1" fill="rgba(255,255,255,0.9)"/>
+  <rect x="8" y="21" width="44" height="3" rx="1" fill="rgba(255,255,255,0.35)"/>
+  <rect x="8" y="30" width="64" height="1" fill="rgba(255,255,255,0.15)"/>
+  <rect x="8" y="34" width="20" height="10" rx="1" fill="rgba(255,255,255,0.12)" stroke="rgba(255,255,255,0.25)" stroke-width="0.5"/>
+  <rect x="32" y="34" width="40" height="3" rx="1" fill="rgba(255,255,255,0.25)"/>
+  <rect x="32" y="39" width="28" height="2" rx="1" fill="rgba(255,255,255,0.15)"/>
+</svg>
+</template>
+
+<script>
+const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');obs.unobserve(e.target);}});},{threshold:0.07});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+const sections=document.querySelectorAll('.page-sec');
+const links=document.querySelectorAll('.jump-a');
+const spy=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){links.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+e.target.id));}});},{rootMargin:'-25% 0px -65% 0px'});
+sections.forEach(s=>spy.observe(s));
+</script>
+</body>
+</html>

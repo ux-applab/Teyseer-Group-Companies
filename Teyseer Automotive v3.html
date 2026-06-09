@@ -3,6 +3,8 @@
 <head>
 <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Automotive Vertical — Teyseer Group</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link href="https://fonts.googleapis.com/css2?family=Cabin:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 <style>
@@ -109,13 +111,35 @@ nav{position:sticky;top:0;z-index:100;background:rgba(244,243,239,0.95);backdrop
 .co-desc{font-size:14px;color:var(--muted);line-height:1.65;flex:1;margin-bottom:16px}
 .co-link{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:600;color:var(--blue);padding:10px 18px;background:var(--sky-soft);border-radius:3px;align-self:flex-start;transition:background 0.2s}
 .co-link:hover{background:var(--blue);color:#fff}.co-link svg{width:13px;height:13px}
-/* LOCATIONS */
-#locations{background:var(--white)}
-.loc-track{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;scrollbar-width:none;padding-bottom:12px}
-.loc-track::-webkit-scrollbar{display:none}
-.loc-card{flex:0 0 240px;scroll-snap-align:start;background:var(--paper);border:1px solid var(--line);padding:20px 22px;display:flex;flex-direction:column;gap:8px}
-.loc-tag{font-family:var(--mono);font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--blue);padding:3px 8px;background:var(--sky-soft);border-radius:2px;align-self:flex-start}
-.loc-company{font-family:var(--mono);font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:0.1em}
+/* LOCATIONS MAP */
+#locations{background:var(--white);padding:0}
+.loc-shell{display:grid;grid-template-columns:360px 1fr;min-height:560px}
+.loc-sidebar{border-right:1px solid var(--line);display:flex;flex-direction:column;overflow:hidden}
+.loc-sidebar-hd{padding:28px 28px 20px;border-bottom:1px solid var(--line);flex-shrink:0}
+.loc-sidebar-eye{font-family:var(--mono);font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--blue);margin-bottom:6px}
+.loc-sidebar-h2{font-size:20px;font-weight:700;color:var(--blue-dark);line-height:1.1}
+.loc-sidebar-sub{font-size:12px;color:var(--muted);margin-top:6px}
+.loc-filter{display:flex;gap:6px;flex-wrap:wrap;padding:14px 28px;border-bottom:1px solid var(--line);flex-shrink:0}
+.loc-filter-btn{padding:4px 12px;border:1px solid var(--line);border-radius:999px;font-family:var(--mono);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);cursor:pointer;background:var(--paper);transition:all 0.16s}
+.loc-filter-btn:hover,.loc-filter-btn.active{background:var(--blue);color:#fff;border-color:var(--blue)}
+.loc-list{overflow-y:auto;flex:1;scrollbar-width:thin;scrollbar-color:var(--line) transparent}
+.loc-item{padding:18px 28px;border-bottom:1px solid var(--line-soft);cursor:pointer;transition:background 0.15s;display:flex;flex-direction:column;gap:6px}
+.loc-item:hover{background:var(--sky-soft)}
+.loc-item.active{background:var(--sky-soft);border-left:3px solid var(--blue)}
+.loc-item:not(.active){border-left:3px solid transparent}
+.loc-tag{font-family:var(--mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--blue);background:var(--sky-soft);padding:2px 8px;border-radius:2px;align-self:flex-start}
+.loc-item.active .loc-tag{background:rgba(42,60,142,0.12)}
+.loc-company{font-family:var(--mono);font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:0.1em}
+.loc-name{font-size:14px;font-weight:600;color:var(--blue-dark);line-height:1.25}
+.loc-addr{font-size:12px;color:var(--muted);display:flex;align-items:center;gap:5px}
+.loc-addr svg{width:11px;height:11px;flex-shrink:0;color:var(--steel)}
+#locMap{flex:1;z-index:0;min-height:560px}
+.leaflet-popup-content-wrapper{border-radius:2px;border:1px solid var(--line);box-shadow:0 4px 16px rgba(42,60,142,0.1);font-family:var(--font)}
+.leaflet-popup-content{margin:12px 16px;font-size:13px}
+.lp-tag{font-family:var(--mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--blue);margin-bottom:5px}
+.lp-name{font-size:13px;font-weight:600;color:var(--blue-dark)}
+.lp-addr{font-size:11px;color:var(--muted);margin-top:3px}
+.leaflet-popup-tip{background:var(--paper)}
 .loc-name{font-size:14px;font-weight:700;color:var(--blue-dark);line-height:1.3}
 .loc-addr{font-size:13px;color:var(--muted)}
 /* CTA */
@@ -220,16 +244,24 @@ footer{background:var(--blue-dark);padding:32px 40px;display:flex;align-items:ce
 </section>
 
 <!-- LOCATIONS -->
-<section class="sec" id="locations">
-  <div class="wrap">
-    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:36px">
-      <div><div class="sec-eye">Where to Find Us</div><h2 class="sec-h2">Showrooms &amp; Stations</h2></div>
-      <div style="display:flex;gap:8px">
-        <button class="proj-btn" id="locPrev" disabled><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 3L5 8l5 5"/></svg></button>
-        <button class="proj-btn" id="locNext"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 3l5 5-5 5"/></svg></button>
+<section id="locations">
+  <div class="loc-shell">
+    <div class="loc-sidebar">
+      <div class="loc-sidebar-hd">
+        <div class="loc-sidebar-eye">Where to Find Us</div>
+        <div class="loc-sidebar-h2">Showrooms &amp; Stations</div>
+        <div class="loc-sidebar-sub">Select a location to view details</div>
       </div>
+      <div class="loc-filter">
+        <button class="loc-filter-btn active" data-filter="all">All</button>
+        <button class="loc-filter-btn" data-filter="Showroom">Showrooms</button>
+        <button class="loc-filter-btn" data-filter="Service">Service</button>
+        <button class="loc-filter-btn" data-filter="Rental">Rental</button>
+        <button class="loc-filter-btn" data-filter="Fuel">Fuel</button>
+      </div>
+      <div class="loc-list" id="locList"></div>
     </div>
-    <div class="loc-track" id="locTrack"></div>
+    <div id="locMap"></div>
   </div>
 </section>
 
@@ -362,28 +394,75 @@ document.getElementById('coGrid').innerHTML=COMPANIES.map(c=>`
     <a class="co-link" href="${c.link}" target="_blank" rel="noopener">${c.label} ${arrowSvg}</a>
   </div>`).join('');
 
-// Locations
-// Location arrows
+// Locations Map
 (function(){
-  const lt=document.getElementById('locTrack');
-  const lp=document.getElementById('locPrev');
-  const ln=document.getElementById('locNext');
-  if(lt&&lp&&ln){
-    function lcw(){const c=lt.querySelector('.loc-card');return c?c.offsetWidth+14:254;}
-    function lupd(){const max=lt.scrollWidth-lt.clientWidth;lp.disabled=lt.scrollLeft<=2;ln.disabled=lt.scrollLeft>=max-2;}
-    lp.addEventListener('click',()=>lt.scrollBy({left:-lcw(),behavior:'smooth'}));
-    ln.addEventListener('click',()=>lt.scrollBy({left:lcw(),behavior:'smooth'}));
-    lt.addEventListener('scroll',lupd);lupd();
+  const locs=[
+    {tag:"Showroom",co:"Teyseer Motors",name:"Suzuki & Peugeot Showroom",addr:"Al Muntazah Area, Doha",lat:25.2854,lng:51.5310,filter:"Showroom"},
+    {tag:"Showroom",co:"Teyseer Motors",name:"GWM Flagship Showroom",addr:"Airport Road, Doha",lat:25.2820,lng:51.5260,filter:"Showroom"},
+    {tag:"Showroom",co:"Teyseer Motors",name:"Motorcycles Showroom",addr:"Industrial Area, Doha",lat:25.2270,lng:51.5180,filter:"Showroom"},
+    {tag:"Service Centre",co:"Teyseer Motors",name:"Suzuki & GWM Service Centre",addr:"Salwa Road, Doha",lat:25.2490,lng:51.4600,filter:"Service"},
+    {tag:"Rental Office",co:"Teyseer Rent A Car",name:"Teyseer Rent A Car HQ",addr:"Old Airport Road, Doha",lat:25.2710,lng:51.5400,filter:"Rental"},
+    {tag:"Fuel & Service",co:"Teyseer Service Centre",name:"Salwa Road Station",addr:"Salwa Road, Doha",lat:25.2340,lng:51.4480,filter:"Fuel"},
+    {tag:"Service",co:"Teyseer Service Centre",name:"Airport Road Station",addr:"Airport Road, Doha",lat:25.2650,lng:51.5330,filter:"Service"},
+    {tag:"Fuel & Service",co:"Teyseer Service Centre",name:"Hilal Station",addr:"Hilal Area, Doha",lat:25.2990,lng:51.5010,filter:"Fuel"}
+  ];
+
+  const map=L.map('locMap',{center:[25.258,51.490],zoom:12,zoomControl:true,scrollWheelZoom:false});
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'© OpenStreetMap'}).addTo(map);
+
+  const blueIcon=L.divIcon({className:'',html:'<div style="width:28px;height:28px;background:#2A3C8E;border:2px solid #fff;border-radius:50%;box-shadow:0 2px 8px rgba(42,60,142,0.4);display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 12 12" width="10" height="10" fill="none"><circle cx="6" cy="6" r="3" fill="white"/></svg></div>',iconSize:[28,28],iconAnchor:[14,14],popupAnchor:[0,-16]});
+  const activeIcon=L.divIcon({className:'',html:'<div style="width:34px;height:34px;background:#1F2D6B;border:2px solid #B6C9E6;border-radius:50%;box-shadow:0 3px 12px rgba(42,60,142,0.6);display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 12 12" width="11" height="11" fill="none"><circle cx="6" cy="6" r="3.5" fill="white"/></svg></div>',iconSize:[34,34],iconAnchor:[17,17],popupAnchor:[0,-18]});
+
+  let activeIdx=0;
+  let currentFilter='all';
+  const markers=locs.map((l,i)=>{
+    const m=L.marker([l.lat,l.lng],{icon:blueIcon}).addTo(map);
+    m.bindPopup('<div class="lp-tag">'+l.tag+'</div><div class="lp-name">'+l.name+'</div><div class="lp-addr">'+l.addr+'</div>');
+    m.on('click',()=>activateLoc(i));
+    return m;
+  });
+
+  function activateLoc(i){
+    markers[activeIdx].setIcon(blueIcon);
+    activeIdx=i;
+    markers[i].setIcon(activeIcon);
+    markers[i].openPopup();
+    map.flyTo([locs[i].lat,locs[i].lng],14,{duration:0.8});
+    document.querySelectorAll('.loc-item').forEach((el,j)=>{el.classList.toggle('active',j===i);});
+    const el=document.querySelectorAll('.loc-item')[i];
+    if(el)el.scrollIntoView({block:'nearest'});
   }
+
+  function renderList(filter){
+    const list=document.getElementById('locList');
+    list.innerHTML=locs.map((l,i)=>{
+      const show=filter==='all'||l.filter===filter||l.filter.toLowerCase().includes(filter.toLowerCase());
+      if(!show)return '';
+      return '<div class="loc-item'+(i===activeIdx?' active':'')+'" data-i="'+i+'">'
+        +'<span class="loc-tag">'+l.tag+'</span>'
+        +'<div class="loc-company">'+l.co+'</div>'
+        +'<div class="loc-name">'+l.name+'</div>'
+        +'<div class="loc-addr"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 1C4.3 1 3 2.3 3 4c0 2.5 3 7 3 7s3-4.5 3-7c0-1.7-1.3-3-3-3zm0 4a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/></svg>'+l.addr+'</div>'
+        +'</div>';
+    }).join('');
+    document.querySelectorAll('.loc-item').forEach(el=>{
+      el.addEventListener('click',()=>activateLoc(+el.dataset.i));
+    });
+  }
+
+  document.querySelectorAll('.loc-filter-btn').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      currentFilter=btn.dataset.filter;
+      document.querySelectorAll('.loc-filter-btn').forEach(b=>b.classList.toggle('active',b===btn));
+      renderList(currentFilter);
+    });
+  });
+
+  renderList('all');
+  activateLoc(0);
 })();
 
-document.getElementById('locTrack').innerHTML=LOCATIONS.map(l=>`
-  <div class="loc-card">
-    <span class="loc-tag">${l.tag}</span>
-    <div class="loc-company">${l.co}</div>
-    <div class="loc-name">${l.name}</div>
-    <div class="loc-addr">${l.addr}</div>
-  </div>`).join('');
+// locations map initialised above
 </script>
 </body>
 </html>

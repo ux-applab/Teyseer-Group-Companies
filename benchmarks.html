@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Benchmarks — Teyseer Group Design References</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --blue:#2A3C8E;--blue-dark:#1F2D6B;--blue-deep:#16204D;
+  --steel:#A6A8BA;--sky:#B6C9E6;--sky-soft:#DCE5F2;
+  --night:#2A2A2A;--white:#F4F3EF;--paper:#FFFFFF;
+  --cream-2:#ECEAE3;--line:#DAD8D0;--line-soft:#E8E6DF;
+  --muted:#5C5C66;
+  --font:'IBM Plex Sans',system-ui,sans-serif;
+  --mono:'IBM Plex Mono',monospace;
+}
+html{scroll-behavior:smooth;scroll-padding-top:112px;overflow-x:hidden}
+body{font-family:var(--font);background:var(--white);color:var(--night);-webkit-font-smoothing:antialiased;font-size:15.5px;line-height:1.6}
+a{text-decoration:none;color:inherit}
+
+nav{position:sticky;top:0;z-index:100;background:rgba(244,243,239,0.96);backdrop-filter:blur(14px);border-bottom:1px solid var(--line);height:64px;display:flex;align-items:center}
+.nav-in{max-width:1320px;margin:0 auto;padding:0 40px;display:flex;align-items:center;gap:16px;width:100%}
+.nav-mark{width:32px;height:32px;background:var(--blue);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.nav-mark svg{width:18px;height:18px}
+.nav-name{font-size:14px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:var(--night)}
+.nav-sep{color:var(--line);font-size:18px;font-weight:300}
+.nav-page{font-family:var(--mono);font-size:11px;letter-spacing:0.14em;color:var(--blue);text-transform:uppercase}
+.nav-back{margin-left:auto;display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);padding:6px 14px;border:1px solid var(--line);border-radius:3px;transition:all 0.18s}
+.nav-back:hover{color:var(--blue);border-color:var(--blue);background:var(--sky-soft)}
+.nav-back svg{width:13px;height:13px}
+
+/* HERO */
+.hero{background:var(--blue);padding:56px 0 52px;position:relative;overflow:hidden}
+.hero::after{content:"";position:absolute;right:-80px;top:-80px;width:500px;height:500px;background:radial-gradient(circle,rgba(255,255,255,0.06) 0%,transparent 70%);pointer-events:none}
+.hero-in{max-width:1320px;margin:0 auto;padding:0 40px;position:relative;z-index:1}
+.hero-eye{font-family:var(--mono);font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:rgba(255,255,255,0.55);margin-bottom:14px}
+.hero-h1{font-size:clamp(28px,3.5vw,48px);font-weight:700;color:#fff;letter-spacing:-0.015em;margin-bottom:14px;line-height:1.1}
+.hero-sub{font-size:16px;font-weight:300;color:rgba(255,255,255,0.72);max-width:680px;line-height:1.6;margin-bottom:36px}
+.hero-meta{display:flex;gap:48px;flex-wrap:wrap}
+.hmeta-n{font-size:26px;font-weight:700;color:#fff}
+.hmeta-l{font-family:var(--mono);font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-top:2px}
+
+/* JUMP NAV */
+.jump{background:var(--paper);border-bottom:1px solid var(--line);position:sticky;top:64px;z-index:90}
+.jump-in{max-width:1320px;margin:0 auto;padding:0 40px;display:flex;gap:0;overflow-x:auto;scrollbar-width:none}
+.jump-in::-webkit-scrollbar{display:none}
+.jump-a{display:flex;align-items:center;gap:8px;padding:16px 20px;font-family:var(--mono);font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);border-right:1px solid var(--line);border-bottom:2px solid transparent;transition:all 0.18s}
+.jump-a:hover{color:var(--blue);background:var(--sky-soft)}
+.jump-a.active{color:var(--blue);border-bottom-color:var(--blue)}
+.jump-dot{width:8px;height:8px;background:var(--blue);transform:rotate(45deg);flex-shrink:0;opacity:0.4}
+.jump-a.active .jump-dot{opacity:1}
+
+/* LAYOUT */
+.wrap{max-width:1320px;margin:0 auto;padding:0 40px}
+.page-sec{padding:72px 0 0}
+.page-sec:last-child{padding-bottom:80px}
+
+.page-header{display:flex;align-items:center;gap:16px;margin-bottom:10px}
+.page-dot{width:10px;height:10px;background:var(--blue);transform:rotate(45deg);flex-shrink:0}
+.page-title{font-size:22px;font-weight:700;color:var(--blue-dark);letter-spacing:-0.01em}
+.open-link{margin-left:auto;display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);padding:4px 12px;border:1px solid var(--line);border-radius:3px;transition:all 0.18s}
+.open-link:hover{color:var(--blue);border-color:var(--blue);background:var(--sky-soft)}
+.open-link svg{width:11px;height:11px}
+.page-sub{font-size:14px;color:var(--muted);margin-bottom:32px}
+.page-divider{width:100%;height:1px;background:var(--line);margin-bottom:36px}
+
+/* BENCHMARK CARDS */
+.bench-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;margin-bottom:20px}
+.bcard{background:var(--paper);border:1px solid var(--line);overflow:hidden;display:flex;flex-direction:column;transition:border-color 0.2s,box-shadow 0.2s}
+.bcard:hover{border-color:var(--sky);box-shadow:0 4px 20px rgba(42,60,142,0.08)}
+.bcard-img{overflow:hidden;background:var(--cream-2);position:relative;aspect-ratio:16/9}
+.bcard-img img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block}
+.bcard-b{padding:20px 22px 22px;display:flex;flex-direction:column;gap:10px;flex:1}
+.btag{font-family:var(--mono);font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:var(--blue);background:var(--sky-soft);padding:3px 9px;border-radius:2px;align-self:flex-start}
+.bcard-title{font-size:16px;font-weight:600;color:var(--blue-dark);line-height:1.25;letter-spacing:-0.005em}
+.bcard-desc{font-size:13px;color:var(--muted);line-height:1.65;flex:1}
+.bcard-foot{display:flex;align-items:center;justify-content:space-between;padding-top:14px;border-top:1px solid var(--line-soft);margin-top:auto}
+.bcard-src{font-family:var(--mono);font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--steel)}
+.bcard-link{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:11px;color:var(--blue);padding:5px 12px;border:1px solid var(--sky);border-radius:3px;transition:all 0.18s;white-space:nowrap}
+.bcard-link:hover{background:var(--blue);color:#fff;border-color:var(--blue)}
+.bcard-link svg{width:10px;height:10px}
+
+/* SECTION SEPARATOR */
+.sec-sep{display:flex;align-items:center;gap:16px;margin:64px 0 0}
+.sec-sep .ln{flex:1;height:1px;background:var(--line)}
+.sec-sep .lbl{font-family:var(--mono);font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--steel);white-space:nowrap}
+
+footer{margin-top:80px;padding:32px 40px;border-top:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;background:var(--paper)}
+.ft-l{display:flex;align-items:center;gap:12px}
+.ft-mark{width:28px;height:28px;background:var(--blue);display:flex;align-items:center;justify-content:center}
+.ft-mark svg{width:15px;height:15px}
+.ft-name{font-size:12px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--night)}
+.ft-copy{font-family:var(--mono);font-size:11px;color:var(--steel)}
+
+.reveal{opacity:0;transform:translateY(16px);transition:opacity 0.55s ease,transform 0.55s ease}
+.reveal.in{opacity:1;transform:none}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-in">
+    <div class="nav-mark"><svg viewBox="0 0 20 20" fill="none"><rect x="3" y="3" width="6" height="6" fill="white"/><rect x="11" y="3" width="6" height="6" fill="rgba(255,255,255,0.5)"/><rect x="3" y="11" width="6" height="6" fill="rgba(255,255,255,0.5)"/><rect x="11" y="11" width="6" height="6" fill="white"/></svg></div>
+    <span class="nav-name">Teyseer Group</span>
+    <span class="nav-sep">/</span>
+    <span class="nav-page">Benchmarks</span>
+    <a class="nav-back" href="index.html"><svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 2L4 7l5 5"/></svg> All Pages</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-in">
+    <div class="hero-eye">Design Research — Teyseer Group Website Prototype</div>
+    <h1 class="hero-h1">Benchmarks &amp; Design References</h1>
+    <p class="hero-sub">Section-by-section design benchmarks used to inform the layout and interaction patterns of each page in the Teyseer Group website prototype. Each card documents the source site, the specific section it influenced, and the design decision borrowed.</p>
+    <div class="hero-meta">
+      <div><div class="hmeta-n">6</div><div class="hmeta-l">Pages Benchmarked</div></div>
+      <div><div class="hmeta-n">11</div><div class="hmeta-l">Source Sites</div></div>
+      <div><div class="hmeta-n">31</div><div class="hmeta-l">Section Benchmarks</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="jump">
+  <div class="jump-in">
+    <a class="jump-a active" href="#v1"><div class="jump-dot"></div>Industry Verticals v1</a>
+    <a class="jump-a" href="#v2"><div class="jump-dot"></div>Industry Verticals v2</a>
+    <a class="jump-a" href="#autov1"><div class="jump-dot"></div>Automotive v1</a>
+    <a class="jump-a" href="#autov2"><div class="jump-dot"></div>Automotive v2</a>
+    <a class="jump-a" href="#autov3"><div class="jump-dot"></div>Automotive v3</a>
+    <a class="jump-a" href="#itvt"><div class="jump-dot"></div>IT Vertical</a>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <!-- ══════════════════════════════════════ V1 ══════════════════════════════════════ -->
+  <div class="page-sec" id="v1">
+    <div class="page-header reveal">
+      <div class="page-dot"></div>
+      <span class="page-title">Industry Verticals — Version 1</span>
+      <a class="open-link" href="Teyseer Group - Industry Verticals.html" target="_blank">Open Page <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 10L10 2M4 2h6v6"/></svg></a>
+    </div>
+    <p class="page-sub reveal">4 section benchmarks across hero stats, industry panel, achievements grid, and end CTA.</p>
+    <div class="page-divider"></div>
+
+    <div class="bench-grid">
+
+      <!-- V1 B1: Aramco → Hero stat strip -->
+      <div class="bcard reveal">
+        <div class="bcard-img">
+          <img src="../uploads/pasted-1780941112269-0.png" alt="Aramco — At a glance stats strip" />
+        </div>
+        <div class="bcard-b">
+          <span class="btag">Hero — Stat Strip</span>
+          <div class="bcard-title">Aramco — "At a glance" minimal stats strip</div>
+          <p class="bcard-desc">The 4-column statistics strip anchored at the base of the v1 hero section was benchmarked from Aramco's "At a glance" section. The pattern uses large, light-weight numbers with a short label beneath and a subtle separator line — letting the numbers command attention without heavy visual decoration. Teyseer adapts this into a 4-column strip using brand blue for the stat values.</p>
+          <div class="bcard-foot">
+            <span class="bcard-src">aramco.com</span>
+            <a class="bcard-link" href="https://www.aramco.com/en" target="_blank" rel="noopener">Visit Source <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 10L10 2M4 2h6v6"/></svg></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- V1 B2: Honeywell → Industry Served section -->
+      <div class="bcard reveal">
+        <div class="bcard-img">
+          <img src="../uploads/pasted-1780941344829-0.png" alt="Honeywell — What We Do left-nav + content panel" />
+        </div>
+        <div class="bcard-b">
+          <span class="btag">Industries Served Section</span>
+          <div class="bcard-title">Honeywell — "What We Do" left-nav with full-bleed content panel</div>
+          <p class="bcard-desc">The left-rail tab navigation pattern used in the Industry Verticals panel of v1 was benchmarked from Honeywell's "What We Do" section. A vertical list of industries on the left activates a full-bleed image content panel on the right with a floating description card — enabling users to explore many sectors without leaving the page. The active state uses a red left-border accent; Teyseer adapts this to brand blue.</p>
+          <div class="bcard-foot">
+            <span class="bcard-src">honeywell.com</span>
+            <a class="bcard-link" href="https://www.honeywell.com/us/en" target="_blank" rel="noopener">Visit Source <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 10L10 2M4 2h6v6"/></svg></a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="bench-grid">
+
+      <!-- V1 B3: Al Futtaim Impact → Key Achievements -->
+      <div class="bcard reveal">
+        <div class="bcard-img">
+          <img src="../uploads/pasted-1780941723236-0.png" alt="Al Futtaim — Sustainability Highlights 4-col card grid" />
+        </div>
+        <div class="bcard-b">
+          <span class="btag">Key Achievements Section</span>
+          <div class="bcard-title">Al Futtaim — "Sustainability Highlights" 4-column image card grid</div>
+          <p class="bcard-desc">The "Key Achievements Across the Verticals" section in v1 was benchmarked from Al Futtaim's Sustainability Highlights on their Impact page. The pattern uses a 4-column image-led card grid where each card carries a photo, bold headline, and short description — presenting achievements as editorial content rather than a list. Teyseer adapts this into 3-column cards with a vertical tag, year, title, and description.</p>
+          <div class="bcard-foot">
+            <span class="bcard-src">alfuttaim.com/impact</span>
+            <a class="bcard-link" href="https://www.alfuttaim.com/impact/" target="_blank" rel="noopener">Visit Source <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 10L10 2M4 2h6v6"/></svg></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- V1 B4: Aramco → End CTA -->
+      <div class="bcard reveal">
+        <div class="bcard-img">
+          <img src="../uploads/pasted-1780941899765-0.png" alt="Aramco — full-bleed About us CTA banner" />
+        </div>
+        <div class="bcard-b">
+          <span class="btag">End of Page CTA</span>
+          <div class="bcard-title">Aramco — Full-bleed image CTA with centred headline</div>
+          <p class="bcard-desc">The end-of-page CTA section in v1 was benchmarked from Aramco's full-bleed "About us" banner. The pattern overlays a large, centred headline and a minimal arrow CTA on an atmospheric industrial photograph — creating a strong visual close to the page that communicates scale and credibility. Teyseer adapts this into a blue-gradient CTA with a headline, subtext, and two action buttons (Partner with Us / News).</p>
+          <div class="bcard-foot">
+            <span class="bcard-src">aramco.com</span>
+            <a class="bcard-link" href="https://www.aramco.com/en" target="_blank" rel="noopener">Visit Source <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 10L10 2M4 2h6v6"/></svg></a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="sec-sep reveal"><div class="ln"></div><div class="lbl">Next Page</div><div class="ln"></div></div>
+
+  <!-- ══════════════════════════════════════ V2 ══════════════════════════════════════ -->
+  <div class="page-sec" id="v2">
+    <div class="page-header reveal">
+      <div class="page-dot"></div>
+      <span class="page-title">Industry Verticals — Version 2</span>
+      <a class="open-link" href="Teyseer Group - Industry Verticals v2.html" target="_blank">Open Page <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 10L10 2M4 2h6v6"/></svg></a>
+    </div>
+    <p class="page-sub reveal">4 section benchmarks across hero stats, achievements grid, industry accordion, and end CTA.</p>
+    <div class="page-divider"></div>
+
+    <div class="bench-grid">
+
+      <!-- V2 B1: Aramco → Hero stat strip -->
+      <div class="bcard reveal">
+        <div class="bcard-img">
+          <img src="../uploads/pasted-1780941112269-0.png" alt="Aramco — At a glance stats strip" />
+        </div>
+        <div class="bcard-b">
+          <span class="btag">Hero — Stat Strip</span>
+          <div class="bcard-title">Aramco — "At a glance" minimal stats strip</div>
+          <p class="bcard-desc">The same Aramco "At a glance" pattern informs the v2 hero stats strip. In v2 the hero is more compact — prioritising getting the industry verticals accordion above the fold on larger screens — so the stats strip is tighter, with smaller padding. The large-number typographic style and bottom separator are retained from the Aramco benchmark.</p>
+          <div class="bcard-foot">
+            <span class="bcard-src">aramco.com</span>
+            <a class="bcard-link" href="https://www.aramco.com/en" target="_blank" rel="noopener">Visit Source <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 10L10 2M4 2h6v6"/></svg></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- V2 B2: Al Futtaim Impact → Key Achievements -->
+      <div class="bcard reveal">
+        <div class="bcard-img">
+          <img src="../uploads/pasted-1780941723236-0.png" alt="Al Futtaim — Sustainability Highlights card grid" />
+        </div>
+        <div class="bcard-b">
+          <span class="btag">Key Achievements Section</span>
+          <div class="bcard-title">Al Futtaim — "Sustainability Highlights" image card grid</div>
+          <p class="bcard-desc">The "Key Achievements Across the Verticals" section in v2 also draws from Al Futtaim's Sustainability Highlights card grid. In v2, the cards are arranged in a 3-column grid with a vertical tag indicating which of Teyseer's 9 verticals the achievement belongs to — enabling users to filter by sector at a glance. This vertical tagging pattern is a direct adaptation of Al Futtaim's category labels on each highlight card.</p>
+          <div class="bcard-foot">
+            <span class="bcard-src">alfuttaim.com/impact</span>
+            <a class="bcard-link" href="https://www.alfuttaim.com/impact/" target="_blank" rel="noopener">Visit Source <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 10L10 2M4 2h6v6"/></svg></a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="bench-grid">
+
+      <!-- V2 B3: Al Futtaim → Industry accordion list -->
+      <div class="bcard reveal">
+        <div class="bcard-img">
+          <img src="../uploads/pasted-1780941840891-0.png" alt="Al Futtaim — Our Divisions accordion list" />
+        </div>
+        <div class="bcard-b">
+          <span class="btag">Industry Verticals Section</span>
+          <div class="bcard-title">Al Futtaim — "Our Divisions" typographic accordion list</div>
+          <p class="bcard-desc">The Industry Verticals section in v2 uses an expandable accordion layout benchmarked directly from Al Futtaim's "Our Divisions" page. Large bold division names separated by horizontal rules create a typographic list that communicates scale and prestige. Clicking a row expands to reveal company chips, partner brands, and an Explore CTA — Teyseer's adaptation adds richer detail to the Al Futtaim pattern while preserving the bold typographic rhythm.</p>
+          <div class="bcard-foot">
+            <span class="bcard-src">alfuttaim.com</span>
+            <a class="bcard-link" href="https://www.alfuttaim.com/" target="_blank" rel="noopener">Visit Source <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 10L10 2M4 2h6v6"/></svg></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- V2 B4: Aramco → End CTA -->
+      <div class="bcard reveal">
+        <div class="bcard-img">
+          <img src="../uploads/pasted-1780941899765-0.png" alt="Aramco — full-bleed About us CTA banner" />
+        </div>
+        <div class="bcard-b">
+          <span class="btag">End of Page CTA</span>
+          <div class="bcard-title">Aramco — Full-bleed image CTA with centred headline</div>
+          <p class="bcard-desc">The end-of-page CTA in v2 mirrors the Aramco full-bleed CTA benchmark. In v2 the section is split into two columns — a headline + description on the left and two action cards (Partner with Us, Latest News) on the right — adapting Aramco's cinematic full-bleed format into a more structured, scannable layout while preserving the atmospheric, full-width visual weight of the original benchmark.</p>
+          <div class="bcard-foot">
+            <span class="bcard-src">aramco.com</span>
+            <a class="bcard-link" href="https://www.aramco.com/en" target="_blank" rel="noopener">Visit Source <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 10L10 2M4 2h6v6"/></svg></a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+  <div class="sec-sep reveal"><div class="ln"></div><div class="lbl">Next Page</div><div class="ln"></div></div>
+
+  <!-- ══════════════════════════════════════ AUTOMOTIVE V1 ══════════════════════════════════════ -->
+  <div class="page-sec" id="autov1">
+    <div class="page-header reveal">
+      <div class="page-dot"></div>
+      <span class="page-title">Teyseer Automotive — Version 1</span>
+      <a class="open-link" href="Teyseer Automotive.html" target="_blank">Open Page <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 10L10 2M4 2h6v6"/></svg></a>
+    </div>
+    <p class="page-sub reveal">6 section benchmarks across hero, services, business units, and marques.</p>
+    <div class="page-divider"></div>
+
+    <div class="bench-grid">
+
+      <!-- B1: Rolls-Royce → Our Services -->
+      <div class="bcard reveal">
+        <div class="bcard-img">
+          <img src="../uploads/pasted-1780982882761-0.png" alt="Rolls-Royce Products & Services — 3-column image card grid" />
+        </div>
+        <div class="bcard-b">
+          <span class="btag">Our Services Section</span>
+          <div class="bcard-title">Rolls-Royce — "Products &amp; Services" 3-column image card grid</div>
+          <p class="bcard-desc">The Our Services section layout in Automotive v1 was benchmarked from Rolls-Royce's Products &amp; Services page. The pattern uses three equal-width, dark-toned image panels each bearing a category icon and label at the bottom-left — letting photography communicate the service category while maintaining a clean, prestige feel. Teyseer adapts this into blue-tinted image cards with service title and description overlaid.</p>
+          <div class="bcard-foot">
+            <span class="bcard-src">rolls-royce.com</span>
+            <a class="bcard-link" href="https://www.rolls-royce.com/" target="_blank" rel="noopener">Visit Source <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 10L10 2M4 2h6v6"/></svg></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- B2: Aramco → Hero -->
+      <div class="bcard reveal">
+        <div class="bcard-img">
+          <img src="../uploads/pasted-1780982903238-0.png" alt="Aramco — About Aramco full-bleed hero with 3-col text below" />
+        </div>
+        <div class="bcard-b">
+          <span class="btag">Hero Section</span>
+          <div class="bcard-title">Aramco — Full-bleed hero with headline overlay + 3-column editorial text below</div>
+          <p class="bcard-desc">The Automotive v1 hero was benchmarked from Aramco's "About Aramco" page. The pattern uses a full-bleed atmospheric photo with a large headline and subtext overlaid in the top-left corner, followed immediately by a 3-column editorial text block below the image — grounding the visual impact with factual copy. Teyseer adapts this into a dark-blue gradient overlay hero with headline, subtext, and a stats strip instead of the 3-column text.</p>
+          <div class="bcard-foot">
+            <span class="bcard-src">aramco.com</span>
+            <a class="bcard-link" href="https://www.aramco.com/en/about-us" target="_blank" rel="noopener">Visit Source <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 10L10 2M4 2h6v6"/></svg></a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="bench-grid">
+
+      <!-- B3: GE Aerospace → Business Units -->
+      <div class="bcard reveal">
+        <div class="bcard-img">
+          <img src="../uploads/pasted-1780983073875-0.png" alt="GE Aerospace — Our portfolio of brands: left text + scrollable tall image cards" />
+        </div>
+        <div class="bcard-b">
+          <span class="btag">Business Units Section</span>
+          <div class="bcard-title">GE Aerospace — "Our portfolio of brands" left text + scrollable tall image cards</div>
+          <p class="bcard-desc">The Business Units section in Automotive v1 was first benchmarked from GE Aerospace's brand portfolio layout: a static left column with heading, descriptor, and navigation arrows, paired with a horizontally scrollable set of tall image cards — each bearing a company name, tagline, and arrow CTA at the bottom. Teyseer adapts this format with a vertical card layout per business unit and a fixed 3-column grid rather than a horizontal scroll.</p>
+          <div class="bcard-foot">
+            <span class="bcard-src">geaerospace.com</span>
+            <a class="bcard-link" href="https://www.geaerospace.com/" target="_blank" rel="noopener">Visit Source <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 10L10 2M4 2h6v6"/></svg></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- B4: Al Ghurair → Business Units -->
+      <div class="bcard reveal">
+        <div class="bcard-img">
+          <img src="../uploads/pasted-1780983233668-0.png" alt="Al Ghurair — Innovation Across Sectors: left headline + asymmetric image mosaic" />
+        </div>
+        <div class="bcard-b">
+          <span class="btag">Business Units Section (Alt)</span>
+          <div class="bcard-title">Al Ghurair — "Innovation Across Sectors" left headline + asymmetric image mosaic</div>
+          <p class="bcard-desc">A second benchmark for Business Units, from Al Ghurair's businesses section. The pattern pairs a left-aligned large headline, descriptor, and CTA button with an asymmetric 3-panel image mosaic on the right — each panel overlaid with a category label at the bottom. The "+" explore icon on each image suggests interactivity. This benchmark informed the explore CTA approach and the asymmetric image treatment considered for the Business Units section in v1.</p>
+          <div class="bcard-foot">
+            <span class="bcard-src">alghurair.com</span>
+            <a class="bcard-link" href="https://www.alghurair.com/" target="_blank" rel="noopener">Visit Source <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 10L10 2M4 2h6v6"/></svg></a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="bench-grid">
+
+      <!-- B5: Rolls-Royce Civil Aerospace → Marques We Represent -->
+      <div class="bcard reveal">
+        <div class="bcard-img">
+          <img src="../uploads/pasted-1780983544167-0.png" alt="Rolls-Royce — Our Family of Engines carousel: transparent product images with dot nav" />
+        </div>
+        <div class="bcard-b">
+          <span class="btag">Marques We Represent</span>
+          <div class="bcard-title">Rolls-Royce — "Our Family of Engines" transparent product carousel</div>
+          <p class="bcard-desc">The Marques We Represent section carousel in Automotive v1 was benchmarked from Rolls-Royce Civil Aerospace's product carousel. The pattern presents product photography on a white background — no card border or container — with a bold headline link and dot navigation beneath. The clean, product-focused presentation elevates each brand or product. Teyseer adapts this into a horizontally scrollable brand marquee strip for the automotive marques.</p>
+          <div class="bcard-foot">
+            <span class="bcard-src">rolls-royce.com</span>
+            <a class="bcard-link" href="https://www.rolls-royce.com/products-and-services/civil-aerospace.aspx" target="_blank" rel="noopener">Visit Source <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 10L10 2M4 2h6v6"/></svg></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- B6: Mercedes → Marques We Represent -->
+      <div class="bcard reveal">
+        <div class="bcard-img">
+          <img src="../uploads/pasted-1780983714676-0.png" alt="Mercedes-Benz — Our Models: pill tab filter + 3-col product grid" />
+        </div>
+        <div class="bcard-b">
+          <span class="btag">Marques We Represent (Alt)</span>
+          <div class="bcard-title">Mercedes-Benz — "Our Models" pill tab filter + 3-column product grid</div>
+          <p class="bcard-desc">A second benchmark for the Marques section, from Mercedes-Benz MENA's models page. The pattern uses a row of pill-shaped category filter tabs (Sedans, SUVs, Coupés…) above a 3-column product grid — each card showing a product image, model name, price, and a Learn More CTA. This tab-filter + grid approach informed the brand filtering interaction considered for the Marques We Represent section, allowing users to navigate by brand or vehicle category.</p>
+          <div class="bcard-foot">
+            <span class="bcard-src">mercedes-benz-mena.com</span>
+            <a class="bcard-link" href="https://www.mercedes-benz-mena.com/dubai/en/" target="_blank" rel="noopener">Visit Source <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 10L10 2M4 2h6v6"/></svg></a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+  <div class="sec-sep reveal"><div class="ln"></div><div class="lbl">Next Page</div><div class="ln"></div></div>
+
+  <!-- ══════════════════════════════════════ AUTOMOTIVE V2 ══════════════════════════════════════ -->
+  <div class="page-sec" id="autov2">
+    <div class="page-header reveal">
+      <div class="page-dot"></div>
+      <span class="page-title">Teyseer Automotive — Version 2</span>
+      <a class="open-link" href="Teyseer Automotive v2.html" target="_blank">Open Page <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 10L10 2M4 2h6v6"/></svg></a>
+    </div>
+    <p class="page-sub reveal">2 section benchmarks across hero and key projects &amp; accomplishments.</p>
+    <div class="page-divider"></div>
+
+    <div class="bench-grid">
+
+      <!-- B1: Stripe → Hero -->
+      <div class="bcard reveal">
+        <div class="bcard-img">
+          <img src="../uploads/pasted-1780984142010-0.png" alt="Stripe — large headline hero with live stat ticker and brand logo strip" />
+        </div>
+        <div class="bcard-b">
+          <span class="btag">Hero Section</span>
+          <div class="bcard-title">Stripe — Large typographic hero with live stat + brand logo strip</div>
+          <p class="bcard-desc">The Automotive v2 hero was benchmarked from Stripe's homepage. The pattern leads with a bold, oversized headline that commands the full width of the viewport, paired with a subtle live-data stat line above it ("Global GDP running on Stripe: X%") and a scrolling strip of trusted partner/client logos below the CTAs. This pattern informed the large-headline hero approach in v2, the stats strip beneath the headline, and the brand marquee running below the hero fold.</p>
+          <div class="bcard-foot">
+            <span class="bcard-src">stripe.com</span>
+            <a class="bcard-link" href="https://www.stripe.com/" target="_blank" rel="noopener">Visit Source <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 10L10 2M4 2h6v6"/></svg></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- B2: Al Futtaim News → Key Projects & Accomplishments -->
+      <div class="bcard reveal">
+        <div class="bcard-img">
+          <img src="../uploads/pasted-1780984499642-0.png" alt="Al Futtaim News & Insights — 3-column editorial news card grid" />
+        </div>
+        <div class="bcard-b">
+          <span class="btag">Key Projects &amp; Accomplishments</span>
+          <div class="bcard-title">Al Futtaim News &amp; Insights — 3-column editorial card grid</div>
+          <p class="bcard-desc">The "Key Projects and Accomplishments" section in Automotive v2 was benchmarked from Al Futtaim's News &amp; Insights page. Each card presents a full-bleed image, a category tag (e.g. Financial Services), a date, and a bold multi-line headline — with no body text shown. The editorial card grid pattern communicates credibility and recency. Teyseer adapts this into 4-column cards with a vertical tag, date, headline, source attribution, and a NE-arrow link indicating external news.</p>
+          <div class="bcard-foot">
+            <span class="bcard-src">alfuttaim.com/news-insights</span>
+            <a class="bcard-link" href="https://www.alfuttaim.com/news-insights/" target="_blank" rel="noopener">Visit Source <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 10L10 2M4 2h6v6"/></svg></a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="bench-grid">
+
+      <!-- V2 B3: Al Futtaim Automotive Highlights → Key Projects -->
+      <div class="bcard reveal">
+        <div class="bcard-img">
+          <img src="../uploads/pasted-1780988311999-0.png" alt="Al Futtaim — Highlights in Automotive 4-column image cards with + icon" />
+        </div>
+        <div class="bcard-b">
+          <span class="btag">Key Projects &amp; Accomplishments (Alt)</span>
+          <div class="bcard-title">Al Futtaim Automotive — "Highlights in Automotive" 4-column image card grid</div>
+          <p class="bcard-desc">A second benchmark for Key Projects & Accomplishments in v2, from Al Futtaim's Automotive division page. Each card features a full-bleed vehicle photo with a bold headline overlaid in the bottom-left and a “+” expand icon at the bottom-right — inviting further interaction. This pattern informed the hover-to-expand behaviour and the image-led visual treatment considered for the accomplishment cards in Teyseer Automotive v2.</p>
+          <div class="bcard-foot">
+            <span class="bcard-src">alfuttaim.com/divisions/automotive</span>
+            <a class="bcard-link" href="https://www.alfuttaim.com/divisions/automotive/" target="_blank" rel="noopener">Visit Source <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 10L10 2M4 2h6v6"/></svg></a>
+          </div>
+        </div>
+      </div>
+
+      <div style="background:var(--white);border:1px dashed var(--line);display:flex;align-items:center;justify-content:center;padding:40px;opacity:0.4">
+        <span style="font-family:var(--mono);font-size:11px;letter-spacing:0.14em;color:var(--steel);text-transform:uppercase">3 of 3 benchmarks documented</span>
+      </div>
+
+    </div>
+
+    <div class="bench-grid">
+
+      <!-- V2 B4: Al Ghurair Contact → Showrooms & Stations -->
+      <div class="bcard reveal">
+        <div class="bcard-img">
+          <img src="../uploads/pasted-1780989468887-0.png" alt="Al Ghurair — company tab selector with address/contact detail card" />
+        </div>
+        <div class="bcard-b">
+          <span class="btag">Showrooms &amp; Stations Section</span>
+          <div class="bcard-title">Al Ghurair — Company tab selector + contact detail card</div>
+          <p class="bcard-desc">The Showrooms &amp; Stations section in Automotive v2 was benchmarked from Al Ghurair's contact/company selector. A row of pill-shaped company tabs activates a detail card below showing address, phone, email, website, and a "Get Directions" CTA — a compact pattern that presents multiple location entities without requiring separate pages. Teyseer adapts this into a horizontally scrollable card strip per location, keeping the same information density in a more compact format suited to 8 locations.</p>
+          <div class="bcard-foot">
+            <span class="bcard-src">alghurair.com/contact-us</span>
+            <a class="bcard-link" href="https://www.alghurair.com/contact-us/" target="_blank" rel="noopener">Visit Source <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 10L10 2M4 2h6v6"/></svg></a>
+          </div>
+        </div>
+      </div>
+
+      <div style="background:var(--white);border:1px dashed var(--line);display:flex;align-items:center;justify-content:center;padding:40px;opacity:0.4">
+        <span style="font-family:var(--mono);font-size:11px;letter-spacing:0.14em;color:var(--steel);text-transform:uppercase">4 of 4 benchmarks documented</span>
+      </div>
+
+  <div class="sec-sep reveal"><div class="ln"></div><div class="lbl">Next Page</div><div class="ln"></div></div>
+
+  <!-- ════════════════════════════════════════ AUTOMOTIVE V3 ════════════════════════════════════════ -->
+  <div class="page-sec" id="autov3">
+    <div class="page-header reveal">
+      <div class="page-dot"></div>
+      <span class="page-title">Teyseer Automotive — Version 3</span>
+      <a class="open-link" href="Teyseer Automotive v3.html" target="_blank">Open Page <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 10L10 2M4 2h6v6"/></svg></a>
+    </div>
+    <p class="page-sub reveal">5 section benchmarks across key accomplishments, our companies, automotive services, key brands &amp; projects, and showrooms.</p>
+    <div class="page-divider"></div>
+
+    <div class="bench-grid">
+
+      <!-- B1: Al Futtaim Divisions → Key Accomplishments -->
+      <div class="bcard reveal">
+        <div class="bcard-img">
+          <img src="../uploads/pasted-1780984695891-0.png" alt="Al Futtaim — Building Partnership stats strip with brand logo row" />
+        </div>
+        <div class="bcard-b">
+          <span class="btag">Key Accomplishments Section</span>
+          <div class="bcard-title">Al Futtaim — "Building Partnership" dark stats strip + brand logo marquee</div>
+          <p class="bcard-desc">The Key Accomplishments section in Automotive v3 was benchmarked from Al Futtaim's divisions page. The pattern uses a dark navy background with a two-column header (headline left, description right), large coloured stat numbers beneath ("70 Years with Toyota"), and a scrolling partner logo strip at the bottom. Teyseer adapts this into a 4-column accomplishment card grid with category tag, year, headline, short description, and a source attribution link.</p>
+          <div class="bcard-foot">
+            <span class="bcard-src">alfuttaim.com/divisions</span>
+            <a class="bcard-link" href="https://www.alfuttaim.com/divisions/" target="_blank" rel="noopener">Visit Source <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 10L10 2M4 2h6v6"/></svg></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- B2: Al Ghurair → Our Companies -->
+      <div class="bcard reveal">
+        <div class="bcard-img">
+          <img src="../uploads/pasted-1780984742663-0.png" alt="Al Ghurair — Innovation Across Sectors: left headline + asymmetric image mosaic" />
+        </div>
+        <div class="bcard-b">
+          <span class="btag">Our Companies Section</span>
+          <div class="bcard-title">Al Ghurair — "Innovation Across Sectors" left headline + image mosaic grid</div>
+          <p class="bcard-desc">The Our Companies section in Automotive v3 was benchmarked from Al Ghurair's businesses section. A left-anchored headline, descriptor, and CTA button pair with an asymmetric mosaic of company/sector images on the right, each overlaid with a category label. Teyseer adapts this into a 3-column company card layout, with each card holding a company name, description, service chips, founding year eyebrow, and a Visit Site CTA.</p>
+          <div class="bcard-foot">
+            <span class="bcard-src">alghurair.com</span>
+            <a class="bcard-link" href="https://www.alghurair.com/" target="_blank" rel="noopener">Visit Source <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 10L10 2M4 2h6v6"/></svg></a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="bench-grid">
+
+      <!-- B3: Siemens → Automotive Services -->
+      <div class="bcard reveal">
+        <div class="bcard-img">
+          <img src="../uploads/pasted-1780986565982-0.png" alt="Siemens — left tab nav, centre image, right content card" />
+        </div>
+        <div class="bcard-b">
+          <span class="btag">Automotive Services Section</span>
+          <div class="bcard-title">Siemens — Left tab nav + full-bleed image + right content card</div>
+          <p class="bcard-desc">The Automotive Services section layout in v3 was benchmarked from Siemens' technology sections. A vertical list of topic tabs on the left activates a centre image panel and a right-side dark content card simultaneously — delivering rich context per topic without leaving the page. Teyseer adapts this 3-column panel structure for its automotive service categories: Sales, Aftersales, Lubrication, Car Wash, and Rental.</p>
+          <div class="bcard-foot">
+            <span class="bcard-src">siemens.com</span>
+            <a class="bcard-link" href="https://www.siemens.com/en-us/" target="_blank" rel="noopener">Visit Source <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 10L10 2M4 2h6v6"/></svg></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- B4: Al Futtaim News → Key Brands & Projects -->
+      <div class="bcard reveal">
+        <div class="bcard-img">
+          <img src="../uploads/pasted-1780986620541-1.png" alt="Al Futtaim News & Insights — 3-column editorial news card grid" />
+        </div>
+        <div class="bcard-b">
+          <span class="btag">Key Brands &amp; Projects Section</span>
+          <div class="bcard-title">Al Futtaim News &amp; Insights — 3-column editorial card grid</div>
+          <p class="bcard-desc">The Key Brands &amp; Projects section in Automotive v3 draws from the same Al Futtaim News &amp; Insights editorial card benchmark used in Automotive v2. Full-bleed image, category tag, date, bold headline — no body text visible in the grid. Teyseer adapts this for brand and project cards, each showing a placeholder image, brand/project name, description, service pills, and a location tag, creating an editorial feel for partner brands and company projects.</p>
+          <div class="bcard-foot">
+            <span class="bcard-src">alfuttaim.com/news-insights</span>
+            <a class="bcard-link" href="https://www.alfuttaim.com/news-insights/" target="_blank" rel="noopener">Visit Source <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 10L10 2M4 2h6v6"/></svg></a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="bench-grid">
+
+      <!-- V3 B6: Al Futtaim Automotive Highlights → Key Brands & Projects (Alt) -->
+      <div class="bcard reveal">
+        <div class="bcard-img">
+          <img src="../uploads/pasted-1780988311999-0.png" alt="Al Futtaim — Highlights in Automotive 4-col image cards with + icon" />
+        </div>
+        <div class="bcard-b">
+          <span class="btag">Key Brands &amp; Projects (Alt)</span>
+          <div class="bcard-title">Al Futtaim Automotive — "Highlights in Automotive" 4-column image cards</div>
+          <p class="bcard-desc">A second benchmark for Key Brands &amp; Projects in v3, from Al Futtaim's Automotive page. Full-bleed vehicle photos with bold overlaid headlines and a “+” expand icon. This card-grid pattern informed the image-led visual treatment for Teyseer's brand and project cards — particularly the hover-reveal approach showing more detail on interaction rather than showing everything at once.</p>
+          <div class="bcard-foot">
+            <span class="bcard-src">alfuttaim.com/divisions/automotive</span>
+            <a class="bcard-link" href="https://www.alfuttaim.com/divisions/automotive/" target="_blank" rel="noopener">Visit Source <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 10L10 2M4 2h6v6"/></svg></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- V3 B7: Al Futtaim Selected Brands → Key Accomplishments -->
+      <div class="bcard reveal">
+        <div class="bcard-img">
+          <img src="../uploads/pasted-1780988513275-0.png" alt="Al Futtaim — Selected Brands 2x4 logo grid" />
+        </div>
+        <div class="bcard-b">
+          <span class="btag">Key Accomplishments Section</span>
+          <div class="bcard-title">Al Futtaim Automotive — "Selected Brands" 2×4 logo grid with two-col header</div>
+          <p class="bcard-desc">The Key Accomplishments section in Automotive v3 references Al Futtaim's Selected Brands layout: a two-column section header (large title left, description + CTA right) above a clean 4-column logo grid on a light background. This two-col header pattern was adapted as the section title + descriptor layout above the accomplishment cards, while the logo grid informed the brand partner display in the Key Brands &amp; Projects section.</p>
+          <div class="bcard-foot">
+            <span class="bcard-src">alfuttaim.com/divisions/automotive</span>
+            <a class="bcard-link" href="https://www.alfuttaim.com/divisions/automotive/" target="_blank" rel="noopener">Visit Source <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 10L10 2M4 2h6v6"/></svg></a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+      <div class="bcard reveal">
+        <div class="bcard-img">
+          <img src="../uploads/pasted-1780987169016-0.png" alt="Mercedes-Benz Dealer Locator — left list panel + right map" />
+        </div>
+        <div class="bcard-b">
+          <span class="btag">Showrooms &amp; Stations Section</span>
+          <div class="bcard-title">Mercedes-Benz — "Dealer Locator" left scrollable list + right map panel</div>
+          <p class="bcard-desc">The Showrooms and Stations section in Automotive v3 was benchmarked from Mercedes-Benz MENA's Dealer Locator page. The pattern presents a scrollable left panel of location cards (dealer name, address, contact, enquiry CTA) alongside a right-side map with pin markers. Teyseer adapts this into a horizontally scrollable card strip of showrooms and service stations — each card showing the company name, location name, address, phone, and hours — without a live map component.</p>
+          <div class="bcard-foot">
+            <span class="bcard-src">mercedes-benz-mena.com</span>
+            <a class="bcard-link" href="https://www.mercedes-benz-mena.com/dubai/en/locate-us/" target="_blank" rel="noopener">Visit Source <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 10L10 2M4 2h6v6"/></svg></a>
+          </div>
+        </div>
+      </div>
+
+      <div style="background:var(--white);border:1px dashed var(--line);display:flex;align-items:center;justify-content:center;padding:40px;opacity:0.4">
+        <span style="font-family:var(--mono);font-size:11px;letter-spacing:0.14em;color:var(--steel);text-transform:uppercase">5 of 5 benchmarks documented</span>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="sec-sep reveal"><div class="ln"></div><div class="lbl">Next Page</div><div class="ln"></div></div>
+
+  <!-- ══════════════════════════ IT VERTICAL ══════════════════════════ -->
+  <div class="page-sec" id="itvt">
+    <div class="page-header reveal">
+      <div class="page-dot"></div>
+      <span class="page-title">Teyseer IT Vertical</span>
+      <a class="open-link" href="Teyseer IT Vertical.html" target="_blank">Open Page <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 10L10 2M4 2h6v6"/></svg></a>
+    </div>
+    <p class="page-sub reveal">4 section benchmarks across key accomplishments, stats strip, and IT services.</p>
+    <div class="page-divider"></div>
+
+    <div class="bench-grid">
+
+      <!-- B1: Siemens Press → Key Accomplishments -->
+      <div class="bcard reveal">
+        <div class="bcard-img">
+          <img src="../uploads/pasted-1780987598767-0.png" alt="Siemens — Global news & press highlights 3-column card grid" />
+        </div>
+        <div class="bcard-b">
+          <span class="btag">Key Accomplishments Section</span>
+          <div class="bcard-title">Siemens — "Global news &amp; press highlights" 3-column image card grid</div>
+          <p class="bcard-desc">The Key Accomplishments section in the IT Vertical was benchmarked from Siemens' press page. Each card features a full-bleed image, a bold headline, a location tag, and a short body paragraph — presenting milestones as editorial news items rather than a plain list. Teyseer adapts this into 3-column cards with a vertical category tag, date, headline, one-line description, source attribution, and a NE-arrow link to the original article.</p>
+          <div class="bcard-foot">
+            <span class="bcard-src">siemens.com/press</span>
+            <a class="bcard-link" href="https://www.siemens.com/en-us/press/" target="_blank" rel="noopener">Visit Source <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 10L10 2M4 2h6v6"/></svg></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- B2: Aramco At a Glance → Stats Strip -->
+      <div class="bcard reveal">
+        <div class="bcard-img">
+          <img src="../uploads/pasted-1780987651885-0.png" alt="Aramco — At a glance minimal stats strip" />
+        </div>
+        <div class="bcard-b">
+          <span class="btag">Stats Strip — At a Glance</span>
+          <div class="bcard-title">Aramco — "At a glance" minimal large-number stats</div>
+          <p class="bcard-desc">The At a Glance stats band in the IT Vertical follows the same Aramco benchmark used across the Industry Verticals pages. Large, light-weight numbers with a short label and a horizontal rule separator communicate scale and credibility with minimal visual decoration. Teyseer's IT Vertical adapts this into a 4-column strip: Years in Qatar, IT Companies, Technology Partners, and Sectors Served.</p>
+          <div class="bcard-foot">
+            <span class="bcard-src">aramco.com</span>
+            <a class="bcard-link" href="https://www.aramco.com/en" target="_blank" rel="noopener">Visit Source <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 10L10 2M4 2h6v6"/></svg></a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="bench-grid">
+
+      <!-- B3: Al Futtaim Impact → Stats Strip -->
+      <div class="bcard reveal">
+        <div class="bcard-img">
+          <img src="../uploads/pasted-1780987707631-0.png" alt="Al Futtaim Impact — At a Glance bold-number stats with separator lines" />
+        </div>
+        <div class="bcard-b">
+          <span class="btag">Stats Strip — Alt Benchmark</span>
+          <div class="bcard-title">Al Futtaim Impact — "At a Glance" bold-number stats with left-rule separators</div>
+          <p class="bcard-desc">A second benchmark for the IT Vertical stats strip, from Al Futtaim's Impact page. This version uses much bolder, heavier numbers (18%, 23%, 350+) separated by vertical lines — creating more visual weight and contrast than the Aramco variant. The two-column header (title left, description right) above the stats also informed the layout of the IT Vertical's stats band header.</p>
+          <div class="bcard-foot">
+            <span class="bcard-src">alfuttaim.com/impact</span>
+            <a class="bcard-link" href="https://www.alfuttaim.com/impact/" target="_blank" rel="noopener">Visit Source <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 10L10 2M4 2h6v6"/></svg></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- B4: Siemens → IT Services -->
+      <div class="bcard reveal">
+        <div class="bcard-img">
+          <img src="../uploads/pasted-1780987783625-0.png" alt="Siemens — left tab nav + centre image + right content card" />
+        </div>
+        <div class="bcard-b">
+          <span class="btag">IT Services Section</span>
+          <div class="bcard-title">Siemens — Left tab nav + full-bleed image + right content panel</div>
+          <p class="bcard-desc">The IT Services section layout was benchmarked from Siemens' technology page. A vertical list of service topics on the left activates a centre image and a right content card simultaneously — enabling exploration of many service categories without navigating away. Teyseer adapts this 3-column panel structure for its IT service categories: Cloud &amp; Infrastructure, Cybersecurity, Managed Services, Hardware, and Software &amp; Licensing.</p>
+          <div class="bcard-foot">
+            <span class="bcard-src">siemens.com</span>
+            <a class="bcard-link" href="https://www.siemens.com/en-us/" target="_blank" rel="noopener">Visit Source <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 10L10 2M4 2h6v6"/></svg></a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="bench-grid">
+
+      <!-- IT B5: Al Futtaim Automotive Highlights → Brands & Projects -->
+      <div class="bcard reveal">
+        <div class="bcard-img">
+          <img src="../uploads/pasted-1780988311999-0.png" alt="Al Futtaim — Highlights in Automotive 4-col image cards" />
+        </div>
+        <div class="bcard-b">
+          <span class="btag">Brands &amp; Projects Section</span>
+          <div class="bcard-title">Al Futtaim Automotive — "Highlights in Automotive" 4-column image cards</div>
+          <p class="bcard-desc">The Brands &amp; Projects section in the IT Vertical was benchmarked from Al Futtaim's Automotive highlights layout. Full-bleed image cards with bold overlaid headlines and a “+” icon suggest expandable detail. Teyseer adapts this into 3-column project cards showing company name, project description, technology pills, and a location tag — giving each brand or project equal editorial weight without requiring a separate page.</p>
+          <div class="bcard-foot">
+            <span class="bcard-src">alfuttaim.com/divisions/automotive</span>
+            <a class="bcard-link" href="https://www.alfuttaim.com/divisions/automotive/" target="_blank" rel="noopener">Visit Source <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 10L10 2M4 2h6v6"/></svg></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- IT B6: Al Futtaim Selected Brands → Our Partners -->
+      <div class="bcard reveal">
+        <div class="bcard-img">
+          <img src="../uploads/pasted-1780988513275-0.png" alt="Al Futtaim — Selected Brands 2x4 logo grid" />
+        </div>
+        <div class="bcard-b">
+          <span class="btag">Our Partners Section</span>
+          <div class="bcard-title">Al Futtaim Automotive — "Selected Brands" 2×4 logo grid</div>
+          <p class="bcard-desc">The Our Partners section in the IT Vertical was benchmarked from Al Futtaim's Selected Brands grid. A clean 4-column grid of brand logos on a neutral background with a two-column header (title left, description + CTA right). Teyseer adapts this for its technology partners — Microsoft, Cisco, Dell, Palo Alto Networks, HPE, Lenovo — displayed as a scrolling brand marquee strip rather than a static grid, reflecting the larger number of partners and keeping the section compact.</p>
+          <div class="bcard-foot">
+            <span class="bcard-src">alfuttaim.com/divisions/automotive</span>
+            <a class="bcard-link" href="https://www.alfuttaim.com/divisions/automotive/" target="_blank" rel="noopener">Visit Source <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 10L10 2M4 2h6v6"/></svg></a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <div class="ft-l">
+    <div class="ft-mark"><svg viewBox="0 0 20 20" fill="none"><rect x="3" y="3" width="6" height="6" fill="white"/><rect x="11" y="3" width="6" height="6" fill="rgba(255,255,255,0.5)"/><rect x="3" y="11" width="6" height="6" fill="rgba(255,255,255,0.5)"/><rect x="11" y="11" width="6" height="6" fill="white"/></svg></div>
+    <span class="ft-name">Teyseer Group</span>
+  </div>
+  <span class="ft-copy">Benchmarks document — design reference only · June 2026</span>
+</footer>
+
+<template id="__bundler_thumbnail">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 56">
+  <rect width="80" height="56" fill="#2A3C8E"/>
+  <rect x="12" y="14" width="56" height="6" rx="1" fill="rgba(255,255,255,0.9)"/>
+  <rect x="12" y="24" width="40" height="3" rx="1" fill="rgba(255,255,255,0.35)"/>
+  <rect x="12" y="34" width="56" height="1" fill="rgba(255,255,255,0.18)"/>
+  <rect x="12" y="38" width="12" height="4" rx="1" fill="rgba(255,255,255,0.28)"/>
+  <rect x="28" y="38" width="12" height="4" rx="1" fill="rgba(255,255,255,0.28)"/>
+  <rect x="44" y="38" width="12" height="4" rx="1" fill="rgba(255,255,255,0.28)"/>
+</svg>
+</template>
+
+<script>
+const obs = new IntersectionObserver(es => {
+  es.forEach(e => { if(e.isIntersecting){ e.target.classList.add('in'); obs.unobserve(e.target); }});
+}, {threshold:0.08});
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+// Jump nav active state
+const sections = document.querySelectorAll('.page-sec');
+const jumpLinks = document.querySelectorAll('.jump-a');
+const spyObs = new IntersectionObserver(es => {
+  es.forEach(e => {
+    if(e.isIntersecting){
+      jumpLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + e.target.id));
+    }
+  });
+}, {rootMargin:'-30% 0px -60% 0px'});
+sections.forEach(s => spyObs.observe(s));
+</script>
+</body>
+</html>
