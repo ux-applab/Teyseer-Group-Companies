@@ -837,18 +837,40 @@
 
 
 /* ─── TEYSEER GLOBAL HEADER ─────────────────────────────── */
-.tg-header{background:#2A3C8E;padding:14px 40px;border-bottom:1px solid rgba(255,255,255,0.1)}
-.tg-header-in{max-width:1320px;margin:0 auto;display:flex;align-items:center}
-.tg-logo{display:flex;align-items:center;gap:12px}
-.tg-logo-en{display:flex;flex-direction:column;align-items:flex-start;line-height:1;gap:2px}
-.tg-logo-name{font-size:20px;font-weight:800;color:#fff;letter-spacing:0.06em;font-family:'IBM Plex Sans',system-ui,sans-serif}
-.tg-logo-sub{font-size:10px;font-weight:600;color:rgba(255,255,255,0.75);letter-spacing:0.18em;text-transform:uppercase}
-.tg-logo-sub2{font-size:9px;color:rgba(255,255,255,0.5);letter-spacing:0.12em}
-.tg-logo-mark{height:44px;width:auto;object-fit:contain}
-.tg-logo-ar{display:flex;flex-direction:column;align-items:flex-end;line-height:1;gap:3px;direction:rtl}
-.tg-logo-ar1{font-size:18px;font-weight:700;color:#fff;font-family:system-ui,sans-serif}
-.tg-logo-ar2{font-size:12px;color:rgba(255,255,255,0.75);font-family:system-ui,sans-serif}
-.tg-logo-ar3{font-size:9px;color:rgba(255,255,255,0.5);font-family:system-ui,sans-serif}
+
+
+
+
+
+
+
+
+
+
+
+
+</style>
+
+
+<style id="tg-nav-reset">
+header nav a,header nav button,header button{pointer-events:none!important;cursor:default!important}
+/* Kill any page-level nav/button styles bleeding into the global header */
+header,header *{box-sizing:border-box}
+header nav{background:transparent!important;background-color:transparent!important;border:none!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;height:auto!important;position:static!important;padding:0!important;box-shadow:none!important}
+header a,header nav a,header button{background:transparent!important;background-color:transparent!important;border:none!important;border-radius:0!important;box-shadow:none!important;color:rgba(255,255,255,0.75)!important;font-size:13.5px!important;padding:8px 12px!important}
+
+
+
+/* CTA v2 - light strip */
+#cta{background:linear-gradient(135deg,#e4eaf6 0%,#d0d9ef 100%)}
+.cta-in{max-width:1320px;margin:0 auto;padding:52px 40px;display:flex;align-items:center;justify-content:space-between;gap:48px}
+.cta-h2{font-size:clamp(20px,2vw,30px);font-weight:700;color:#1F2D6B;max-width:36ch;line-height:1.25;margin:0}
+.cta-p{display:none}
+.cta-btns{display:flex;align-items:center;gap:20px;flex-shrink:0;flex-wrap:wrap}
+.cta-btn-pri{padding:14px 28px;background:#1F2D6B;color:#fff;font-size:14px;font-weight:600;border-radius:999px;text-decoration:none;white-space:nowrap;transition:background 0.2s}
+.cta-btn-pri:hover{background:#2A3C8E}
+.cta-btn-sec{font-size:14px;font-weight:500;color:#1F2D6B;text-decoration:none;white-space:nowrap;opacity:0.8}
+.cta-btn-sec:hover{opacity:1}
 </style>
 </head>
 <body data-screen-label="Our Portfolio">
@@ -856,24 +878,29 @@
 <a class="skip" href="#main">Skip to content</a>
 <div class="progress"><div class="fill" id="progressFill"></div></div>
 
-<header class="pagebar" role="banner">
-  <div class="wrap">
-    <div class="pb-row pb-bottom">
-      <a href="index.html" class="brand" aria-label="Teyseer Group">
-      <span class="mark" aria-hidden="true">
-        <svg viewBox="0 0 36 36" fill="none">
-          <rect x="6" y="6" width="24" height="24" fill="#2A3C8E"></rect>
-          <rect x="13.5" y="13.5" width="9" height="9" transform="rotate(45 18 18)" fill="#A6A8BA"></rect>
-          <rect x="16.5" y="16.5" width="3" height="3" transform="rotate(45 18 18)" fill="#F4F3EF"></rect>
-        </svg>
-      </span>
-      <span>
-        <div class="name">Teyseer</div>
-        <div class="tag">Since 1968</div>
-      </span>
-    </a>
-      <div class="anchornav-wrap">
-      </div>
+<header style="background:#2A3C8E;padding:0 40px;display:block">
+  <div style="max-width:1320px;margin:0 auto;height:68px;display:flex;align-items:center;gap:40px">
+    <img src="img/teyseer-logo-full.png" alt="Teyseer Holding W.L.L." style="height:42px;width:auto;object-fit:contain;display:block;filter:brightness(0) invert(1);flex-shrink:0" />
+    <nav style="display:flex;align-items:center;gap:4px;margin-left:auto;flex-shrink:0">
+      <a href="#" style="font-size:13.5px;color:rgba(255,255,255,0.75);text-decoration:none;padding:8px 12px;white-space:nowrap;font-family:system-ui,sans-serif">Home</a>
+      <a href="#" style="font-size:13.5px;color:rgba(255,255,255,0.75);text-decoration:none;padding:8px 12px;white-space:nowrap;display:inline-flex;align-items:center;gap:4px;font-family:system-ui,sans-serif">About Us <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 4l3 3 3-3" stroke="rgba(255,255,255,0.7)" stroke-width="1.4" stroke-linecap="round"/></svg></a>
+      <a href="#" style="font-size:13.5px;color:rgba(255,255,255,0.75);text-decoration:none;padding:8px 12px;white-space:nowrap;display:inline-flex;align-items:center;gap:4px;font-family:system-ui,sans-serif">Group Companies <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 4l3 3 3-3" stroke="rgba(255,255,255,0.7)" stroke-width="1.4" stroke-linecap="round"/></svg></a>
+      <a href="#" style="font-size:13.5px;color:rgba(255,255,255,0.75);text-decoration:none;padding:8px 12px;white-space:nowrap;display:inline-flex;align-items:center;gap:4px;font-family:system-ui,sans-serif">Teyseer Verticals <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 4l3 3 3-3" stroke="rgba(255,255,255,0.7)" stroke-width="1.4" stroke-linecap="round"/></svg></a>
+      <a href="#" style="font-size:13.5px;color:rgba(255,255,255,0.75);text-decoration:none;padding:8px 12px;white-space:nowrap;font-family:system-ui,sans-serif">News</a>
+      <a href="#" style="font-size:13.5px;color:rgba(255,255,255,0.75);text-decoration:none;padding:8px 12px;white-space:nowrap;font-family:system-ui,sans-serif">Contact Us</a>
+    </nav>
+    <div style="display:inline-flex;align-items:center;border:1px solid rgba(255,255,255,0.25);border-radius:999px;overflow:hidden;flex-shrink:0">
+      <button style="background:transparent!important;border:none!important;cursor:pointer;color:rgba(255,255,255,0.8);padding:7px 14px;display:inline-flex;align-items:center;gap:6px;font-size:13px;font-family:system-ui,sans-serif;white-space:nowrap">
+        <svg width="14" height="14" viewBox="0 0 15 15" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6.5" cy="6.5" r="4.5"/><path d="M10 10l3 3"/></svg>Search
+      </button>
+      <div style="width:1px;height:18px;background:rgba(255,255,255,0.25)"></div>
+      <button style="background:transparent!important;border:none!important;cursor:pointer;color:rgba(255,255,255,0.8);padding:7px 14px;display:inline-flex;align-items:center;gap:5px;font-size:13px;font-family:system-ui,sans-serif;white-space:nowrap">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg>En
+      </button>
+      <div style="width:1px;height:18px;background:rgba(255,255,255,0.25)"></div>
+      <button style="background:transparent!important;border:none!important;cursor:pointer;color:rgba(255,255,255,0.8);padding:7px 12px;display:inline-flex;align-items:center;font-family:system-ui,sans-serif">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="5" r="2"/><path d="M12 7v5m0 0l-4 5m4-5l4 5M8 12H5m14 0h-3"/></svg>
+      </button>
     </div>
   </div>
 </header>
@@ -1921,19 +1948,7 @@
      Closing CTA — "Partner With Us"
      ============================================================ -->
 
-<section class="final-cta reveal" aria-label="Partner with us">
-  <div class="wrap">
-    <div class="ctxt">
-      <div class="eyebrow">Work With Us</div>
-      <h2>Partner With Us.</h2>
-      <p>From international principals seeking a foothold in Qatar to local clients across infrastructure, industry, mobility and services — the right introduction starts a long-tenure relationship.</p>
-      <div class="btns">
-        <a class="btn" href="partners.html">View Our Partners <span class="arrow">→</span></a>
-        <a class="btn outline" href="index.html">Back to Overview <span class="arrow">→</span></a>
-      </div>
-    </div>
-  </div>
-</section>
+<section id="cta"><div class="cta-in"><h2 class="cta-h2">Explore Our Full Range of Services.</h2><div class="cta-btns"><a class="cta-btn-pri" href="#">Connect With Us &rarr;</a><a class="cta-btn-sec" href="#">View Verticals &rarr;</a></div></div></section>
 
 </main>
 
