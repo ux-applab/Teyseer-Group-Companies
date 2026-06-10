@@ -4,65 +4,6 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Teyseer Wireframe for Inner Pages</title>
-  <script>
-  (function() {
-    const correct = "Teyseer@26#1";
-    if (sessionStorage.getItem("auth") === "true") return;
-
-    document.documentElement.style.visibility = "hidden";
-
-    document.addEventListener("DOMContentLoaded", function() {
-      const overlay = document.createElement("div");
-      overlay.style.cssText = `
-        position:fixed;top:0;left:0;width:100%;height:100%;
-        background:#f5f4f0;display:flex;align-items:center;
-        justify-content:center;z-index:999999;
-        font-family:sans-serif;
-      `;
-      overlay.innerHTML = `
-        <div style="text-align:center;padding:48px;background:white;
-          border-radius:8px;box-shadow:0 4px 24px rgba(0,0,0,0.08);
-          min-width:320px;">
-          <h2 style="color:#1a2e5a;margin:0 0 8px">Teyseer Group</h2>
-          <p style="color:#666;margin:0 0 24px;font-size:14px">
-            This is a private preview. Enter password to continue.
-          </p>
-          <input id="pwInput" type="password" placeholder="Password"
-            style="width:100%;padding:12px;border:1px solid #ddd;
-            border-radius:6px;font-size:14px;box-sizing:border-box;
-            margin-bottom:12px;outline:none;" />
-          <p id="pwError" style="color:#c0392b;font-size:13px;
-            margin:0 0 12px;display:none;">Incorrect password. Try again.</p>
-          <button id="pwBtn"
-            style="width:100%;padding:12px;background:#1a2e5a;
-            color:white;border:none;border-radius:6px;font-size:14px;
-            cursor:pointer;">
-            Enter
-          </button>
-        </div>
-      `;
-      document.body.appendChild(overlay);
-      document.documentElement.style.visibility = "visible";
-
-      function attempt() {
-        const val = document.getElementById("pwInput").value;
-        if (val === correct) {
-          sessionStorage.setItem("auth", "true");
-          overlay.remove();
-        } else {
-          document.getElementById("pwError").style.display = "block";
-          document.getElementById("pwInput").value = "";
-          document.getElementById("pwInput").focus();
-        }
-      }
-
-      document.getElementById("pwBtn").addEventListener("click", attempt);
-      document.getElementById("pwInput").addEventListener("keydown", function(e) {
-        if (e.key === "Enter") attempt();
-      });
-    });
-  })();
-</script>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
 <style>
@@ -78,75 +19,61 @@ html{overflow-x:hidden}
 body{font-family:var(--font);background:var(--white);color:var(--night);-webkit-font-smoothing:antialiased;min-height:100vh}
 a{text-decoration:none;color:inherit}
 
-/* NAV */
-nav{position:sticky;top:0;z-index:100;height:64px;background:rgba(244,243,239,0.97);backdrop-filter:blur(14px);border-bottom:1px solid var(--line);display:flex;align-items:center;padding:0 40px}
-.nav-logo{display:flex;align-items:center;gap:8px;border:1px solid var(--line);padding:4px 12px 4px 4px;border-radius:2px}
-.logo-sq{width:30px;height:30px;background:var(--blue);display:grid;place-items:center;flex-shrink:0}
-.logo-sq svg{width:16px;height:16px}
-.logo-words{display:flex;flex-direction:column;gap:1px;line-height:1}
-.logo-name{font-size:13px;font-weight:700;letter-spacing:0.1em;color:var(--night)}
-.logo-since{font-family:var(--mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted)}
-.nav-slash{color:var(--line);font-size:18px;font-weight:200;margin:0 10px}
-.nav-title{font-family:var(--mono);font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted)}
-
 /* MAIN */
-main{max-width:1120px;margin:0 auto;padding:56px 40px 80px}
-h1{font-size:clamp(22px,2.4vw,32px);font-weight:700;color:var(--blue-dark);letter-spacing:-0.01em;margin-bottom:52px}
+main{max-width:1120px;margin:0 auto;padding:64px 40px 80px}
 
-/* GROUPS */
-.batch{margin-bottom:56px}
-.batch-title{font-family:var(--mono);font-size:10px;letter-spacing:0.22em;text-transform:uppercase;color:var(--steel);margin-bottom:24px;padding-bottom:10px;border-bottom:1px solid var(--line)}
-.pages-grid{display:grid;grid-template-columns:1fr 1fr;gap:0}
-.page-item{border-bottom:1px solid var(--line)}
-.page-item a{display:flex;align-items:center;justify-content:space-between;padding:14px 0;font-size:14px;font-weight:500;color:var(--night);letter-spacing:0.01em;transition:color .16s}
-.page-item a:hover{color:var(--blue)}
-.page-item a:hover .arr{opacity:1;transform:translateX(3px)}
-.arr{font-size:14px;color:var(--blue);opacity:0;transition:all .16s;flex-shrink:0}
+/* HEADER */
+.idx-header{display:flex;align-items:center;gap:16px;margin-bottom:56px}
+.logo-img{width:44px;height:44px;object-fit:contain;display:block}
+.header-divider{width:1px;height:36px;background:var(--line)}
+h1{font-size:clamp(18px,2vw,26px);font-weight:700;color:var(--blue-dark);letter-spacing:-0.01em}
+
+/* BATCH */
+.batch{margin-bottom:52px}
+.batch-title{font-family:var(--mono);font-size:10px;letter-spacing:0.22em;text-transform:uppercase;color:var(--steel);margin-bottom:20px;padding-bottom:10px;border-bottom:1px solid var(--line)}
+
+/* PAGE GRID */
+.pages-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 64px}
+.page-item a{display:block;padding:11px 0;font-size:14px;font-weight:500;color:var(--night);letter-spacing:0.01em;transition:color .16s;border-bottom:none}
+.page-item a:hover{color:var(--blue);text-decoration:underline;text-underline-offset:3px}
 
 /* REFERENCES — different UI */
 .ref-batch{background:var(--blue-dark);padding:32px 40px;border-radius:3px;margin-top:8px}
 .ref-batch .batch-title{color:rgba(255,255,255,0.4);border-bottom-color:rgba(255,255,255,0.1)}
-.ref-batch .page-item{border-bottom-color:rgba(255,255,255,0.1)}
 .ref-batch .page-item a{color:rgba(255,255,255,0.75)}
 .ref-batch .page-item a:hover{color:#fff}
-.ref-batch .arr{color:rgba(255,255,255,0.6)}
 
 footer{border-top:1px solid var(--line);padding:24px 40px;display:flex;align-items:center;justify-content:space-between;background:var(--paper)}
 .ft-l{display:flex;align-items:center;gap:10px}
-.ft-sq{width:24px;height:24px;background:var(--blue);display:grid;place-items:center}
-.ft-sq svg{width:13px;height:13px}
+.ft-logo{width:24px;height:24px;object-fit:contain}
 .ft-name{font-size:12px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--night)}
 .ft-copy{font-family:var(--mono);font-size:10px;color:var(--steel)}
 
-@media(max-width:700px){.pages-grid{grid-template-columns:1fr}.main{padding:40px 20px}}
+@media(max-width:700px){.pages-grid{grid-template-columns:1fr}main{padding:40px 20px}}
 </style>
 </head>
 <body>
-<nav>
-  <div class="nav-logo">
-    <div class="logo-sq"><svg viewBox="0 0 20 20" fill="none"><polygon points="10,2 18,10 10,18 2,10" stroke="rgba(255,255,255,0.55)" stroke-width="1" fill="none"/><polygon points="10,6 14,10 10,14 6,10" fill="white"/></svg></div>
-    <div class="logo-words"><span class="logo-name">TEYSEER</span><span class="logo-since">Since 1968</span></div>
-  </div>
-  <span class="nav-slash">/</span>
-  <span class="nav-title">Index</span>
-</nav>
 
 <main>
-  <h1>Teyseer Wireframe for Inner Pages</h1>
+  <div class="idx-header">
+    <img class="logo-img" src="img/teyseer-logo-full.png" alt="Teyseer Group" />
+    <div class="header-divider"></div>
+    <h1>Teyseer Wireframe for Inner Pages</h1>
+  </div>
 
   <!-- ABOUT US -->
   <div class="batch">
     <div class="batch-title">About Us</div>
     <div class="pages-grid">
-      <div class="page-item"><a href="About Us.html" target="_blank">About Us <span class="arr">→</span></a></div>
-      <div class="page-item"><a href="History.html" target="_blank">History <span class="arr">→</span></a></div>
-      <div class="page-item"><a href="Vision Mission.html" target="_blank">Vision and Mission <span class="arr">→</span></a></div>
-      <div class="page-item"><a href="Partners.html" target="_blank">Our Partners <span class="arr">→</span></a></div>
-      <div class="page-item"><a href="Portfolio.html" target="_blank">Our Portfolio <span class="arr">→</span></a></div>
-      <div class="page-item"><a href="Chairman.html" target="_blank">Chairman's Message <span class="arr">→</span></a></div>
-      <div class="page-item"><a href="Awards.html" target="_blank">Awards and Certifications <span class="arr">→</span></a></div>
-      <div class="page-item"><a href="QNV.html" target="_blank">QNV 2030 <span class="arr">→</span></a></div>
-      <div class="page-item"><a href="Sustainability.html" target="_blank">Sustainability <span class="arr">→</span></a></div>
+      <div class="page-item"><a href="About Us.html" target="_blank">About Us</a></div>
+      <div class="page-item"><a href="History.html" target="_blank">History</a></div>
+      <div class="page-item"><a href="Vision Mission.html" target="_blank">Vision and Mission</a></div>
+      <div class="page-item"><a href="Partners.html" target="_blank">Our Partners</a></div>
+      <div class="page-item"><a href="Portfolio.html" target="_blank">Our Portfolio</a></div>
+      <div class="page-item"><a href="Chairman.html" target="_blank">Chairman's Message</a></div>
+      <div class="page-item"><a href="Awards.html" target="_blank">Awards and Certifications</a></div>
+      <div class="page-item"><a href="QNV.html" target="_blank">QNV 2030</a></div>
+      <div class="page-item"><a href="Sustainability.html" target="_blank">Sustainability</a></div>
     </div>
   </div>
 
@@ -154,30 +81,37 @@ footer{border-top:1px solid var(--line);padding:24px 40px;display:flex;align-ite
   <div class="batch">
     <div class="batch-title">Group Companies</div>
     <div class="pages-grid">
-      <div class="page-item"><a href="Industry Verticals Listing v1.html" target="_blank">Industry Verticals Listing v1 <span class="arr">→</span></a></div>
-      <div class="page-item"><a href="Automotive Details Page v1.html" target="_blank">Automotive Details V1 <span class="arr">→</span></a></div>
-      <div class="page-item"><a href="Automotive Details Page v2.html" target="_blank">Automotive Details V2 <span class="arr">→</span></a></div>
-      <div class="page-item"><a href="Automotive Details Page v3.html" target="_blank">Automotive Details V3 <span class="arr">→</span></a></div>
-      <div class="page-item"><a href="IT Details Page.html" target="_blank">IT Details <span class="arr">→</span></a></div>
+      <!-- Column 1 -->
+      <div>
+        <div class="page-item"><a href="Industry Verticals Listing v1.html" target="_blank">Industry Verticals Listing</a></div>
+        <div class="page-item"><a href="IT Details Page.html" target="_blank">IT Details</a></div>
+      </div>
+      <!-- Column 2 -->
+      <div>
+        <div class="page-item"><a href="Automotive Details Page v1.html" target="_blank">Automotive Details V1</a></div>
+        <div class="page-item"><a href="Automotive Details Page v2.html" target="_blank">Automotive Details V2</a></div>
+        <div class="page-item"><a href="Automotive Details Page v3.html" target="_blank">Automotive Details V3</a></div>
+      </div>
     </div>
   </div>
 
-  <!-- REFERENCES — different UI -->
+  <!-- REFERENCES -->
   <div class="ref-batch">
     <div class="batch-title">References</div>
     <div class="pages-grid">
-      <div class="page-item"><a href="Benchmarks.html" target="_blank">Benchmarks <span class="arr">→</span></a></div>
-      <div class="page-item"><a href="Content Provenance.html" target="_blank">Content Provenance <span class="arr">→</span></a></div>
+      <div class="page-item"><a href="Benchmarks.html" target="_blank">Benchmarks</a></div>
+      <div class="page-item"><a href="Content Provenance.html" target="_blank">Content Provenance</a></div>
     </div>
   </div>
 </main>
 
 <footer>
   <div class="ft-l">
-    <div class="ft-sq"><svg viewBox="0 0 20 20" fill="none"><polygon points="10,2 18,10 10,18 2,10" stroke="rgba(255,255,255,0.55)" stroke-width="1" fill="none"/><polygon points="10,6 14,10 10,14 6,10" fill="white"/></svg></div>
+    <img class="ft-logo" src="img/teyseer-logo-full.png" alt="Teyseer" />
     <span class="ft-name">Teyseer Group</span>
   </div>
   <span class="ft-copy">Applab Qatar · 2026 · All pages open in new tab</span>
 </footer>
+
 </body>
 </html>
